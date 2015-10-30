@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="30dp">
+            <EditText
+                android:id="@+id/establshname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Establishment Name"
+                android:inputType="textPersonName"
+                />
+            <EditText
+                android:id="@+id/firstname"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="First Name"
+                android:inputType="textPersonName"
+
+                android:layout_marginTop="10dp"
+                />
+            <EditText
+                android:id="@+id/lastname"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Last Name"
+
+                android:inputType="textPersonName"
+                android:layout_marginTop="10dp"/>
+            <EditText
+                android:id="@+id/mobileno"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mobile no"
+                android:inputType="phone"
+
+                android:layout_marginTop="10dp"/>
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email Address"
+                android:inputType="textEmailAddress"
+
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This will be your email username"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Password"
+
+                        android:inputType="textPassword"
+                        android:layout_marginTop="20dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SHOW"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="35dp"/>
+                </FrameLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please enter a password usingbetween 8 to 20 characters, including atleast one alpha numeric letter and an uppercase letter"
+
+                />
+            <EditText
+                android:id="@+id/retypepassword"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Retype Password"
+
+                android:inputType="textPassword"
+                android:layout_marginTop="20dp"/>
+            <Button
+                android:id="@+id/signup_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="SIGN UP"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bottom_selector_secondary"
+                android:textColor="#ffffff"
+                android:layout_gravity="center"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>
