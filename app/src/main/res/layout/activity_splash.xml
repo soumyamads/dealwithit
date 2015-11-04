@@ -10,7 +10,7 @@
     android:src="@drawable/deaawithit"
     android:gravity="center"
     android:layout_centerVertical="true"
-    android:textSize="50dp"
+    android:padding="50dp"
     />
 
 

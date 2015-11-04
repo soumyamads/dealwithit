@@ -52,101 +52,21 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/toolbar">
 
-        <View
+        <com.snyxius.apps.dealwithit.utils.StepsView
+            android:id="@+id/stepsView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/label"
             android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
-            android:layout_marginTop="18dp"
-            android:background="@color/colorPrimaryDark"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp"
-            android:gravity="center">
+            android:layout_below="@+id/stepsView"
+            android:visibility="gone"
+            android:text="StepsView 1"/>
 
-            <ImageView
-                android:id="@+id/indicator1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/rounded_fill_indicator"/>
-
-            <TextView
-                android:id="@+id/indicator_text1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="BASIC"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="12dp"
-                android:textStyle="bold"
-                android:layout_marginTop="5dp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/indicator2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/rounded_stroke_indicator"/>
-
-            <TextView
-                android:id="@+id/indicator_text2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="DETAILS"
-                android:textSize="12dp"
-                android:textStyle="bold"
-                android:layout_marginTop="5dp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/indicator3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/rounded_stroke_indicator"/>
-
-            <TextView
-                android:id="@+id/indicator_text3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="INCOMING DEAL"
-                android:textSize="12dp"
-                android:textStyle="bold"
-                android:layout_marginTop="5dp"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-
-</RelativeLayout>
+        </RelativeLayout>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"

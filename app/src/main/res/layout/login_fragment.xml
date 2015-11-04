@@ -16,7 +16,7 @@
         android:inputType="textEmailAddress"
         android:layout_marginTop="20dp"/>
 
-    <EditText
+    <com.snyxius.apps.dealwithit.utils.CustomPasswordEditText
         android:id="@+id/password"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:padding="10dp"
-        android:text="Forgot Password"
+        android:text="Forgot Password?"
         android:layout_gravity="center"
         />
     <Button
@@ -38,7 +38,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/bottom_selector_secondary"
         android:textColor="#ffffff"
         android:textStyle="bold"

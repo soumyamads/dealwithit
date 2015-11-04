@@ -5,7 +5,7 @@
 
 
 
-        <android.support.v7.widget.Toolbar
+        <RelativeLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -22,7 +22,10 @@
                     android:id="@+id/wrong"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="5dp"
+                    android:padding="7dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/bottom_selector_transparent"
                     android:src="@drawable/left_cross"
                     />
                 <TextView
@@ -30,6 +33,7 @@
                     android:layout_height="wrap_content"
                     android:text="Account"
                     android:textColor="#ffffff"
+                    android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
                     android:layout_centerInParent="true"
 
                     />
@@ -37,12 +41,15 @@
                     android:id="@+id/wright"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:padding="5dp"
+                    android:padding="7dp"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:src="@drawable/right_tick"
+                    android:background="@drawable/bottom_selector_transparent"
                     android:layout_alignParentRight="true"
                     />
             </RelativeLayout>
-        </android.support.v7.widget.Toolbar>
+        </RelativeLayout>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
