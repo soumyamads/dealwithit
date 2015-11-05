@@ -23,9 +23,6 @@ public class IntroActivity extends AppCompatActivity{
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-
-
-
         CirclePageIndicator mIndicator  = (CirclePageIndicator) findViewById(R.id.indicator);
         mIndicator.setViewPager(viewPager);
     }
@@ -41,7 +38,7 @@ public class IntroActivity extends AppCompatActivity{
         public Fragment getItem(int pos) {
             switch(pos) {
 
-                case 0:  return LoginSignupFragment.newInstance("LoginSignupFragment, Instance 1");
+                case 0:  return LoginSignupFragment.newInstance("IntroFragment, Instance 1");
                 case 1:  return LoginSignupFragment.newInstance("SecondFragment, Instance 1");
                 case 2:  return LoginSignupFragment.newInstance("ThirdFragment, Instance 1");
                 case 3:  return LoginSignupFragment.newInstance("ThirdFragment, Instance 2");

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.extras.Constants;
+import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.fragments.LoginFragment;
 import com.snyxius.apps.dealwithit.fragments.SignupFragment;
 
@@ -23,20 +24,17 @@ public class LoginSignupActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    Bundle getExtraIntent;
-    int page_go;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_signup);
+        int position = getIntent().getIntExtra(Keys.position,Constants.DEFAULT_INT);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-        getExtraIntent=getIntent().getExtras();
-        page_go=getExtraIntent.getInt("page");
-        viewPager.setCurrentItem(page_go);
+        viewPager.setCurrentItem(position);
     }
 
     private void setupViewPager(ViewPager viewPager) {

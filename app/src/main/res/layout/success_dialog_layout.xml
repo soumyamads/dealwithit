@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/rounded_corner_dialog_white"
     android:layout_margin="10dp"
@@ -16,6 +17,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/success_tick"
+        android:layout_gravity="center"
         android:layout_centerHorizontal="true"
         android:id="@+id/imageView" />
 
@@ -37,15 +39,15 @@
         android:layout_height="wrap_content"
         android:text="We might give you a verification call !"
         android:gravity="center"
+        android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
         android:id="@+id/textView2" />
 
 
     <Button
         android:id="@+id/gotit_button"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="GOT IT"
         android:background="@drawable/bottom_selector_secondary"
@@ -53,9 +55,7 @@
         android:textStyle="bold"
         android:layout_gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:layout_below="@+id/textView2"
-        android:layout_margin="15dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:textAllCaps="true"
+        android:layout_margin="15dp" />
 
-</RelativeLayout>
+</LinearLayout>
