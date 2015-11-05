@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
@@ -27,9 +28,10 @@ import java.util.List;
 public class BusinessProfileActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private CustomViewPager viewPager;
-    StepsView mStepsView;
-    TextView mLabel,stepViewText1,stepViewText2,stepViewText3;
-    private final String[] labels = {Constants.BASIC, Constants.DETAILS, Constants.INCOMING_DEAL};
+//    StepsView mStepsView;
+    ImageView stepViewImage2;
+    TextView mLabel,stepViewText2;//,stepViewText2,stepViewText3;
+    private final String[] labels = {Constants.BASIC, Constants.DETAILS};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,7 @@ public class BusinessProfileActivity extends AppCompatActivity {
         adapter.addFragment(new AddBusinessProfileDetailFragment(), Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT);
         adapter.addFragment(new AddBusinessProfileDealFragment(), Constants.ADDBUSINESSPROFILEDEAL_FRAGMENT);
         viewPager.setAdapter(adapter);
-        stepViewText1.setTypeface(null, Typeface.BOLD);
+//        stepViewText1.setTypeface(null, Typeface.BOLD);
 
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -58,16 +60,12 @@ public class BusinessProfileActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if(position==0){
-                    stepViewText1.setTypeface(null, Typeface.BOLD);
-                }else if(position==1){
-                    stepViewText1.setTypeface(null, Typeface.BOLD);
+                if (position == 1) {
                     stepViewText2.setTypeface(null, Typeface.BOLD);
-                }else{
-                    stepViewText1.setTypeface(null, Typeface.BOLD);
-                    stepViewText2.setTypeface(null, Typeface.BOLD);
-                    stepViewText3.setTypeface(null, Typeface.BOLD);
-
+                    stepViewImage2.setImageResource(R.drawable.rounded_fill_indicator);
+                } else {
+                    stepViewText2.setTypeface(null, Typeface.NORMAL);
+                    stepViewImage2.setImageResource(R.drawable.rounded_stroke_indicator);
                 }
 
             }
@@ -88,15 +86,15 @@ public class BusinessProfileActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
 
-            mLabel.setText(mFragmentTitleList.get(position));
-
-            mStepsView
-                    .setLabels(labels)
-                    .setBarColorIndicator(
-                            getResources().getColor(R.color.grey))
-                    .setProgressColorIndicator(getResources().getColor(R.color.colorPrimaryDark))
-                    .setLabelColorIndicator(getResources().getColor(R.color.colorPrimaryDark))
-                    .drawView();
+//            mLabel.setText(mFragmentTitleList.get(position));
+//
+//            mStepsView
+//                    .setLabels(labels)
+//                    .setBarColorIndicator(
+//                            getResources().getColor(R.color.grey))
+//                    .setProgressColorIndicator(getResources().getColor(R.color.colorPrimaryDark))
+//                    .setLabelColorIndicator(getResources().getColor(R.color.colorPrimaryDark))
+//                    .drawView();
 
             return mFragmentList.get(position);
         }
@@ -120,52 +118,29 @@ public class BusinessProfileActivity extends AppCompatActivity {
 
 
     private void initializeView(){
-        mStepsView = (StepsView) findViewById(R.id.stepsView);
-        mLabel = (TextView) findViewById(R.id.label);
-        stepViewText1= (TextView) findViewById(R.id.stepsView_text1);
-        stepViewText2= (TextView) findViewById(R.id.stepsView_text2);
-        stepViewText3= (TextView) findViewById(R.id.stepsView_text3);
+//        mStepsView = (StepsView) findViewById(R.id.stepsView);
+//        mLabel = (TextView) findViewById(R.id.label);
+        stepViewText2= (TextView) findViewById(R.id.stepView_text2);
+        stepViewImage2= (ImageView) findViewById(R.id.stepView_image2);
+//        stepViewText2= (TextView) findViewById(R.id.stepsView_text2);
+//        stepViewText3= (TextView) findViewById(R.id.stepsView_text3);
     }
 
     private void setSelectedPage(int pos){
         if(pos==0){
-            mLabel.setText(labels[pos]);
 
-            mStepsView.setCompletedPosition(pos % labels.length)
-                    .setLabels(labels)
-                    .setBarColorIndicator(
-                            getResources().getColor(R.color.grey))
-                    .setProgressColorIndicator(getResources().getColor(R.color.colorPrimaryDark))
-                    .setLabelColorIndicator(getResources().getColor(R.color.colorPrimaryDark))
-                    .setCompletedPosition(pos)
-                    .drawView();
+
         }else if(pos==1){
-            mLabel.setText(labels[pos]);
 
-            mStepsView.setCompletedPosition(pos % labels.length)
-                    .setLabels(labels)
-                    .setBarColorIndicator(
-                            getResources().getColor(R.color.grey))
-                    .setProgressColorIndicator(getResources().getColor(R.color.colorPrimaryDark))
-                    .setLabelColorIndicator(getResources().getColor(R.color.colorPrimaryDark))
-                    .setCompletedPosition(pos)
-                    .drawView();
+
         }else  if(pos==2){
-            mLabel.setText(labels[pos]);
 
-            mStepsView.setCompletedPosition(pos % labels.length)
-                    .setLabels(labels)
-                    .setBarColorIndicator(
-                            getResources().getColor(R.color.grey))
-                    .setProgressColorIndicator(getResources().getColor(R.color.colorPrimaryDark))
-                    .setLabelColorIndicator(getResources().getColor(R.color.colorPrimaryDark))
-                    .setCompletedPosition(pos)
-                    .drawView();
+
         }
     }
 
     public void selectPage(int page) {
         viewPager.setCurrentItem(page);
-        mStepsView.setCompletedPosition(page).drawView();
+//        mStepsView.setCompletedPosition(page).drawView();
     }
 }

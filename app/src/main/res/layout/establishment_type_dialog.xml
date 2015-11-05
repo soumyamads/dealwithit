@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <RelativeLayout
+        android:id="@+id/relative1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        >
+
+        <ImageView
+            android:id="@+id/wrong"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="7dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/bottom_selector_transparent"
+            android:src="@drawable/left_cross"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Establishment Type"
+            android:textColor="#ffffff"
+            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+            android:layout_centerInParent="true"
+
+            />
+        <ImageView
+            android:id="@+id/right"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="7dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/right_tick"
+            android:background="@drawable/bottom_selector_transparent"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+<ListView
+    android:id="@+id/establishment_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:layout_margin="20dp"></ListView>
+</LinearLayout>

@@ -23,6 +23,8 @@ public class LoginSignupActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    Bundle getExtraIntent;
+    int page_go;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,9 @@ public class LoginSignupActivity extends AppCompatActivity {
         setupViewPager(viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+        getExtraIntent=getIntent().getExtras();
+        page_go=getExtraIntent.getInt("page");
+        viewPager.setCurrentItem(page_go);
     }
 
     private void setupViewPager(ViewPager viewPager) {

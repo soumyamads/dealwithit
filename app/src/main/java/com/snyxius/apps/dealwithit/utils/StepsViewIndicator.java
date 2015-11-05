@@ -19,7 +19,7 @@ import java.util.List;
 
 public class StepsViewIndicator extends View {
 
-    private static final int THUMB_SIZE = 35;
+    private static final int THUMB_SIZE = 50;
 
     private Paint paint = new Paint();
     private Paint selectedPaint = new Paint();
@@ -63,7 +63,7 @@ public class StepsViewIndicator extends View {
         mLineHeight = 0.1f * THUMB_SIZE;
         mThumbRadius = 0.4f * THUMB_SIZE;
         mCircleRadius = 0.7f * mThumbRadius;
-        mPadding = 0.5f * THUMB_SIZE;
+        mPadding = 1.3f * THUMB_SIZE;
     }
 
     public void setStepSize(int size) {
@@ -100,7 +100,7 @@ public class StepsViewIndicator extends View {
 
     @Override
     protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int width = 200;
+        int width = 10;
         if (MeasureSpec.UNSPECIFIED != MeasureSpec.getMode(widthMeasureSpec)) {
             width = MeasureSpec.getSize(widthMeasureSpec);
         }

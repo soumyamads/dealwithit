@@ -40,6 +40,7 @@ public class LoginSignupFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(),LoginSignupActivity.class);
+                intent.putExtra("page",0);
                 startActivity(intent);
             }
         });
@@ -47,6 +48,7 @@ public class LoginSignupFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), LoginSignupActivity.class);
+                intent.putExtra("page",1);
                 startActivity(intent);
             }
         });

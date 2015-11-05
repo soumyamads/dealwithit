@@ -1,5 +1,6 @@
 package com.snyxius.apps.dealwithit.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
+import com.snyxius.apps.dealwithit.activities.DealWithItActivity;
 
 
 /**
@@ -46,7 +48,10 @@ public class AddBusinessProfileDetailFragment extends Fragment {
 //                initialise(view);
 //                intent = new Intent(getActivity(), MerchantProfile.class);
 //                startActivityy(intent);
-                ((BusinessProfileActivity)getActivity()).selectPage(2);
+//                ((BusinessProfileActivity)getActivity()).selectPage(2);
+                Intent intent = new Intent(getActivity(), DealWithItActivity.class);
+                startActivity(intent);
+                getActivity().finish();
 
             }
         });

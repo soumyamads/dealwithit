@@ -13,20 +13,24 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
+import com.snyxius.apps.dealwithit.adapters.EstablishmentTypeAdapter;
+
+import java.util.ArrayList;
 
 
 /**
  * Created by snyxius on 10/15/2015.
  */
 public class AddBusinessProfileBasicFragment extends Fragment {
-//    Intent intent;
-//    EditText email,password;
-//    TextView fgtpaswd;
-//    Button login;
+
+    RelativeLayout estType;
+
 
     public AddBusinessProfileBasicFragment() {
         // Required empty public constructor
@@ -55,8 +59,54 @@ public class AddBusinessProfileBasicFragment extends Fragment {
 //                initialise(view);
 //                intent = new Intent(getActivity(), MerchantProfile.class);
 //                startActivityy(intent);
-                ((BusinessProfileActivity)getActivity()).selectPage(1);
+                ((BusinessProfileActivity) getActivity()).selectPage(1);
 
+            }
+        });
+        view.findViewById(R.id.est_type).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Dialog dialog = new Dialog(getActivity());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                dialog.setContentView(R.layout.establishment_type_dialog);
+                dialog.setCanceledOnTouchOutside(true);
+
+                WindowManager.LayoutParams lp = new WindowManager.LayoutParams();//dialog.getWindow().getAttributes();
+                lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+//                lp.dimAmount = 0.60f;
+                dialog.getWindow().setAttributes(lp);
+                dialog.getWindow().getAttributes().windowAnimations = R.style.PauseDialogAnimation;
+//
+//                window.setAttributes(lp);
+////                   lp.dimAmount = 0.6f;
+//                dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+//                dialog.getWindow().setGravity(Gravity.CENTER);
+//                   lp.gravity = Gravity.CENTER;
+
+//                lp.x = -100;   //x position
+//                lp.y = -100;   //y position
+
+                ListView jobList  =(ListView)dialog.findViewById(R.id.establishment_list);
+
+//                final ListView listview = (ListView) findViewById(R.id.listview);
+                String[] values = new String[] { "Fine Dine", "Lounge", "Bar",
+                        "Family Restaurant", "Quick Service Restaurant", "Club", "Brewberry", "Desert & Bakery",
+                        "Cafe", "Casual Dine", "Banquet" };
+
+                final ArrayList<String> list = new ArrayList<String>();
+                for (int i = 0; i < values.length; ++i) {
+                    list.add(values[i]);
+                }
+                final EstablishmentTypeAdapter adapter = new EstablishmentTypeAdapter(getContext(),values);
+                jobList.setAdapter(adapter);
+                dialog.show();
+
+//                getActivity().getSupportFragmentManager().beginTransaction()
+//                        .add(R.id.container,new SignupFragment(),"demo")
+//                        .commit();
             }
         });
     }
