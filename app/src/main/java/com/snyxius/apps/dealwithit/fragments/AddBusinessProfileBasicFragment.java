@@ -1,27 +1,34 @@
 package com.snyxius.apps.dealwithit.fragments;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
-import com.snyxius.apps.dealwithit.activities.DealWithItActivity;
 
 
 /**
  * Created by snyxius on 10/15/2015.
  */
-public class AddBusinessProfileDeal extends Fragment {
+public class AddBusinessProfileBasicFragment extends Fragment {
 //    Intent intent;
 //    EditText email,password;
 //    TextView fgtpaswd;
 //    Button login;
 
-    public AddBusinessProfileDeal() {
+    public AddBusinessProfileBasicFragment() {
         // Required empty public constructor
     }
 
@@ -34,7 +41,7 @@ public class AddBusinessProfileDeal extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.add_business_profile_deals, container, false);
+        View rootView = inflater.inflate(R.layout.add_business_profile_basic, container, false);
         return rootView;
 }
 
@@ -43,12 +50,12 @@ public class AddBusinessProfileDeal extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialise(view);
-        view.findViewById(R.id.continue_deal).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.continues).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 //                initialise(view);
-                Intent intent = new Intent(getActivity(), DealWithItActivity.class);
-                startActivity(intent);
-                getActivity().finish();
+//                intent = new Intent(getActivity(), MerchantProfile.class);
+//                startActivityy(intent);
+                ((BusinessProfileActivity)getActivity()).selectPage(1);
 
             }
         });

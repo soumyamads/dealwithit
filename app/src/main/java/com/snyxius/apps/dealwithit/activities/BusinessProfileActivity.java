@@ -8,17 +8,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
-import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileBasic;
-import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileDeal;
-import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileDetail;
-import com.snyxius.apps.dealwithit.fragments.LoginFragment;
-import com.snyxius.apps.dealwithit.fragments.SignupFragment;
+import com.snyxius.apps.dealwithit.extras.Constants;
+import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileBasicFragment;
+import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileDealFragment;
+import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileDetailFragment;
 import com.snyxius.apps.dealwithit.utils.CustomViewPager;
 import com.snyxius.apps.dealwithit.utils.StepsView;
 
@@ -33,10 +29,7 @@ public class BusinessProfileActivity extends AppCompatActivity {
     private CustomViewPager viewPager;
     StepsView mStepsView;
     TextView mLabel,stepViewText1,stepViewText2,stepViewText3;
-    private final String[] labels = {"BASIC", "DETAILS", "INCOMING DEAL"};
-//    TextView indicatorText1,indicatorText2,indicatorText3;
-//    ImageView indicator1,indicator2,indicator3;
-
+    private final String[] labels = {Constants.BASIC, Constants.DETAILS, Constants.INCOMING_DEAL};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,19 +39,13 @@ public class BusinessProfileActivity extends AppCompatActivity {
         viewPager = (CustomViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
-//        tabLayout = (TabLayout) findViewById(R.id.tabs);
-//        tabLayout.setupWithViewPager(viewPager);
-
-
-
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new AddBusinessProfileBasic(), "Signup");
-        adapter.addFragment(new AddBusinessProfileDetail(), "Login");
-        adapter.addFragment(new AddBusinessProfileDeal(), "Login");
-//        adapter.addFragment(new ThreeFragment(), "THREE");
+        adapter.addFragment(new AddBusinessProfileBasicFragment(), Constants.ADDBUSINESSPROFILEBASIC_FRAGMENT);
+        adapter.addFragment(new AddBusinessProfileDetailFragment(), Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT);
+        adapter.addFragment(new AddBusinessProfileDealFragment(), Constants.ADDBUSINESSPROFILEDEAL_FRAGMENT);
         viewPager.setAdapter(adapter);
         stepViewText1.setTypeface(null, Typeface.BOLD);
 
@@ -71,7 +58,6 @@ public class BusinessProfileActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-//                setSelectedPage(position);
                 if(position==0){
                     stepViewText1.setTypeface(null, Typeface.BOLD);
                 }else if(position==1){
@@ -96,11 +82,9 @@ public class BusinessProfileActivity extends AppCompatActivity {
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
-
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
         }
-
         @Override
         public Fragment getItem(int position) {
 
@@ -117,10 +101,6 @@ public class BusinessProfileActivity extends AppCompatActivity {
             return mFragmentList.get(position);
         }
 
-//        @Override
-//        public android.support.v4.app.Fragment getItem(int position) {
-//          //  return;
-//        }
 
         @Override
         public int getCount() {

@@ -10,10 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.fragments.BookingsFragment;
 import com.snyxius.apps.dealwithit.fragments.ChatFragment;
-import com.snyxius.apps.dealwithit.fragments.LoginFragment;
-import com.snyxius.apps.dealwithit.fragments.SignupFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,9 +41,8 @@ public class DealWithItActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ChatFragment(), "CHATS");
-        adapter.addFragment(new BookingsFragment(), "BOOKINGS");
-//        adapter.addFragment(new ThreeFragment(), "THREE");
+        adapter.addFragment(new ChatFragment(), Constants.CHAT_FRAGMENT);
+        adapter.addFragment(new BookingsFragment(), Constants.BOOKINGS_FRAGMENT);
         viewPager.setAdapter(adapter);
     }
 
@@ -62,10 +60,6 @@ public class DealWithItActivity extends AppCompatActivity {
             return mFragmentList.get(position);
         }
 
-//        @Override
-//        public android.support.v4.app.Fragment getItem(int position) {
-//          //  return;
-//        }
 
         @Override
         public int getCount() {

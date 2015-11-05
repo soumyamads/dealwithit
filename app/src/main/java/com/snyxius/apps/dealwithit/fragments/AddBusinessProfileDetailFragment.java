@@ -1,19 +1,10 @@
 package com.snyxius.apps.dealwithit.fragments;
 
-import android.app.Dialog;
-import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
@@ -22,13 +13,13 @@ import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
 /**
  * Created by snyxius on 10/15/2015.
  */
-public class AddBusinessProfileBasic extends Fragment {
+public class AddBusinessProfileDetailFragment extends Fragment {
 //    Intent intent;
 //    EditText email,password;
 //    TextView fgtpaswd;
 //    Button login;
 
-    public AddBusinessProfileBasic() {
+    public AddBusinessProfileDetailFragment() {
         // Required empty public constructor
     }
 
@@ -41,7 +32,7 @@ public class AddBusinessProfileBasic extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.add_business_profile_basic, container, false);
+        View rootView = inflater.inflate(R.layout.add_business_profile_details, container, false);
         return rootView;
 }
 
@@ -50,12 +41,12 @@ public class AddBusinessProfileBasic extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialise(view);
-        view.findViewById(R.id.continues).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.continue_detail).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 //                initialise(view);
 //                intent = new Intent(getActivity(), MerchantProfile.class);
 //                startActivityy(intent);
-                ((BusinessProfileActivity)getActivity()).selectPage(1);
+                ((BusinessProfileActivity)getActivity()).selectPage(2);
 
             }
         });

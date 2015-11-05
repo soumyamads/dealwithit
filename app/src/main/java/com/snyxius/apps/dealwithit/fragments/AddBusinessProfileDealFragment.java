@@ -1,5 +1,6 @@
 package com.snyxius.apps.dealwithit.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,18 +9,19 @@ import android.view.ViewGroup;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
+import com.snyxius.apps.dealwithit.activities.DealWithItActivity;
 
 
 /**
  * Created by snyxius on 10/15/2015.
  */
-public class AddBusinessProfileDetail extends Fragment {
+public class AddBusinessProfileDealFragment extends Fragment {
 //    Intent intent;
 //    EditText email,password;
 //    TextView fgtpaswd;
 //    Button login;
 
-    public AddBusinessProfileDetail() {
+    public AddBusinessProfileDealFragment() {
         // Required empty public constructor
     }
 
@@ -32,7 +34,7 @@ public class AddBusinessProfileDetail extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.add_business_profile_details, container, false);
+        View rootView = inflater.inflate(R.layout.add_business_profile_deals, container, false);
         return rootView;
 }
 
@@ -41,12 +43,12 @@ public class AddBusinessProfileDetail extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialise(view);
-        view.findViewById(R.id.continue_detail).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.continue_deal).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 //                initialise(view);
-//                intent = new Intent(getActivity(), MerchantProfile.class);
-//                startActivityy(intent);
-                ((BusinessProfileActivity)getActivity()).selectPage(2);
+                Intent intent = new Intent(getActivity(), DealWithItActivity.class);
+                startActivity(intent);
+                getActivity().finish();
 
             }
         });

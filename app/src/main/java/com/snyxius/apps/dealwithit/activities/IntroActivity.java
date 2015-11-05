@@ -41,11 +41,11 @@ public class IntroActivity extends AppCompatActivity{
         public Fragment getItem(int pos) {
             switch(pos) {
 
-                case 0: return LoginSignupFragment.newInstance("LoginSignupFragment, Instance 1");
-                case 1: return LoginSignupFragment.newInstance("SecondFragment, Instance 1");
-                case 2: return LoginSignupFragment.newInstance("ThirdFragment, Instance 1");
-                case 3: return LoginSignupFragment.newInstance("ThirdFragment, Instance 2");
-                case 4: return LoginSignupFragment.newInstance("ThirdFragment, Instance 3");
+                case 0:  return LoginSignupFragment.newInstance("LoginSignupFragment, Instance 1");
+                case 1:  return LoginSignupFragment.newInstance("SecondFragment, Instance 1");
+                case 2:  return LoginSignupFragment.newInstance("ThirdFragment, Instance 1");
+                case 3:  return LoginSignupFragment.newInstance("ThirdFragment, Instance 2");
+                case 4:  return LoginSignupFragment.newInstance("ThirdFragment, Instance 3");
                 default: return LoginSignupFragment.newInstance("ThirdFragment, Default");
             }
         }

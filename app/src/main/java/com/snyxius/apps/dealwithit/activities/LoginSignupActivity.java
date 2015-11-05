@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.fragments.LoginFragment;
 import com.snyxius.apps.dealwithit.fragments.SignupFragment;
 
@@ -19,9 +20,9 @@ import java.util.List;
  * Created by snyxius on 10/30/2015.
  */
 public class LoginSignupActivity extends AppCompatActivity {
+
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +30,14 @@ public class LoginSignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_signup);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
-
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new SignupFragment(), "Signup");
-        adapter.addFragment(new LoginFragment(), "Login");
-//        adapter.addFragment(new ThreeFragment(), "THREE");
+        adapter.addFragment(new SignupFragment(), Constants.SIGNUP_FRAGMENT);
+        adapter.addFragment(new LoginFragment(), Constants.LOGIN_FRAGMENT);
         viewPager.setAdapter(adapter);
     }
 
@@ -55,10 +54,6 @@ public class LoginSignupActivity extends AppCompatActivity {
             return mFragmentList.get(position);
         }
 
-//        @Override
-//        public android.support.v4.app.Fragment getItem(int position) {
-//          //  return;
-//        }
 
         @Override
         public int getCount() {
