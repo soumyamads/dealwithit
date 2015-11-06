@@ -30,7 +30,7 @@ import java.util.ArrayList;
  */
 public class AddBusinessProfileBasicFragment extends Fragment  {
 
-    
+
     RelativeLayout estType;
 
 

@@ -44,9 +44,9 @@ import java.util.List;
 public class EstablishmentTypeFragment extends Fragment {
 
     ImageView right_tick,left_cross;
-    ListView jobList;
+    ListView typeList;
     String[] values;
-    ArrayList<EstablishmentTypePojo> phoneList;
+    ArrayList<EstablishmentTypePojo> estTypeListArray;
 
     public EstablishmentTypeFragment() {
         // Required empty public constructor
@@ -99,7 +99,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 
     }
     private void initialise(View rootView) {
-        jobList  =(ListView)rootView.findViewById(R.id.establishment_list);
+        typeList  =(ListView)rootView.findViewById(R.id.establishment_list);
         right_tick=(ImageView)rootView.findViewById(R.id.right_tick);
         left_cross=(ImageView)rootView.findViewById(R.id.left_cross);
 
@@ -151,18 +151,18 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 //                    list.add(values[i]);
 //                }
                 JSONArray jArray=jsonObject.getJSONArray(Keys.notice);
-                phoneList=new ArrayList<EstablishmentTypePojo>();
+                estTypeListArray=new ArrayList<EstablishmentTypePojo>();
                 if (jArray != null) {
                     for (int i=0;i<jArray.length();i++){
                         EstablishmentTypePojo cp = new EstablishmentTypePojo();
                         cp.setName(jArray.getString(i));
-                        phoneList.add(cp);
+                        estTypeListArray.add(cp);
                     }
                 }
 
-                final EstablishmentTypeAdapter adapter = new EstablishmentTypeAdapter(getContext(),phoneList);
-                jobList.setAdapter(adapter);
-                jobList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                final EstablishmentTypeAdapter adapter = new EstablishmentTypeAdapter(getContext(),estTypeListArray);
+                typeList.setAdapter(adapter);
+                typeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                     @Override
                     public void onItemClick(AdapterView<?> parent,
@@ -170,7 +170,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 
                         CheckBox chk = (CheckBox) view
                                 .findViewById(R.id.est_check_box);
-                        EstablishmentTypePojo bean = phoneList.get(position);
+                        EstablishmentTypePojo bean = estTypeListArray.get(position);
                         if (bean.isSelected()) {
                             bean.setSelected(false);
                             chk.setChecked(false);
@@ -210,7 +210,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 
         StringBuffer sb = new StringBuffer();
         ArrayList<String> selectedTypes=new ArrayList<>();
-        for (EstablishmentTypePojo bean : phoneList) {
+        for (EstablishmentTypePojo bean : estTypeListArray) {
 
             if (bean.isSelected()) {
                 sb.append(bean.getName());
