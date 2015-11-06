@@ -1,5 +1,6 @@
 package com.snyxius.apps.dealwithit.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
 
 
 /**
@@ -40,15 +42,14 @@ public class BookingsFragment extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialise(view);
-//        view.findViewById(R.id.continues).setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-////                initialise(view);
-////                intent = new Intent(getActivity(), MerchantProfile.class);
-////                startActivityy(intent);
-//                ((BusinessProfileActivity)getActivity()).selectPage(1);
-//
-//            }
-//        });
+        view.findViewById(R.id.create_deal).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+//                initialise(view);
+                Intent intent = new Intent(getActivity(), CreateDealActivity.class);
+                startActivity(intent);
+            getActivity().finish();
+            }
+        });
     }
 
     private void initialise(View rootView){
