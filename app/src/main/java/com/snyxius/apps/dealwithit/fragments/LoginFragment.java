@@ -188,6 +188,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             getActivity().getSupportFragmentManager().beginTransaction()
                     .add(R.id.container,new ProgressBarFrament(),Constants.PROGRESS_FRAGMENT)
                     .commit();
+
         }
 
         @Override
@@ -218,7 +219,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                  DealWithItApp.saveToPreferences(getActivity(),Keys.id,jsonObject.getString(Keys.id));
                  DialogFragment dialogFrag = SuccessDialogFragment.newInstance();
                  dialogFrag.show(getFragmentManager().beginTransaction(), Constants.SUCCESSDIALOG_FRAGMENT);
-            }else if(jsonObject.getString(Keys.status).equals(Constants.SUCCESS)){
+            }else if(jsonObject.getString(Keys.status).equals(Constants.FAILED)){
                  DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
              }
         }catch (Exception e){

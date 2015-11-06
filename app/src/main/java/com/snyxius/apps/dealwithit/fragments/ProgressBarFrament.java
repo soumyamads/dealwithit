@@ -19,4 +19,14 @@ public class ProgressBarFrament extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.progressbar_layout,container,false);
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initialize(view);
+    }
+
+    private void initialize(View view) {
+        view.setClickable(false);
+    }
 }
