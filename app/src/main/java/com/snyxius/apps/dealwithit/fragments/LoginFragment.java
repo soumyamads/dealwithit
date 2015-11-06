@@ -105,7 +105,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         protected void onPreExecute() {
             super.onPreExecute();
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container,new ProgressBarFrament(),Constants.PROGRESS_FRAGMENT)
+                    .add(R.id.container_loading,new ProgressBarFrament(),Constants.PROGRESS_FRAGMENT)
                     .commit();
         }
 
@@ -137,6 +137,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
             }else if(jsonObject.getString(Keys.status).equals(Constants.FAILED)){
                 DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+            }else{
+                DealWithItApp.showAToast("Something Went Wrong.");
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -186,7 +188,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         protected void onPreExecute() {
             super.onPreExecute();
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container,new ProgressBarFrament(),Constants.PROGRESS_FRAGMENT)
+                    .add(R.id.container_loading,new ProgressBarFrament(),Constants.PROGRESS_FRAGMENT)
                     .commit();
 
         }
@@ -221,6 +223,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                  dialogFrag.show(getFragmentManager().beginTransaction(), Constants.SUCCESSDIALOG_FRAGMENT);
             }else if(jsonObject.getString(Keys.status).equals(Constants.FAILED)){
                  DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+             }else{
+                 DealWithItApp.showAToast("Something Went Wrong.");
              }
         }catch (Exception e){
             e.printStackTrace();

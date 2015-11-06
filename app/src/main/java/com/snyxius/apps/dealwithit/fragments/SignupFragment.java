@@ -143,6 +143,9 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container_loading,new ProgressBarFrament(),Constants.PROGRESS_FRAGMENT)
+                    .commit();
         }
 
         @Override
@@ -159,6 +162,9 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .remove(getActivity().getSupportFragmentManager().findFragmentByTag(Constants.PROGRESS_FRAGMENT))
+                    .commit();
             onDone(jsonObject);
         }
     }
@@ -172,6 +178,8 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 dialogFrag.show(getFragmentManager().beginTransaction(), Constants.SUCCESSDIALOG_FRAGMENT);
             }else if(jsonObject.getString(Keys.status).equals(Constants.FAILED)){
                 DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+            }else{
+                DealWithItApp.showAToast("Something Went Wrong.");
             }
         }catch (Exception e){
             e.printStackTrace();

@@ -43,6 +43,12 @@ public class AddBusinessProfileDetailFragment extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialise(view);
+        view.findViewById(R.id.prev).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((BusinessProfileActivity) getActivity()).selectPage(0);
+            }
+        });
         view.findViewById(R.id.continue_detail).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 //                initialise(view);

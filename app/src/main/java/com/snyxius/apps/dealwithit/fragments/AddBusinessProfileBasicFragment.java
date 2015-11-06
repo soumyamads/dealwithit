@@ -67,46 +67,48 @@ public class AddBusinessProfileBasicFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Dialog dialog = new Dialog(getActivity());
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                dialog.setContentView(R.layout.establishment_type_dialog);
-                dialog.setCanceledOnTouchOutside(true);
-
-                WindowManager.LayoutParams lp = new WindowManager.LayoutParams();//dialog.getWindow().getAttributes();
-                lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-                lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-//                lp.dimAmount = 0.60f;
-                dialog.getWindow().setAttributes(lp);
-                dialog.getWindow().getAttributes().windowAnimations = R.style.PauseDialogAnimation;
+//                Dialog dialog = new Dialog(getActivity());
+//                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+////                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//                dialog.setContentView(R.layout.establishment_type_dialog);
+//                dialog.setCanceledOnTouchOutside(true);
 //
-//                window.setAttributes(lp);
-////                   lp.dimAmount = 0.6f;
-//                dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-//                dialog.getWindow().setGravity(Gravity.CENTER);
-//                   lp.gravity = Gravity.CENTER;
+//                WindowManager.LayoutParams lp = new WindowManager.LayoutParams();//dialog.getWindow().getAttributes();
+//                lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+//                lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+////                lp.dimAmount = 0.60f;
+//                dialog.getWindow().setAttributes(lp);
+//                dialog.getWindow().getAttributes().windowAnimations = R.style.PauseDialogAnimation;
+////
+////                window.setAttributes(lp);
+//////                   lp.dimAmount = 0.6f;
+////                dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+////                dialog.getWindow().setGravity(Gravity.CENTER);
+////                   lp.gravity = Gravity.CENTER;
+//
+////                lp.x = -100;   //x position
+////                lp.y = -100;   //y position
+//
+//                ListView jobList  =(ListView)dialog.findViewById(R.id.establishment_list);
+//
+////                final ListView listview = (ListView) findViewById(R.id.listview);
+//                String[] values = new String[] { "Fine Dine", "Lounge", "Bar",
+//                        "Family Restaurant", "Quick Service Restaurant", "Club", "Brewberry", "Desert & Bakery",
+//                        "Cafe", "Casual Dine", "Banquet" };
+//
+//                final ArrayList<String> list = new ArrayList<String>();
+//                for (int i = 0; i < values.length; ++i) {
+//                    list.add(values[i]);
+//                }
+//                final EstablishmentTypeAdapter adapter = new EstablishmentTypeAdapter(getContext(),values);
+//                jobList.setAdapter(adapter);
+//                dialog.show();
 
-//                lp.x = -100;   //x position
-//                lp.y = -100;   //y position
-
-                ListView jobList  =(ListView)dialog.findViewById(R.id.establishment_list);
-
-//                final ListView listview = (ListView) findViewById(R.id.listview);
-                String[] values = new String[] { "Fine Dine", "Lounge", "Bar",
-                        "Family Restaurant", "Quick Service Restaurant", "Club", "Brewberry", "Desert & Bakery",
-                        "Cafe", "Casual Dine", "Banquet" };
-
-                final ArrayList<String> list = new ArrayList<String>();
-                for (int i = 0; i < values.length; ++i) {
-                    list.add(values[i]);
-                }
-                final EstablishmentTypeAdapter adapter = new EstablishmentTypeAdapter(getContext(),values);
-                jobList.setAdapter(adapter);
-                dialog.show();
-
-//                getActivity().getSupportFragmentManager().beginTransaction()
-//                        .add(R.id.container,new SignupFragment(),"demo")
-//                        .commit();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out,R.anim.push_up_in, R.anim.push_down_out)
+                        .replace(R.id.container, new EstablishmentTypeFragment(), "demo")
+                        .addToBackStack("est")
+                        .commit();
             }
         });
     }

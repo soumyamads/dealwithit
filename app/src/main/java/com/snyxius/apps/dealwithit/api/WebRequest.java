@@ -20,9 +20,10 @@ import java.net.URL;
  */
 public class WebRequest {
 
-        public static String getData(String url){
+        public static JSONObject getData(String url){
             StringBuffer response = new StringBuffer();
             URL obj = null;
+            JSONObject jsonObject = null;
             try {
                 System.out.println("URL :: " + url);
                 obj = new URL(url);
@@ -45,6 +46,7 @@ public class WebRequest {
 
                     // print result
                     System.out.println(response.toString());
+                    jsonObject = new JSONObject(response.toString());
                 } else {
                     System.out.println("GET request not worked");
                 }
@@ -59,8 +61,10 @@ public class WebRequest {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            }catch (JSONException e){
+                e.printStackTrace();
             }
-            return response.toString();
+            return jsonObject;
 
         }
 
