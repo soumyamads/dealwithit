@@ -87,13 +87,13 @@
 
 
             <RelativeLayout
-            android:id="@+id/upload_menu"
+            android:id="@+id/cuisine_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
 
             <TextView
-                android:id="@+id/upload_text"
+                android:id="@+id/cuisine_text"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="4dp"
@@ -106,7 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="3dp"
-                android:layout_below="@+id/upload_text"
+                android:layout_below="@+id/cuisine_text"
                 android:background="@color/grey"/>
 
             <ImageView
@@ -118,12 +118,12 @@
         </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/cover_image"
+                android:id="@+id/ambience_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
                 <TextView
-                    android:id="@+id/cover_text"
+                    android:id="@+id/ambience_text"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="4dp"
@@ -136,7 +136,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="3dp"
-                    android:layout_below="@+id/cover_text"
+                    android:layout_below="@+id/ambience_text"
                     android:background="@color/grey"/>
 
                 <ImageView

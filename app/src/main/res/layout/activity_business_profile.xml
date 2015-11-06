@@ -144,7 +144,6 @@
             style="@style/MyCustomTabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/toolbar"
             app:tabIndicatorHeight="2dp"
             app:tabIndicatorColor="#ffffff"
             android:background="@color/colorPrimary"
