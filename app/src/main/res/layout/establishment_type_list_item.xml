@@ -11,13 +11,13 @@
         android:textSize="16sp"
         android:padding="10dp"
         android:text="aaaa"
-        android:id="@+id/rowTextView"/>
+        android:id="@+id/est_type_name"/>
 
     <CheckBox
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:padding="10dp"
-        android:id="@+id/CheckBox01"
+        android:id="@+id/est_check_box"
         android:focusable="false"
         android:layout_marginRight="6sp"
         android:layout_alignParentRight="true"> </CheckBox>

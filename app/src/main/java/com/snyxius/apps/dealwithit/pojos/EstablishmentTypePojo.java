@@ -5,17 +5,21 @@ package com.snyxius.apps.dealwithit.pojos;
  */
 public class EstablishmentTypePojo {
     String name;
-    int value; /* 0 -&gt; checkbox disable, 1 -&gt; checkbox enable */
+    private boolean selected; /* 0 -&gt; checkbox disable, 1 -&gt; checkbox enable */
 
-    EstablishmentTypePojo(String name, int value){
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
-        this.value = value;
-    }
-    public String getName(){
-        return this.name;
-    }
-    public int getValue(){
-        return this.value;
     }
 
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 }
