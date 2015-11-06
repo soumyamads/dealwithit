@@ -19,7 +19,6 @@
         android:padding="10dp"
         android:id="@+id/est_check_box"
         android:focusable="false"
-        android:layout_marginRight="6sp"
         android:layout_alignParentRight="true"> </CheckBox>
 
 </RelativeLayout>

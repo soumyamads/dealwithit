@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="30dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEAL IMAGE"
+                android:textStyle="bold"/>
+            <RelativeLayout
+                android:id="@+id/deal_image_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/deal_image_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="3dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="Deal Image" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_below="@+id/deal_image_text"
+                    android:background="@color/grey"/>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/null_image"/>
+            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:layout_marginTop="3dp"
+                android:text="image should be larger than 800x400"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEAL SETTINGS"
+                android:textStyle="bold"
+                android:layout_marginTop="30dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Minimum Guests"
+                    android:id="@+id/radioButton"
+                    android:checked="false" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Minium Billings"
+                    android:id="@+id/radioButton2"
+                    android:layout_marginLeft="20dp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Minimum Billing"
+                    android:id="@+id/minimumbilg"
+                    android:checked="false" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mimimum_billig"
+                    android:layout_marginLeft="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Discount(%)"
+                    android:id="@+id/discount"
+                    android:checked="false" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/discount_percent"
+                    android:layout_marginLeft="50dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Maximum Bookings"
+                    android:id="@+id/maxbkg"
+                    android:checked="false" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/max_booking"
+
+                    android:layout_marginLeft="50dp" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/additional"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Additional"
+                android:inputType="text"
+                android:layout_marginTop="20dp"/>
+
+            <RelativeLayout
+                android:id="@+id/terms_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/terms_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="3dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="Terms and Conditions" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_below="@+id/terms_text"
+                    android:background="@color/grey"/>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow_right"/>
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/continue_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="continue"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bottom_selector_secondary"
+                android:textColor="#ffffff"
+                android:layout_gravity="center"
+                />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
