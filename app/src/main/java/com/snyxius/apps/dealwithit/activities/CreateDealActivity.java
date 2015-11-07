@@ -31,8 +31,8 @@ public class CreateDealActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private CustomViewPager viewPager;
 //    StepsView mStepsView;
-    ImageView stepViewImage2;
-    TextView mLabel,stepViewText2;//,stepViewText2,stepViewText3;
+    ImageView stepViewImage2,stepViewImage3;
+//    TextView mLabel,stepViewText2;//,stepViewText2,stepViewText3;
     private final String[] labels = {Constants.BASIC, Constants.DETAILS};
 
     @Override
@@ -63,11 +63,15 @@ public class CreateDealActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 if (position == 1) {
-                    stepViewText2.setTypeface(null, Typeface.BOLD);
+//                    stepViewText2.setTypeface(null, Typeface.BOLD);
                     stepViewImage2.setImageResource(R.drawable.rounded_fill_indicator);
+                } else if (position == 2) {
+//                    stepViewText2.setTypeface(null, Typeface.NORMAL);
+                    stepViewImage2.setImageResource(R.drawable.rounded_fill_indicator);
+                    stepViewImage3.setImageResource(R.drawable.rounded_fill_indicator);
                 } else {
-                    stepViewText2.setTypeface(null, Typeface.NORMAL);
                     stepViewImage2.setImageResource(R.drawable.rounded_stroke_indicator);
+                    stepViewImage3.setImageResource(R.drawable.rounded_stroke_indicator);
                 }
 
             }
@@ -122,8 +126,9 @@ public class CreateDealActivity extends AppCompatActivity {
     private void initializeView(){
 //        mStepsView = (StepsView) findViewById(R.id.stepsView);
 //        mLabel = (TextView) findViewById(R.id.label);
-        stepViewText2= (TextView) findViewById(R.id.stepView_text2);
+//        stepViewText2= (TextView) findViewById(R.id.stepView_text2);
         stepViewImage2= (ImageView) findViewById(R.id.stepView_image2);
+        stepViewImage3= (ImageView) findViewById(R.id.stepView_image3);
 //        stepViewText2= (TextView) findViewById(R.id.stepsView_text2);
 //        stepViewText3= (TextView) findViewById(R.id.stepsView_text3);
     }
