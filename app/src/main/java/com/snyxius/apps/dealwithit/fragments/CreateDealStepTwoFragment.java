@@ -51,7 +51,7 @@ public class CreateDealStepTwoFragment extends Fragment  {
 
             }
         });
-        
+
     }
 
     private void initialise(View rootView){

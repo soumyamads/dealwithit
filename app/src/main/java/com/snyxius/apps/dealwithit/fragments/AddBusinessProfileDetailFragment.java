@@ -4,20 +4,29 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.DealWithItActivity;
+
+import net.yazeed44.imagepicker.model.ImageEntry;
+import net.yazeed44.imagepicker.util.Picker;
+
+import java.util.ArrayList;
 
 
 /**
  * Created by snyxius on 10/15/2015.
  */
-public class AddBusinessProfileDetailFragment extends Fragment implements View.OnClickListener {
+public class AddBusinessProfileDetailFragment extends Fragment implements View.OnClickListener,Picker.PickListener {
 
     BasicStroke mCallback;
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -52,6 +61,8 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
     private void initialise(View view){
         view.findViewById(R.id.prev).setOnClickListener(this);
         view.findViewById(R.id.continue_detail).setOnClickListener(this);
+        view.findViewById(R.id.upload_menu_layout).setOnClickListener(this);
+        view.findViewById(R.id.cover_image_layout).setOnClickListener(this);
     }
 
     @Override
@@ -66,10 +77,37 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
                 mCallback.setBasicStoke();
                 getActivity().getSupportFragmentManager().popBackStack();
                 break;
+            case R.id.upload_menu_layout:
+                new Picker.Builder(getContext(),this,R.style.MIP_theme)
+                        .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
+                        .setLimit(6)
+                        .build()
+                        .startActivity();
+                break;
+            case R.id.cover_image_layout:
+                new Picker.Builder(getContext(),this,R.style.MIP_theme)
+                        .setPickMode(Picker.PickMode.SINGLE_IMAGE)
+                        .build()
+                        .startActivity();
+                break;
+
         }
+    }
+
+    @Override
+    public void onPickedSuccessfully(ArrayList<ImageEntry> images) {
+        Log.d("IMAGES", "Picked images  " + images.toString());
+    }
+
+    @Override
+    public void onCancel() {
+        Log.i("Images", "User canceled picker activity");
+        Toast.makeText(getActivity(), "User canceld picker activtiy", Toast.LENGTH_SHORT).show();
     }
 
     public interface BasicStroke{
         void setBasicStoke();
     }
+
+
 }

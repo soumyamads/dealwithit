@@ -24,8 +24,8 @@ public class AddBusinessProfileActivity extends AppCompatActivity{
         addBusinessProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(AddBusinessProfileActivity.this,BusinessProfileActivity.class);
-                startActivity(intent);
+                Intent inten=new Intent(AddBusinessProfileActivity.this,BusinessProfileActivity.class);
+                startActivity(inten);
             }
         });
 

@@ -24,7 +24,10 @@
                 android:id="@+id/upload_menu_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/bottom_selector_transparent">
 
             <TextView
                 android:id="@+id/cuisine_text"
@@ -56,7 +59,10 @@
             android:id="@+id/cover_image_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/bottom_selector_transparent">
 
             <TextView
                 android:id="@+id/ambience_text"
