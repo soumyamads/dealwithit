@@ -88,10 +88,9 @@ AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.Ba
         try {
             AddBusinessProfileBasicFragment f = (AddBusinessProfileBasicFragment) getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEBASIC_FRAGMENT);
             f.changeCuisineText(data, array);
-
             }catch(Exception e){
-
         }
-
     }
+
+
 }

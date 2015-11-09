@@ -72,6 +72,7 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
             case R.id.continues:
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .add(R.id.frmaecontainer,new AddBusinessProfileDetailFragment(),Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
+                        .addToBackStack(null)
                         .commit();
                 mCallback.setDetailStoke();
                 break;
@@ -135,5 +136,6 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
     public interface DetailStroke{
         void setDetailStoke();
     }
+
 
 }

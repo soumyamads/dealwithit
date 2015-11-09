@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.adapters.EstablishmentTypeAdapter;
 import com.snyxius.apps.dealwithit.api.WebRequest;
