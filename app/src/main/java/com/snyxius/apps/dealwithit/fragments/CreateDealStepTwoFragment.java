@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.snyxius.apps.dealwithit.R;
-import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
 import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
 
 
@@ -48,7 +47,7 @@ public class CreateDealStepTwoFragment extends Fragment  {
 //                initialise(view);
 //                intent = new Intent(getActivity(), MerchantProfile.class);
 //                startActivityy(intent);
-                ((CreateDealActivity) getActivity()).selectPage(2);
+               ((CreateDealActivity) getActivity()).selectPage(2);
 
             }
         });

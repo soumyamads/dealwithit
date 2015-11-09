@@ -1,28 +1,19 @@
 package com.snyxius.apps.dealwithit.fragments;
 
-import android.app.Dialog;
-import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.snyxius.apps.dealwithit.R;
-import com.snyxius.apps.dealwithit.activities.AddBusinessProfileActivity;
 import com.snyxius.apps.dealwithit.adapters.EstablishmentTypeAdapter;
 import com.snyxius.apps.dealwithit.api.WebRequest;
 import com.snyxius.apps.dealwithit.api.WebServices;
@@ -35,30 +26,33 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
  * Created by snyxius on 10/14/2015.
  */
-public class EstablishmentTypeFragment extends Fragment {
+public class EstablishmentTypeFragment extends Fragment implements View.OnClickListener {
 
-    ImageView right_tick,left_cross;
+
     ListView typeList;
     String[] values;
+    DataPassListener mCallback;
     ArrayList<EstablishmentTypePojo> estTypeListArray;
 
-    public EstablishmentTypeFragment() {
-        // Required empty public constructor
-        }
 
-@Override
-public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        // Make sure that container activity implement the callback interface
+        try {
+            mCallback = (DataPassListener)activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement DataPassListener");
         }
-
-@Override
-public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    }
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.establishment_type_dialog, container, false);
         return rootView;
@@ -76,33 +70,24 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 
         }
 
-//        String[] values = new String[] { "Fine Dine", "Lounge", "Bar",
-//                "Family Restaurant", "Quick Service Restaurant", "Club", "Brewberry", "Desert & Bakery",
-//                "Cafe", "Casual Dine", "Banquet" };
-
-
-
-        right_tick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().popBackStack();
-                getSelectedTypes();
-            }
-        });
-
-        left_cross.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().popBackStack();
-            }
-        });
-
     }
     private void initialise(View rootView) {
         typeList  =(ListView)rootView.findViewById(R.id.establishment_list);
-        right_tick=(ImageView)rootView.findViewById(R.id.right_tick);
-        left_cross=(ImageView)rootView.findViewById(R.id.left_cross);
+        rootView.findViewById(R.id.right_tick).setOnClickListener(this);
+        rootView.findViewById(R.id.left_cross).setOnClickListener(this);
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.right_tick:
+                getSelectedTypes();
+                break;
+            case R.id.left_cross:
+                getActivity().getSupportFragmentManager().popBackStack();
+                break;
+        }
     }
 
     private class getEstType extends AsyncTask<String, Void, JSONObject> {
@@ -142,16 +127,8 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
         try {
             if(jsonObject.getString(Keys.status).equals(Constants.SUCCESS)){
 
-
-//                values = getStringArray(jsonObject.getJSONArray(Keys.notice));
-//                DealWithItApp.showAToast(values.toString());
-
-//                final ArrayList<String> list = new ArrayList<String>();
-//                for (int i = 0; i < values.length; ++i) {
-//                    list.add(values[i]);
-//                }
                 JSONArray jArray=jsonObject.getJSONArray(Keys.notice);
-                estTypeListArray=new ArrayList<EstablishmentTypePojo>();
+                estTypeListArray=new ArrayList<>();
                 if (jArray != null) {
                     for (int i=0;i<jArray.length();i++){
                         EstablishmentTypePojo cp = new EstablishmentTypePojo();
@@ -165,8 +142,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 typeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                     @Override
-                    public void onItemClick(AdapterView<?> parent,
-                                            View view, int position, long id) {
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                         CheckBox chk = (CheckBox) view
                                 .findViewById(R.id.est_check_box);
@@ -193,51 +169,42 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 
     }
 
-    public static String[] getStringArray(JSONArray jsonArray){
-        String[] stringArray = null;
-        int length = jsonArray.length();
-        if(jsonArray!=null){
-            stringArray = new String[length];
-            for(int i=0;i<length;i++){
-                stringArray[i]= jsonArray.optString(i);
-            }
-        }
-        return stringArray;
-    }
 
     private void getSelectedTypes() {
-        // TODO Auto-generated method stub
+        try {
+            StringBuffer sb = new StringBuffer();
+            ArrayList<String> selectedTypes = new ArrayList<>();
+            for (EstablishmentTypePojo bean : estTypeListArray) {
 
-        StringBuffer sb = new StringBuffer();
-        ArrayList<String> selectedTypes=new ArrayList<>();
-        for (EstablishmentTypePojo bean : estTypeListArray) {
-
-            if (bean.isSelected()) {
-                sb.append(bean.getName());
-                sb.append(",");
-                selectedTypes.add(bean.getName());
+                if (bean.isSelected()) {
+                    sb.append(bean.getName());
+                    sb.append(",");
+                    selectedTypes.add(bean.getName());
+                }
             }
+
+            String s = sb.toString().trim();
+
+            if (TextUtils.isEmpty(s)) {
+                DealWithItApp.showAToast("Select atleast one Contact");
+            } else {
+                s = s.substring(0, s.length() - 1);
+                JSONArray jsonArray = new JSONArray(selectedTypes);
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.accumulate("type",jsonArray);
+                Log.v("array", jsonObject.toString());
+                mCallback.passData(s, selectedTypes);
+            }
+            getActivity().getSupportFragmentManager().popBackStack();
+        }catch (Exception e){
+            e.printStackTrace();
+
         }
-
-        String s = sb.toString().trim();
-
-        if (TextUtils.isEmpty(s)) {
-            DealWithItApp.showAToast("Select atleast one Contact");
-        } else {
-
-            s = s.substring(0, s.length() - 1);
-            DealWithItApp.showAToast("Selected Types : " + s);
-
-        }
-
-        //Establishment establis = (Establishment) getActivity();
-        //establis.setEstablishType(selectedTypes);
     }
 
-    interface Establishment{
-        void setEstablishType(ArrayList<String> array);
+    public interface DataPassListener{
+         void passData(String data,ArrayList<String> array);
     }
 
-
-    }
+}
 

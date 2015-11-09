@@ -1,26 +1,15 @@
 package com.snyxius.apps.dealwithit.fragments;
 
-import android.app.Dialog;
-import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
-import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
-import com.snyxius.apps.dealwithit.adapters.EstablishmentTypeAdapter;
-import com.snyxius.apps.dealwithit.applications.DealWithItApp;
+import com.snyxius.apps.dealwithit.extras.Constants;
 
 import java.util.ArrayList;
 
@@ -28,25 +17,29 @@ import java.util.ArrayList;
 /**
  * Created by snyxius on 10/15/2015.
  */
-public class AddBusinessProfileBasicFragment extends Fragment  {
 
 
-    RelativeLayout estType;
+public class AddBusinessProfileBasicFragment extends Fragment implements View.OnClickListener {
 
-
-    public AddBusinessProfileBasicFragment() {
-        // Required empty public constructor
-    }
-
+    static TextView  est_type_text;
+    static String s;
+    DetailStroke mCallback;
+ArrayList<String> arrayList = new ArrayList<>();
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        // Make sure that container activity implement the callback interface
+        try {
+            mCallback = (DetailStroke)activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement DataPassListener");
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.add_business_profile_basic, container, false);
         return rootView;
 }
@@ -56,33 +49,59 @@ public class AddBusinessProfileBasicFragment extends Fragment  {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialise(view);
-        view.findViewById(R.id.continues).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-//                initialise(view);
-//                intent = new Intent(getActivity(), MerchantProfile.class);
-//                startActivityy(intent);
-                ((BusinessProfileActivity) getActivity()).selectPage(1);
+    }
 
-            }
-        });
-        view.findViewById(R.id.est_type).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    private void initialise(View view){
+        view.findViewById(R.id.continues).setOnClickListener(this);
+        view.findViewById(R.id.est_type).setOnClickListener(this);
+        view.findViewById(R.id.cuisine_layout).setOnClickListener(this);
+        view.findViewById(R.id.ambience_layout).setOnClickListener(this);
+        est_type_text = (TextView)view.findViewById(R.id.est_type_text);
+    }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.continues:
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out,R.anim.push_up_in, R.anim.push_down_out)
-                        .replace(R.id.container, new EstablishmentTypeFragment(), "demo")
-                        .addToBackStack("est")
+                        .add(R.id.frmaecontainer,new AddBusinessProfileDetailFragment(),Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
+                        .addToBackStack(null)
                         .commit();
-            }
-        });
+                mCallback.setDetailStoke();
+                break;
+            case R.id.est_type:
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
+                        .add(R.id.container, new EstablishmentTypeFragment(), Constants.ESTABLISHMENTTYPE_FRAGMENT)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case R.id.cuisine_layout:
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
+                        .add(R.id.container, new ExpandableFragment(), "demo")
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case R.id.ambience_layout:
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
+                        .add(R.id.container, new ExpandableFragment(), "demo")
+                        .addToBackStack(null)
+                        .commit();
+
+                break;
+        }
     }
 
-    private void initialise(View rootView){
-
-//        email=(EditText)rootView.findViewById(R.id.email);
-//        password=(EditText)rootView.findViewById(R.id.password);
-//        fgtpaswd=(TextView)rootView.findViewById(R.id.fgtpaswd);
-//        login = (Button) rootView.findViewById(R.id.login_button);
+    public void changetext(String string){
+        est_type_text.setText(string);
     }
+
+
+
+    public interface DetailStroke{
+        void setDetailStoke();
+    }
+
 }

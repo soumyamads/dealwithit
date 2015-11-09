@@ -1,5 +1,6 @@
 package com.snyxius.apps.dealwithit.fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,12 @@ import android.widget.Toast;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.adapters.ExpandableListAdapter;
+import com.snyxius.apps.dealwithit.api.WebRequest;
+import com.snyxius.apps.dealwithit.api.WebServices;
+import com.snyxius.apps.dealwithit.applications.DealWithItApp;
+import com.snyxius.apps.dealwithit.extras.Constants;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +26,7 @@ import java.util.List;
 /**
  * Created by AMAN on 06-11-2015.
  */
-public class ExpandableFragment extends Fragment {
+public class ExpandableFragment extends Fragment implements View.OnClickListener {
 
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
@@ -40,14 +47,17 @@ public class ExpandableFragment extends Fragment {
     private void initialize(View view){
         // get the listview
         expListView = (ExpandableListView) view.findViewById(R.id.lvExp);
+        view.findViewById(R.id.right_tick).setOnClickListener(this);
+        view.findViewById(R.id.left_cross).setOnClickListener(this);
 
+
+
+        if (DealWithItApp.isNetworkAvailable()) {
+            new getEstDetails().execute(WebServices.typeDetails);
+        }else{
+
+        }
         // preparing list data
-        prepareListData();
-
-        listAdapter = new ExpandableListAdapter(getActivity(), listDataHeader, listDataChild);
-
-        // setting list adapter
-        expListView.setAdapter(listAdapter);
 
         // Listview Group click listener
         expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
@@ -107,10 +117,13 @@ public class ExpandableFragment extends Fragment {
 
     }
 
+
+
+
     /*
      * Preparing the list data
      */
-    private void prepareListData() {
+    private void prepareListData(JSONObject jsonObject) {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
 
@@ -149,4 +162,56 @@ public class ExpandableFragment extends Fragment {
         listDataChild.put(listDataHeader.get(2), comingSoon);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.right_tick:
+
+                break;
+            case R.id.left_cross:
+                getActivity().getSupportFragmentManager().popBackStack();
+                break;
+        }
+    }
+
+
+    private class getEstDetails extends AsyncTask<String, Void, JSONObject> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container_loading,new ProgressBarFrament(), Constants.PROGRESS_FRAGMENT)
+                    .commit();
+
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... params) {
+            JSONObject jsonObject = null;
+            try {
+                return WebRequest.getData(params[0]);
+            }catch (Exception e){
+
+                e.printStackTrace();
+            }
+            return jsonObject;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            super.onPostExecute(jsonObject);
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .remove(getActivity().getSupportFragmentManager().findFragmentByTag(Constants.PROGRESS_FRAGMENT))
+                    .commit();
+
+            prepareListData(jsonObject);
+
+            listAdapter = new ExpandableListAdapter(getActivity(), listDataHeader, listDataChild);
+
+            // setting list adapter
+            expListView.setAdapter(listAdapter);
+
+        }
+    }
 }

@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:id="@+id/container">
 
 
@@ -138,21 +139,9 @@
 
         </RelativeLayout>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
-            android:visibility="gone"
-            style="@style/MyCustomTabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabIndicatorHeight="2dp"
-            app:tabIndicatorColor="#ffffff"
-            android:background="@color/colorPrimary"
-            app:tabMode="scrollable"
-            app:tabGravity="fill"/>
 
-
-    <com.snyxius.apps.dealwithit.utils.CustomViewPager
-        android:id="@+id/viewpager"
+    <FrameLayout
+        android:id="@+id/frmaecontainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tabs2" />

@@ -49,10 +49,19 @@ Response
         "email":"aa@aa.com"
     }*/
 
+    public static final String type = baseUrl  + "establishmenttype/type";
+
+    public static final String typeDetails = baseUrl  + "establishmenttype/typeDetails";
+
+    /*{
+        "type":["Fine","Lounge","Bar"]
+    }*/
+
+
+
+
     public static final String saveDeal = baseUrl  + "merchants/saveDeal";
 
     public static final String saveBuisnessProf = baseUrl  + "merchants/saveBuisnessProf";
-
-    public static final String type = baseUrl  + "establishmenttype/type";
 
 }

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.snyxius.apps.dealwithit.R;
-import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
 import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
 
 
@@ -43,7 +42,7 @@ public class CreateDealStepThreeFragment extends Fragment  {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialise(view);
-        view.findViewById(R.id.continue_button).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.continues).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 //                initialise(view);
 //                intent = new Intent(getActivity(), MerchantProfile.class);
@@ -52,7 +51,17 @@ public class CreateDealStepThreeFragment extends Fragment  {
 
             }
         });
+        view.findViewById(R.id.est_type).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out,R.anim.push_up_in, R.anim.push_down_out)
+                        .replace(R.id.container, new EstablishmentTypeFragment(), "demo")
+                        .addToBackStack("est")
+                        .commit();
+            }
+        });
     }
 
     private void initialise(View rootView){

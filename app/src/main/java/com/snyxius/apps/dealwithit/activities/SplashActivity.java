@@ -30,7 +30,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                    if(DealWithItApp.readFromPreferences(getApplicationContext(), Keys.intro,false)) {
+                     if(!DealWithItApp.readFromPreferences(getApplicationContext(), Keys.id,Constants.DEFAULT_STRING).equals("")){
+                         Intent intent = new Intent(SplashActivity.this, AddBusinessProfileActivity.class);
+                         startActivity(intent);
+                         overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+                         SplashActivity.this.finish();
+                       } else if(DealWithItApp.readFromPreferences(getApplicationContext(), Keys.intro,false)) {
                         Intent intent = new Intent(SplashActivity.this, LoginSignupActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         intent.putExtra(Keys.position, Constants.DEFAULT_ONE);
