@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ import java.util.ArrayList;
 /**
  * Created by snyxius on 10/14/2015.
  */
-public class EstablishmentTypeFragment extends Fragment implements View.OnClickListener {
+public class AmbienceTypeFragment extends Fragment implements View.OnClickListener {
 
 
     ListView typeList;
@@ -63,20 +64,26 @@ public class EstablishmentTypeFragment extends Fragment implements View.OnClickL
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialise(view);
-
-        if (DealWithItApp.isNetworkAvailable()) {
-            new getEstType().execute(WebServices.type);
-        }else{
-
-        }
-
     }
     private void initialise(View rootView) {
-        typeList  =(ListView)rootView.findViewById(R.id.establishment_list);
-        TextView title = (TextView)rootView.findViewById(R.id.title);
-        title.setText("Select Establishment");
-        rootView.findViewById(R.id.right_tick).setOnClickListener(this);
-        rootView.findViewById(R.id.left_cross).setOnClickListener(this);
+        try {
+            typeList = (ListView) rootView.findViewById(R.id.establishment_list);
+            TextView title = (TextView)rootView.findViewById(R.id.title);
+            title.setText("Select Ambience");
+            rootView.findViewById(R.id.right_tick).setOnClickListener(this);
+            rootView.findViewById(R.id.left_cross).setOnClickListener(this);
+            if (DealWithItApp.isNetworkAvailable()) {
+                String str = DealWithItApp.readFromPreferences(getActivity(), Keys.establishmentDetail, Constants.DEFAULT_STRING);
+                JSONObject jsonObject = new JSONObject(str);
+                Log.v("request", jsonObject.toString());
+                new getAmbineceDetails().execute(jsonObject.toString());
+            } else {
+
+            }
+
+        }catch (Exception e){
+
+        }
 
     }
 
@@ -92,7 +99,7 @@ public class EstablishmentTypeFragment extends Fragment implements View.OnClickL
         }
     }
 
-    private class getEstType extends AsyncTask<String, Void, JSONObject> {
+    private class getAmbineceDetails extends AsyncTask<String, Void, JSONObject> {
 
         @Override
         protected void onPreExecute() {
@@ -107,7 +114,7 @@ public class EstablishmentTypeFragment extends Fragment implements View.OnClickL
         protected JSONObject doInBackground(String... params) {
             JSONObject jsonObject = null;
             try {
-                return WebRequest.getData(params[0]);
+                return WebRequest.postData(params[0], WebServices.typeDetails);
             }catch (Exception e){
 
                 e.printStackTrace();
@@ -128,8 +135,8 @@ public class EstablishmentTypeFragment extends Fragment implements View.OnClickL
     private void onDone(JSONObject jsonObject){
         try {
             if(jsonObject.getString(Keys.status).equals(Constants.SUCCESS)){
-
-                JSONArray jArray=jsonObject.getJSONArray(Keys.notice);
+                JSONObject json=jsonObject.getJSONObject(Keys.notice);
+                JSONArray jArray = json.getJSONArray(Keys.ambience);
                 estTypeListArray=new ArrayList<>();
                 if (jArray != null) {
                     for (int i=0;i<jArray.length();i++){
@@ -172,6 +179,7 @@ public class EstablishmentTypeFragment extends Fragment implements View.OnClickL
     }
 
 
+
     private void getSelectedTypes() {
         try {
             StringBuffer sb = new StringBuffer();
@@ -190,7 +198,7 @@ public class EstablishmentTypeFragment extends Fragment implements View.OnClickL
                 DealWithItApp.showAToast("Select atleast one Contact");
             } else {
                 s = s.substring(0, s.length() - 1);
-                mCallback.passEstablishData(s, selectedTypes);
+                mCallback.passAmbienceData(s, selectedTypes);
                 getActivity().getSupportFragmentManager().popBackStack();
             }
 
@@ -201,7 +209,7 @@ public class EstablishmentTypeFragment extends Fragment implements View.OnClickL
     }
 
     public interface DataPassListener{
-         void passEstablishData(String data,ArrayList<String> array);
+         void passAmbienceData(String data, ArrayList<String> array);
     }
 
 }

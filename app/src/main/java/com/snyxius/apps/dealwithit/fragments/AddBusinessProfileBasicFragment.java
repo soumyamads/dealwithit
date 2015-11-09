@@ -3,13 +3,19 @@ package com.snyxius.apps.dealwithit.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
+import com.snyxius.apps.dealwithit.extras.Keys;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -21,10 +27,9 @@ import java.util.ArrayList;
 
 public class AddBusinessProfileBasicFragment extends Fragment implements View.OnClickListener {
 
-    static TextView  est_type_text;
+     TextView  est_type_text,ambience_text,cuisine_text;
     static String s;
     DetailStroke mCallback;
-ArrayList<String> arrayList = new ArrayList<>();
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -57,6 +62,8 @@ ArrayList<String> arrayList = new ArrayList<>();
         view.findViewById(R.id.cuisine_layout).setOnClickListener(this);
         view.findViewById(R.id.ambience_layout).setOnClickListener(this);
         est_type_text = (TextView)view.findViewById(R.id.est_type_text);
+        ambience_text = (TextView)view.findViewById(R.id.ambience_text);
+        cuisine_text = (TextView)view.findViewById(R.id.cuisine_text);
     }
 
     @Override
@@ -79,14 +86,14 @@ ArrayList<String> arrayList = new ArrayList<>();
             case R.id.cuisine_layout:
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
-                        .add(R.id.container, new ExpandableFragment(), "demo")
+                        .add(R.id.container, new CuisineTypeFragment(), Constants.CUISINE_FRAGMENT)
                         .addToBackStack(null)
                         .commit();
                 break;
             case R.id.ambience_layout:
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
-                        .add(R.id.container, new ExpandableFragment(), "demo")
+                        .add(R.id.container, new AmbienceTypeFragment(), Constants.AMBINENCE_FRAGMENT)
                         .addToBackStack(null)
                         .commit();
 
@@ -94,11 +101,37 @@ ArrayList<String> arrayList = new ArrayList<>();
         }
     }
 
-    public void changetext(String string){
-        est_type_text.setText(string);
+    public void changeEstablishmentText(String string,ArrayList<String> arrayList){
+        try {
+            est_type_text.setText(string);
+            JSONArray jsonArray = new JSONArray(arrayList);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.accumulate(Keys.type, jsonArray);
+            Log.v("array", jsonObject.toString());
+            DealWithItApp.saveToPreferences(getActivity(), Keys.establishmentDetail, jsonObject.toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
+    public void changeAmbienceText(String string,ArrayList<String> arrayList){
+        try {
+            ambience_text.setText(string);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
+    }
+
+    public void changeCuisineText(String string,ArrayList<String> arrayList){
+        try {
+            cuisine_text.setText(string);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 
     public interface DetailStroke{
         void setDetailStoke();

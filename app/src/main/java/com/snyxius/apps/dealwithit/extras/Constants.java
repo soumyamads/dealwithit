@@ -10,6 +10,8 @@ public class Constants {
     public static final String PROGRESS_FRAGMENT = "ProgressFragment";
     public static final String SUCCESSDIALOG_FRAGMENT = "SuccessDialogFragment";
     public static final String ESTABLISHMENTTYPE_FRAGMENT = "EstablishmentTypeFragment";
+    public static final String CUISINE_FRAGMENT = "CuisineFragment";
+    public static final String AMBINENCE_FRAGMENT = "AmbienceFragment";
     public static final String SIGNUP_FRAGMENT = "Signup";
     public static final String ADDBUSINESSPROFILEBASIC_FRAGMENT = "AddBusinessProfileBasicFragment";
     public static final String ADDBUSINESSPROFILEDETAIL_FRAGMENT = "AddBusinessProfileDetailFragment";

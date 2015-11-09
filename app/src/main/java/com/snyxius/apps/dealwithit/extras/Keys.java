@@ -17,5 +17,9 @@ public interface Keys {
     public static final String lastName = "lastName";
     public static final String mobile = "mobile";
     public static final String establishmentName = "establishmentName";
+    public static final String establishmentDetail = "establishmentDetail";
+    public static final String type = "type";
     public static final String notice = "notice";
+    public static final String cusine = "cusine";
+    public static final String ambience = "ambience";
 }
