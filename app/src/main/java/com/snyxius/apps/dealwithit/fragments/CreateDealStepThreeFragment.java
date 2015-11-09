@@ -1,23 +1,44 @@
 package com.snyxius.apps.dealwithit.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
 
+import java.util.ArrayList;
+
 
 /**
  * Created by snyxius on 10/15/2015.
  */
-public class CreateDealStepThreeFragment extends Fragment  {
+public class CreateDealStepThreeFragment extends Fragment implements View.OnClickListener {
 
 
-    RelativeLayout estType;
+    RadioButton recurring,fixedrate;
+    LinearLayout recuringlayout;
+    RadioGroup radioGroup;
+    StepOneStroke mCallback;
+    ArrayList<String> arrayList = new ArrayList<>();
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        // Make sure that container activity implement the callback interface
+        try {
+            mCallback = (StepOneStroke) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement DataPassListener");
+        }
+    }
 
 
     public CreateDealStepThreeFragment() {
@@ -42,33 +63,36 @@ public class CreateDealStepThreeFragment extends Fragment  {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialise(view);
-        view.findViewById(R.id.continues).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-//                initialise(view);
-//                intent = new Intent(getActivity(), MerchantProfile.class);
-//                startActivityy(intent);
-                ((CreateDealActivity) getActivity()).selectPage(2);
 
-            }
-        });
-        view.findViewById(R.id.est_type).setOnClickListener(new View.OnClickListener() {
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
 
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out,R.anim.push_up_in, R.anim.push_down_out)
-                        .replace(R.id.container, new EstablishmentTypeFragment(), "demo")
-                        .addToBackStack("est")
-                        .commit();
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.radio_recurring) {
+                    recuringlayout.setVisibility(View.VISIBLE);
+                } else if (checkedId == R.id.radio_fixed) {
+                    recuringlayout.setVisibility(View.GONE);
+                }
             }
+
+
         });
+
     }
 
-    private void initialise(View rootView){
+    private void initialise(View view){
+        view.findViewById(R.id.continue_button).setOnClickListener(this);
+        view.findViewById(R.id.radio_fixed).setOnClickListener(this);
+        view.findViewById(R.id.radio_recurring).setOnClickListener(this);
+        radioGroup=(RadioGroup)view.findViewById(R.id.dateGroup);
+        recuringlayout=(LinearLayout)view.findViewById(R.id.recurring_layout);
+    }
 
-//        email=(EditText)rootView.findViewById(R.id.email);
-//        password=(EditText)rootView.findViewById(R.id.password);
-//        fgtpaswd=(TextView)rootView.findViewById(R.id.fgtpaswd);
-//        login = (Button) rootView.findViewById(R.id.login_button);
+    @Override
+    public void onClick(View v) {
+
+    }
+    public interface StepOneStroke{
+        void setStepThreeStoke();
     }
 }
