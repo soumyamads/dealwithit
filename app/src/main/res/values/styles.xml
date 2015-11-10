@@ -12,6 +12,11 @@
     <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
 </style>
 
+    <declare-styleable name="CircleAnimatedCheckBox">
+        <attr name="cb_color" format="color" />
+        <attr name="cb_pressed_ring_width" format="dimension" />
+    </declare-styleable>
+
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
