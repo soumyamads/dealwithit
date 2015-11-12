@@ -12,6 +12,16 @@
     <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
 </style>
 
+
+    <style name="Widget.CardContent" parent="android:Widget">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">24dp</item>
+        <item name="android:paddingBottom">24dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+
     <declare-styleable name="CircleAnimatedCheckBox">
         <attr name="cb_color" format="color" />
         <attr name="cb_pressed_ring_width" format="dimension" />

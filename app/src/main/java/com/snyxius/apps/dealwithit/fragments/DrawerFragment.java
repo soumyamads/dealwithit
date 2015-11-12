@@ -1,5 +1,6 @@
 package com.snyxius.apps.dealwithit.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.activities.MerchantProfileActivity;
 import com.snyxius.apps.dealwithit.adapters.DrawerAdapter;
 import com.snyxius.apps.dealwithit.adapters.SectionedRecyclerViewAdapter;
+import com.snyxius.apps.dealwithit.utils.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +61,19 @@ public class DrawerFragment extends Fragment {
 
         //Apply this adapter to the RecyclerView
         mRecyclerView.setAdapter(mSectionedAdapter);
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                switch (position){
+                    case 13:
+                        Intent merchant_pro=new Intent(getActivity(), MerchantProfileActivity.class);
+                        startActivity(merchant_pro);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }));
     }
 
     private void initialise(View view) {

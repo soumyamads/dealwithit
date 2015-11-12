@@ -6,7 +6,7 @@
         android:orderInCategory="100" app:showAsAction="never" />
 
     <item android:id="@+id/action_profile" android:title="@string/action_settings"
-        android:icon="@drawable/cwac_cam2_ic_action_settings"
+        android:icon="@drawable/profile_icon"
         android:orderInCategory="100" app:showAsAction="always" />
 
 </menu>

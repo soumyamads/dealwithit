@@ -44,6 +44,9 @@
         <activity android:name=".activities.CreateDealActivity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".activities.MerchantProfileActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>
