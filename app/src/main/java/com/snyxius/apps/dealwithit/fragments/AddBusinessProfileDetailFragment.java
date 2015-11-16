@@ -40,8 +40,7 @@ import java.util.ArrayList;
 public class AddBusinessProfileDetailFragment extends Fragment implements View.OnClickListener {
 
 
-    AddBusinessProfileBasicFragment.BasicStroke mBasicCallback;
-    AddBusinessProfileDealFragment.DealStroke mDealCallback;
+    DealStroke mDealCallback;
 
 
     @Override
@@ -49,8 +48,8 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
         super.onAttach(activity);
         // Make sure that container activity implement the callback interface
         try {
-//            mBasicCallback = (AddBusinessProfileBasicFragment.BasicStroke)activity;
-//            mDealCallback = (AddBusinessProfileDealFragment.DealStroke)activity;
+
+                  mDealCallback = (DealStroke) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement DataPassListener");
@@ -77,7 +76,6 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
     }
 
     private void initialise(View view){
-        view.findViewById(R.id.prev).setOnClickListener(this);
         view.findViewById(R.id.continue_detail).setOnClickListener(this);
         view.findViewById(R.id.cuisine_layout).setOnClickListener(this);
         view.findViewById(R.id.ambience_layout).setOnClickListener(this);
@@ -93,15 +91,15 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
 //                startActivity(intent);
 //                getActivity().finish();
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .add(R.id.frmaecontainer,new AddBusinessProfileDealFragment(),Constants.ADDBUSINESSPROFILEDEAL_FRAGMENT)
-                        .addToBackStack(null)
+                        .replace(R.id.frmaecontainer,new AddBusinessProfileDealFragment(),Constants.ADDBUSINESSPROFILEDEAL_FRAGMENT)
+                        .addToBackStack(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
                         .commit();
-//                mDealCallback.setDealStoke();
+                mDealCallback.setDealStoke();
                 break;
-            case R.id.prev:
-                mBasicCallback.setBasicStoke();
-                getActivity().getSupportFragmentManager().popBackStack();
-                break;
+//            case R.id.prev:
+//                mBasicCallback.setBasicStoke();
+//                getActivity().getSupportFragmentManager().popBackStack();
+//                break;
             case R.id.cuisine_layout:
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
@@ -236,9 +234,6 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
         void setDealStoke();
     }
 
-    public interface BasicStroke{
-        void setBasicStoke();
-    }
 
 
 }

@@ -270,26 +270,26 @@
 
 
 
-            <TextView
-                android:id="@+id/prev"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="PREVIOUS"
-                android:layout_marginTop="50dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:padding="10dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:gravity="center"
-                android:background="@drawable/bottom_selector_transparent"
-                android:textStyle="bold"
-                />
+            <!--<TextView-->
+                <!--android:id="@+id/prev"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="PREVIOUS"-->
+                <!--android:layout_marginTop="50dp"-->
+                <!--android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+                <!--android:padding="10dp"-->
+                <!--android:textColor="@color/colorPrimaryDark"-->
+                <!--android:gravity="center"-->
+                <!--android:background="@drawable/bottom_selector_transparent"-->
+                <!--android:textStyle="bold"-->
+                <!--/>-->
 
             <Button
                 android:id="@+id/continue_detail"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="50dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:background="@drawable/bottom_selector_secondary"
                 android:text="CONTINUE"

@@ -46,12 +46,6 @@ public class AddBusinessProfileActivity extends AppCompatActivity{
                 .commit();
         initDrawer();
 
-
-
-
-
-
-
         addBusinessProfile=(Button)findViewById(R.id.add_business_profile);
         addBusinessProfile.setOnClickListener(new View.OnClickListener() {
             @Override

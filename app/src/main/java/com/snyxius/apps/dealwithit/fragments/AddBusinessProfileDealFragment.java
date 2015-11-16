@@ -74,20 +74,15 @@ public class AddBusinessProfileDealFragment extends Fragment implements View.OnC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.continue_detail:
+
                 Intent intent = new Intent(getActivity(), DealWithItActivity.class);
                 startActivity(intent);
                 getActivity().finish();
+
                 break;
         }
 
     }
 
-    public interface DetailStroke{
-        void setDetailStoke();
-    }
 
-
-    public interface DealStroke{
-        void setDealStoke();
-    }
 }

@@ -81,8 +81,6 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
         view.findViewById(R.id.est_type).setOnClickListener(this);
         view.findViewById(R.id.upload_menu_layout).setOnClickListener(this);
         view.findViewById(R.id.cover_image_layout).setOnClickListener(this);
-//        view.findViewById(R.id.cuisine_layout).setOnClickListener(this);
-//        view.findViewById(R.id.ambience_layout).setOnClickListener(this);
         est_type_text = (TextView)view.findViewById(R.id.est_type_text);
 //        ambience_text = (TextView)view.findViewById(R.id.ambience_text);
 //        cuisine_text = (TextView)view.findViewById(R.id.cuisine_text);
@@ -93,8 +91,8 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
         switch (v.getId()){
             case R.id.continues:
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .add(R.id.frmaecontainer,new AddBusinessProfileDetailFragment(),Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
-                        .addToBackStack(null)
+                        .replace(R.id.frmaecontainer,new AddBusinessProfileDetailFragment(),Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
+                        .addToBackStack(Constants.ADDBUSINESSPROFILEBASIC_FRAGMENT)
                         .commit();
                 mCallback.setDetailStoke();
                 break;
@@ -249,9 +247,7 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
         Toast.makeText(getActivity(), "User canceld picker activtiy", Toast.LENGTH_SHORT).show();
     }
 
-    public interface BasicStroke{
-        void setBasicStoke();
-    }
+
 
     public void changeAmbienceText(String string,ArrayList<String> arrayList){
         try {
