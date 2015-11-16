@@ -23,6 +23,44 @@
                 android:hint="Establishment Name"
                 android:inputType="textPersonName" />
 
+            <!--.................ESTABLISHMENT TYPE............-->
+
+            <RelativeLayout
+                android:id="@+id/est_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bottom_selector_transparent"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/est_type_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="3dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="Establishment Type" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_below="@+id/est_type_text"
+                    android:background="@color/grey"/>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow_right"/>
+            </RelativeLayout>
+
+            <!--.................ESTABLISHMENT TYPE............-->
+
             <EditText
                 android:id="@+id/locationname"
                 android:layout_width="fill_parent"
@@ -47,30 +85,31 @@
                 android:hint="Description"
                 android:inputType="textMultiLine" />
 
+
             <RelativeLayout
-                android:id="@+id/est_type"
+                android:id="@+id/upload_menu_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/bottom_selector_transparent"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:background="@drawable/bottom_selector_transparent">
 
-            <TextView
-                android:id="@+id/est_type_text"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="4dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="3dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:text="Establishment Type" />
+                <TextView
+                    android:id="@+id/cuisine_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="3dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="Upload Menu" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="3dp"
-                    android:layout_below="@+id/est_type_text"
+                    android:layout_below="@+id/cuisine_text"
                     android:background="@color/grey"/>
 
                 <ImageView
@@ -82,47 +121,15 @@
             </RelativeLayout>
 
 
-
-
-
-
-
             <RelativeLayout
-            android:id="@+id/cuisine_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/cuisine_text"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="4dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="3dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:text="Cuisine" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="3dp"
-                android:layout_below="@+id/cuisine_text"
-                android:background="@color/grey"/>
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/arrow_right"/>
-        </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/ambience_layout"
+                android:id="@+id/cover_image_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/bottom_selector_transparent">
+
                 <TextView
                     android:id="@+id/ambience_text"
                     android:layout_width="fill_parent"
@@ -131,7 +138,7 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="3dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:text="Ambience" />
+                    android:text="Cover Image" />
 
                 <View
                     android:layout_width="match_parent"
@@ -145,8 +152,18 @@
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/arrow_right"/>
+                    android:src="@drawable/null_image"/>
             </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
 
 
             <Button

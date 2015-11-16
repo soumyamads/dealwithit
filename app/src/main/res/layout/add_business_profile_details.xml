@@ -21,23 +21,20 @@
 
 
             <RelativeLayout
-                android:id="@+id/upload_menu_layout"
+                android:id="@+id/cuisine_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="@drawable/bottom_selector_transparent">
+                android:layout_marginTop="10dp">
 
-            <TextView
-                android:id="@+id/cuisine_text"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="4dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="3dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:text="Upload Menu" />
+                <TextView
+                    android:id="@+id/cuisine_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="3dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="Cuisine" />
 
                 <View
                     android:layout_width="match_parent"
@@ -54,40 +51,35 @@
                     android:src="@drawable/arrow_right"/>
             </RelativeLayout>
 
-
             <RelativeLayout
-            android:id="@+id/cover_image_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="@drawable/bottom_selector_transparent">
-
-            <TextView
-                android:id="@+id/ambience_text"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="4dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="3dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:text="Cover Image" />
-
-            <View
+                android:id="@+id/ambience_layout"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="3dp"
-                android:layout_below="@+id/ambience_text"
-                android:background="@color/grey"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:id="@+id/ambience_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="3dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="Ambience" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/null_image"/>
-        </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_below="@+id/ambience_text"
+                    android:background="@color/grey"/>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow_right"/>
+            </RelativeLayout>
 
 
                 <TextView
@@ -275,128 +267,7 @@
             </LinearLayout>
 
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:layout_marginTop="15dp"
-                android:text="INCOMING DEAL SETTINGS" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Maximum Guests"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
-
-                <EditText
-                    android:id="@+id/max_guest"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="4dp"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="3dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:text="Cost /Person" />
-
-                <RelativeLayout
-                    android:id="@+id/cost_start_layout"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.8"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/cost_start_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:paddingLeft="8dp"
-                        android:text="500"
-                        android:paddingRight="25dp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:padding="2dp"
-                        android:layout_alignRight="@+id/cost_start_text"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/down_arrow"/>
-
-
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="to"/>
-
-
-                <RelativeLayout
-                    android:id="@+id/cost_end_layout"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.8"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/cost_end_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:paddingLeft="8dp"
-                        android:text="1000"
-                        android:paddingRight="25dp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:padding="2dp"
-                        android:layout_alignRight="@+id/cost_end_text"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/down_arrow"/>
-
-
-                </RelativeLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Alcohol included"
-                    android:textStyle="bold"/>
-
-
-            </LinearLayout>
 
 
             <TextView

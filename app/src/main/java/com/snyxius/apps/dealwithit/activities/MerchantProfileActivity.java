@@ -9,9 +9,12 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.OvershootInterpolator;
+import android.view.animation.ScaleAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
@@ -29,6 +32,7 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
     private boolean mIsTheTitleContainerVisible = true;
 
     private LinearLayout mTitleContainer;
+    private RelativeLayout mImageLayout;
     private TextView mTitle;
     private AppBarLayout mAppBarLayout;
     private ImageView mImageparallax;
@@ -64,6 +68,7 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
         mAppBarLayout   = (AppBarLayout) findViewById(R.id.appbar);
         mImageparallax  = (ImageView) findViewById(R.id.backdrop);
         mFrameParallax  = (FrameLayout) findViewById(R.id.main_framelayout_title);
+        mImageLayout=(RelativeLayout)findViewById(R.id.imageLayout);
     }
 
     private void initParallaxValues() {
@@ -109,6 +114,7 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
     private void handleAlphaOnTitle(float percentage) {
         if (percentage >= PERCENTAGE_TO_HIDE_TITLE_DETAILS) {
             if(mIsTheTitleContainerVisible) {
+                scaleView(mImageLayout, View.INVISIBLE);
                 startAlphaAnimation(mTitleContainer, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
                 mIsTheTitleContainerVisible = false;
             }
@@ -117,12 +123,14 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
 
             if (!mIsTheTitleContainerVisible) {
                 startAlphaAnimation(mTitleContainer, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
+                scaleView(mImageLayout, View.VISIBLE);
                 mIsTheTitleContainerVisible = true;
             }
         }
     }
 
     public static void startAlphaAnimation (View v, long duration, int visibility) {
+
         AlphaAnimation alphaAnimation = (visibility == View.VISIBLE)
                 ? new AlphaAnimation(0f, 1f)
                 : new AlphaAnimation(1f, 0f);
@@ -130,5 +138,18 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
         alphaAnimation.setDuration(duration);
         alphaAnimation.setFillAfter(true);
         v.startAnimation(alphaAnimation);
+    }
+
+    public void scaleView(View v, int visibility) {
+        ScaleAnimation anim = (visibility == View.VISIBLE)
+        ? new ScaleAnimation(0,1,0,1) : new ScaleAnimation(1,0,1,0);
+        anim.setFillBefore(true);
+        anim.setFillAfter(true);
+        anim.setFillEnabled(true);
+        anim.setDuration(300);
+        anim.setInterpolator(new OvershootInterpolator());
+//        fab.startAnimation(anim);
+//        anim.setFillAfter(true); // Needed to keep the result of the animation
+        v.startAnimation(anim);
     }
 }

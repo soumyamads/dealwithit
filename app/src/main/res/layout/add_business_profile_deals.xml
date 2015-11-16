@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#ffffff">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -21,13 +22,12 @@
 
 
 
-                <TextView
-                    android:id="@+id/cover_text"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:layout_marginTop="15dp"
-                    android:text="INCOMING DEAL SETTINGS" />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:text="INCOMING DEAL SETTINGS" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,6 +43,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
                 <EditText
+                    android:id="@+id/max_guest"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -65,24 +66,26 @@
                     android:text="Cost /Person" />
 
                 <RelativeLayout
+                    android:id="@+id/cost_start_layout"
                     android:layout_width="0dp"
+                    android:gravity="center"
                     android:layout_weight="0.8"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/slot1_start"
+                        android:id="@+id/cost_start_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         android:paddingLeft="8dp"
-                        android:text="11:00"
+                        android:text="500"
                         android:paddingRight="25dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:padding="2dp"
-                        android:layout_alignRight="@+id/slot1_start"
+                        android:layout_alignRight="@+id/cost_start_text"
                         android:layout_centerVertical="true"
                         android:src="@drawable/down_arrow"/>
 
@@ -97,24 +100,26 @@
 
 
                 <RelativeLayout
+                    android:id="@+id/cost_end_layout"
                     android:layout_width="0dp"
                     android:layout_weight="0.8"
+                    android:gravity="center"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/slot1_end"
+                        android:id="@+id/cost_end_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         android:paddingLeft="8dp"
-                        android:text="11:00"
+                        android:text="1000"
                         android:paddingRight="25dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:padding="2dp"
-                        android:layout_alignRight="@+id/slot1_end"
+                        android:layout_alignRight="@+id/cost_end_text"
                         android:layout_centerVertical="true"
                         android:src="@drawable/down_arrow"/>
 
@@ -129,9 +134,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:layout_width="wrap_content"
