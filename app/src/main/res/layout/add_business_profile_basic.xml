@@ -26,7 +26,7 @@
             <!--.................ESTABLISHMENT TYPE............-->
 
             <RelativeLayout
-                android:id="@+id/est_type"
+                android:id="@+id/category_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -35,20 +35,20 @@
                 android:focusable="true">
 
                 <TextView
-                    android:id="@+id/est_type_text"
+                    android:id="@+id/category_text"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="4dp"
                     android:paddingTop="8dp"
                     android:paddingBottom="3dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:text="Establishment Type" />
+                    android:text="Select Category" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="3dp"
-                    android:layout_below="@+id/est_type_text"
+                    android:layout_below="@+id/category_text"
                     android:background="@color/grey"/>
 
                 <ImageView

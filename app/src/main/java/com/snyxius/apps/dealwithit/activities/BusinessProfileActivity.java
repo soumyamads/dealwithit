@@ -1,10 +1,8 @@
 package com.snyxius.apps.dealwithit.activities;
 
-import android.app.Fragment;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,18 +11,19 @@ import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileBasicFragment;
-import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileDealFragment;
 import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileDetailFragment;
 import com.snyxius.apps.dealwithit.fragments.AmbienceTypeFragment;
+import com.snyxius.apps.dealwithit.fragments.CategoryFragment;
 import com.snyxius.apps.dealwithit.fragments.CuisineTypeFragment;
-import com.snyxius.apps.dealwithit.fragments.EstablishmentTypeFragment;
+import com.snyxius.apps.dealwithit.fragments.TypeFragment;
 
 import java.util.ArrayList;
 
 /**
  * Created by snyxius on 10/30/2015.
  */
-public class BusinessProfileActivity extends AppCompatActivity implements EstablishmentTypeFragment.DataPassListener,
+public class BusinessProfileActivity extends AppCompatActivity implements CategoryFragment.DataPassListener,TypeFragment.DataPassListener,
+        AmbienceTypeFragment.DataPassListener,CuisineTypeFragment.DataPassListener,
 AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.DealStroke{
 
     ImageView stepViewImage2,stepViewImage3;
@@ -39,15 +38,6 @@ AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.De
     }
 
 
-    @Override
-    public void passEstablishData(String data,ArrayList<String> arrayList) {
-        try {
-            AddBusinessProfileBasicFragment f = (AddBusinessProfileBasicFragment) getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEBASIC_FRAGMENT);
-            f.changeEstablishmentText(data, arrayList);
-        }catch(Exception e){
-
-           }
-        }
 
 
     private void initializeView(){
@@ -95,5 +85,47 @@ AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.De
         }
 
 
+    }
+
+    @Override
+    public void passCategoryData(String data) {
+        try {
+            AddBusinessProfileBasicFragment f = (AddBusinessProfileBasicFragment) getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEBASIC_FRAGMENT);
+            f.changeCategoryText(data);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
+    public void passTypeData(String data,ArrayList<String> arrayList) {
+        try {
+            AddBusinessProfileDetailFragment f = (AddBusinessProfileDetailFragment) getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT);
+            f.changeTypeText(data);
+        }catch(Exception e){
+
+        }
+    }
+
+
+    @Override
+    public void passAmbienceData(String data, ArrayList<String> array) {
+        try {
+            AddBusinessProfileDetailFragment f = (AddBusinessProfileDetailFragment) getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT);
+            f.changeAmbienceText(data);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void passCuisineData(String data, ArrayList<String> array) {
+        try {
+            AddBusinessProfileDetailFragment f = (AddBusinessProfileDetailFragment) getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT);
+            f.changeCuisineText(data);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

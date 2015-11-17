@@ -70,7 +70,7 @@ public class CreateDealStepOneFragment extends Fragment implements View.OnClickL
 
         view.findViewById(R.id.continue_button).setOnClickListener(this);
         view.findViewById(R.id.select_business_layout).setOnClickListener(this);
-        est_type_text = (TextView) view.findViewById(R.id.est_type_text);
+        est_type_text = (TextView) view.findViewById(R.id.type_text);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class CreateDealStepOneFragment extends Fragment implements View.OnClickL
 //            case R.id.est_type:
 //                getActivity().getSupportFragmentManager().beginTransaction()
 //                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
-//                        .add(R.id.container, new EstablishmentTypeFragment(), Constants.ESTABLISHMENTTYPE_FRAGMENT)
+//                        .add(R.id.container, new TypeFragment(), Constants.ESTABLISHMENTTYPE_FRAGMENT)
 //                        .addToBackStack(null)
 //                        .commit();
 //                break;

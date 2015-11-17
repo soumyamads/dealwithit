@@ -17,11 +17,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.DealWithItActivity;
 import com.snyxius.apps.dealwithit.extras.Constants;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import net.yazeed44.imagepicker.model.ImageEntry;
 import net.yazeed44.imagepicker.util.Picker;
@@ -32,17 +36,21 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 /**
  * Created by snyxius on 10/15/2015.
  */
-public class AddBusinessProfileDetailFragment extends Fragment implements View.OnClickListener {
+public class AddBusinessProfileDetailFragment extends Fragment implements View.OnClickListener,
+        TimePickerDialog.OnTimeSetListener,
+        DatePickerDialog.OnDateSetListener{
 
 
     DealStroke mDealCallback;
-
-
+    TextView slot1_start_time_text,slot1_end_time_text,ambience_text,cuisine_text,type_text;
+    TextView slot2_start_time_text,slot2_end_time_text;
+    private int position = 0;
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -76,30 +84,52 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
     }
 
     private void initialise(View view){
+        slot1_start_time_text = (TextView) view.findViewById(R.id.slot1_start_time_text);
+
+        slot1_end_time_text = (TextView) view.findViewById(R.id.slot1_end_time_text);
+
+        slot2_start_time_text = (TextView) view.findViewById(R.id.slot2_start_time_text);
+
+        slot2_end_time_text = (TextView) view.findViewById(R.id.slot2_end_time_text);
+
+
+        ambience_text = (TextView) view.findViewById(R.id.ambience_text);
+
+        cuisine_text = (TextView) view.findViewById(R.id.cuisine_text);
+
+        type_text = (TextView) view.findViewById(R.id.type_text);
+
+
         view.findViewById(R.id.continue_detail).setOnClickListener(this);
         view.findViewById(R.id.cuisine_layout).setOnClickListener(this);
         view.findViewById(R.id.ambience_layout).setOnClickListener(this);
-//        view.findViewById(R.id.upload_menu_layout).setOnClickListener(this);
-//        view.findViewById(R.id.cover_image_layout).setOnClickListener(this);
+        view.findViewById(R.id.type_layout).setOnClickListener(this);
+
+        view.findViewById(R.id.slot1_start_time_layout).setOnClickListener(this);
+        view.findViewById(R.id.slot1_end_time_layout).setOnClickListener(this);
+        view.findViewById(R.id.slot2_start_time_layout).setOnClickListener(this);
+        view.findViewById(R.id.slot2_end_time_layout).setOnClickListener(this);
+
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.continue_detail:
-//                Intent intent = new Intent(getActivity(), DealWithItActivity.class);
-//                startActivity(intent);
-//                getActivity().finish();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frmaecontainer,new AddBusinessProfileDealFragment(),Constants.ADDBUSINESSPROFILEDEAL_FRAGMENT)
                         .addToBackStack(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
                         .commit();
                 mDealCallback.setDealStoke();
                 break;
-//            case R.id.prev:
-//                mBasicCallback.setBasicStoke();
-//                getActivity().getSupportFragmentManager().popBackStack();
-//                break;
+            case R.id.type_layout:
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
+                        .add(R.id.container, new TypeFragment(), Constants.TYPE_FRAGMENT)
+                        .addToBackStack(null)
+                        .commit();
+                break;
             case R.id.cuisine_layout:
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
@@ -113,127 +143,92 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
                         .add(R.id.container, new AmbienceTypeFragment(), Constants.AMBINENCE_FRAGMENT)
                         .addToBackStack(null)
                         .commit();
-
                 break;
-//            case R.id.upload_menu_layout:
-//                new Picker.Builder(getContext(),this,R.style.MIP_theme)
-//                        .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
-//                        .setLimit(6)
-//                        .build()
-//                        .startActivity();
-//                break;
-//            case R.id.cover_image_layout:
-//                selectImage();
-//                break;
+            case R.id.slot1_start_time_layout:
+                position = 1;
+                setTime();
+                break;
+            case R.id.slot1_end_time_layout:
+                position = 2;
+                setTime();
+                break;
+            case R.id.slot2_start_time_layout:
+                position = 3;
+                setTime();
+                break;
+            case R.id.slot2_end_time_layout:
+                position = 4;
+                setTime();
+                break;
+        }
+    }
 
+    private void setTime(){
+        Calendar now = Calendar.getInstance();
+        TimePickerDialog tpd = TimePickerDialog.newInstance(this, now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE), false);
+        tpd.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                Log.d("TimePicker", "Dialog was cancelled");
+            }
+        });
+        tpd.show(getFragmentManager(), "TimePicker");
+
+    }
+
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+
+    }
+
+    @Override
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+
+        String hourString = hourOfDay < 10 ? "0"+hourOfDay : ""+hourOfDay;
+        String minuteString = minute < 10 ? "0"+minute : ""+minute;
+        String time = hourString+":"+minuteString;
+        Log.d("Time",time);
+        if(position == 1){
+              slot1_start_time_text.setText(time);
+        }else if(position == 2){
+                        slot1_end_time_text.setText(time);
+        }else if(position == 3){
+                        slot2_start_time_text.setText(time);
+        }else if(position == 4){
+                      slot2_end_time_text.setText(time);
         }
     }
 
 
-//    private void selectImage() {
-//        final CharSequence[] items = {"Take Photo", "Choose from Library", "Cancel"};
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//        builder.setTitle("Add Photo!");
-//        builder.setItems(items, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int item) {
-//                if (items[item].equals("Take Photo")) {
-//                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                    startActivityForResult(intent, REQUEST_CAMERA);
-//                } else if (items[item].equals("Choose from Library")) {
-//                    Intent intent = new Intent(
-//                            Intent.ACTION_PICK,
-//                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                    intent.setType("image/*");
-//                    startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
-//                } else if (items[item].equals("Cancel")) {
-//                    dialog.dismiss();
-//                }
-//            }
-//        });
-//        builder.show();
-//    }
-//
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == Activity.RESULT_OK) {
-//            if (requestCode == SELECT_FILE)
-//                onSelectFromGalleryResult(data);
-//            else if (requestCode == REQUEST_CAMERA)
-//                onCaptureImageResult(data);
-//        }
-//    }
-//
-//
-//    private void onCaptureImageResult(Intent data) {
-//        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-//        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-//        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-//
-//        File destination = new File(Environment.getExternalStorageDirectory(),
-//                System.currentTimeMillis() + ".jpg");
-//
-//        FileOutputStream fo;
-//        try {
-//            destination.createNewFile();
-//            fo = new FileOutputStream(destination);
-//            fo.write(bytes.toByteArray());
-//            fo.close();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//    }
-//
-//    @SuppressWarnings("deprecation")
-//    private void onSelectFromGalleryResult(Intent data) {
-//        Uri selectedImageUri = data.getData();
-//        String[] projection = { MediaColumns.DATA };
-//        Cursor cursor = getActivity().managedQuery(selectedImageUri, projection, null, null,
-//                null);
-//        int column_index = cursor.getColumnIndexOrThrow(MediaColumns.DATA);
-//        cursor.moveToFirst();
-//
-//        String selectedImagePath = cursor.getString(column_index);
-//
-//        Bitmap bm;
-//        BitmapFactory.Options options = new BitmapFactory.Options();
-//        options.inJustDecodeBounds = true;
-//        BitmapFactory.decodeFile(selectedImagePath, options);
-//        final int REQUIRED_SIZE = 200;
-//        int scale = 1;
-//        while (options.outWidth / scale / 2 >= REQUIRED_SIZE
-//                && options.outHeight / scale / 2 >= REQUIRED_SIZE)
-//            scale *= 2;
-//        options.inSampleSize = scale;
-//        options.inJustDecodeBounds = false;
-//        bm = BitmapFactory.decodeFile(selectedImagePath, options);
-//
-//
-//
-//    }
-//
-//
-//    @Override
-//    public void onPickedSuccessfully(ArrayList<ImageEntry> images) {
-//        Log.d("IMAGES", "Picked images  " + images.toString());
-//    }
-//
-//
-//    @Override
-//    public void onCancel() {
-//        Log.i("Images", "User canceled picker activity");
-//        Toast.makeText(getActivity(), "User canceld picker activtiy", Toast.LENGTH_SHORT).show();
-//    }
 
     public interface DealStroke{
         void setDealStoke();
     }
+    public void changeAmbienceText(String string){
+        try {
+            ambience_text.setText(string);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
+    }
+    public void changeCuisineText(String string){
+        try {
+            cuisine_text.setText(string);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+    public void changeTypeText(String string){
+        try {
+            type_text.setText(string);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 
 
 }

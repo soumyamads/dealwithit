@@ -31,7 +31,7 @@ import java.util.ArrayList;
 /**
  * Created by snyxius on 10/14/2015.
  */
-public class EstablishmentTypeFragment extends Fragment implements View.OnClickListener {
+public class TypeFragment extends Fragment implements View.OnClickListener {
 
 
     ListView typeList;
@@ -65,7 +65,7 @@ public class EstablishmentTypeFragment extends Fragment implements View.OnClickL
         initialise(view);
 
         if (DealWithItApp.isNetworkAvailable()) {
-            new getEstType().execute(WebServices.type);
+            new getEstType().execute(WebServices.typeDetails);
         }else{
 
         }
@@ -190,7 +190,7 @@ public class EstablishmentTypeFragment extends Fragment implements View.OnClickL
                 DealWithItApp.showAToast("Select atleast one Contact");
             } else {
                 s = s.substring(0, s.length() - 1);
-                mCallback.passEstablishData(s, selectedTypes);
+                mCallback.passTypeData(s, selectedTypes);
                 getActivity().getSupportFragmentManager().popBackStack();
             }
 
@@ -201,7 +201,7 @@ public class EstablishmentTypeFragment extends Fragment implements View.OnClickL
     }
 
     public interface DataPassListener{
-         void passEstablishData(String data,ArrayList<String> array);
+         void passTypeData(String data,ArrayList<String> array);
     }
 
 }

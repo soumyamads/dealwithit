@@ -19,7 +19,8 @@ public interface Keys {
     public static final String establishmentName = "establishmentName";
     public static final String establishmentDetail = "establishmentDetail";
     public static final String type = "type";
+    public static final String category = "category";
     public static final String notice = "notice";
-    public static final String cusine = "cusine";
-    public static final String ambience = "ambience";
+    public static final String cusine = "Cuisine";
+    public static final String ambience = "Ambiance";
 }

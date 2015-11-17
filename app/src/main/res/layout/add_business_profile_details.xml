@@ -21,6 +21,37 @@
 
 
             <RelativeLayout
+                android:id="@+id/type_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/type_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="3dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="Select Type" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_below="@+id/type_text"
+                    android:background="@color/grey"/>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow_right"/>
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/cuisine_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,7 +65,7 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="3dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:text="Cuisine" />
+                    android:text="Select Cuisine" />
 
                 <View
                     android:layout_width="match_parent"
@@ -64,7 +95,7 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="3dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:text="Ambience" />
+                    android:text="Select Ambience" />
 
                 <View
                     android:layout_width="match_parent"
@@ -107,25 +138,25 @@
                     android:text="Hours Slot 1" />
 
                 <RelativeLayout
-                    android:id="@+id/slot1_start_layout"
+                    android:id="@+id/slot1_start_time_layout"
                     android:layout_width="0dp"
                     android:layout_weight="0.8"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/slot1_start_text"
+                        android:id="@+id/slot1_start_time_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         android:paddingLeft="8dp"
-                        android:text="11:00"
+                        android:text="--:--"
                         android:paddingRight="25dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:padding="2dp"
-                        android:layout_alignRight="@+id/slot1_start_text"
+                        android:layout_alignRight="@+id/slot1_start_time_text"
                         android:layout_centerVertical="true"
                         android:src="@drawable/down_arrow"/>
 
@@ -140,25 +171,25 @@
 
 
                 <RelativeLayout
-                    android:id="@+id/slot1_end_layout"
+                    android:id="@+id/slot1_end_time_layout"
                     android:layout_width="0dp"
                     android:layout_weight="0.8"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/slot1_end_text"
+                        android:id="@+id/slot1_end_time_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         android:paddingLeft="8dp"
-                        android:text="11:00"
+                        android:text="--:--"
                         android:paddingRight="25dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:padding="2dp"
-                        android:layout_alignRight="@+id/slot1_end_text"
+                        android:layout_alignRight="@+id/slot1_end_time_text"
                         android:layout_centerVertical="true"
                         android:src="@drawable/down_arrow"/>
 
@@ -186,25 +217,25 @@
                     android:text="Hours Slot 2" />
 
                 <RelativeLayout
-                    android:id="@+id/slot2_start_layout"
+                    android:id="@+id/slot2_start_time_layout"
                     android:layout_width="0dp"
                     android:layout_weight="0.8"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/slot2_start_text"
+                        android:id="@+id/slot2_start_time_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         android:paddingLeft="8dp"
-                        android:text="11:00"
+                        android:text="--:--"
                         android:paddingRight="25dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:padding="2dp"
-                        android:layout_alignRight="@+id/slot2_start_text"
+                        android:layout_alignRight="@+id/slot2_start_time_text"
                         android:layout_centerVertical="true"
                         android:src="@drawable/down_arrow"/>
 
@@ -219,25 +250,25 @@
 
 
                 <RelativeLayout
-                    android:id="@+id/slot2_end_layout"
+                    android:id="@+id/slot2_end_time_layout"
                     android:layout_width="0dp"
                     android:layout_weight="0.8"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/slot2_end_text"
+                        android:id="@+id/slot2_end_time_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         android:paddingLeft="8dp"
-                        android:text="11:00"
+                        android:text="--:--"
                         android:paddingRight="25dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:padding="2dp"
-                        android:layout_alignRight="@+id/slot2_end_text"
+                        android:layout_alignRight="@+id/slot2_end_time_text"
                         android:layout_centerVertical="true"
                         android:src="@drawable/down_arrow"/>
 
@@ -267,22 +298,6 @@
             </LinearLayout>
 
 
-
-
-
-            <!--<TextView-->
-                <!--android:id="@+id/prev"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="PREVIOUS"-->
-                <!--android:layout_marginTop="50dp"-->
-                <!--android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-                <!--android:padding="10dp"-->
-                <!--android:textColor="@color/colorPrimaryDark"-->
-                <!--android:gravity="center"-->
-                <!--android:background="@drawable/bottom_selector_transparent"-->
-                <!--android:textStyle="bold"-->
-                <!--/>-->
 
             <Button
                 android:id="@+id/continue_detail"

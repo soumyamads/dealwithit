@@ -135,7 +135,7 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
         view.findViewById(R.id.upload_menu_layout).setOnClickListener(this);
         view.findViewById(R.id.cover_image_layout).setOnClickListener(this);
         view.findViewById(R.id.button_clear).setOnClickListener(this);
-        est_type_text = (TextView)view.findViewById(R.id.est_type_text);
+        est_type_text = (TextView)view.findViewById(R.id.category_text);
 //        ambience_text = (TextView)view.findViewById(R.id.ambience_text);
 //        cuisine_text = (TextView)view.findViewById(R.id.cuisine_text);
     }
@@ -160,14 +160,6 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
             case R.id.button_clear:
                 mAutocompleteView.setText("");
                 break;
-//            case R.id.ambience_layout:
-//                getActivity().getSupportFragmentManager().beginTransaction()
-//                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
-//                        .add(R.id.container, new AmbienceTypeFragment(), Constants.AMBINENCE_FRAGMENT)
-//                        .addToBackStack(null)
-//                        .commit();
-//
-//                break;
             case R.id.upload_menu_layout:
                 new Picker.Builder(getContext(),this,R.style.MIP_theme)
                         .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
@@ -287,7 +279,12 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
 
     @Override
     public void onPickedSuccessfully(ArrayList<ImageEntry> images) {
+
         Log.d("IMAGES", "Picked images  " + images.toString());
+
+
+
+
     }
 
 
@@ -405,6 +402,15 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
                 websiteUri));
         return Html.fromHtml(res.getString(R.string.place_details, name, id, address, phoneNumber,
                 websiteUri));
+
+    }
+
+    public void changeCategoryText(String string){
+        try {
+            est_type_text.setText(string);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 

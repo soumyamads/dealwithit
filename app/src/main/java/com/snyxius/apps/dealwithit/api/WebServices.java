@@ -49,15 +49,22 @@ Response
         "email":"aa@aa.com"
     }*/
 
-    public static final String type = baseUrl  + "establishmenttype/type";
+    public static final String category = baseUrl  + "establishmenttype/category";
 
     public static final String typeDetails = baseUrl  + "establishmenttype/typeDetails";
 
     /*{
-        "type":["Fine","Lounge","Bar"]
-    }*/
+     "type":
+                [
+                      "Restaurant",
+                       "Halls"
+                ]
+}
+*/
 
+    public static final String cuisine = baseUrl  + "establishmenttype/cuisine";
 
+    public static final String ambiance = baseUrl  + "establishmenttype/ambiance";
 
 
     public static final String saveDeal = baseUrl  + "merchants/saveDeal";

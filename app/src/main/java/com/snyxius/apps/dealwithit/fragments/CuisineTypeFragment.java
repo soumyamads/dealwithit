@@ -76,11 +76,11 @@ public class CuisineTypeFragment extends Fragment implements View.OnClickListene
            rootView.findViewById(R.id.right_tick).setOnClickListener(this);
            rootView.findViewById(R.id.left_cross).setOnClickListener(this);
            if (DealWithItApp.isNetworkAvailable()) {
-               String str = DealWithItApp.readFromPreferences(getActivity(), Keys.establishmentDetail, Constants.DEFAULT_STRING);
-               JSONObject jsonObject = new JSONObject(str);
-               Log.v("request", jsonObject.toString());
+            //   String str = DealWithItApp.readFromPreferences(getActivity(), Keys.establishmentDetail, Constants.DEFAULT_STRING);
+            //   JSONObject jsonObject = new JSONObject(str);
+             //  Log.v("request", jsonObject.toString());
 
-               new getCuisineDetails().execute(jsonObject.toString());
+               new getCuisineDetails().execute(WebServices.cuisine);
            } else {
 
            }
@@ -117,7 +117,7 @@ public class CuisineTypeFragment extends Fragment implements View.OnClickListene
         protected JSONObject doInBackground(String... params) {
             JSONObject jsonObject = null;
             try {
-                return WebRequest.postData(params[0], WebServices.typeDetails);
+                return WebRequest.getData(params[0]);
             }catch (Exception e){
 
                 e.printStackTrace();
