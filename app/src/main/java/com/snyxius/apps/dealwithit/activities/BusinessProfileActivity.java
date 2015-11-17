@@ -65,7 +65,7 @@ AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.De
     @Override
     public void setDetailStoke() {
         stepViewText2.setTypeface(null, Typeface.BOLD);
-        stepViewText2.setTextColor(getResources().getColor(R.color.colorPrimary));
+        stepViewText2.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         stepViewImage2.setImageResource(R.drawable.rounded_fill_indicator);
     }
 
@@ -73,7 +73,7 @@ AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.De
     @Override
     public void setDealStoke() {
         stepViewText3.setTypeface(null, Typeface.BOLD);
-        stepViewText3.setTextColor(getResources().getColor(R.color.colorPrimary));
+        stepViewText3.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         stepViewImage3.setImageResource(R.drawable.rounded_fill_indicator);
     }
 
@@ -86,11 +86,11 @@ AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.De
 
         if(fragment instanceof AddBusinessProfileBasicFragment && fragment1 instanceof AddBusinessProfileDetailFragment){
             stepViewText3.setTypeface(null, Typeface.NORMAL);
-            stepViewText3.setTextColor(getResources().getColor(R.color.colorPrimary));
+            stepViewText3.setTextColor(getResources().getColor(R.color.grey));
             stepViewImage3.setImageResource(R.drawable.rounded_stroke_indicator);
         }else if(fragment instanceof AddBusinessProfileBasicFragment){
             stepViewText2.setTypeface(null, Typeface.NORMAL);
-            stepViewText2.setTextColor(getResources().getColor(R.color.colorPrimary));
+            stepViewText2.setTextColor(getResources().getColor(R.color.grey));
             stepViewImage2.setImageResource(R.drawable.rounded_stroke_indicator);
         }
 
