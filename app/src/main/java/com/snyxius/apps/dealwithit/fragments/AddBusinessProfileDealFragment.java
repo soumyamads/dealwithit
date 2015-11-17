@@ -7,7 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
+import com.appyvet.rangebar.RangeBar;
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
 import com.snyxius.apps.dealwithit.activities.DealWithItActivity;
@@ -19,9 +23,11 @@ import com.snyxius.apps.dealwithit.extras.Constants;
  */
 public class AddBusinessProfileDealFragment extends Fragment implements View.OnClickListener{
 //    Intent intent;
-//    EditText email,password;
+    EditText leftIndexValue,rightIndexValue;
 //    TextView fgtpaswd;
 //    Button login;
+// Initializes the RangeBar in the application
+private RangeBar rangebar;
 
     @Override
     public void onAttach(Activity activity) {
@@ -59,11 +65,31 @@ public class AddBusinessProfileDealFragment extends Fragment implements View.OnC
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialise(view);
+        rangebar.setPinColor(getResources().getColor(R.color.colorPrimaryDark));
+        rangebar.setTickColor(getResources().getColor(R.color.grey));
+        rangebar.setConnectingLineColor(getResources().getColor(R.color.colorPrimaryDark));
+        rangebar.setBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        rangebar.setSelectorColor(getResources().getColor(R.color.colorPrimaryDark));
+        rangebar.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
+            @Override
+            public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex, int rightPinIndex, String leftPinValue, String rightPinValue) {
+                leftIndexValue.setText(leftPinValue);
+                rightIndexValue.setText(rightPinValue);
+            }
+        });
+
 
     }
 
     private void initialise(View view){
         view.findViewById(R.id.continue_deal).setOnClickListener(this);
+        rangebar = (RangeBar) view.findViewById(R.id.rangebar1);
+//        rangebar.setTickStart(5);
+//        rangebar.setTickInterval(1);
+//        rangebar.setTickEnd(100);
+        // Gets the index value TextViews
+        leftIndexValue = (EditText) view.findViewById(R.id.leftIndexValue);
+        rightIndexValue = (EditText) view.findViewById(R.id.rightIndexValue);
 //        email=(EditText)rootView.findViewById(R.id.email);
 //        password=(EditText)rootView.findViewById(R.id.password);
 //        fgtpaswd=(TextView)rootView.findViewById(R.id.fgtpaswd);
@@ -83,6 +109,10 @@ public class AddBusinessProfileDealFragment extends Fragment implements View.OnC
         }
 
     }
+
+
+
+
 
 
 }
