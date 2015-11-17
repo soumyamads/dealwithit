@@ -131,7 +131,7 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
 
     private void initialise(View view){
         view.findViewById(R.id.continues).setOnClickListener(this);
-        view.findViewById(R.id.est_type).setOnClickListener(this);
+        view.findViewById(R.id.category_layout).setOnClickListener(this);
         view.findViewById(R.id.upload_menu_layout).setOnClickListener(this);
         view.findViewById(R.id.cover_image_layout).setOnClickListener(this);
         view.findViewById(R.id.button_clear).setOnClickListener(this);
@@ -150,10 +150,10 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
                         .commit();
                 mCallback.setDetailStoke();
                 break;
-            case R.id.est_type:
+            case R.id.category_layout:
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
-                        .add(R.id.container, new EstablishmentTypeFragment(), Constants.ESTABLISHMENTTYPE_FRAGMENT)
+                        .add(R.id.container, new CategoryFragment(), Constants.CATEGORY_FRAGMENT)
                         .addToBackStack(null)
                         .commit();
                 break;

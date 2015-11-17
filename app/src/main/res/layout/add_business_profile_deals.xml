@@ -59,11 +59,8 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="4dp"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="3dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:text="Cost /Person" />
+                    android:textStyle="bold"
+                    android:text="SET RANGE COST/PERSION" />
 
                 <RelativeLayout
                     android:id="@+id/cost_start_layout"
@@ -140,8 +137,8 @@
                 android:id="@+id/rangebar1"
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
-                custom:tickStart="5"
-                custom:tickInterval="1"
+                custom:tickStart="0"
+                custom:tickInterval="50"
                 custom:tickEnd="5000"
                 custom:temporaryPins="false"
                 custom:pinMaxFont="10sp"/>
@@ -162,41 +159,20 @@
                         android:id="@+id/leftIndex"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:padding="8dp"
                         android:layout_marginTop="0dp"
-                        android:text="Left Index"/>
-
-                    <EditText
-                        android:id="@+id/leftIndexValue"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
-                        android:inputType="number"
-                        android:text="0"
-                        android:textSize="35sp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                        android:text="Approx Cost/Person"/>
 
                     <TextView
-                        android:id="@+id/rightIndex"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
-                        android:text="Right Index"/>
-
-                    <EditText
-                        android:id="@+id/rightIndexValue"
-                        android:layout_width="match_parent"
+                        android:id="@+id/leftIndexValue"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:inputType="number"
-                        android:text="0"
-                        android:textSize="35sp"/>
+                        android:text="Rs 0 To Rs 5000"
+                        android:textSize="30sp"/>
                 </LinearLayout>
+
             </LinearLayout>
 
             <!--.................Range SEEKBAR.........................-->

@@ -3,6 +3,7 @@ package com.snyxius.apps.dealwithit.activities;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,7 +25,7 @@ import java.util.ArrayList;
  */
 public class BusinessProfileActivity extends AppCompatActivity implements CategoryFragment.DataPassListener,TypeFragment.DataPassListener,
         AmbienceTypeFragment.DataPassListener,CuisineTypeFragment.DataPassListener,
-AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.DealStroke{
+AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetailFragment.PassData{
 
     ImageView stepViewImage2,stepViewImage3;
     TextView stepViewText2,stepViewText3;
@@ -124,6 +125,21 @@ AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.De
         try {
             AddBusinessProfileDetailFragment f = (AddBusinessProfileDetailFragment) getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT);
             f.changeCuisineText(data);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setCuisineData(String string) {
+        try {
+            getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
+                    .add(R.id.container, new CuisineTypeFragment().newInstance(string), Constants.CUISINE_FRAGMENT)
+                    .addToBackStack(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
+                    .commit();
+//            CuisineTypeFragment f = (CuisineTypeFragment) getSupportFragmentManager().findFragmentByTag(Constants.CUISINE_FRAGMENT);
+//            f.getData(string);
         }catch(Exception e){
             e.printStackTrace();
         }

@@ -23,7 +23,7 @@ import com.snyxius.apps.dealwithit.extras.Constants;
  */
 public class AddBusinessProfileDealFragment extends Fragment implements View.OnClickListener{
 //    Intent intent;
-    EditText leftIndexValue,rightIndexValue;
+    TextView leftIndexValue,rightIndexValue;
 //    TextView fgtpaswd;
 //    Button login;
 // Initializes the RangeBar in the application
@@ -73,8 +73,7 @@ private RangeBar rangebar;
         rangebar.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
             @Override
             public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex, int rightPinIndex, String leftPinValue, String rightPinValue) {
-                leftIndexValue.setText(leftPinValue);
-                rightIndexValue.setText(rightPinValue);
+                leftIndexValue.setText("Rs "+leftPinValue+" To "+ "Rs "+rightPinValue);
             }
         });
 
@@ -88,8 +87,8 @@ private RangeBar rangebar;
 //        rangebar.setTickInterval(1);
 //        rangebar.setTickEnd(100);
         // Gets the index value TextViews
-        leftIndexValue = (EditText) view.findViewById(R.id.leftIndexValue);
-        rightIndexValue = (EditText) view.findViewById(R.id.rightIndexValue);
+        leftIndexValue = (TextView) view.findViewById(R.id.leftIndexValue);
+
 //        email=(EditText)rootView.findViewById(R.id.email);
 //        password=(EditText)rootView.findViewById(R.id.password);
 //        fgtpaswd=(TextView)rootView.findViewById(R.id.fgtpaswd);

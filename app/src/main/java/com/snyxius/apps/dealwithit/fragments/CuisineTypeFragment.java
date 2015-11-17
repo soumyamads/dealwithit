@@ -23,6 +23,7 @@ import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.pojos.EstablishmentTypePojo;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -39,7 +40,14 @@ public class CuisineTypeFragment extends Fragment implements View.OnClickListene
     String[] values;
     DataPassListener mCallback;
     ArrayList<EstablishmentTypePojo> estTypeListArray;
+    ArrayList<String> arrayList;
+    static String strings;
 
+    public static CuisineTypeFragment newInstance(String string) {
+        strings = string;
+        CuisineTypeFragment f = new CuisineTypeFragment();
+        return f;
+    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -63,10 +71,7 @@ public class CuisineTypeFragment extends Fragment implements View.OnClickListene
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         initialise(view);
-
-
     }
     private void initialise(View rootView) {
        try {
@@ -75,11 +80,10 @@ public class CuisineTypeFragment extends Fragment implements View.OnClickListene
            title.setText("Select Cuisine");
            rootView.findViewById(R.id.right_tick).setOnClickListener(this);
            rootView.findViewById(R.id.left_cross).setOnClickListener(this);
-           if (DealWithItApp.isNetworkAvailable()) {
-            //   String str = DealWithItApp.readFromPreferences(getActivity(), Keys.establishmentDetail, Constants.DEFAULT_STRING);
-            //   JSONObject jsonObject = new JSONObject(str);
-             //  Log.v("request", jsonObject.toString());
+            splitingData();
 
+
+           if (DealWithItApp.isNetworkAvailable()) {
                new getCuisineDetails().execute(WebServices.cuisine);
            } else {
 
@@ -90,6 +94,20 @@ public class CuisineTypeFragment extends Fragment implements View.OnClickListene
        }
     }
 
+    private void splitingData(){
+        arrayList = new ArrayList<>();
+        if(strings.equals("Select Cuisine")){
+
+        }else{
+            int count = StringUtils.countMatches(strings, ",");
+            for (int i=0 ;i<=count;i++) {
+                String[] splited = strings.split(",");
+                arrayList.add(splited[i]);
+            }
+
+            Log.d("List",arrayList.toString());
+        }
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -137,41 +155,57 @@ public class CuisineTypeFragment extends Fragment implements View.OnClickListene
 
     private void onDone(JSONObject jsonObject){
         try {
-            if(jsonObject.getString(Keys.status).equals(Constants.SUCCESS)){
-                JSONObject json=jsonObject.getJSONObject(Keys.notice);
-                JSONArray jArray = json.getJSONArray(Keys.cusine);
-                estTypeListArray=new ArrayList<>();
-                if (jArray != null) {
-                    for (int i=0;i<jArray.length();i++){
-                        EstablishmentTypePojo cp = new EstablishmentTypePojo();
-                        cp.setName(jArray.getString(i));
-                        estTypeListArray.add(cp);
-                    }
-                }
-
-                final EstablishmentTypeAdapter adapter = new EstablishmentTypeAdapter(getContext(),estTypeListArray);
-                typeList.setAdapter(adapter);
-                typeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                        CheckBox chk = (CheckBox) view
-                                .findViewById(R.id.est_check_box);
-                        EstablishmentTypePojo bean = estTypeListArray.get(position);
-                        if (bean.isSelected()) {
-                            bean.setSelected(false);
-                            chk.setChecked(false);
-                        } else {
-                            bean.setSelected(true);
-                            chk.setChecked(true);
+            if(jsonObject != null) {
+                if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
+                    JSONObject json = jsonObject.getJSONObject(Keys.notice);
+                    JSONArray jArray = json.getJSONArray(Keys.cusine);
+                    estTypeListArray = new ArrayList<>();
+                    if (jArray != null) {
+                        for (int i = 0; i < jArray.length(); i++) {
+                            EstablishmentTypePojo cp = new EstablishmentTypePojo();
+                            cp.setName(jArray.getString(i));
+                            estTypeListArray.add(cp);
                         }
-
                     }
-                });
-            }else if(jsonObject.getString(Keys.status).equals(Constants.FAILED)){
-                DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
 
+                    final EstablishmentTypeAdapter adapter = new EstablishmentTypeAdapter(getContext(), estTypeListArray);
+                    typeList.setAdapter(adapter);
+                    if (!arrayList.isEmpty()) {
+                        for (int i = 0; i < estTypeListArray.size(); i++) {
+                            String string = estTypeListArray.get(i).getName();
+                            for (int j = 0; j < arrayList.size(); j++) {
+                                if (string.equals(arrayList.get(j))) {
+                                    estTypeListArray.get(i).setSelected(true);
+                                }
+                            }
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    typeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            CheckBox chk = (CheckBox) view
+                                    .findViewById(R.id.est_check_box);
+                            EstablishmentTypePojo bean = estTypeListArray.get(position);
+                            if (bean.isSelected()) {
+                                bean.setSelected(false);
+                                chk.setChecked(false);
+                            } else {
+                                bean.setSelected(true);
+                                chk.setChecked(true);
+                            }
+
+                        }
+                    });
+                } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
+                    DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+
+                } else {
+                    DealWithItApp.showAToast("Something Went Wrong.");
+                }
             }else{
                 DealWithItApp.showAToast("Something Went Wrong.");
             }

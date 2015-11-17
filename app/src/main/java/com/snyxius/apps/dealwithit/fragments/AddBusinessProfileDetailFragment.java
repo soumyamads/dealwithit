@@ -48,6 +48,7 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
 
 
     DealStroke mDealCallback;
+    PassData passData;
     TextView slot1_start_time_text,slot1_end_time_text,ambience_text,cuisine_text,type_text;
     TextView slot2_start_time_text,slot2_end_time_text;
     private int position = 0;
@@ -58,6 +59,8 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
         try {
 
                   mDealCallback = (DealStroke) activity;
+                  passData = (PassData) activity;
+
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement DataPassListener");
@@ -131,11 +134,7 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
                         .commit();
                 break;
             case R.id.cuisine_layout:
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
-                        .add(R.id.container, new CuisineTypeFragment(), Constants.CUISINE_FRAGMENT)
-                        .addToBackStack(null)
-                        .commit();
+                passData.setCuisineData(cuisine_text.getText().toString());
                 break;
             case R.id.ambience_layout:
                 getActivity().getSupportFragmentManager().beginTransaction()
@@ -201,6 +200,9 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
     }
 
 
+    public interface PassData{
+        void setCuisineData(String string);
+    }
 
     public interface DealStroke{
         void setDealStoke();
