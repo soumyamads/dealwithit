@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.adapters.EstablishmentTypeAdapter;
@@ -41,6 +42,8 @@ public class AmbienceTypeFragment extends Fragment implements View.OnClickListen
     ArrayList<EstablishmentTypePojo> estTypeListArray;
     ArrayList<String> arrayList;
     static String strings;
+    ProgressBar progressBar;
+    TextView emptytext;
 
     public static AmbienceTypeFragment newInstance(String string) {
         strings = string;
@@ -89,6 +92,9 @@ public class AmbienceTypeFragment extends Fragment implements View.OnClickListen
     }
     private void initialise(View rootView) {
         try {
+            progressBar=(ProgressBar)rootView.findViewById(R.id.pBar);
+            emptytext=(TextView)rootView.findViewById(R.id.empty);
+            emptytext.setVisibility(View.GONE);
             typeList = (ListView) rootView.findViewById(R.id.establishment_list);
             TextView title = (TextView)rootView.findViewById(R.id.title);
             title.setText("Select Ambience");
@@ -125,9 +131,7 @@ public class AmbienceTypeFragment extends Fragment implements View.OnClickListen
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container_loading,new ProgressBarFrament(), Constants.PROGRESS_FRAGMENT)
-                    .commit();
+
 
         }
 
@@ -146,9 +150,7 @@ public class AmbienceTypeFragment extends Fragment implements View.OnClickListen
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .remove(getActivity().getSupportFragmentManager().findFragmentByTag(Constants.PROGRESS_FRAGMENT))
-                    .commit();
+            progressBar.setVisibility(View.GONE);
             onDone(jsonObject);
         }
     }
@@ -201,7 +203,7 @@ public class AmbienceTypeFragment extends Fragment implements View.OnClickListen
                     });
                 } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
                     DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
-
+                    emptytext.setVisibility(View.VISIBLE);
                 } else {
                     DealWithItApp.showAToast("Something Went Wrong.");
                 }

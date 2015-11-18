@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
@@ -39,6 +40,8 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
     String[] values;
     DataPassListener mCallback;
     ArrayList<EstablishmentTypePojo> estTypeListArray;
+    ProgressBar progressBar;
+    TextView emptytext;
 
 
     @Override
@@ -74,6 +77,9 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
     }
     private void initialise(View rootView) {
         typeList  =(ListView)rootView.findViewById(R.id.establishment_list);
+        progressBar=(ProgressBar)rootView.findViewById(R.id.pBar);
+        emptytext=(TextView)rootView.findViewById(R.id.empty);
+        emptytext.setVisibility(View.GONE);
         TextView title = (TextView)rootView.findViewById(R.id.title);
         title.setText("Select Category");
         rootView.findViewById(R.id.right_tick).setOnClickListener(this);
@@ -116,7 +122,7 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
-
+            progressBar.setVisibility(View.GONE);
             onDone(jsonObject);
         }
     }
@@ -149,7 +155,7 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
                     });
                 } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
                     DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
-
+                    emptytext.setVisibility(View.VISIBLE);
                 } else {
                     DealWithItApp.showAToast("Something Went Wrong.");
                 }

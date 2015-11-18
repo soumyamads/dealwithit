@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
@@ -38,6 +39,8 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
     String[] values;
     DataPassListener mCallback;
     ArrayList<EstablishmentTypePojo> estTypeListArray;
+    ProgressBar progressBar;
+    TextView emptytext;
 
 
     @Override
@@ -72,6 +75,9 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
     }
     private void initialise(View rootView) {
+        progressBar=(ProgressBar)rootView.findViewById(R.id.pBar);
+        emptytext=(TextView)rootView.findViewById(R.id.empty);
+        emptytext.setVisibility(View.GONE);
         typeList  =(ListView)rootView.findViewById(R.id.establishment_list);
         TextView title = (TextView)rootView.findViewById(R.id.title);
         title.setText("Select Establishment");
@@ -97,9 +103,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container_loading,new ProgressBarFrament(), Constants.PROGRESS_FRAGMENT)
-                    .commit();
+
 
         }
 
@@ -118,9 +122,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .remove(getActivity().getSupportFragmentManager().findFragmentByTag(Constants.PROGRESS_FRAGMENT))
-                    .commit();
+            progressBar.setVisibility(View.GONE);
             onDone(jsonObject);
         }
     }
@@ -161,7 +163,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
                 });
             }else if(jsonObject.getString(Keys.status).equals(Constants.FAILED)){
                 DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
-
+                emptytext.setVisibility(View.VISIBLE);
             }else{
                 DealWithItApp.showAToast("Something Went Wrong.");
             }

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
@@ -42,6 +43,8 @@ public class CuisineTypeFragment extends Fragment implements View.OnClickListene
     ArrayList<EstablishmentTypePojo> estTypeListArray;
     ArrayList<String> arrayList;
     static String strings;
+    ProgressBar progressBar;
+    TextView emptytext;
 
     public static CuisineTypeFragment newInstance(String string) {
         strings = string;
@@ -79,6 +82,9 @@ public class CuisineTypeFragment extends Fragment implements View.OnClickListene
            title.setText("Select Cuisine");
            rootView.findViewById(R.id.right_tick).setOnClickListener(this);
            rootView.findViewById(R.id.left_cross).setOnClickListener(this);
+           progressBar=(ProgressBar)rootView.findViewById(R.id.pBar);
+           emptytext=(TextView)rootView.findViewById(R.id.empty);
+           emptytext.setVisibility(View.GONE);
             splitingData();
 
 
@@ -124,9 +130,9 @@ public class CuisineTypeFragment extends Fragment implements View.OnClickListene
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container_loading,new ProgressBarFrament(), Constants.PROGRESS_FRAGMENT)
-                    .commit();
+//            getActivity().getSupportFragmentManager().beginTransaction()
+//                    .add(R.id.container_loading,new ProgressBarFrament(), Constants.PROGRESS_FRAGMENT)
+//                    .commit();
 
         }
 
@@ -145,9 +151,10 @@ public class CuisineTypeFragment extends Fragment implements View.OnClickListene
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .remove(getActivity().getSupportFragmentManager().findFragmentByTag(Constants.PROGRESS_FRAGMENT))
-                    .commit();
+            progressBar.setVisibility(View.GONE);
+//            getActivity().getSupportFragmentManager().beginTransaction()
+//                    .remove(getActivity().getSupportFragmentManager().findFragmentByTag(Constants.PROGRESS_FRAGMENT))
+//                    .commit();
             onDone(jsonObject);
         }
     }
@@ -201,7 +208,7 @@ public class CuisineTypeFragment extends Fragment implements View.OnClickListene
                     });
                 } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
                     DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
-
+                    emptytext.setVisibility(View.GONE);
                 } else {
                     DealWithItApp.showAToast("Something Went Wrong.");
                 }
