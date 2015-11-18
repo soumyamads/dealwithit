@@ -28,13 +28,14 @@
 
                 <TextView
                     android:id="@+id/type_text"
+                    android:textColor="@android:color/black"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="4dp"
                     android:paddingTop="8dp"
                     android:paddingBottom="3dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:text="Select Type" />
+                    android:hint="Select Type" />
 
                 <View
                     android:layout_width="match_parent"
@@ -62,10 +63,11 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="4dp"
+                    android:textColor="@android:color/black"
                     android:paddingTop="8dp"
                     android:paddingBottom="3dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:text="Select Cuisine" />
+                    android:hint="Select Cuisine" />
 
                 <View
                     android:layout_width="match_parent"
@@ -89,13 +91,14 @@
                 android:layout_marginTop="10dp">
                 <TextView
                     android:id="@+id/ambience_text"
+                    android:textColor="@android:color/black"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="4dp"
                     android:paddingTop="8dp"
                     android:paddingBottom="3dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:text="Select Ambience" />
+                    android:hint="Select Ambience" />
 
                 <View
                     android:layout_width="match_parent"
@@ -149,7 +152,8 @@
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         android:paddingLeft="8dp"
-                        android:text="--:--"
+                        android:hint="--:--"
+                        android:textColor="@android:color/black"
                         android:paddingRight="25dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
                     <ImageView
@@ -182,7 +186,8 @@
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         android:paddingLeft="8dp"
-                        android:text="--:--"
+                        android:hint="--:--"
+                        android:textColor="@android:color/black"
                         android:paddingRight="25dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
                     <ImageView
@@ -228,7 +233,8 @@
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         android:paddingLeft="8dp"
-                        android:text="--:--"
+                        android:hint="--:--"
+                        android:textColor="@android:color/black"
                         android:paddingRight="25dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
                     <ImageView
@@ -261,7 +267,8 @@
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         android:paddingLeft="8dp"
-                        android:text="--:--"
+                        android:hint="--:--"
+                        android:textColor="@android:color/black"
                         android:paddingRight="25dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
                     <ImageView
@@ -293,7 +300,8 @@
                 <EditText
                     android:id="@+id/max_seat"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="number"/>
 
             </LinearLayout>
 

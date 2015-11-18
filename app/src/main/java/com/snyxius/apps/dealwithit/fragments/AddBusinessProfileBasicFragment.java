@@ -15,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,12 +63,13 @@ import java.util.ArrayList;
 
 public class AddBusinessProfileBasicFragment extends Fragment implements View.OnClickListener,Picker.PickListener, GoogleApiClient.OnConnectionFailedListener {
 
-     TextView  est_type_text;//,ambience_text,cuisine_text;
+    TextView  est_type_text;//,ambience_text,cuisine_text;
     static String s;
     EditText est_name,address,description;
     DetailStroke mCallback;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
-
+    ArrayList<String> arrayImage = new ArrayList<>();
+    String uploadPicture = "";
     protected GoogleApiClient mGoogleApiClient;
     private PlaceAutocompleteAdapter mAdapter;
     private AutoCompleteTextView mAutocompleteView;
@@ -100,16 +102,12 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialise(view);
-
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .enableAutoManage(getActivity(), 0 /* clientId */, this)
                 .addApi(Places.GEO_DATA_API)
                 .build();
         mAutocompleteView = (AutoCompleteTextView) view.findViewById(R.id.location_name);
-        // Register a listener that receives callbacks when a suggestion has been selected
         mAutocompleteView.setOnItemClickListener(mAutocompleteClickListener);
-        // Set up the adapter that will retrieve suggestions from the Places Geo Data API that cover
-        // the entire world.
         mAdapter = new PlaceAutocompleteAdapter(getActivity(), mGoogleApiClient, BOUNDS_GREATER_SYDNEY, null);
         mAutocompleteView.setAdapter(mAdapter);
     }
@@ -141,8 +139,6 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
         est_name = (EditText)view.findViewById(R.id.est_name);
         address = (EditText)view.findViewById(R.id.address);
         description = (EditText)view.findViewById(R.id.description);
-//        ambience_text = (TextView)view.findViewById(R.id.ambience_text);
-//        cuisine_text = (TextView)view.findViewById(R.id.cuisine_text);
     }
 
     @Override
@@ -229,7 +225,7 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-
+        sendImages(thumbnail);
         File destination = new File(Environment.getExternalStorageDirectory(),
                 System.currentTimeMillis() + ".jpg");
 
@@ -273,7 +269,7 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
         options.inSampleSize = scale;
         options.inJustDecodeBounds = false;
         bm = BitmapFactory.decodeFile(selectedImagePath, options);
-
+        sendImages(bm);
 
 
     }
@@ -285,6 +281,32 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
 
         Log.d("IMAGES", "Picked images  " + images.toString());
 
+        arrayImage = new ArrayList<>();
+
+        for(int i=0;i<images.size();i++){
+
+            Bitmap bitmaps;
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(images.get(i).path, options);
+            final int REQUIRED_SIZE = 200;
+            int scale = 1;
+            while (options.outWidth / scale / 2 >= REQUIRED_SIZE
+                    && options.outHeight / scale / 2 >= REQUIRED_SIZE)
+                scale *= 2;
+            options.inSampleSize = scale;
+            options.inJustDecodeBounds = false;
+            bitmaps = BitmapFactory.decodeFile(images.get(i).path, options);
+            int nh = (int) ( bitmaps.getHeight() * (256.0 / bitmaps.getWidth()) );
+            Bitmap scaled = Bitmap.createScaledBitmap(bitmaps, 256, nh, true);
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            scaled.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream.toByteArray();
+            String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+            arrayImage.add(encoded);
+        }
 
 
 
@@ -317,6 +339,17 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
 
     }
 
+    private void sendImages(Bitmap bitmaps){
+        int nh = (int) ( bitmaps.getHeight() * (256.0 / bitmaps.getWidth()) );
+        Bitmap scaled = Bitmap.createScaledBitmap(bitmaps, 256, nh, true);
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        scaled.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        uploadPicture = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+    }
+
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
@@ -324,6 +357,7 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
 
     public interface DetailStroke{
         void setDetailStoke();
+        void sendCategoryData(String string,JSONObject jsonObject);
     }
 
 
@@ -374,17 +408,7 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
             // Get the Place object from the buffer.
             final Place place = places.get(0);
 
-            // Format details of the place for display and show it in a TextView.
-//            Intent intent = new Intent(SearchActivity.this,
-//                    ActivityRooms.class);
-//            intent.putExtra("location2", place.getName().toString());
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            startActivity(intent);
-//            finish();
-//            mPlaceDetailsText.setText(formatPlaceDetails(getResources(), place.getName(),
-//                    place.getId(), place.getAddress(), place.getPhoneNumber(),
-//                    place.getWebsiteUri()));
-            // Display the third party attributions if set.
+
             final CharSequence thirdPartyAttribution = places.getAttributions();
             if (thirdPartyAttribution == null) {
 //                mPlaceDetailsAttribution.setVisibility(View.GONE);
@@ -425,16 +449,35 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
         }
         else if(mAutocompleteView.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select the Location Name");
-        }else if(address.getText().toString().isEmpty()){
+        }else if(mAutocompleteView.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select the Address");
         }else if(description.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select the Description");
-        }else{
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frmaecontainer,new AddBusinessProfileDetailFragment(),Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
-                    .addToBackStack(Constants.ADDBUSINESSPROFILEBASIC_FRAGMENT)
-                    .commit();
+        }else if(arrayImage.isEmpty()){
+            DealWithItApp.showAToast("Please upload menu first");
+        }else if(uploadPicture.equals("")){
+            DealWithItApp.showAToast("Please cover picture first");
+        }
+     else{
+            sendBasicData();
+        }
+    }
+
+    private void sendBasicData(){
+        try{
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.accumulate(Keys.business_name,est_name.getText().toString());
+            jsonObject.accumulate(Keys.category, est_type_text.getText().toString());
+            jsonObject.accumulate(Keys.location_name,mAutocompleteView.getText().toString());
+            jsonObject.accumulate(Keys.description,description.getText().toString());
+            jsonObject.accumulate(Keys.address, address.getText().toString());
+            JSONArray array = new JSONArray(arrayImage);
+            jsonObject.accumulate(Keys.menu_images,array);
+            jsonObject.accumulate(Keys.cover_image,uploadPicture);
             mCallback.setDetailStoke();
+            mCallback.sendCategoryData(est_type_text.getText().toString(), jsonObject);
+        }catch (Exception e){
+
         }
     }
 

@@ -237,7 +237,7 @@ public class CuisineTypeFragment extends Fragment implements View.OnClickListene
             }
             String s = sb.toString().trim();
             if (TextUtils.isEmpty(s)) {
-                DealWithItApp.showAToast("Select atleast one Contact");
+                DealWithItApp.showAToast("Select atleast one cuisine");
             } else {
                 s = s.substring(0, s.length() - 1);
                 mCallback.passCuisineData(s, selectedTypes);

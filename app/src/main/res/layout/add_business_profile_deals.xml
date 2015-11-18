@@ -13,6 +13,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:id="@+id/pBar" />
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -44,7 +53,8 @@
                 <EditText
                     android:id="@+id/max_guest"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="number"/>
 
             </LinearLayout>
 
@@ -167,7 +177,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:inputType="number"
-                        android:text="Rs 0 - Rs 5000"
+                        android:hint="Rs 0 - Rs 5000"
+                        android:textColor="@android:color/black"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
                 </LinearLayout>
 
@@ -183,6 +194,7 @@
                 android:layout_marginTop="10dp">
 
                 <CheckBox
+                    android:id="@+id/checkBox_Alcohol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -204,25 +216,32 @@
                 android:text="WHAT'S COVERED IN DEAL" />
 
             <EditText
+                android:id="@+id/deal_offering"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="50dp"
                 android:hint="Deal Offering"/>
 
             <Button
-                android:id="@+id/continue_deal"
+                android:id="@+id/save"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/bottom_selector_secondary"
-                android:text="Continue"
+                android:text="SAVE"
                 android:layout_marginTop="20dp"
                 android:textColor="#ffffff" />
 
 
-
-
+            <Button
+                android:id="@+id/add_business_profile"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/bottom_selector_secondary"
+                android:text="ADD BUSINESS PROFILE"
+                android:layout_marginTop="20dp"
+                android:textColor="#ffffff" />
 
         </LinearLayout>
 

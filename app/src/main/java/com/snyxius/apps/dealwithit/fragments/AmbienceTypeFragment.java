@@ -40,10 +40,11 @@ public class AmbienceTypeFragment extends Fragment implements View.OnClickListen
     String[] values;
     DataPassListener mCallback;
     ArrayList<EstablishmentTypePojo> estTypeListArray;
-    ArrayList<String> arrayList;
     static String strings;
     ProgressBar progressBar;
     TextView emptytext;
+    ArrayList<String> arrayList;
+
 
     public static AmbienceTypeFragment newInstance(String string) {
         strings = string;
@@ -233,7 +234,7 @@ public class AmbienceTypeFragment extends Fragment implements View.OnClickListen
             }
             String s = sb.toString().trim();
             if (TextUtils.isEmpty(s)) {
-                DealWithItApp.showAToast("Select atleast one Contact");
+                DealWithItApp.showAToast("Select atleast one Ambience");
             } else {
                 s = s.substring(0, s.length() - 1);
                 mCallback.passAmbienceData(s, selectedTypes);

@@ -12,15 +12,39 @@ public interface Keys {
     public static final String Password = "Password";
     public static final String password = "password";
     public static final String status = "status";
-    public static final String id = "id";
+    public static final String id = "userId";
     public static final String firstName = "firstName";
     public static final String lastName = "lastName";
     public static final String mobile = "mobile";
     public static final String establishmentName = "establishmentName";
     public static final String establishmentDetail = "establishmentDetail";
-    public static final String type = "type";
-    public static final String category = "category";
     public static final String notice = "notice";
+    public static final String profile = "profile";
+    public static final String business = "business";
+
+    //AdddBusinessBasicKeys
+    public static final String business_name = "Business_Name";
+    public static final String category = "category";
+    public static final String location_name = "Location_Name";
+    public static final String address = "Address";
+    public static final String description = "Description";
+    public static final String menu_images = "Menu_Images";
+    public static final String cover_image = "Cover_Image";
+
+    //Add_BusinessDetailKeys
+    public static final String type = "type";
     public static final String cusine = "Cuisine";
     public static final String ambience = "Ambiance";
+    public static final String timing_slot_1_start = "Timing_Slot_1_Start";
+    public static final String timing_slot_2_start = "Timing_Slot_2_Start";
+    public static final String timing_slot_1_end = "Timing_Slot_1_End";
+    public static final String timing_slot_2_end = "Timing_Slot_2_End";
+    public static final String max_seating = "Maximum_Seating";
+
+    //AddBusinessIncomingKeys
+    public static final String deal_offering = "Deal_Offering";
+    public static final String alcohol = "Alcohol";
+    public static final String cost_per_person = "Cost_Per_Person";
+    public static final String max_guest = "Maximum_Guest";
+
 }

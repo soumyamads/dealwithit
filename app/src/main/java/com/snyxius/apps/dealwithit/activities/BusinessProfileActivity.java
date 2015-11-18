@@ -12,11 +12,14 @@ import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileBasicFragment;
+import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileDealFragment;
 import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileDetailFragment;
 import com.snyxius.apps.dealwithit.fragments.AmbienceTypeFragment;
 import com.snyxius.apps.dealwithit.fragments.CategoryFragment;
 import com.snyxius.apps.dealwithit.fragments.CuisineTypeFragment;
 import com.snyxius.apps.dealwithit.fragments.TypeFragment;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -60,12 +63,29 @@ AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.De
         stepViewImage2.setImageResource(R.drawable.rounded_fill_indicator);
     }
 
+    @Override
+    public void sendCategoryData(String string, JSONObject jsonObject) {
+        DealWithItApp.saveToPreferences(getApplicationContext(),Keys.category,string);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frmaecontainer,new AddBusinessProfileDetailFragment().newInstance(jsonObject),Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
+                .addToBackStack(Constants.ADDBUSINESSPROFILEBASIC_FRAGMENT)
+                .commit();
+    }
+
 
     @Override
     public void setDealStoke() {
         stepViewText3.setTypeface(null, Typeface.BOLD);
         stepViewText3.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         stepViewImage3.setImageResource(R.drawable.rounded_fill_indicator);
+    }
+
+    @Override
+    public void sendDetailsCategoryData(JSONObject jsonObject) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frmaecontainer,new AddBusinessProfileDealFragment().newInstance(jsonObject),Constants.ADDBUSINESSPROFILEDEAL_FRAGMENT)
+                .addToBackStack(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
+                .commit();
     }
 
     @Override
@@ -103,7 +123,7 @@ AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.De
     public void passTypeData(String data,ArrayList<String> arrayList) {
         try {
             AddBusinessProfileDetailFragment f = (AddBusinessProfileDetailFragment) getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT);
-            f.changeTypeText(data);
+            f.changeTypeText(data, arrayList);
         }catch(Exception e){
 
         }
@@ -114,7 +134,7 @@ AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.De
     public void passAmbienceData(String data, ArrayList<String> array) {
         try {
             AddBusinessProfileDetailFragment f = (AddBusinessProfileDetailFragment) getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT);
-            f.changeAmbienceText(data);
+            f.changeAmbienceText(data,array);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -124,7 +144,7 @@ AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.De
     public void passCuisineData(String data, ArrayList<String> array) {
         try {
             AddBusinessProfileDetailFragment f = (AddBusinessProfileDetailFragment) getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT);
-            f.changeCuisineText(data);
+            f.changeCuisineText(data,array);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -155,5 +175,14 @@ AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.De
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void setTypeData(String string) {
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
+                .add(R.id.container, new TypeFragment().newInstance(string), Constants.TYPE_FRAGMENT)
+                .addToBackStack(null)
+                .commit();
     }
 }

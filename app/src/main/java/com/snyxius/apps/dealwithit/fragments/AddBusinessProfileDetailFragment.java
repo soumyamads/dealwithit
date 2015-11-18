@@ -17,18 +17,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.DealWithItActivity;
+import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
+import com.snyxius.apps.dealwithit.extras.Keys;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import net.yazeed44.imagepicker.model.ImageEntry;
 import net.yazeed44.imagepicker.util.Picker;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -47,11 +53,29 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
         DatePickerDialog.OnDateSetListener{
 
 
+
+
     DealStroke mDealCallback;
+    EditText max_seat;
     PassData passData;
     TextView slot1_start_time_text,slot1_end_time_text,ambience_text,cuisine_text,type_text;
     TextView slot2_start_time_text,slot2_end_time_text;
     private int position = 0;
+
+    ArrayList<String> arrayListAmbience;
+    ArrayList<String> arrayListCuisine;
+    ArrayList<String> arrayListType;
+
+
+
+    static  JSONObject jsonObject = new JSONObject();
+
+    public static AddBusinessProfileDetailFragment newInstance(JSONObject Object) {
+        jsonObject = Object;
+        AddBusinessProfileDetailFragment f = new AddBusinessProfileDetailFragment();
+        return f;
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -84,6 +108,8 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialise(view);
+
+        Log.d("JSONCategory",jsonObject.toString());
     }
 
     private void initialise(View view){
@@ -102,6 +128,7 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
 
         type_text = (TextView) view.findViewById(R.id.type_text);
 
+        max_seat = (EditText)view.findViewById(R.id.max_seat);
 
         view.findViewById(R.id.continue_detail).setOnClickListener(this);
         view.findViewById(R.id.cuisine_layout).setOnClickListener(this);
@@ -120,18 +147,10 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.continue_detail:
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frmaecontainer,new AddBusinessProfileDealFragment(),Constants.ADDBUSINESSPROFILEDEAL_FRAGMENT)
-                        .addToBackStack(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
-                        .commit();
-                mDealCallback.setDealStoke();
+                validate();
                 break;
             case R.id.type_layout:
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
-                        .add(R.id.container, new TypeFragment(), Constants.TYPE_FRAGMENT)
-                        .addToBackStack(null)
-                        .commit();
+                passData.setTypeData(type_text.getText().toString());
                 break;
             case R.id.cuisine_layout:
                 passData.setCuisineData(cuisine_text.getText().toString());
@@ -199,29 +218,34 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
     public interface PassData{
         void setCuisineData(String string);
         void setAmbienceData(String string);
+        void setTypeData(String string);
     }
 
     public interface DealStroke{
         void setDealStoke();
+        void sendDetailsCategoryData(JSONObject jsonObject);
     }
-    public void changeAmbienceText(String string){
+    public void changeAmbienceText(String string,ArrayList<String> arrayList){
         try {
+            arrayListAmbience = arrayList;
             ambience_text.setText(string);
         }catch (Exception e){
             e.printStackTrace();
         }
 
     }
-    public void changeCuisineText(String string){
+    public void changeCuisineText(String string,ArrayList<String> arrayList){
         try {
+            arrayListCuisine =arrayList;
             cuisine_text.setText(string);
         }catch (Exception e){
             e.printStackTrace();
         }
 
     }
-    public void changeTypeText(String string){
+    public void changeTypeText(String string,ArrayList<String> arrayList){
         try {
+            arrayListType = arrayList;
             type_text.setText(string);
         }catch (Exception e){
             e.printStackTrace();
@@ -229,5 +253,49 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
 
     }
 
+
+    private void validate(){
+        if(type_text.getText().toString().isEmpty()){
+            DealWithItApp.showAToast("Please select the Type");
+        }else if(cuisine_text.getText().toString().isEmpty()){
+            DealWithItApp.showAToast("Please select the Cuisine");
+        }else if(ambience_text.getText().toString().isEmpty()){
+            DealWithItApp.showAToast("Please select the Ambience");
+        }else if(slot1_start_time_text.getText().toString().isEmpty()){
+            DealWithItApp.showAToast("Please select First start Hour Slot");
+        }else if(slot1_end_time_text.getText().toString().isEmpty()){
+            DealWithItApp.showAToast("Please select First end Hour Slot");
+        }else if(slot2_start_time_text.getText().toString().isEmpty()){
+            DealWithItApp.showAToast("Please select Second start Hour Slot");
+        }else if(slot2_end_time_text.getText().toString().isEmpty()){
+            DealWithItApp.showAToast("Please select Second end Hour Slot");
+        }else if(max_seat.getText().toString().isEmpty()){
+            DealWithItApp.showAToast("Please select the Maximum Seatings");
+        }
+        else{
+            sendBasicData();
+        }
+    }
+
+
+    private void sendBasicData(){
+        try{
+            JSONArray arrayType = new JSONArray(arrayListType);
+            JSONArray arrayCuisine = new JSONArray(arrayListCuisine);
+            JSONArray arrayAmbience = new JSONArray(arrayListAmbience);
+            jsonObject.accumulate(Keys.type,arrayType);
+            jsonObject.accumulate(Keys.cusine,arrayCuisine);
+            jsonObject.accumulate(Keys.ambience,arrayAmbience);
+            jsonObject.accumulate(Keys.timing_slot_1_start, slot1_start_time_text.getText().toString());
+            jsonObject.accumulate(Keys.timing_slot_1_end, slot1_end_time_text.getText().toString());
+            jsonObject.accumulate(Keys.timing_slot_2_start,slot2_start_time_text.getText().toString());
+            jsonObject.accumulate(Keys.timing_slot_2_end,slot2_end_time_text.getText().toString());
+            jsonObject.accumulate(Keys.max_seating, max_seat.getText().toString());
+            mDealCallback.setDealStoke();
+            mDealCallback.sendDetailsCategoryData(jsonObject);
+        }catch (Exception e){
+
+        }
+    }
 
 }

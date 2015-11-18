@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.pojos.EstablishmentTypePojo;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -39,9 +41,17 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
     String[] values;
     DataPassListener mCallback;
     ArrayList<EstablishmentTypePojo> estTypeListArray;
+
+    static String strings;
     ProgressBar progressBar;
     TextView emptytext;
+    ArrayList<String> arrayList;
 
+    public static TypeFragment newInstance(String string) {
+        strings = string;
+        TypeFragment f = new TypeFragment();
+        return f;
+    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -54,25 +64,50 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
                     + " must implement DataPassListener");
         }
     }
+
+    private void splitingData(){
+        arrayList = new ArrayList<>();
+        if(strings.equals("Select Type")){
+
+        }else{
+            int count = StringUtils.countMatches(strings, ",");
+            for (int i=0 ;i<=count;i++) {
+                String[] splited = strings.split(",");
+                arrayList.add(splited[i]);
+            }
+
+            Log.d("List", arrayList.toString());
+        }
+    }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.establishment_type_dialog, container, false);
         return rootView;
 
-}
+    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initialise(view);
+        try {
+            initialise(view);
+            splitingData();
+            if (DealWithItApp.isNetworkAvailable()) {
+                String s = DealWithItApp.readFromPreferences(getActivity(), Keys.category, Constants.DEFAULT_STRING);
+                String spilted[] = s.split(" ");
+                String s1 = spilted[0];
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.accumulate(Keys.type, s1);
 
-        if (DealWithItApp.isNetworkAvailable()) {
-            new getEstType().execute(WebServices.typeDetails);
-        }else{
+                new getEstType().execute(jsonObject.toString());
+            } else {
 
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
-
     }
     private void initialise(View rootView) {
         progressBar=(ProgressBar)rootView.findViewById(R.id.pBar);
@@ -80,7 +115,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
         emptytext.setVisibility(View.GONE);
         typeList  =(ListView)rootView.findViewById(R.id.establishment_list);
         TextView title = (TextView)rootView.findViewById(R.id.title);
-        title.setText("Select Establishment");
+        title.setText("Select Type");
         rootView.findViewById(R.id.right_tick).setOnClickListener(this);
         rootView.findViewById(R.id.left_cross).setOnClickListener(this);
 
@@ -101,17 +136,10 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
     private class getEstType extends AsyncTask<String, Void, JSONObject> {
 
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-
-        }
-
-        @Override
         protected JSONObject doInBackground(String... params) {
             JSONObject jsonObject = null;
             try {
-                return WebRequest.getData(params[0]);
+                return WebRequest.postData(params[0], WebServices.typeDetails);
             }catch (Exception e){
 
                 e.printStackTrace();
@@ -129,41 +157,60 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
 
     private void onDone(JSONObject jsonObject){
         try {
-            if(jsonObject.getString(Keys.status).equals(Constants.SUCCESS)){
 
-                JSONArray jArray=jsonObject.getJSONArray(Keys.notice);
-                estTypeListArray=new ArrayList<>();
-                if (jArray != null) {
-                    for (int i=0;i<jArray.length();i++){
-                        EstablishmentTypePojo cp = new EstablishmentTypePojo();
-                        cp.setName(jArray.getString(i));
-                        estTypeListArray.add(cp);
-                    }
-                }
+            if(jsonObject != null) {
+                if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
+                    JSONObject obj = jsonObject.getJSONObject(Keys.notice);
+                    JSONArray jArray = obj.getJSONArray(Keys.type);
 
-                final EstablishmentTypeAdapter adapter = new EstablishmentTypeAdapter(getContext(),estTypeListArray);
-                typeList.setAdapter(adapter);
-                typeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                        CheckBox chk = (CheckBox) view
-                                .findViewById(R.id.est_check_box);
-                        EstablishmentTypePojo bean = estTypeListArray.get(position);
-                        if (bean.isSelected()) {
-                            bean.setSelected(false);
-                            chk.setChecked(false);
-                        } else {
-                            bean.setSelected(true);
-                            chk.setChecked(true);
+                    estTypeListArray = new ArrayList<>();
+                    if (jArray != null) {
+                        for (int i = 0; i < jArray.length(); i++) {
+                            EstablishmentTypePojo cp = new EstablishmentTypePojo();
+                            cp.setName(jArray.getString(i));
+                            estTypeListArray.add(cp);
                         }
-
                     }
-                });
-            }else if(jsonObject.getString(Keys.status).equals(Constants.FAILED)){
-                DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
-                emptytext.setVisibility(View.VISIBLE);
+
+                    final EstablishmentTypeAdapter adapter = new EstablishmentTypeAdapter(getContext(), estTypeListArray);
+                    typeList.setAdapter(adapter);
+
+
+                    if (!arrayList.isEmpty()) {
+                        for (int i = 0; i < estTypeListArray.size(); i++) {
+                            String string = estTypeListArray.get(i).getName();
+                            for (int j = 0; j < arrayList.size(); j++) {
+                                if (string.equals(arrayList.get(j))) {
+                                    estTypeListArray.get(i).setSelected(true);
+                                }
+                            }
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                    typeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            CheckBox chk = (CheckBox) view
+                                    .findViewById(R.id.est_check_box);
+                            EstablishmentTypePojo bean = estTypeListArray.get(position);
+                            if (bean.isSelected()) {
+                                bean.setSelected(false);
+                                chk.setChecked(false);
+                            } else {
+                                bean.setSelected(true);
+                                chk.setChecked(true);
+                            }
+
+                        }
+                    });
+                } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
+                    DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+                    emptytext.setVisibility(View.VISIBLE);
+                } else {
+                    DealWithItApp.showAToast("Something Went Wrong.");
+                }
             }else{
                 DealWithItApp.showAToast("Something Went Wrong.");
             }
