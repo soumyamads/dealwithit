@@ -38,9 +38,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Maximum Guests"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                    android:paddingRight="8dp"
+                    android:text="Maximum Guests"/>
 
                 <EditText
                     android:id="@+id/max_guest"
@@ -159,7 +158,6 @@
                         android:id="@+id/leftIndex"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="8dp"
                         android:layout_marginTop="0dp"
                         android:text="Approx Cost/Person"/>
 
@@ -167,10 +165,10 @@
                         android:id="@+id/leftIndexValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
+                        android:layout_marginTop="10dp"
                         android:inputType="number"
-                        android:text="Rs 0 To Rs 5000"
-                        android:textSize="30sp"/>
+                        android:text="Rs 0 - Rs 5000"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -180,7 +178,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginLeft="-6dp"
+                android:layout_marginTop="10dp">
 
                 <CheckBox
                     android:layout_width="wrap_content"

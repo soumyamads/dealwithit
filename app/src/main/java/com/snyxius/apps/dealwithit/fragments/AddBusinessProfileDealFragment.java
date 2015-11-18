@@ -73,7 +73,7 @@ private RangeBar rangebar;
         rangebar.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
             @Override
             public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex, int rightPinIndex, String leftPinValue, String rightPinValue) {
-                leftIndexValue.setText("Rs "+leftPinValue+" To "+ "Rs "+rightPinValue);
+                leftIndexValue.setText("Rs "+leftPinValue+" - "+ "Rs "+rightPinValue);
             }
         });
 
