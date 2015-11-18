@@ -29,7 +29,7 @@ import org.json.JSONObject;
  */
 public class LoginFragment extends Fragment implements View.OnClickListener {
     EditText email;
-    CustomPasswordEditText password;
+    EditText password;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +52,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         rootView.findViewById(R.id.show).setOnClickListener(this);
         rootView.findViewById(R.id.login_button).setOnClickListener(this);
         email=(EditText)rootView.findViewById(R.id.email);
-        password=(CustomPasswordEditText)rootView.findViewById(R.id.password);
+        password=(EditText)rootView.findViewById(R.id.password);
         rootView.findViewById(R.id.fgtpaswd).setOnClickListener(this);
     }
 

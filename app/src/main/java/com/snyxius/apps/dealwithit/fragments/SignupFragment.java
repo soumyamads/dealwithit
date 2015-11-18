@@ -32,7 +32,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
 
      EditText firstname,lastname,email,mobileno,establshname;
-     CustomPasswordEditText password,retypepassword;
+     EditText password,retypepassword;
 
 
 @Override
@@ -88,8 +88,8 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 establshname = (EditText) rootView.findViewById(R.id.establshname);
                 email = (EditText) rootView.findViewById(R.id.email);
                 mobileno = (EditText) rootView.findViewById(R.id.mobileno);
-                password = (CustomPasswordEditText) rootView.findViewById(R.id.password);
-                retypepassword = (CustomPasswordEditText) rootView.findViewById(R.id.retypepassword);
+                password = (EditText) rootView.findViewById(R.id.password);
+                retypepassword = (EditText) rootView.findViewById(R.id.retypepassword);
                 rootView.findViewById(R.id.show).setOnClickListener(this);
             }
 

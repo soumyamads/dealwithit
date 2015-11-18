@@ -72,12 +72,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp">
 
-                    <com.snyxius.apps.dealwithit.utils.CustomPasswordEditText
+                    <EditText
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Password"
                         android:paddingRight="30dp"
+                        android:fontFamily="sans-serif"
                         android:inputType="textPassword" />
 
                     <TextView
@@ -101,12 +102,12 @@
 
                 />
 
-            <com.snyxius.apps.dealwithit.utils.CustomPasswordEditText
+            <EditText
                 android:id="@+id/retypepassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-
+                android:fontFamily="sans-serif"
                 android:hint="Retype Password"
                 android:inputType="textPassword" />
 
