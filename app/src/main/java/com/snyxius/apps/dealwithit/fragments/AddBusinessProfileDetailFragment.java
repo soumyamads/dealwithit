@@ -137,11 +137,7 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
                 passData.setCuisineData(cuisine_text.getText().toString());
                 break;
             case R.id.ambience_layout:
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
-                        .add(R.id.container, new AmbienceTypeFragment(), Constants.AMBINENCE_FRAGMENT)
-                        .addToBackStack(null)
-                        .commit();
+                passData.setAmbienceData(ambience_text.getText().toString());
                 break;
             case R.id.slot1_start_time_layout:
                 position = 1;
@@ -202,6 +198,7 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
 
     public interface PassData{
         void setCuisineData(String string);
+        void setAmbienceData(String string);
     }
 
     public interface DealStroke{

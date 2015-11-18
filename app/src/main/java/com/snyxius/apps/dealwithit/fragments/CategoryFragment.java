@@ -123,32 +123,36 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
 
     private void onDone(JSONObject jsonObject){
         try {
-            if(jsonObject.getString(Keys.status).equals(Constants.SUCCESS)){
-                JSONObject object = jsonObject.getJSONObject(Keys.notice);
-                JSONArray jArray=object.getJSONArray(Keys.category);
-                estTypeListArray=new ArrayList<>();
-                if (jArray != null) {
-                    for (int i=0;i<jArray.length();i++){
-                        EstablishmentTypePojo cp = new EstablishmentTypePojo();
-                        cp.setName(jArray.getString(i));
-                        estTypeListArray.add(cp);
+            if(jsonObject != null) {
+                if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
+                    JSONObject object = jsonObject.getJSONObject(Keys.notice);
+                    JSONArray jArray = object.getJSONArray(Keys.category);
+                    estTypeListArray = new ArrayList<>();
+                    if (jArray != null) {
+                        for (int i = 0; i < jArray.length(); i++) {
+                            EstablishmentTypePojo cp = new EstablishmentTypePojo();
+                            cp.setName(jArray.getString(i));
+                            estTypeListArray.add(cp);
+                        }
                     }
+
+                    final CategoryAdapter adapter = new CategoryAdapter(getActivity(), estTypeListArray);
+                    typeList.setAdapter(adapter);
+                    typeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            mCallback.passCategoryData(estTypeListArray.get(position).getName());
+                            getActivity().getSupportFragmentManager().popBackStack();
+                        }
+                    });
+                } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
+                    DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+
+                } else {
+                    DealWithItApp.showAToast("Something Went Wrong.");
                 }
-
-                final CategoryAdapter adapter = new CategoryAdapter(getActivity(),estTypeListArray);
-                typeList.setAdapter(adapter);
-                typeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                        mCallback.passCategoryData(estTypeListArray.get(position).getName());
-                        getActivity().getSupportFragmentManager().popBackStack();
-                    }
-                });
-            }else if(jsonObject.getString(Keys.status).equals(Constants.FAILED)){
-                DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
-
             }else{
                 DealWithItApp.showAToast("Something Went Wrong.");
             }

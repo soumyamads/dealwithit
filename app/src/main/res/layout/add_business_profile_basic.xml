@@ -41,8 +41,9 @@
                     android:paddingLeft="4dp"
                     android:paddingTop="8dp"
                     android:paddingBottom="3dp"
+                    android:textColor="@android:color/black"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:text="Select Category" />
+                    android:hint="Select Category" />
 
                 <View
                     android:layout_width="match_parent"
@@ -125,7 +126,7 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="3dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:text="Upload Menu" />
+                    android:hint="Upload Menu" />
 
                 <View
                     android:layout_width="match_parent"
@@ -160,7 +161,7 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="3dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:text="Cover Image" />
+                    android:hint="Cover Image" />
 
                 <View
                     android:layout_width="match_parent"

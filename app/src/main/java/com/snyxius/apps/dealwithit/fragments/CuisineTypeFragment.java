@@ -65,8 +65,7 @@ public class CuisineTypeFragment extends Fragment implements View.OnClickListene
         Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.establishment_type_dialog, container, false);
         return rootView;
-
-}
+        }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {

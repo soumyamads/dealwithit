@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +64,7 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
 
      TextView  est_type_text;//,ambience_text,cuisine_text;
     static String s;
+    EditText est_name,address,description;
     DetailStroke mCallback;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
 
@@ -136,6 +138,9 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
         view.findViewById(R.id.cover_image_layout).setOnClickListener(this);
         view.findViewById(R.id.button_clear).setOnClickListener(this);
         est_type_text = (TextView)view.findViewById(R.id.category_text);
+        est_name = (EditText)view.findViewById(R.id.est_name);
+        address = (EditText)view.findViewById(R.id.address);
+        description = (EditText)view.findViewById(R.id.description);
 //        ambience_text = (TextView)view.findViewById(R.id.ambience_text);
 //        cuisine_text = (TextView)view.findViewById(R.id.cuisine_text);
     }
@@ -144,11 +149,7 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.continues:
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frmaecontainer,new AddBusinessProfileDetailFragment(),Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
-                        .addToBackStack(Constants.ADDBUSINESSPROFILEBASIC_FRAGMENT)
-                        .commit();
-                mCallback.setDetailStoke();
+               validate();
                 break;
             case R.id.category_layout:
                 getActivity().getSupportFragmentManager().beginTransaction()
@@ -257,6 +258,8 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
         cursor.moveToFirst();
 
         String selectedImagePath = cursor.getString(column_index);
+
+        Log.d("selectPath",selectedImagePath);
 
         Bitmap bm;
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -412,6 +415,27 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
             e.printStackTrace();
         }
 
+    }
+
+    private void validate(){
+        if(est_name.getText().toString().isEmpty()){
+            DealWithItApp.showAToast("Please select the Establishment Name");
+        }else if(est_type_text.getText().toString().isEmpty()){
+            DealWithItApp.showAToast("Please select the Category");
+        }
+        else if(mAutocompleteView.getText().toString().isEmpty()){
+            DealWithItApp.showAToast("Please select the Location Name");
+        }else if(address.getText().toString().isEmpty()){
+            DealWithItApp.showAToast("Please select the Address");
+        }else if(description.getText().toString().isEmpty()){
+            DealWithItApp.showAToast("Please select the Description");
+        }else{
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frmaecontainer,new AddBusinessProfileDetailFragment(),Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
+                    .addToBackStack(Constants.ADDBUSINESSPROFILEBASIC_FRAGMENT)
+                    .commit();
+            mCallback.setDetailStoke();
+        }
     }
 
 }

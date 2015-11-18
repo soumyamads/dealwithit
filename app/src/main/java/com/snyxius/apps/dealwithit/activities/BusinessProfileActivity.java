@@ -138,10 +138,22 @@ AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.De
                     .add(R.id.container, new CuisineTypeFragment().newInstance(string), Constants.CUISINE_FRAGMENT)
                     .addToBackStack(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
                     .commit();
-//            CuisineTypeFragment f = (CuisineTypeFragment) getSupportFragmentManager().findFragmentByTag(Constants.CUISINE_FRAGMENT);
-//            f.getData(string);
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void setAmbienceData(String string) {
+        try {
+            getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
+                    .add(R.id.container, new AmbienceTypeFragment().newInstance(string), Constants.AMBINENCE_FRAGMENT)
+                    .addToBackStack(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
+                    .commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }
