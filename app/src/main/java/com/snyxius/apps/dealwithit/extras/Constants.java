@@ -9,6 +9,7 @@ public class Constants {
 
     public static final String PROGRESS_FRAGMENT = "ProgressFragment";
     public static final String SUCCESSDIALOG_FRAGMENT = "SuccessDialogFragment";
+    public static final String BUSINESS_PROFILE_CREATED_DIALOG = "BusinessCreatedDialogFragment";
     public static final String CATEGORY_FRAGMENT = "CategoryFragment";
     public static final String TYPE_FRAGMENT = "TypeFragment";
     public static final String CUISINE_FRAGMENT = "CuisineFragment";

@@ -241,6 +241,7 @@
                 android:background="@drawable/bottom_selector_secondary"
                 android:text="ADD BUSINESS PROFILE"
                 android:layout_marginTop="20dp"
+                android:visibility="gone"
                 android:textColor="#ffffff" />
 
         </LinearLayout>

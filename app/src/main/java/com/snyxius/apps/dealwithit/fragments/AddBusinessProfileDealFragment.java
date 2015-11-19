@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -179,7 +180,12 @@ public class AddBusinessProfileDealFragment extends Fragment implements View.OnC
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
+//            progressBar.setVisibility(View.VISIBLE);
+
+
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container_loading, new ProgressBarFrament(), Constants.PROGRESS_FRAGMENT)
+                    .commit();
         }
 
         @Override
@@ -196,7 +202,10 @@ public class AddBusinessProfileDealFragment extends Fragment implements View.OnC
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
-            progressBar.setVisibility(View.GONE);
+//            progressBar.setVisibility(View.GONE);
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .remove(getActivity().getSupportFragmentManager().findFragmentByTag(Constants.PROGRESS_FRAGMENT))
+                    .commit();
             onDone(jsonObject);
         }
     }
@@ -206,7 +215,9 @@ public class AddBusinessProfileDealFragment extends Fragment implements View.OnC
             if(jsonObject != null){
                 if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
                     DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
-                    save.setText("continue");
+                    DialogFragment dialogFrag = BusinessCreatedDialogFragment.newInstance();
+                    dialogFrag.show(getFragmentManager().beginTransaction(), Constants.BUSINESS_PROFILE_CREATED_DIALOG);
+//                    save.setText("contiue");
                 } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
                     DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
                 } else {
