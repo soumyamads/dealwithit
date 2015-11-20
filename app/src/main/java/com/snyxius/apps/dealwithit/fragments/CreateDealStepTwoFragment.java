@@ -68,7 +68,6 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
 
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.min_guests) {
-
                     linearguest.setVisibility(View.VISIBLE);
                     linearbilling.setVisibility(View.GONE);
                 } else if (checkedId == R.id.min_billing) {

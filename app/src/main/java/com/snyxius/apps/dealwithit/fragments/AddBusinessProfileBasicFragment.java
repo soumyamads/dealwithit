@@ -106,7 +106,7 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
                 .enableAutoManage(getActivity(), 0 /* clientId */, this)
                 .addApi(Places.GEO_DATA_API)
                 .build();
-        mAutocompleteView = (AutoCompleteTextView) view.findViewById(R.id.location_name);
+        mAutocompleteView = (AutoCompleteTextView) view.findViewById(R.id.address);
         mAutocompleteView.setOnItemClickListener(mAutocompleteClickListener);
         mAdapter = new PlaceAutocompleteAdapter(getActivity(), mGoogleApiClient, BOUNDS_GREATER_SYDNEY, null);
         mAutocompleteView.setAdapter(mAdapter);
@@ -137,7 +137,7 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
         view.findViewById(R.id.button_clear).setOnClickListener(this);
         est_type_text = (TextView)view.findViewById(R.id.category_text);
         est_name = (EditText)view.findViewById(R.id.est_name);
-        address = (EditText)view.findViewById(R.id.address);
+        address = (EditText)view.findViewById(R.id.location_name);
         description = (EditText)view.findViewById(R.id.description);
     }
 
@@ -170,19 +170,6 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
         }
     }
 
-    public void changeEstablishmentText(String string,ArrayList<String> arrayList){
-        try {
-            est_type_text.setText(string);
-            JSONArray jsonArray = new JSONArray(arrayList);
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.accumulate(Keys.type, jsonArray);
-            Log.v("array", jsonObject.toString());
-            DealWithItApp.saveToPreferences(getActivity(), Keys.establishmentDetail, jsonObject.toString());
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
 
 
     private void selectImage() {
@@ -446,10 +433,10 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
             DealWithItApp.showAToast("Please select the Establishment Name");
         }else if(est_type_text.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select the Category");
+        }else if(address.getText().toString().isEmpty()){
+            DealWithItApp.showAToast("Please select the Location Name");
         }
         else if(mAutocompleteView.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Location Name");
-        }else if(mAutocompleteView.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select the Address");
         }else if(description.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select the Description");
@@ -458,7 +445,7 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
         }else if(uploadPicture.equals("")){
             DealWithItApp.showAToast("Please cover picture first");
         }
-     else{
+        else{
             sendBasicData();
         }
     }

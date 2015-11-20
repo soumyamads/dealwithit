@@ -17,7 +17,8 @@ public class Constants {
     public static final String SIGNUP_FRAGMENT = "Signup";
     public static final String ADDBUSINESSPROFILEBASIC_FRAGMENT = "AddBusinessProfileBasicFragment";
     public static final String ADDBUSINESSPROFILEDETAIL_FRAGMENT = "AddBusinessProfileDetailFragment";
-    public static final String ADDBUSINESSPROFILEDEAL_FRAGMENT = "AddBusinessProfileDealFragment";
+    public static final String ADDBUSINESSPROFILEDEAL_FRAGMENT = "AddBusinessProfileIncomingDealFragment";
+    public static final String ADDBUSINESSPROFILENEWDEAL_FRAGMENT = "AddBusinessProfileNewIncomingDealFragment";
     public static final String CREATE_STEP_ONE_FRAGMENT = "CreateDealStepOneFragment";
     public static final String CREATE_STEP_TWO_FRAGMENT = "CreateDealStepTwoFragment";
     public static final String CREATE_STEP_THREE_FRAGMENT = "CreateDealStepTwoFragment";

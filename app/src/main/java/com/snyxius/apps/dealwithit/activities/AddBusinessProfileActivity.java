@@ -50,8 +50,9 @@ public class AddBusinessProfileActivity extends AppCompatActivity{
         addBusinessProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent inten=new Intent(AddBusinessProfileActivity.this,BusinessProfileActivity.class);
-                startActivity(inten);
+                Intent intent = new Intent(AddBusinessProfileActivity.this,BusinessProfileActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -87,11 +88,9 @@ public class AddBusinessProfileActivity extends AppCompatActivity{
                 super.onDrawerClosed(drawerView);
 
             }
-
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-
             }
         };
         drawerLayout.setDrawerListener(drawerToggle);

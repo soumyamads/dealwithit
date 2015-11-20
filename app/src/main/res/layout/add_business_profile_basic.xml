@@ -62,6 +62,15 @@
 
             <!--.................ESTABLISHMENT TYPE............-->
 
+
+            <EditText
+                android:id="@+id/location_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Location Name"
+                android:inputType="textMultiLine" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,14 +79,13 @@
                 android:clickable="true"
                 android:focusable="true">
 
-            <AutoCompleteTextView
-                android:id="@+id/location_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="Location Name"
-                android:paddingRight="20dp"
-                android:inputType="textMultiLine" />
+                <AutoCompleteTextView
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Address"
+                    android:paddingRight="20dp"
+                    android:inputType="textMultiLine" />
 
                 <ImageView
                     android:id="@+id/button_clear"
@@ -91,14 +99,6 @@
                     android:padding="5dp"
                     android:layout_marginRight="6dp"/>
             </RelativeLayout>
-
-            <EditText
-                android:id="@+id/address"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="Address"
-                android:inputType="textMultiLine" />
 
             <EditText
                 android:id="@+id/description"

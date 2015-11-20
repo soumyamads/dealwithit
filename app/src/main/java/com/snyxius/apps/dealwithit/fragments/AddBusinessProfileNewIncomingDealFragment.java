@@ -10,38 +10,35 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.appyvet.rangebar.RangeBar;
 import com.snyxius.apps.dealwithit.R;
-import com.snyxius.apps.dealwithit.activities.AddBusinessProfileActivity;
-import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
 import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
-import com.snyxius.apps.dealwithit.activities.DealWithItActivity;
-import com.snyxius.apps.dealwithit.adapters.EstablishmentTypeAdapter;
 import com.snyxius.apps.dealwithit.api.WebRequest;
 import com.snyxius.apps.dealwithit.api.WebServices;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
+import com.snyxius.apps.dealwithit.extras.IncomingDeals;
 import com.snyxius.apps.dealwithit.extras.Keys;
-import com.snyxius.apps.dealwithit.pojos.EstablishmentTypePojo;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
  * Created by snyxius on 10/15/2015.
  */
-public class AddBusinessProfileDealFragment extends Fragment implements View.OnClickListener{
+
+public class AddBusinessProfileNewIncomingDealFragment extends Fragment implements View.OnClickListener{
+
+    IncomingDeals incomingDeals;
     TextView leftIndexValue;
 
     private RangeBar rangebar;
@@ -56,13 +53,31 @@ public class AddBusinessProfileDealFragment extends Fragment implements View.OnC
 
     Button save;
 
+    Button add_incoming_deals;
     static JSONObject jsonObject = new JSONObject();
-
-    public static AddBusinessProfileDealFragment newInstance(JSONObject Object) {
+    static JSONArray incomingDealArray = new JSONArray();
+    public static AddBusinessProfileNewIncomingDealFragment newInstance(JSONObject Object,JSONArray incomingDealArray) {
+        incomingDealArray = incomingDealArray;
         jsonObject = Object;
-        AddBusinessProfileDealFragment f = new AddBusinessProfileDealFragment();
+        AddBusinessProfileNewIncomingDealFragment f = new AddBusinessProfileNewIncomingDealFragment();
         return f;
     }
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        // Make sure that container activity implement the callback interface
+        try {
+
+
+            incomingDeals = (IncomingDeals) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement DataPassListener");
+        }
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,8 +85,7 @@ public class AddBusinessProfileDealFragment extends Fragment implements View.OnC
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.add_business_profile_deals, container, false);
         return rootView;
 }
@@ -98,7 +112,9 @@ public class AddBusinessProfileDealFragment extends Fragment implements View.OnC
 
     private void initialise(View view){
         save = (Button)view.findViewById(R.id.save);
+        add_incoming_deals = (Button)view.findViewById(R.id.add_incoming_deals);
         save.setOnClickListener(this);
+        add_incoming_deals.setOnClickListener(this);
         view.findViewById(R.id.save).setOnClickListener(this);
         progressBar=(ProgressBar)view.findViewById(R.id.pBar);
         rangebar = (RangeBar) view.findViewById(R.id.rangebar1);
@@ -112,67 +128,74 @@ public class AddBusinessProfileDealFragment extends Fragment implements View.OnC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.save:
-                if(save.getText().toString().equalsIgnoreCase("save")){
-                    validate();
-                }else if(save.getText().toString().equalsIgnoreCase("continue")){
-                    Intent inten=new Intent(getActivity(),CreateDealActivity.class);
-                    startActivity(inten);
-                }
+                    validate(1);
                 break;
-            case R.id.add_business_profile:
-                Intent inten=new Intent(getActivity(),BusinessProfileActivity.class);
-                startActivity(inten);
+            case R.id.add_incoming_deals:
+                    validate(2);
                 break;
         }
 
     }
 
 
-    private void validate(){
+    private void validate(int position){
         if(max_guest.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select the Maximum Guest");
         }else if(leftIndexValue.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select the Range cost/person");
-        }else if(checkBox_Alcohol.isChecked()){
-            alcohol = "Yes";
-        }
-        else if(!checkBox_Alcohol.isChecked()) {
-            alcohol = "No";
-        }
-
-        if(deal_offering.getText().toString().isEmpty()){
+        } else if(deal_offering.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select Deal Offering");
-        }
-        else{
-            sendBasicData();
+        } else{
+
+            if(checkBox_Alcohol.isChecked()){
+                alcohol = "Yes";
+            } else if(!checkBox_Alcohol.isChecked()) {
+                alcohol = "No";
+            }
+
+            if(position == 1) {
+                sendBasicData(position);
+            }else if(position == 2){
+                sendBasicData(position);
+
+            }
         }
     }
 
 
-    private void sendBasicData(){
+    private void sendBasicData(int position){
         try{
 
-            String id  = DealWithItApp.readFromPreferences(getActivity(), Keys.id, Constants.DEFAULT_STRING);
-            jsonObject.accumulate(Keys.max_guest, max_guest.getText().toString());
-            jsonObject.accumulate(Keys.cost_per_person, leftIndexValue.getText().toString());
-            jsonObject.accumulate(Keys.alcohol,alcohol);
-            jsonObject.accumulate(Keys.deal_offering, deal_offering.getText().toString());
-            JSONObject object = new JSONObject();
-            object.accumulate(Keys.profile,jsonObject);
-            object.accumulate(Keys.id,id);
-            JSONObject object1 = new JSONObject();
-            object1.accumulate(Keys.business,object);
-            if (DealWithItApp.isNetworkAvailable()) {
-                new sendBusinessProfileData().execute(object1.toString());
-            } else {
 
+            JSONObject jsonObjectDeal = new JSONObject();
+            jsonObjectDeal.put(Keys.max_guest, max_guest.getText().toString());
+            jsonObjectDeal.put(Keys.cost_per_person, leftIndexValue.getText().toString());
+            jsonObjectDeal.put(Keys.alcohol, alcohol);
+            jsonObjectDeal.put(Keys.deal_offering, deal_offering.getText().toString());
+
+            incomingDealArray.put(jsonObjectDeal);
+
+            if(position == 2) {
+                incomingDeals.sendDealsCategoryData(jsonObject,incomingDealArray);
+            }else {
+                jsonObject.accumulate(Keys.incoming_deals, incomingDealArray);
+                String id = DealWithItApp.readFromPreferences(getActivity(), Keys.id, Constants.DEFAULT_STRING);
+                JSONObject object = new JSONObject();
+                object.accumulate(Keys.profile, jsonObject);
+                object.accumulate(Keys.id, id);
+                JSONObject object1 = new JSONObject();
+                object1.accumulate(Keys.business, object);
+                if (DealWithItApp.isNetworkAvailable()) {
+                    Log.d("Object",object1.toString());
+                    new sendBusinessProfileData().execute(object1.toString());
+                } else {
+
+                }
             }
-
         }catch (Exception e){
             e.printStackTrace();
         }
     }
-
 
     private class sendBusinessProfileData extends AsyncTask<String, Void, JSONObject> {
 
@@ -216,8 +239,8 @@ public class AddBusinessProfileDealFragment extends Fragment implements View.OnC
                 if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
                     DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
                     DialogFragment dialogFrag = BusinessCreatedDialogFragment.newInstance();
+                    dialogFrag.setCancelable(false);
                     dialogFrag.show(getFragmentManager().beginTransaction(), Constants.BUSINESS_PROFILE_CREATED_DIALOG);
-//                    save.setText("contiue");
                 } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
                     DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
                 } else {

@@ -223,6 +223,16 @@
                 android:hint="Deal Offering"/>
 
             <Button
+                android:id="@+id/add_incoming_deals"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/bottom_selector_secondary"
+                android:text="ADD INCOMING DEAL"
+                android:layout_marginTop="20dp"
+                android:textColor="#ffffff" />
+
+            <Button
                 android:id="@+id/save"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -232,17 +242,6 @@
                 android:layout_marginTop="20dp"
                 android:textColor="#ffffff" />
 
-
-            <Button
-                android:id="@+id/add_business_profile"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/bottom_selector_secondary"
-                android:text="ADD BUSINESS PROFILE"
-                android:layout_marginTop="20dp"
-                android:visibility="gone"
-                android:textColor="#ffffff" />
 
         </LinearLayout>
 

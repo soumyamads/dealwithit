@@ -11,6 +11,7 @@ import android.view.Window;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.AddBusinessProfileActivity;
+import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
 import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
 import com.snyxius.apps.dealwithit.activities.DealWithItActivity;
 
@@ -28,6 +29,7 @@ public class BusinessCreatedDialogFragment extends DialogFragment implements Vie
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.business_profile_created, container,false);
         view.findViewById(R.id.continue_button).setOnClickListener(this);
+        view.findViewById(R.id.create_another).setOnClickListener(this);
         return view;
     }
 
@@ -35,7 +37,6 @@ public class BusinessCreatedDialogFragment extends DialogFragment implements Vie
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(true);
         return dialog;
     }
 
@@ -46,6 +47,14 @@ public class BusinessCreatedDialogFragment extends DialogFragment implements Vie
             startActivity(intent);
             getActivity().finish();
         }
+        if(v.getId() == R.id.create_another){
+            Intent intent = new Intent(getActivity(),BusinessProfileActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        }
+
+
+
 
     }
 }

@@ -3,32 +3,36 @@ package com.snyxius.apps.dealwithit.activities;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
+import com.snyxius.apps.dealwithit.extras.IncomingDeals;
 import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileBasicFragment;
-import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileDealFragment;
+import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileBasicFragment.DetailStroke;
+import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileIncomingDealFragment;
 import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileDetailFragment;
+import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileNewIncomingDealFragment;
 import com.snyxius.apps.dealwithit.fragments.AmbienceTypeFragment;
 import com.snyxius.apps.dealwithit.fragments.CategoryFragment;
 import com.snyxius.apps.dealwithit.fragments.CuisineTypeFragment;
 import com.snyxius.apps.dealwithit.fragments.TypeFragment;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by snyxius on 10/30/2015.
  */
 public class BusinessProfileActivity extends AppCompatActivity implements CategoryFragment.DataPassListener,TypeFragment.DataPassListener,
         AmbienceTypeFragment.DataPassListener,CuisineTypeFragment.DataPassListener,
-AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetailFragment.PassData{
+DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetailFragment.PassData,IncomingDeals{
 
     ImageView stepViewImage2,stepViewImage3;
     TextView stepViewText2,stepViewText3;
@@ -83,7 +87,7 @@ AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.De
     @Override
     public void sendDetailsCategoryData(JSONObject jsonObject) {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frmaecontainer,new AddBusinessProfileDealFragment().newInstance(jsonObject),Constants.ADDBUSINESSPROFILEDEAL_FRAGMENT)
+                .replace(R.id.frmaecontainer,new AddBusinessProfileIncomingDealFragment().newInstance(jsonObject),Constants.ADDBUSINESSPROFILEDEAL_FRAGMENT)
                 .addToBackStack(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
                 .commit();
     }
@@ -92,10 +96,11 @@ AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.De
     public void onBackPressed() {
         super.onBackPressed();
 
+        android.support.v4.app.Fragment fragment2 = getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEDEAL_FRAGMENT);
         android.support.v4.app.Fragment fragment1 = getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT);
         android.support.v4.app.Fragment fragment = getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEBASIC_FRAGMENT);
 
-        if(fragment instanceof AddBusinessProfileBasicFragment && fragment1 instanceof AddBusinessProfileDetailFragment){
+        if(fragment instanceof AddBusinessProfileBasicFragment && fragment1 instanceof AddBusinessProfileDetailFragment && fragment2 instanceof AddBusinessProfileIncomingDealFragment ){
             stepViewText3.setTypeface(null, Typeface.NORMAL);
             stepViewText3.setTextColor(getResources().getColor(R.color.grey));
             stepViewImage3.setImageResource(R.drawable.rounded_stroke_indicator);
@@ -183,6 +188,14 @@ AddBusinessProfileBasicFragment.DetailStroke,AddBusinessProfileDetailFragment.De
                 .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
                 .add(R.id.container, new TypeFragment().newInstance(string), Constants.TYPE_FRAGMENT)
                 .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void sendDealsCategoryData(JSONObject jsonObject, JSONArray incomingDealArray) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frmaecontainer, new AddBusinessProfileNewIncomingDealFragment().newInstance(jsonObject,incomingDealArray), Constants.ADDBUSINESSPROFILENEWDEAL_FRAGMENT)
+                .addToBackStack(Constants.ADDBUSINESSPROFILENEWDEAL_FRAGMENT)
                 .commit();
     }
 }

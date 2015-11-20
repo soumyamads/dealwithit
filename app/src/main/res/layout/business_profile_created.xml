@@ -53,7 +53,7 @@
         android:id="@+id/create_another"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CREATE ANOTHER"
+        android:text="CREATE ANOTHER BUSINESS"
         android:background="@drawable/bottom_selector_secondary"
         android:textColor="#ffffff"
         android:textStyle="bold"

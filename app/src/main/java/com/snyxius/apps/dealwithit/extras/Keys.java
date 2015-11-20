@@ -46,5 +46,6 @@ public interface Keys {
     public static final String alcohol = "Alcohol";
     public static final String cost_per_person = "Cost_Per_Person";
     public static final String max_guest = "Maximum_Guest";
+    public static final String incoming_deals = "IncomingDeals";
 
 }

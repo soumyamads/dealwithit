@@ -33,7 +33,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
      EditText firstname,lastname,email,mobileno,establshname;
      EditText password,retypepassword;
-
+    boolean flags =  false;
 
 @Override
 public void onCreate(Bundle savedInstanceState) {
@@ -53,33 +53,9 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
         super.onViewCreated(view, savedInstanceState);
         initialise(view);
 
-
-        password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    if (!Validater.isValidPassword(password.getText().toString())) {
-                        password.setError("Invalid Format Password");
-                    }
-                }
-
-            }
-        });
-        mobileno.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    if (mobileno.getText().toString().startsWith("0")) {
-                        mobileno.setError("zero not required");
-                    } else if (!Validater.isValidMobile(mobileno.getText().toString())) {
-                        mobileno.setError("Invalid Format Password");
-                    }
-                }
-            }
-        });
+    }
 
 
-            }
 
             private void initialise(View rootView) {
                 rootView.findViewById(R.id.signup_button).setOnClickListener(this);
@@ -112,7 +88,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 mobileno.clearFocus();
                 email.clearFocus();
                 password.clearFocus();
-
+                retypepassword.clearFocus();
                 if (establshname.getText().toString().isEmpty()) {
                     establshname.setError("Field Required");
                     establshname.requestFocus();
@@ -125,10 +101,14 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 } else if (mobileno.getText().toString().isEmpty()) {
                     mobileno.setError("Field Required");
                     mobileno.requestFocus();
-                }/* else if (!Validater.isValidMobile(mobileno.getText().toString())) {
-            mobileno.setError("Invalid Mobile No");
-            mobileno.requestFocus();
-        }*/ else if (email.getText().toString().isEmpty()) {
+                }else if (mobileno.getText().toString().startsWith("0")) {
+                        mobileno.setError("zero not allowed");
+                        mobileno.requestFocus();
+                }else if (mobileno.getText().toString().length() != 10) {
+                    mobileno.setError("Mobile Number should be 10 digit without zero");
+                    mobileno.requestFocus();
+                }
+                else if (email.getText().toString().isEmpty()) {
                     email.setError("Field Required");
                     email.requestFocus();
                 } else if (!Validater.isValidEmail(email.getText().toString())) {
@@ -137,14 +117,14 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 } else if (password.getText().toString().isEmpty()) {
                     password.setError("Field Required");
                     password.requestFocus();
-                }/* else if (!Validater.isValidPassword(password.getText().toString())) {
-            password.setError("Invalid Format Password");
-            password.requestFocus();
-        }*/ else if (!password.getText().toString().equals(retypepassword.getText().toString())) {
+                } else  if (!Validater.isValidPassword(password.getText().toString())) {
+                    password.setError("Invalid Format Password");
+                    password.requestFocus();
+                } else if (!password.getText().toString().equals(retypepassword.getText().toString())) {
                     retypepassword.setError("Password Mismatching");
                     retypepassword.requestFocus();
                 } else {
-                    submit();
+                     submit();
                 }
             }
 

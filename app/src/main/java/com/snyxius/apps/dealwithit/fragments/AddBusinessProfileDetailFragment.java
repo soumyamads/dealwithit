@@ -62,9 +62,9 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
     TextView slot2_start_time_text,slot2_end_time_text;
     private int position = 0;
 
-    ArrayList<String> arrayListAmbience;
-    ArrayList<String> arrayListCuisine;
-    ArrayList<String> arrayListType;
+    ArrayList<String> arrayListAmbience = new ArrayList<>();
+    ArrayList<String> arrayListCuisine = new ArrayList<>();
+    ArrayList<String> arrayListType = new ArrayList<>();
 
 
 
@@ -271,7 +271,7 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
             DealWithItApp.showAToast("Please select Second end Hour Slot");
         }else if(max_seat.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select the Maximum Seatings");
-        }
+       }
         else{
             sendBasicData();
         }
@@ -294,7 +294,7 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
             mDealCallback.setDealStoke();
             mDealCallback.sendDetailsCategoryData(jsonObject);
         }catch (Exception e){
-
+            e.printStackTrace();
         }
     }
 
