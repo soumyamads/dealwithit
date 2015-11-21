@@ -1,5 +1,6 @@
 package com.snyxius.apps.dealwithit.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,20 +9,14 @@ import android.view.ViewGroup;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
+import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
 
 
 /**
  * Created by snyxius on 10/15/2015.
  */
-public class ChatFragment extends Fragment {
-//    Intent intent;
-//    EditText email,password;
-//    TextView fgtpaswd;
-//    Button login;
+public class ChatFragment extends Fragment implements View.OnClickListener{
 
-    public ChatFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +26,6 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.no_deal_layout, container, false);
         return rootView;
 }
@@ -41,22 +35,18 @@ public class ChatFragment extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialise(view);
-//        view.findViewById(R.id.continues).setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-////                initialise(view);
-////                intent = new Intent(getActivity(), MerchantProfile.class);
-////                startActivityy(intent);
-//                ((BusinessProfileActivity)getActivity()).selectPage(1);
-//
-//            }
-//        });
     }
 
-    private void initialise(View rootView){
+    private void initialise(View view){
+        view.findViewById(R.id.create_deal).setOnClickListener(this);
+    }
 
-//        email=(EditText)rootView.findViewById(R.id.email);
-//        password=(EditText)rootView.findViewById(R.id.password);
-//        fgtpaswd=(TextView)rootView.findViewById(R.id.fgtpaswd);
-//        login = (Button) rootView.findViewById(R.id.login_button);
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.create_deal){
+            Intent intent = new Intent(getActivity(), CreateDealActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        }
     }
 }

@@ -129,7 +129,6 @@
         </RelativeLayout>
 
 
-
     <FrameLayout
         android:id="@+id/container_createdeal"
         android:layout_width="match_parent"

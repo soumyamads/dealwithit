@@ -6,12 +6,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
-import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
-import com.snyxius.apps.dealwithit.extras.Constants;
+import com.snyxius.apps.dealwithit.applications.DealWithItApp;
+import com.snyxius.apps.dealwithit.extras.Keys;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -22,18 +25,17 @@ import java.util.ArrayList;
 public class CreateDealStepOneFragment extends Fragment implements View.OnClickListener {
 
 
-    RelativeLayout estType;
-    TextView est_type_text;
-
-    StepTwoStroke mCallback;
-    ArrayList<String> arrayList = new ArrayList<>();
-
+    TextView business_text;
+    StepOneStroke mCallback;
+    PassData passData;
+    EditText quickDescription,fullDescription,deal_name;
+    ArrayList<String> arrayListBusinessProfile = new ArrayList<>();
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        // Make sure that container activity implement the callback interface
         try {
-            mCallback = (StepTwoStroke) activity;
+            mCallback = (StepOneStroke) activity;
+            passData = (PassData)activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement DataPassListener");
@@ -41,9 +43,6 @@ public class CreateDealStepOneFragment extends Fragment implements View.OnClickL
     }
 
 
-    public CreateDealStepOneFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +52,6 @@ public class CreateDealStepOneFragment extends Fragment implements View.OnClickL
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.create_deal_step_one, container, false);
         return rootView;
     }
@@ -67,40 +65,74 @@ public class CreateDealStepOneFragment extends Fragment implements View.OnClickL
     }
 
     private void initialise(View view) {
-
         view.findViewById(R.id.continue_button).setOnClickListener(this);
         view.findViewById(R.id.select_business_layout).setOnClickListener(this);
-        est_type_text = (TextView) view.findViewById(R.id.type_text);
+        business_text = (TextView) view.findViewById(R.id.select_business_text);
+        quickDescription = (EditText)view.findViewById(R.id.quick_desc);
+        fullDescription =  (EditText)view.findViewById(R.id.additional);
+        deal_name =  (EditText)view.findViewById(R.id.deal_name);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.continue_button:
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .add(R.id.container_createdeal, new CreateDealStepTwoFragment(), Constants.CREATE_STEP_ONE_FRAGMENT)
-                        .addToBackStack(null)
-                        .commit();
-                mCallback.setStepTwoStoke();
+                validate();
+               // sendBasicData();
                 break;
-//            case R.id.est_type:
-//                getActivity().getSupportFragmentManager().beginTransaction()
-//                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
-//                        .add(R.id.container, new TypeFragment(), Constants.ESTABLISHMENTTYPE_FRAGMENT)
-//                        .addToBackStack(null)
-//                        .commit();
-//                break;
             case R.id.select_business_layout:
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
-                        .add(R.id.container, new ExpandableFragment(), "demo")
-                        .addToBackStack(null)
-                        .commit();
+                passData.setBusinessData(business_text.getText().toString());
+                break;
+        }
+    }
+    public interface StepOneStroke {
+        void setStepTwoStoke();
+        void sendStepOneData(JSONObject jsonObject);
+    }
 
+    public interface PassData{
+        void setBusinessData(String string);
+    }
+
+    private void validate(){
+        if(deal_name.getText().toString().isEmpty()){
+            DealWithItApp.showAToast("Please select the Deal Name");
+        }else if(business_text.getText().toString().isEmpty()){
+            DealWithItApp.showAToast("Please select the Business Type");
+        }else if(quickDescription.getText().toString().isEmpty()){
+            DealWithItApp.showAToast("Please give the Quick Description");
+        }else if(fullDescription.getText().toString().isEmpty()) {
+            DealWithItApp.showAToast("Please give the Full Description");
+        }
+        else{
+            sendBasicData();
         }
     }
 
-    public interface StepTwoStroke {
-        void setStepTwoStoke();
+
+    private void sendBasicData(){
+        try{
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.accumulate(Keys.deal_name, deal_name.getText().toString());
+            JSONArray jsonArray = new JSONArray(arrayListBusinessProfile);
+            jsonObject.accumulate(Keys.businessprofilesIds, jsonArray);
+            jsonObject.accumulate(Keys.quick_description, quickDescription.getText().toString());
+            jsonObject.accumulate(Keys.full_description, fullDescription.getText().toString());
+            mCallback.setStepTwoStoke();
+            mCallback.sendStepOneData(jsonObject);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void changeBusinessProfileText(String string,ArrayList<String> arrayList){
+        try {
+            arrayListBusinessProfile = arrayList;
+            business_text.setText(string);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }

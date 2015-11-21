@@ -225,6 +225,8 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
         void setDealStoke();
         void sendDetailsCategoryData(JSONObject jsonObject);
     }
+
+
     public void changeAmbienceText(String string,ArrayList<String> arrayList){
         try {
             arrayListAmbience = arrayList;

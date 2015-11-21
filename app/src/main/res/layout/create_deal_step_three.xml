@@ -177,12 +177,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/dealstrt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/dealstrt"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -190,21 +191,23 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/dlstrt"
+                    android:id="@+id/dlstart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:hint="December 20,2015"
+                    android:hint="--/--/----"
+                    android:textColor="@android:color/black"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/dealexp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/dealexpr"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -212,10 +215,12 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/dlend"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:hint="December 20,2015"
+                    android:hint="--/--/----"
+                    android:textColor="@android:color/black"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </LinearLayout>
 
@@ -232,6 +237,7 @@
                     android:textStyle="bold" />
 
                 <RelativeLayout
+                    android:id="@+id/opening_time_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -244,26 +250,27 @@
                         android:text="Opening Time" />
 
                     <RelativeLayout
-                        android:id="@+id/slot1_start_layout"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true">
 
                         <TextView
-                            android:id="@+id/slot1_start_text"
+                            android:id="@+id/opening_time_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingBottom="8dp"
                             android:paddingLeft="8dp"
                             android:paddingRight="25dp"
                             android:paddingTop="8dp"
-                            android:text="11:00"
+                            android:hint="--:--"
+                            android:textColor="@android:color/black"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:layout_alignRight="@+id/slot1_start_text"
+                            android:layout_alignRight="@+id/opening_time_text"
                             android:layout_centerVertical="true"
                             android:padding="2dp"
                             android:src="@drawable/down_arrow" />
@@ -273,6 +280,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/closing_time_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -285,7 +293,7 @@
                         android:text="Closing Time" />
 
                     <RelativeLayout
-                        android:id="@+id/closing_time_layout"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true">
@@ -298,7 +306,8 @@
                             android:paddingLeft="8dp"
                             android:paddingRight="25dp"
                             android:paddingTop="8dp"
-                            android:text="11:00"
+                            android:hint="--:--"
+                            android:textColor="@android:color/black"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                         <ImageView

@@ -5,6 +5,9 @@ package com.snyxius.apps.dealwithit.extras;
  */
 public interface Keys {
 
+    public static final String allProfiles = "allProfiles";
+    public static final String deal = "deal";
+    public static final String businessprofilesIds = "BusinessProfilesIds";
     public static final String position = "position";
     public static final String intro = "intro";
     public static final String Email = "Email";
@@ -21,6 +24,8 @@ public interface Keys {
     public static final String notice = "notice";
     public static final String profile = "profile";
     public static final String business = "business";
+
+    public static final String profileId = "profileId";
 
     //AdddBusinessBasicKeys
     public static final String business_name = "Business_Name";
@@ -47,5 +52,32 @@ public interface Keys {
     public static final String cost_per_person = "Cost_Per_Person";
     public static final String max_guest = "Maximum_Guest";
     public static final String incoming_deals = "IncomingDeals";
+
+
+    //CreateDealStepOne
+    public static final String deal_name = "Deal_Name";
+    public static final String quick_description = "Quick_Description";
+    public static final String full_description = "Full_Description";
+
+
+    //CreateDealStepTwo
+    public static final String deal_image = "Deal_Image";
+    public static final String minimum_guest = "Minimum_Guest";
+    public static final String cost_person = "Cost_person";
+    public static final String max_boking = "Maximum_Booking";
+    public static final String additional = "Additional";
+    public static final String terms_text = "Terms_Conditions";
+    public static final String minimum_billig = "Minimum_Billing";
+    public static final String discount_percent = "Discount_Person";
+
+    //CreateDealStepThree
+    public static final String recurring = "Recurring";
+    public static final String fixed = "Fixed";
+    public static final String days = "Days";
+    public static final String repeat = "Repeat";
+    public static final String startdealdate = "Start_Deal_Date";
+    public static final String enddealdate = "End_Deal_date";
+    public static final String opening_hour = "Opening_Hour";
+    public static final String closing_hour = "Closing_Hour";
 
 }

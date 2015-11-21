@@ -40,7 +40,8 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="3dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:text="Select Business Profile" />
+                    android:hint="Select Business Profile"
+                    android:textColor="@android:color/black"/>
 
                 <View
                     android:layout_width="match_parent"

@@ -14,15 +14,7 @@ import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
 /**
  * Created by snyxius on 10/15/2015.
  */
-public class BookingsFragment extends Fragment {
-//    Intent intent;
-//    EditText email,password;
-//    TextView fgtpaswd;
-//    Button login;
-
-    public BookingsFragment() {
-        // Required empty public constructor
-    }
+public class BookingsFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,31 +24,27 @@ public class BookingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.no_deal_layout, container, false);
         return rootView;
-}
+     }
 
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialise(view);
-        view.findViewById(R.id.create_deal).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-//                initialise(view);
-                Intent intent = new Intent(getActivity(), CreateDealActivity.class);
-                startActivity(intent);
-            getActivity().finish();
-            }
-        });
     }
 
-    private void initialise(View rootView){
+    private void initialise(View view){
+        view.findViewById(R.id.create_deal).setOnClickListener(this);
+    }
 
-//        email=(EditText)rootView.findViewById(R.id.email);
-//        password=(EditText)rootView.findViewById(R.id.password);
-//        fgtpaswd=(TextView)rootView.findViewById(R.id.fgtpaswd);
-//        login = (Button) rootView.findViewById(R.id.login_button);
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.create_deal){
+            Intent intent = new Intent(getActivity(), CreateDealActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        }
     }
 }

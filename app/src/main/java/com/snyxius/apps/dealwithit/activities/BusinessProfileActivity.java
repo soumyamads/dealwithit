@@ -42,10 +42,7 @@ DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetai
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_profile);
         initializeView();
-
     }
-
-
 
 
     private void initializeView(){
@@ -53,7 +50,6 @@ DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetai
         stepViewImage2= (ImageView) findViewById(R.id.stepView_image2);
         stepViewText3= (TextView) findViewById(R.id.stepView_text3);
         stepViewImage3= (ImageView) findViewById(R.id.stepView_image3);
-        DealWithItApp.saveToPreferences(getApplicationContext(), Keys.establishmentDetail, Constants.DEFAULT_STRING);
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.frmaecontainer,new AddBusinessProfileBasicFragment(),Constants.ADDBUSINESSPROFILEBASIC_FRAGMENT)
                 .commit();
@@ -95,11 +91,9 @@ DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetai
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
         android.support.v4.app.Fragment fragment2 = getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEDEAL_FRAGMENT);
         android.support.v4.app.Fragment fragment1 = getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT);
         android.support.v4.app.Fragment fragment = getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEBASIC_FRAGMENT);
-
         if(fragment instanceof AddBusinessProfileBasicFragment && fragment1 instanceof AddBusinessProfileDetailFragment && fragment2 instanceof AddBusinessProfileIncomingDealFragment ){
             stepViewText3.setTypeface(null, Typeface.NORMAL);
             stepViewText3.setTextColor(getResources().getColor(R.color.grey));
@@ -130,7 +124,7 @@ DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetai
             AddBusinessProfileDetailFragment f = (AddBusinessProfileDetailFragment) getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT);
             f.changeTypeText(data, arrayList);
         }catch(Exception e){
-
+            e.printStackTrace();
         }
     }
 

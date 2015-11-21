@@ -66,6 +66,7 @@ Response
 
     public static final String ambiance = baseUrl  + "establishmenttype/ambiance";
 
+    public static final String allBuisnessProf = baseUrl  + "merchants/allBuisnessProf";
 
     public static final String saveDeal = baseUrl  + "merchants/saveDeal";
 

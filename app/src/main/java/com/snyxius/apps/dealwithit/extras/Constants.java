@@ -15,13 +15,15 @@ public class Constants {
     public static final String CUISINE_FRAGMENT = "CuisineFragment";
     public static final String AMBINENCE_FRAGMENT = "AmbienceFragment";
     public static final String SIGNUP_FRAGMENT = "Signup";
+
     public static final String ADDBUSINESSPROFILEBASIC_FRAGMENT = "AddBusinessProfileBasicFragment";
     public static final String ADDBUSINESSPROFILEDETAIL_FRAGMENT = "AddBusinessProfileDetailFragment";
     public static final String ADDBUSINESSPROFILEDEAL_FRAGMENT = "AddBusinessProfileIncomingDealFragment";
     public static final String ADDBUSINESSPROFILENEWDEAL_FRAGMENT = "AddBusinessProfileNewIncomingDealFragment";
     public static final String CREATE_STEP_ONE_FRAGMENT = "CreateDealStepOneFragment";
     public static final String CREATE_STEP_TWO_FRAGMENT = "CreateDealStepTwoFragment";
-    public static final String CREATE_STEP_THREE_FRAGMENT = "CreateDealStepTwoFragment";
+    public static final String CREATE_STEP_THREE_FRAGMENT = "CreateDealStepThreeFragment";
+    public static final String GET_ALL_BUSINESS_PROFILE_FRAGMENT = "GetAllBusinessProfileFragment";
     public static final String DRAWER_FRAGMENT = "DrawerFragment";
     public static final String LOGIN_FRAGMENT = "Login";
     public static final String CHAT_FRAGMENT = "Chat";

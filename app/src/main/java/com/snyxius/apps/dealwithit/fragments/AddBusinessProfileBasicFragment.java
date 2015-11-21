@@ -308,23 +308,6 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
 
 
 
-    public void changeAmbienceText(String string,ArrayList<String> arrayList){
-        try {
-//            ambience_text.setText(string);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
-
-    public void changeCuisineText(String string,ArrayList<String> arrayList){
-        try {
-//            cuisine_text.setText(string);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
 
     private void sendImages(Bitmap bitmaps){
         int nh = (int) ( bitmaps.getHeight() * (256.0 / bitmaps.getWidth()) );
@@ -455,9 +438,9 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
             JSONObject jsonObject = new JSONObject();
             jsonObject.accumulate(Keys.business_name,est_name.getText().toString());
             jsonObject.accumulate(Keys.category, est_type_text.getText().toString());
-            jsonObject.accumulate(Keys.location_name,mAutocompleteView.getText().toString());
+            jsonObject.accumulate(Keys.address,mAutocompleteView.getText().toString());
             jsonObject.accumulate(Keys.description,description.getText().toString());
-            jsonObject.accumulate(Keys.address, address.getText().toString());
+            jsonObject.accumulate(Keys.location_name, address.getText().toString());
             JSONArray array = new JSONArray(arrayImage);
             jsonObject.accumulate(Keys.menu_images,array);
             jsonObject.accumulate(Keys.cover_image,uploadPicture);
