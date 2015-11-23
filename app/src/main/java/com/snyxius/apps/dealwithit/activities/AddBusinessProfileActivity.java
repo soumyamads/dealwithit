@@ -46,6 +46,10 @@ public class AddBusinessProfileActivity extends AppCompatActivity{
                 .commit();
         initDrawer();
 
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        drawerToggle.setDrawerIndicatorEnabled(false);
+        drawerToggle.syncState();
+
         addBusinessProfile=(Button)findViewById(R.id.add_business_profile);
         addBusinessProfile.setOnClickListener(new View.OnClickListener() {
             @Override
