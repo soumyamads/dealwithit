@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.activities.LoginSignupActivity;
 import com.snyxius.apps.dealwithit.api.WebRequest;
 import com.snyxius.apps.dealwithit.api.WebServices;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
@@ -81,7 +82,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 }
             }
 
-            private void validate() {
+            public void validate() {
                 establshname.clearFocus();
                 firstname.clearFocus();
                 lastname.clearFocus();
@@ -148,7 +149,9 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 }
             }
 
-            private class SignUp extends AsyncTask<String, Void, JSONObject> {
+
+
+    private class SignUp extends AsyncTask<String, Void, JSONObject> {
 
                 @Override
                 protected void onPreExecute() {

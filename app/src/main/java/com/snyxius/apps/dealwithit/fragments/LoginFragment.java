@@ -145,7 +145,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
 
     }
-     private void validate(){
+     public void validate(){
          email.clearFocus();
          password.clearFocus();
             if(email.getText().toString().isEmpty()){
