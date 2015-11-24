@@ -1,11 +1,18 @@
 package com.snyxius.apps.dealwithit.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +23,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
@@ -51,12 +59,14 @@ public class CreateDealStepThreeFragment extends Fragment implements View.OnClic
     TextView opening_hour,closing_hour,startdealdate,enddealdate;
     ArrayList<String> arrayListDays = new ArrayList<>();
     CheckBox monday,tuesday,wednesday,thusday,friday,saturday,sunday,repeat;
+     static  AppCompatActivity mContext;
 
     static JSONObject jsonObject = new JSONObject();
 
-    public static CreateDealStepThreeFragment newInstance(JSONObject Object) {
+    public static CreateDealStepThreeFragment newInstance(JSONObject Object,AppCompatActivity Context) {
         jsonObject = Object;
         CreateDealStepThreeFragment f = new CreateDealStepThreeFragment();
+        mContext=Context;
         return f;
     }
 
@@ -94,6 +104,15 @@ public class CreateDealStepThreeFragment extends Fragment implements View.OnClic
         });
 
     }
+
+
+
+
+
+
+
+
+
 
     private void initialise(View view){
         view.findViewById(R.id.continue_button).setOnClickListener(this);
@@ -285,6 +304,7 @@ public class CreateDealStepThreeFragment extends Fragment implements View.OnClic
             e.printStackTrace();
         }
     }
+
 
 
     private class sendCreateDealData extends AsyncTask<String, Void, JSONObject> {

@@ -57,7 +57,7 @@ GetAllBusinessProfileFragment.DataPassListener,CreateDealStepOneFragment.PassDat
     @Override
     public void sendStepTwoData(JSONObject jsonObject) {
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.container_createdeal, new CreateDealStepThreeFragment().newInstance(jsonObject), Constants.CREATE_STEP_TWO_FRAGMENT)
+                .add(R.id.container_createdeal, new CreateDealStepThreeFragment().newInstance(jsonObject,CreateDealActivity.this), Constants.CREATE_STEP_TWO_FRAGMENT)
                 .addToBackStack(null)
                 .commit();
     }

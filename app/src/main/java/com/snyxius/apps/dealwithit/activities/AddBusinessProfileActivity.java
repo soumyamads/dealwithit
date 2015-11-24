@@ -90,8 +90,8 @@ public class AddBusinessProfileActivity extends AppCompatActivity{
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-
             }
+
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);

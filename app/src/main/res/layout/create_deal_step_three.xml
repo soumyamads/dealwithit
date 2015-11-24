@@ -65,9 +65,11 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp">
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="?actionBarSize"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
 
@@ -192,10 +194,11 @@
 
                 <TextView
                     android:id="@+id/dlstart"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:hint="--/--/----"
+                    android:background="@drawable/bottom_selector_transparent"
                     android:textColor="@android:color/black"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </LinearLayout>
@@ -216,10 +219,11 @@
 
                 <TextView
                     android:id="@+id/dlend"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:hint="--/--/----"
+                    android:background="@drawable/bottom_selector_transparent"
                     android:textColor="@android:color/black"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </LinearLayout>
@@ -253,7 +257,8 @@
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true">
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/bottom_selector_transparent">
 
                         <TextView
                             android:id="@+id/opening_time_text"
@@ -296,7 +301,8 @@
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true">
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/bottom_selector_transparent">
 
                         <TextView
                             android:id="@+id/closing_time_text"

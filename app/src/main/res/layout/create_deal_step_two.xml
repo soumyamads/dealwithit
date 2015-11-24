@@ -174,7 +174,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="MinimumGuests"
+                        android:text="Minimum Guests"
                         android:id="@+id/minimumguest"
                         android:checked="false" />
 
