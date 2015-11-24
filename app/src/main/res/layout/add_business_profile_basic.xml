@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="Establishment Name"
-                android:inputType="textPersonName" />
+                android:inputType="textCapSentences" />
 
             <!--.................ESTABLISHMENT TYPE............-->
 
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="Location Name"
-                android:inputType="textMultiLine" />
+                android:inputType="textCapSentences" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="Description"
-                android:inputType="textMultiLine" />
+                android:inputType="textCapSentences" />
 
 
             <RelativeLayout

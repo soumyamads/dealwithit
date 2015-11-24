@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Deal Name"
-                android:inputType="textEmailAddress"
+                android:inputType="textCapSentences"
                 android:layout_marginTop="20dp"/>
 
             <RelativeLayout
@@ -82,6 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Quick Description"
+                android:inputType="textCapSentences"
                 android:layout_marginTop="30dp"/>
 
 
@@ -111,7 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Additional"
-                android:inputType="text"
+                android:inputType="textCapSentences"
                 android:layout_marginTop="40dp"/>
             <Button
                 android:id="@+id/continue_button"

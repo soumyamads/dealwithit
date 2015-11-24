@@ -30,8 +30,8 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                     if(!DealWithItApp.readFromPreferences(getApplicationContext(), Keys.id,Constants.DEFAULT_STRING).equals("")){
-                         Intent intent = new Intent(SplashActivity.this, AddBusinessProfileActivity.class);
+                     if(!DealWithItApp.readFromPreferences(getApplicationContext(), Keys.id,Constants.DEFAULT_STRING).equals(Constants.DEFAULT_STRING)){
+                         Intent intent = new Intent(SplashActivity.this, DealWithItActivity.class);
                          startActivity(intent);
                          overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
                          SplashActivity.this.finish();

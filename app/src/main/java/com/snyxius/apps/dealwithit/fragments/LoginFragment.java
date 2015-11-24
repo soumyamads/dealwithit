@@ -220,6 +220,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                  DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
                  DealWithItApp.saveToPreferences(getActivity(),Keys.id,jsonObject.getString(Keys.id));
                  DialogFragment dialogFrag = SuccessDialogFragment.newInstance();
+                 dialogFrag.setCancelable(false);
                  dialogFrag.show(getFragmentManager().beginTransaction(), Constants.SUCCESSDIALOG_FRAGMENT);
             }else if(jsonObject.getString(Keys.status).equals(Constants.FAILED)){
                  DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
