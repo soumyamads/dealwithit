@@ -50,7 +50,6 @@ GetAllBusinessProfileFragment.DataPassListener,CreateDealStepOneFragment.PassDat
         findViewById(R.id.wrong).setOnClickListener(this);
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container_createdeal,new CreateDealStepOneFragment(),Constants.CREATE_STEP_ONE_FRAGMENT)
-                .addToBackStack(null)
                 .commit();
     }
 

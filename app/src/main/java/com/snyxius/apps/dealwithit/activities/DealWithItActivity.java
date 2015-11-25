@@ -72,7 +72,6 @@ public class DealWithItActivity extends AppCompatActivity implements View.OnClic
         if(v.getId() == R.id.fab) {
             Intent intent = new Intent(getApplicationContext(), CreateDealActivity.class);
             startActivity(intent);
-            finish();
         }
 
     }
