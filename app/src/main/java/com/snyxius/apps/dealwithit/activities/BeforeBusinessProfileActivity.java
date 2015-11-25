@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,19 +13,13 @@ import android.view.View;
 import android.widget.Button;
 
 import com.snyxius.apps.dealwithit.R;
-import com.snyxius.apps.dealwithit.adapters.DrawerAdapter;
-import com.snyxius.apps.dealwithit.adapters.SectionedRecyclerViewAdapter;
 import com.snyxius.apps.dealwithit.extras.Constants;
-import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileDetailFragment;
 import com.snyxius.apps.dealwithit.fragments.DrawerFragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Nihas on 02-11-2015.
  */
-public class AddBusinessProfileActivity extends AppCompatActivity{
+public class BeforeBusinessProfileActivity extends AppCompatActivity{
 
     Button addBusinessProfile;
     Toolbar toolbar;
@@ -54,7 +46,7 @@ public class AddBusinessProfileActivity extends AppCompatActivity{
         addBusinessProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AddBusinessProfileActivity.this,BusinessProfileActivity.class);
+                Intent intent = new Intent(BeforeBusinessProfileActivity.this,CreateBusinessProfileActivity.class);
                 startActivity(intent);
                 finish();
             }

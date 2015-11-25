@@ -10,9 +10,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 
 import com.snyxius.apps.dealwithit.R;
-import com.snyxius.apps.dealwithit.activities.AddBusinessProfileActivity;
-import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
-import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
+import com.snyxius.apps.dealwithit.activities.CreateBusinessProfileActivity;
 import com.snyxius.apps.dealwithit.activities.DealWithItActivity;
 
 /**
@@ -48,7 +46,7 @@ public class BusinessCreatedDialogFragment extends DialogFragment implements Vie
             getActivity().finish();
         }
         if(v.getId() == R.id.create_another){
-            Intent intent = new Intent(getActivity(),BusinessProfileActivity.class);
+            Intent intent = new Intent(getActivity(),CreateBusinessProfileActivity.class);
             startActivity(intent);
             getActivity().finish();
         }

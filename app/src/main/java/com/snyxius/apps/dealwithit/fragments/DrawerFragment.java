@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.activities.CreateBusinessProfileActivity;
 import com.snyxius.apps.dealwithit.activities.MerchantProfileActivity;
 import com.snyxius.apps.dealwithit.adapters.DrawerAdapter;
 import com.snyxius.apps.dealwithit.adapters.SectionedRecyclerViewAdapter;
@@ -68,6 +69,9 @@ public class DrawerFragment extends Fragment {
                     case 13:
                         Intent merchant_pro=new Intent(getActivity(), MerchantProfileActivity.class);
                         startActivity(merchant_pro);
+                        break;
+                    case 11:Intent business_pro=new Intent(getActivity(), CreateBusinessProfileActivity.class);
+                        startActivity(business_pro);
                         break;
                     default:
                         break;

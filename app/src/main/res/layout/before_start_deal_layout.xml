@@ -23,10 +23,12 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
 
         <View
+            android:id="@+id/below_line"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_below="@+id/toolbar"
             android:background="#ffffff" />
+
 
         <RelativeLayout
             android:layout_width="match_parent"

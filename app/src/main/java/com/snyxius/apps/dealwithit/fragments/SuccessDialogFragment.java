@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 
 import com.snyxius.apps.dealwithit.R;
-import com.snyxius.apps.dealwithit.activities.AddBusinessProfileActivity;
+import com.snyxius.apps.dealwithit.activities.BeforeBusinessProfileActivity;
 
 /**
  * Created by AMAN on 05-11-2015.
@@ -39,7 +39,7 @@ public class SuccessDialogFragment extends DialogFragment implements View.OnClic
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.gotit_button){
-            Intent intent=new Intent(getActivity(), AddBusinessProfileActivity.class);
+            Intent intent=new Intent(getActivity(), BeforeBusinessProfileActivity.class);
             startActivity(intent);
             getActivity().finish();
         }

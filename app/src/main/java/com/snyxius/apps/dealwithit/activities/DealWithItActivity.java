@@ -1,6 +1,7 @@
 package com.snyxius.apps.dealwithit.activities;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -8,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -16,6 +19,7 @@ import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.fragments.BookingsFragment;
 import com.snyxius.apps.dealwithit.fragments.ChatFragment;
+import com.snyxius.apps.dealwithit.fragments.DrawerFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +31,8 @@ public class DealWithItActivity extends AppCompatActivity implements View.OnClic
     private TabLayout tabLayout;
     private ViewPager viewPager;
     Toolbar toolbar;
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle drawerToggle;
 
 
     @Override
@@ -34,6 +40,11 @@ public class DealWithItActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deal_with_it);
         initialize();
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.container_drawer,new DrawerFragment(), Constants.DRAWER_FRAGMENT)
+                .commit();
+        initDrawer();
     }
 
     private void initialize() {
@@ -64,6 +75,36 @@ public class DealWithItActivity extends AppCompatActivity implements View.OnClic
             finish();
         }
 
+    }
+
+
+    private void initDrawer() {
+        drawerLayout=(DrawerLayout)findViewById(R.id.drawerlayout);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+        };
+        drawerLayout.setDrawerListener(drawerToggle);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
     }
 
 

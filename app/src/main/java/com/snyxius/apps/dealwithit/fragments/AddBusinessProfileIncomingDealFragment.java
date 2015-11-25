@@ -1,7 +1,6 @@
 package com.snyxius.apps.dealwithit.fragments;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -18,9 +17,6 @@ import android.widget.TextView;
 
 import com.appyvet.rangebar.RangeBar;
 import com.snyxius.apps.dealwithit.R;
-import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
-import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
-import com.snyxius.apps.dealwithit.activities.DealWithItActivity;
 import com.snyxius.apps.dealwithit.api.WebRequest;
 import com.snyxius.apps.dealwithit.api.WebServices;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
@@ -30,8 +26,6 @@ import com.snyxius.apps.dealwithit.extras.Keys;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.HashMap;
 
 
 /**

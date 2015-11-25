@@ -1,166 +1,31 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:id="@+id/container">
+    android:layout_height="match_parent">
 
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
 
-        <RelativeLayout
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            >
-
-            <RelativeLayout
-                android:id="@+id/relative1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/wrong"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:padding="7dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/bottom_selector_transparent"
-                    android:src="@drawable/left_cross"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Add Business Profile"
-                    android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-                    android:textColor="#ffffff"
-                    android:layout_centerInParent="true"
-
-                    />
-                <ImageView
-                    android:id="@+id/right"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:padding="7dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:src="@drawable/right_tick"
-                    android:background="@drawable/bottom_selector_transparent"
-                    android:layout_alignParentRight="true"
-                    />
-            </RelativeLayout>
-        </RelativeLayout>
-
-
-    <!--<RelativeLayout-->
-        <!--android:id="@+id/tabs1"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_below="@+id/toolbar">-->
-
-        <!--<com.snyxius.apps.dealwithit.utils.StepsView-->
-            <!--android:id="@+id/stepsView"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="10dp"/>-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/label"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@+id/stepsView"-->
-            <!--android:visibility="gone"-->
-            <!--android:text="StepsView 1"/>-->
-
-        <!--</RelativeLayout>-->
-
-    <RelativeLayout
-        android:id="@+id/container_loading"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar">
-
-    <RelativeLayout
-        android:id="@+id/tabs2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="7dp">
-
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerHorizontal="true">
-        <LinearLayout
-            android:id="@+id/circle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="8dp"
-            android:background="@drawable/line">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/rounded_fill_indicator"/>
+        android:layout_gravity="start"
+        android:background="#ffffff"
+        android:paddingLeft="16dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp" />
 
 
-            <ImageView
-                android:id="@+id/stepView_image2"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="80dp"
-                android:src="@drawable/rounded_stroke_indicator"/>
-
-            <ImageView
-                android:id="@+id/stepView_image3"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="80dp"
-                android:src="@drawable/rounded_stroke_indicator"/>
-
-        </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="BASIC"
-        android:textSize="12dp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_below="@+id/circle"/>
-
-    <TextView
-        android:id="@+id/stepView_text2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DETAILS"
-        android:textSize="12dp"
-        android:textColor="@color/grey"
-        android:layout_marginLeft="95dp"
-        android:layout_below="@+id/circle"/>
-
-    <TextView
-        android:id="@+id/stepView_text3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="INCOMING DEAL"
-        android:textSize="12dp"
-        android:textColor="@color/grey"
-        android:layout_marginLeft="175dp"
-        android:layout_below="@+id/circle"/>
-
-</RelativeLayout>
-
-        </RelativeLayout>
-
-
-    <FrameLayout
-        android:id="@+id/frmaecontainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/tabs2" />
-    </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>
