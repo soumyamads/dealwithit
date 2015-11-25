@@ -236,7 +236,7 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
 
 
 
-    private void validate(){
+    public void validate(){
         if(uploadPicture.equals("")){
             DealWithItApp.showAToast("Please select the Deal Image");
         }else if(minimum_guest.getText().toString().isEmpty()){

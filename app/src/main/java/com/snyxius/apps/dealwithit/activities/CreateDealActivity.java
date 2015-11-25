@@ -3,9 +3,11 @@ package com.snyxius.apps.dealwithit.activities;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.snyxius.apps.dealwithit.R;
@@ -13,6 +15,7 @@ import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileBasicFragment;
 import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileDetailFragment;
 import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileIncomingDealFragment;
+import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileNewIncomingDealFragment;
 import com.snyxius.apps.dealwithit.fragments.CreateDealStepOneFragment;
 import com.snyxius.apps.dealwithit.fragments.CreateDealStepThreeFragment;
 import com.snyxius.apps.dealwithit.fragments.CreateDealStepTwoFragment;
@@ -28,7 +31,7 @@ import java.util.List;
  * Created by snyxius on 10/30/2015.
  */
 public class CreateDealActivity extends AppCompatActivity implements CreateDealStepOneFragment.StepOneStroke,CreateDealStepTwoFragment.StepTwoStroke,
-GetAllBusinessProfileFragment.DataPassListener,CreateDealStepOneFragment.PassData{
+GetAllBusinessProfileFragment.DataPassListener,CreateDealStepOneFragment.PassData, View.OnClickListener{
 
     ImageView stepViewImage2,stepViewImage3;
 
@@ -43,6 +46,8 @@ GetAllBusinessProfileFragment.DataPassListener,CreateDealStepOneFragment.PassDat
     private void initializeView(){
         stepViewImage2 = (ImageView) findViewById(R.id.stepView_image2);
         stepViewImage3 = (ImageView) findViewById(R.id.stepView_image3);
+        findViewById(R.id.right).setOnClickListener(this);
+        findViewById(R.id.wrong).setOnClickListener(this);
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container_createdeal,new CreateDealStepOneFragment(),Constants.CREATE_STEP_ONE_FRAGMENT)
                 .addToBackStack(null)
@@ -98,16 +103,53 @@ GetAllBusinessProfileFragment.DataPassListener,CreateDealStepOneFragment.PassDat
     }
 
     @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.right:
+                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container_createdeal);
+                if(fragment instanceof CreateDealStepOneFragment){
+                    Log.d("fragment","1 instance");
+                    ((CreateDealStepOneFragment) fragment).validate();
+                }else if(fragment instanceof CreateDealStepTwoFragment){
+                    ((CreateDealStepTwoFragment) fragment).validate();
+                    Log.d("fragment", "2 instance");
+                }else if(fragment instanceof CreateDealStepThreeFragment){
+                    ((CreateDealStepThreeFragment) fragment).validate();
+                    Log.d("fragment", "3 instance");
+                }else{
+                    Log.d("fragment","no instance");
+                }
+                break;
+
+            case R.id.wrong:
+                onBackPressed();
+                break;
+        }
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
-        android.support.v4.app.Fragment fragment1 = getSupportFragmentManager().findFragmentByTag(Constants.CREATE_STEP_TWO_FRAGMENT);
-        android.support.v4.app.Fragment fragment = getSupportFragmentManager().findFragmentByTag(Constants.CREATE_STEP_ONE_FRAGMENT);
-        if(fragment instanceof AddBusinessProfileBasicFragment && fragment1 instanceof AddBusinessProfileDetailFragment){
-            stepViewImage3.setImageResource(R.drawable.rounded_stroke_indicator);
-        }else if(fragment instanceof AddBusinessProfileBasicFragment){
 
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container_createdeal);
+        if(fragment instanceof CreateDealStepOneFragment){
             stepViewImage2.setImageResource(R.drawable.rounded_stroke_indicator);
+        }else if(fragment instanceof CreateDealStepTwoFragment){
+            stepViewImage3.setImageResource(R.drawable.rounded_stroke_indicator);
+        }else if(fragment instanceof CreateDealStepThreeFragment){
+            Log.d("fragment", "3 instance");
+        }else{
+            Log.d("fragment","no instance");
         }
+
+//        android.support.v4.app.Fragment fragment1 = getSupportFragmentManager().findFragmentByTag(Constants.CREATE_STEP_TWO_FRAGMENT);
+//        android.support.v4.app.Fragment fragment = getSupportFragmentManager().findFragmentByTag(Constants.CREATE_STEP_ONE_FRAGMENT);
+//        if(fragment instanceof AddBusinessProfileBasicFragment && fragment1 instanceof AddBusinessProfileDetailFragment){
+//            stepViewImage3.setImageResource(R.drawable.rounded_stroke_indicator);
+//        }else if(fragment instanceof AddBusinessProfileBasicFragment){
+//
+//            stepViewImage2.setImageResource(R.drawable.rounded_stroke_indicator);
+//        }
 
 
     }

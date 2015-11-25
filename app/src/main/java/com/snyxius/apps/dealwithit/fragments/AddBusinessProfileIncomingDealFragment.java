@@ -20,6 +20,7 @@ import com.appyvet.rangebar.RangeBar;
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
 import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
+import com.snyxius.apps.dealwithit.activities.DealWithItActivity;
 import com.snyxius.apps.dealwithit.api.WebRequest;
 import com.snyxius.apps.dealwithit.api.WebServices;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
@@ -53,7 +54,7 @@ public class AddBusinessProfileIncomingDealFragment extends Fragment implements 
     Button save;
 
     Button add_incoming_deals;
-    static JSONObject jsonObject = new JSONObject();
+    static  JSONObject jsonObject = new JSONObject();
 
     IncomingDeals incomingDeal;
 
@@ -71,7 +72,7 @@ public class AddBusinessProfileIncomingDealFragment extends Fragment implements 
     }
 
 
-    public static AddBusinessProfileIncomingDealFragment newInstance(JSONObject Object) {
+    public static   AddBusinessProfileIncomingDealFragment newInstance(JSONObject Object) {
         jsonObject = Object;
         AddBusinessProfileIncomingDealFragment f = new AddBusinessProfileIncomingDealFragment();
         return f;
@@ -136,7 +137,7 @@ public class AddBusinessProfileIncomingDealFragment extends Fragment implements 
     }
 
 
-    private void validate(int position){
+    public void validate(int position){
         if(max_guest.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select the Maximum Guest");
         }else if(leftIndexValue.getText().toString().isEmpty()){
@@ -145,11 +146,6 @@ public class AddBusinessProfileIncomingDealFragment extends Fragment implements 
             DealWithItApp.showAToast("Please select Deal Offering");
         } else{
 
-            if(checkBox_Alcohol.isChecked()){
-                alcohol = "Yes";
-            } else if(!checkBox_Alcohol.isChecked()) {
-                alcohol = "No";
-            }
 
             if(position == 1) {
                 sendBasicData(position);
@@ -164,6 +160,12 @@ public class AddBusinessProfileIncomingDealFragment extends Fragment implements 
     private void sendBasicData(int position){
         try{
 
+            if(checkBox_Alcohol.isChecked()){
+                alcohol = "Yes";
+            } else if(!checkBox_Alcohol.isChecked()) {
+                alcohol = "No";
+            }
+
             JSONObject jsonObjectDeal = new JSONObject();
             jsonObjectDeal.put(Keys.max_guest, max_guest.getText().toString());
             jsonObjectDeal.put(Keys.cost_per_person, leftIndexValue.getText().toString());
@@ -173,7 +175,9 @@ public class AddBusinessProfileIncomingDealFragment extends Fragment implements 
             jsonArray.put(jsonObjectDeal);
 
             if(position == 2) {
-                incomingDeal.sendDealsCategoryData(jsonObject,jsonArray);
+                incomingDeal.sendDealsCategoryData(jsonObject, jsonArray);
+
+
             }else {
                 jsonObject.accumulate(Keys.incoming_deals, jsonArray);
                 String id = DealWithItApp.readFromPreferences(getActivity(), Keys.id, Constants.DEFAULT_STRING);
@@ -183,6 +187,7 @@ public class AddBusinessProfileIncomingDealFragment extends Fragment implements 
                 JSONObject object1 = new JSONObject();
                 object1.accumulate(Keys.business, object);
                 if (DealWithItApp.isNetworkAvailable()) {
+                    Log.d("Object",object1.toString());
                     new sendBusinessProfileData().execute(object1.toString());
                 } else {
 
@@ -235,6 +240,7 @@ public class AddBusinessProfileIncomingDealFragment extends Fragment implements 
             if(jsonObject != null){
                 if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
                     DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+                    DealWithItApp.saveToPreferences(getActivity(),Keys.profileId,jsonObject.getString(Keys.profileId));
                     DialogFragment dialogFrag = BusinessCreatedDialogFragment.newInstance();
                     dialogFrag.setCancelable(false);
                     dialogFrag.show(getFragmentManager().beginTransaction(), Constants.BUSINESS_PROFILE_CREATED_DIALOG);

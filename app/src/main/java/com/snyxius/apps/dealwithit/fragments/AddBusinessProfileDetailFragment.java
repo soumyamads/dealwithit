@@ -147,7 +147,8 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.continue_detail:
-                validate();
+              // validate();
+                sendBasicData();
                 break;
             case R.id.type_layout:
                 passData.setTypeData(type_text.getText().toString());
@@ -256,7 +257,7 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
     }
 
 
-    private void validate(){
+    public void validate(){
         if(type_text.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select the Type");
         }else if(cuisine_text.getText().toString().isEmpty()){

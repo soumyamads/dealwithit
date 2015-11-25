@@ -94,7 +94,7 @@ public class CreateDealStepOneFragment extends Fragment implements View.OnClickL
         void setBusinessData(String string);
     }
 
-    private void validate(){
+    public void validate(){
         if(deal_name.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select the Deal Name");
         }else if(business_text.getText().toString().isEmpty()){

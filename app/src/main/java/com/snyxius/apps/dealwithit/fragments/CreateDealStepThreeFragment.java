@@ -219,7 +219,7 @@ public class CreateDealStepThreeFragment extends Fragment implements View.OnClic
     }
 
 
-    private void validate(){
+    public void validate(){
         if(startdealdate.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select the Start Deal Date");
         }else if(enddealdate.getText().toString().isEmpty()){

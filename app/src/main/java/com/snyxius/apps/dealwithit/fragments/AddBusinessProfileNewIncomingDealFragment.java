@@ -54,10 +54,10 @@ public class AddBusinessProfileNewIncomingDealFragment extends Fragment implemen
     Button save;
 
     Button add_incoming_deals;
-    static JSONObject jsonObject = new JSONObject();
-    static JSONArray incomingDealArray = new JSONArray();
+   static JSONObject jsonObject = new JSONObject();
+    static  JSONArray incomingDealArrays = new JSONArray();
     public static AddBusinessProfileNewIncomingDealFragment newInstance(JSONObject Object,JSONArray incomingDealArray) {
-        incomingDealArray = incomingDealArray;
+        incomingDealArrays = incomingDealArray;
         jsonObject = Object;
         AddBusinessProfileNewIncomingDealFragment f = new AddBusinessProfileNewIncomingDealFragment();
         return f;
@@ -129,16 +129,18 @@ public class AddBusinessProfileNewIncomingDealFragment extends Fragment implemen
         switch (v.getId()) {
             case R.id.save:
                     validate(1);
+
                 break;
             case R.id.add_incoming_deals:
                     validate(2);
+
                 break;
         }
 
     }
 
 
-    private void validate(int position){
+    public void validate(int position){
         if(max_guest.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select the Maximum Guest");
         }else if(leftIndexValue.getText().toString().isEmpty()){
@@ -147,11 +149,7 @@ public class AddBusinessProfileNewIncomingDealFragment extends Fragment implemen
             DealWithItApp.showAToast("Please select Deal Offering");
         } else{
 
-            if(checkBox_Alcohol.isChecked()){
-                alcohol = "Yes";
-            } else if(!checkBox_Alcohol.isChecked()) {
-                alcohol = "No";
-            }
+
 
             if(position == 1) {
                 sendBasicData(position);
@@ -166,27 +164,33 @@ public class AddBusinessProfileNewIncomingDealFragment extends Fragment implemen
     private void sendBasicData(int position){
         try{
 
-
+            if(checkBox_Alcohol.isChecked()){
+                alcohol = "Yes";
+            } else if(!checkBox_Alcohol.isChecked()) {
+                alcohol = "No";
+            }
             JSONObject jsonObjectDeal = new JSONObject();
             jsonObjectDeal.put(Keys.max_guest, max_guest.getText().toString());
             jsonObjectDeal.put(Keys.cost_per_person, leftIndexValue.getText().toString());
             jsonObjectDeal.put(Keys.alcohol, alcohol);
             jsonObjectDeal.put(Keys.deal_offering, deal_offering.getText().toString());
 
-            incomingDealArray.put(jsonObjectDeal);
+            incomingDealArrays.put(jsonObjectDeal);
 
             if(position == 2) {
-                incomingDeals.sendDealsCategoryData(jsonObject,incomingDealArray);
+                incomingDeals.sendDealsCategoryData(jsonObject, incomingDealArrays);
+
             }else {
-                jsonObject.accumulate(Keys.incoming_deals, incomingDealArray);
+                jsonObject.accumulate(Keys.incoming_deals, incomingDealArrays);
                 String id = DealWithItApp.readFromPreferences(getActivity(), Keys.id, Constants.DEFAULT_STRING);
                 JSONObject object = new JSONObject();
                 object.accumulate(Keys.profile, jsonObject);
                 object.accumulate(Keys.id, id);
                 JSONObject object1 = new JSONObject();
                 object1.accumulate(Keys.business, object);
+
                 if (DealWithItApp.isNetworkAvailable()) {
-                    Log.d("Object",object1.toString());
+                    Log.d("IncomingDeal", incomingDealArrays.toString());
                     new sendBusinessProfileData().execute(object1.toString());
                 } else {
 

@@ -40,7 +40,7 @@
 
                     />
                 <ImageView
-                    android:id="@+id/wright"
+                    android:id="@+id/right"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:padding="7dp"

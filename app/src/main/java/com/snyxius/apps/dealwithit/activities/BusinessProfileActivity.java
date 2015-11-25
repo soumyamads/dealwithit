@@ -2,7 +2,10 @@ package com.snyxius.apps.dealwithit.activities;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,7 +21,12 @@ import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileDetailFragment;
 import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileNewIncomingDealFragment;
 import com.snyxius.apps.dealwithit.fragments.AmbienceTypeFragment;
 import com.snyxius.apps.dealwithit.fragments.CategoryFragment;
+import com.snyxius.apps.dealwithit.fragments.CreateDealStepOneFragment;
+import com.snyxius.apps.dealwithit.fragments.CreateDealStepThreeFragment;
+import com.snyxius.apps.dealwithit.fragments.CreateDealStepTwoFragment;
 import com.snyxius.apps.dealwithit.fragments.CuisineTypeFragment;
+import com.snyxius.apps.dealwithit.fragments.LoginFragment;
+import com.snyxius.apps.dealwithit.fragments.SignupFragment;
 import com.snyxius.apps.dealwithit.fragments.TypeFragment;
 
 import org.json.JSONArray;
@@ -32,7 +40,7 @@ import java.util.HashMap;
  */
 public class BusinessProfileActivity extends AppCompatActivity implements CategoryFragment.DataPassListener,TypeFragment.DataPassListener,
         AmbienceTypeFragment.DataPassListener,CuisineTypeFragment.DataPassListener,
-DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetailFragment.PassData,IncomingDeals{
+DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetailFragment.PassData,IncomingDeals, View.OnClickListener{
 
     ImageView stepViewImage2,stepViewImage3;
     TextView stepViewText2,stepViewText3;
@@ -50,6 +58,8 @@ DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetai
         stepViewImage2= (ImageView) findViewById(R.id.stepView_image2);
         stepViewText3= (TextView) findViewById(R.id.stepView_text3);
         stepViewImage3= (ImageView) findViewById(R.id.stepView_image3);
+        findViewById(R.id.right).setOnClickListener(this);
+        findViewById(R.id.wrong).setOnClickListener(this);
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.frmaecontainer,new AddBusinessProfileBasicFragment(),Constants.ADDBUSINESSPROFILEBASIC_FRAGMENT)
                 .commit();
@@ -65,7 +75,7 @@ DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetai
 
     @Override
     public void sendCategoryData(String string, JSONObject jsonObject) {
-        DealWithItApp.saveToPreferences(getApplicationContext(),Keys.category,string);
+        DealWithItApp.saveToPreferences(getApplicationContext(), Keys.category, string);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frmaecontainer,new AddBusinessProfileDetailFragment().newInstance(jsonObject),Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
                 .addToBackStack(Constants.ADDBUSINESSPROFILEBASIC_FRAGMENT)
@@ -88,24 +98,7 @@ DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetai
                 .commit();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        android.support.v4.app.Fragment fragment2 = getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEDEAL_FRAGMENT);
-        android.support.v4.app.Fragment fragment1 = getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT);
-        android.support.v4.app.Fragment fragment = getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEBASIC_FRAGMENT);
-        if(fragment instanceof AddBusinessProfileBasicFragment && fragment1 instanceof AddBusinessProfileDetailFragment && fragment2 instanceof AddBusinessProfileIncomingDealFragment ){
-            stepViewText3.setTypeface(null, Typeface.NORMAL);
-            stepViewText3.setTextColor(getResources().getColor(R.color.grey));
-            stepViewImage3.setImageResource(R.drawable.rounded_stroke_indicator);
-        }else if(fragment instanceof AddBusinessProfileBasicFragment){
-            stepViewText2.setTypeface(null, Typeface.NORMAL);
-            stepViewText2.setTextColor(getResources().getColor(R.color.grey));
-            stepViewImage2.setImageResource(R.drawable.rounded_stroke_indicator);
-        }
 
-
-    }
 
     @Override
     public void passCategoryData(String data) {
@@ -133,7 +126,7 @@ DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetai
     public void passAmbienceData(String data, ArrayList<String> array) {
         try {
             AddBusinessProfileDetailFragment f = (AddBusinessProfileDetailFragment) getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT);
-            f.changeAmbienceText(data,array);
+            f.changeAmbienceText(data, array);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -143,7 +136,7 @@ DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetai
     public void passCuisineData(String data, ArrayList<String> array) {
         try {
             AddBusinessProfileDetailFragment f = (AddBusinessProfileDetailFragment) getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT);
-            f.changeCuisineText(data,array);
+            f.changeCuisineText(data, array);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -187,9 +180,76 @@ DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetai
 
     @Override
     public void sendDealsCategoryData(JSONObject jsonObject, JSONArray incomingDealArray) {
+                Log.d("incoming",incomingDealArray.toString());
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frmaecontainer, new AddBusinessProfileNewIncomingDealFragment().newInstance(jsonObject,incomingDealArray), Constants.ADDBUSINESSPROFILENEWDEAL_FRAGMENT)
+                .setCustomAnimations(R.anim.slide_in_right, R.anim.fade_out, R.anim.slide_in_right, R.anim.fade_out)
+                .replace(R.id.frmaecontainer, new AddBusinessProfileNewIncomingDealFragment().newInstance(jsonObject, incomingDealArray), Constants.ADDBUSINESSPROFILENEWDEAL_FRAGMENT)
                 .addToBackStack(Constants.ADDBUSINESSPROFILENEWDEAL_FRAGMENT)
                 .commit();
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.right:
+             Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frmaecontainer);
+                if(fragment instanceof AddBusinessProfileBasicFragment){
+                    Log.d("fragment","1 instance");
+                    ((AddBusinessProfileBasicFragment) fragment).validate();
+                }else if(fragment instanceof AddBusinessProfileDetailFragment){
+                    ((AddBusinessProfileDetailFragment) fragment).validate();
+                    Log.d("fragment", "2 instance");
+                }else if(fragment instanceof AddBusinessProfileIncomingDealFragment){
+                    ((AddBusinessProfileIncomingDealFragment) fragment).validate(1);
+                    Log.d("fragment", "3 instance");
+                }else if(fragment instanceof AddBusinessProfileNewIncomingDealFragment){
+                    ((AddBusinessProfileNewIncomingDealFragment) fragment).validate(1);
+                    Log.d("fragment", "3 instance");
+                }else{
+                    Log.d("fragment","no instance");
+                }
+                break;
+
+            case R.id.wrong:
+                onBackPressed();
+                break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frmaecontainer);
+        if(fragment instanceof AddBusinessProfileBasicFragment){
+            stepViewText2.setTypeface(null, Typeface.NORMAL);
+            stepViewText2.setTextColor(getResources().getColor(R.color.grey));
+            stepViewImage2.setImageResource(R.drawable.rounded_stroke_indicator);
+        }else if(fragment instanceof AddBusinessProfileDetailFragment){
+            stepViewText3.setTypeface(null, Typeface.NORMAL);
+           stepViewText3.setTextColor(getResources().getColor(R.color.grey));
+            stepViewImage3.setImageResource(R.drawable.rounded_stroke_indicator);
+        }else if(fragment instanceof AddBusinessProfileIncomingDealFragment){
+            Log.d("fragment", "3 instance");
+        }else if(fragment instanceof AddBusinessProfileNewIncomingDealFragment){
+            Log.d("fragment", "3 instance");
+        }else{
+            Log.d("fragment","no instance");
+        }
+
+
+//        android.support.v4.app.Fragment fragment1 = getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT);
+//        android.support.v4.app.Fragment fragment = getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEBASIC_FRAGMENT);
+//        if(fragment instanceof AddBusinessProfileBasicFragment && fragment1 instanceof AddBusinessProfileDetailFragment ){
+//            stepViewText3.setTypeface(null, Typeface.NORMAL);
+//            stepViewText3.setTextColor(getResources().getColor(R.color.grey));
+//            stepViewImage3.setImageResource(R.drawable.rounded_stroke_indicator);
+//        }else if(fragment instanceof AddBusinessProfileBasicFragment){
+//            stepViewText2.setTypeface(null, Typeface.NORMAL);
+//            stepViewText2.setTextColor(getResources().getColor(R.color.grey));
+//            stepViewImage2.setImageResource(R.drawable.rounded_stroke_indicator);
+//        }
+
+
     }
 }

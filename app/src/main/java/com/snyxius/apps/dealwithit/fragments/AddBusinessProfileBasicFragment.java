@@ -145,7 +145,8 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.continues:
-               validate();
+             // validate();
+                sendBasicData();
                 break;
             case R.id.category_layout:
                 getActivity().getSupportFragmentManager().beginTransaction()
@@ -411,7 +412,7 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
 
     }
 
-    private void validate(){
+    public void validate(){
         if(est_name.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select the Establishment Name");
         }else if(est_type_text.getText().toString().isEmpty()){
