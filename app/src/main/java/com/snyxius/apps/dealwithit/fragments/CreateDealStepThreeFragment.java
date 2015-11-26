@@ -39,8 +39,12 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -195,16 +199,30 @@ public class CreateDealStepThreeFragment extends Fragment implements View.OnClic
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String date = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
 
-        if(position == 3){
-            startdealdate.setText(date);
-        }else if(position == 4){
-            enddealdate.setText(date);
+
+
+
+        try {
+
+
+            String date = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+            String input_date= date;
+            SimpleDateFormat format1=new SimpleDateFormat("dd/MM/yyyy");
+            Date dt1=format1.parse(input_date);
+            DateFormat format2=new SimpleDateFormat("EEE");
+            String finalDay=format2.format(dt1);
+
+                       if (position == 3) {
+                startdealdate.setText(finalDay+", "+date);
+            } else if (position == 4) {
+                enddealdate.setText(finalDay+", "+date);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
-
-    @Override
+        @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
 
         String hourString = hourOfDay < 10 ? "0"+hourOfDay : ""+hourOfDay;

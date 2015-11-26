@@ -125,8 +125,8 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.continue_button:
-                validate();
-               // sendBasicData();
+                //validate();
+                sendBasicData();
                 break;
             case R.id.deal_image_layout:
                     selectImage();
