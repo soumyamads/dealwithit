@@ -10,7 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
 import com.snyxius.apps.dealwithit.activities.CreateBusinessProfileActivity;
+import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
+import com.snyxius.apps.dealwithit.activities.DealWithItActivity;
+import com.snyxius.apps.dealwithit.activities.DealsActivity;
 import com.snyxius.apps.dealwithit.activities.MerchantProfileActivity;
 import com.snyxius.apps.dealwithit.adapters.DrawerAdapter;
 import com.snyxius.apps.dealwithit.adapters.SectionedRecyclerViewAdapter;
@@ -28,7 +32,7 @@ public class DrawerFragment extends Fragment {
     RecyclerView mRecyclerView;
     String[] values = new String[] {"Home", "Create a Deal", "Chats", "Confirmations",
             "QR Code Scanner", "My Active Deals", "All Deals", "Search Booking ID", "Templates",
-            "Bussiness Profile", "Add a Bussiness Profile", "Merchant Profile",
+            "Business Profile", "Add a Business Profile", "Merchant Profile",
             "Settings","Logout","Payment", "about us"};
 
     @Override
@@ -66,11 +70,25 @@ public class DrawerFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 switch (position){
+                    case 0:Intent deal_with_it=new Intent(getActivity(), DealWithItActivity.class);
+                        startActivity(deal_with_it);
+                        getActivity().finish();
+                        break;
+
+                    case 2:Intent create_deal=new Intent(getActivity(), CreateDealActivity.class);
+                        startActivity(create_deal);
+                        break;
+                    case 6:Intent deals=new Intent(getActivity(), DealsActivity.class);
+                        startActivity(deals);
+                        break;
                     case 13:
                         Intent merchant_pro=new Intent(getActivity(), MerchantProfileActivity.class);
                         startActivity(merchant_pro);
                         break;
-                    case 11:Intent business_pro=new Intent(getActivity(), CreateBusinessProfileActivity.class);
+                    case 11:Intent create_business_pro=new Intent(getActivity(), BusinessProfileActivity.class);
+                        startActivity(create_business_pro);
+                        break;
+                    case 12:Intent business_pro=new Intent(getActivity(), CreateBusinessProfileActivity.class);
                         startActivity(business_pro);
                         break;
                     default:

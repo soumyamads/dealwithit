@@ -28,6 +28,9 @@ public class Constants {
     public static final String LOGIN_FRAGMENT = "Login";
     public static final String CHAT_FRAGMENT = "Chat";
     public static final String BOOKINGS_FRAGMENT = "Bookings";
+    public static final String ACTIVE_DEALS = "Active Deals";
+    public static final String ALL_DEALS = "All Deals";
+    public static final String SEARCH_BOOKING = "Search Booking";
     public static final int DEFAULT_INT = 0;
     public static final int DEFAULT_ONE = 1;
     public static final String DEFAULT_STRING = "";

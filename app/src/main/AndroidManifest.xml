@@ -54,6 +54,12 @@
         <activity android:name=".activities.MerchantProfileActivity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".activities.BusinessProfileActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activities.DealsActivity"
+            android:screenOrientation="portrait"/>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/api_key" />

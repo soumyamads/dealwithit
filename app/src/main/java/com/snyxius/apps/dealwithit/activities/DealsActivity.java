@@ -8,13 +8,11 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
 
 import com.snyxius.apps.dealwithit.R;
@@ -27,9 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Nihas on 02-11-2015.
+ * Created by snyxius on 26/11/15.
  */
-public class DealWithItActivity extends AppCompatActivity implements View.OnClickListener {
+public class DealsActivity extends AppCompatActivity implements View.OnClickListener {
+
     private TabLayout tabLayout;
     private ViewPager viewPager;
     Toolbar toolbar;
@@ -37,10 +36,11 @@ public class DealWithItActivity extends AppCompatActivity implements View.OnClic
     ActionBarDrawerToggle drawerToggle;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_deal_with_it);
+        setContentView(R.layout.activity_deals);
         initialize();
 
         getSupportFragmentManager().beginTransaction()
@@ -61,14 +61,6 @@ public class DealWithItActivity extends AppCompatActivity implements View.OnClic
 
     }
 
-
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ChatFragment(), Constants.CHAT_FRAGMENT);
-        adapter.addFragment(new BookingsFragment(), Constants.BOOKINGS_FRAGMENT);
-        viewPager.setAdapter(adapter);
-    }
-
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.fab) {
@@ -78,6 +70,14 @@ public class DealWithItActivity extends AppCompatActivity implements View.OnClic
 
     }
 
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new ChatFragment(), Constants.ACTIVE_DEALS);
+        adapter.addFragment(new BookingsFragment(), Constants.ALL_DEALS);
+        adapter.addFragment(new BookingsFragment(), Constants.SEARCH_BOOKING);
+        viewPager.setAdapter(adapter);
+    }
 
     private void initDrawer() {
         drawerLayout=(DrawerLayout)findViewById(R.id.drawerlayout);

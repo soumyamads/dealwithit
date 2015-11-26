@@ -68,7 +68,24 @@ Response
 
     public static final String allBuisnessProf = baseUrl  + "merchants/allBuisnessProf";
 
-    public static final String saveDeal = baseUrl  + "merchants/saveDeal";
+
+ /*   {
+        "notice":{
+        "allProfiles":[{
+            "Business_Name":"Sample",
+                    "Cover_Image":"/FFFABRRRQAUUUUAFFFFAB\nRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAH/9k=\n",
+                    "Location_Name":"Domlur Bangalore",
+                    "category":"Restaurant",
+                    "profileId":"SampleDomlur BangaloreRestaurant"
+        }
+        ]
+    }
+    }*/
+
+
+
+
+        public static final String saveDeal = baseUrl  + "merchants/saveDeal";
 
     public static final String saveBuisnessProf = baseUrl  + "merchants/saveBuisnessProf";
 

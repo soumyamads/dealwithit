@@ -2,14 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
-    android:gravity="center">
+    android:padding="16dp"
+    android:gravity="center"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?selectableItemBackground">
 
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/right_tick"
-        android:tint="@color/colorPrimary"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_pic"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/plus_icon"/>
 
     <TextView
         android:layout_width="match_parent"
