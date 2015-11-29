@@ -17,6 +17,7 @@ import android.view.View;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.extras.Constants;
+import com.snyxius.apps.dealwithit.fragments.ActiveDealsFragment;
 import com.snyxius.apps.dealwithit.fragments.BookingsFragment;
 import com.snyxius.apps.dealwithit.fragments.ChatFragment;
 import com.snyxius.apps.dealwithit.fragments.DrawerFragment;
@@ -56,26 +57,19 @@ public class DealsActivity extends AppCompatActivity implements View.OnClickList
         setSupportActionBar(toolbar);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
-        fab.setOnClickListener(this);
-
     }
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.fab) {
-            Intent intent = new Intent(getApplicationContext(), CreateDealActivity.class);
-            startActivity(intent);
-        }
 
     }
 
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ChatFragment(), Constants.ACTIVE_DEALS);
-        adapter.addFragment(new BookingsFragment(), Constants.ALL_DEALS);
-        adapter.addFragment(new BookingsFragment(), Constants.SEARCH_BOOKING);
+        adapter.addFragment(new ActiveDealsFragment(), Constants.ACTIVE_DEALS);
+        adapter.addFragment(new ActiveDealsFragment(), Constants.ALL_DEALS);
+        adapter.addFragment(new ActiveDealsFragment(), Constants.SEARCH_BOOKING);
         viewPager.setAdapter(adapter);
     }
 

@@ -1,29 +1,19 @@
 package com.snyxius.apps.dealwithit.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.snyxius.apps.dealwithit.R;
-import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
-import com.snyxius.apps.dealwithit.activities.CreateBusinessProfileActivity;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
-import com.snyxius.apps.dealwithit.pojos.EstablishmentTypePojo;
+import com.snyxius.apps.dealwithit.pojos.AllPojos;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -35,14 +25,14 @@ public class BusinessProfileListAdapter extends RecyclerView.Adapter<BusinessPro
     public String[] estTypeData;
     private Context mContext;
     private LayoutInflater mInflater;
-    private List<EstablishmentTypePojo> mainDataList = null;
+    private List<AllPojos> mainDataList = null;
     private static final int PROFILE_LIST_HEADER = 0;
     private static final int PROFILE_LIST_ITEM = 1;
-    //    private ArrayList<EstablishmentTypePojo> arraylist;
+    //    private ArrayList<AllPojos> arraylist;
     ImageLoader imageLoader;
     DisplayImageOptions options;
 
-    public BusinessProfileListAdapter(Context context, List<EstablishmentTypePojo> mainDataList) {
+    public BusinessProfileListAdapter(Context context, List<AllPojos> mainDataList) {
         this.mContext = context;
         this.mainDataList = mainDataList;
         mInflater = LayoutInflater.from(mContext);
@@ -92,8 +82,6 @@ public class BusinessProfileListAdapter extends RecyclerView.Adapter<BusinessPro
             holder.profileTitle.setText(mainDataList.get(currentItem).getBusiness_name() + " " + mainDataList.get(currentItem).getLocation_name());
             holder.profileSubTitle.setText(mainDataList.get(currentItem).getCategory());
             holder.profilePic.setImageBitmap(DealWithItApp.base64ToBitmap(mainDataList.get(currentItem).getCover_image()));
-
-//
         }
     }
 

@@ -10,15 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ProgressBar;
 
 import com.snyxius.apps.dealwithit.R;
-import com.snyxius.apps.dealwithit.adapters.BusinessProfileAdapter;
 import com.snyxius.apps.dealwithit.adapters.BusinessProfileListAdapter;
 import com.snyxius.apps.dealwithit.api.WebRequest;
 import com.snyxius.apps.dealwithit.api.WebServices;
@@ -26,7 +21,7 @@ import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.fragments.DrawerFragment;
-import com.snyxius.apps.dealwithit.pojos.EstablishmentTypePojo;
+import com.snyxius.apps.dealwithit.pojos.AllPojos;
 import com.snyxius.apps.dealwithit.utils.DividerItemDecoration;
 import com.snyxius.apps.dealwithit.utils.RecyclerItemClickListener;
 import com.snyxius.apps.dealwithit.utils.VerticalSpaceItemDecoration;
@@ -47,7 +42,7 @@ public class BusinessProfileActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     BusinessProfileListAdapter adapter;
     ProgressBar progressBar;
-    ArrayList<EstablishmentTypePojo> estTypeListArray;
+    ArrayList<AllPojos> estTypeListArray;
 
 
     @Override
@@ -146,7 +141,7 @@ public class BusinessProfileActivity extends AppCompatActivity {
                     if (jArray != null) {
                         for (int i = 0; i < jArray.length(); i++) {
                             JSONObject jsonObject1 = jArray.getJSONObject(i);
-                            EstablishmentTypePojo cp = new EstablishmentTypePojo();
+                            AllPojos cp = new AllPojos();
                             cp.setProfile_id(jsonObject1.getString(Keys.profileId));
                             cp.setBusiness_name(jsonObject1.getString(Keys.business_name));
                             cp.setCover_image(jsonObject1.getString(Keys.cover_image));
@@ -160,35 +155,6 @@ public class BusinessProfileActivity extends AppCompatActivity {
                     mRecyclerView.setAdapter(adapter);
 
 
-//                    if (!arrayList.isEmpty()) {
-//                        for (int i = 0; i < estTypeListArray.size(); i++) {
-//                            String string = estTypeListArray.get(i).getBusiness_name();
-//                            for (int j = 0; j < arrayList.size(); j++) {
-//                                if (string.equals(arrayList.get(j))) {
-//                                    estTypeListArray.get(i).setSelected(true);
-//                                }
-//                            }
-//                        }
-//                        adapter.notifyDataSetChanged();
-//                    }
-//                    typeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//                        @Override
-//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                            CheckBox chk = (CheckBox) view
-//                                    .findViewById(R.id.est_check_box);
-//                            EstablishmentTypePojo bean = estTypeListArray.get(position);
-//                            if (bean.isSelected()) {
-//                                bean.setSelected(false);
-//                                chk.setChecked(false);
-//                            } else {
-//                                bean.setSelected(true);
-//                                chk.setChecked(true);
-//                            }
-//
-//                        }
-//                    });
                 } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
                     DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
 //                    emptytext.setVisibility(View.VISIBLE);

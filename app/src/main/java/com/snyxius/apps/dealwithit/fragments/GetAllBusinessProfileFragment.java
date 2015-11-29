@@ -17,13 +17,12 @@ import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.adapters.BusinessProfileAdapter;
-import com.snyxius.apps.dealwithit.adapters.EstablishmentTypeAdapter;
 import com.snyxius.apps.dealwithit.api.WebRequest;
 import com.snyxius.apps.dealwithit.api.WebServices;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
-import com.snyxius.apps.dealwithit.pojos.EstablishmentTypePojo;
+import com.snyxius.apps.dealwithit.pojos.AllPojos;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
@@ -41,7 +40,7 @@ public class GetAllBusinessProfileFragment extends Fragment implements View.OnCl
     ListView typeList;
     String[] values;
     DataPassListener mCallback;
-    ArrayList<EstablishmentTypePojo> estTypeListArray;
+    ArrayList<AllPojos> estTypeListArray;
 
     static String strings;
     ProgressBar progressBar;
@@ -166,7 +165,7 @@ public class GetAllBusinessProfileFragment extends Fragment implements View.OnCl
                     if (jArray != null) {
                         for (int i = 0; i < jArray.length(); i++) {
                             JSONObject jsonObject1 = jArray.getJSONObject(i);
-                            EstablishmentTypePojo cp = new EstablishmentTypePojo();
+                            AllPojos cp = new AllPojos();
                             cp.setProfile_id(jsonObject1.getString(Keys.profileId));
                             cp.setBusiness_name(jsonObject1.getString(Keys.business_name));
                             estTypeListArray.add(cp);
@@ -195,7 +194,7 @@ public class GetAllBusinessProfileFragment extends Fragment implements View.OnCl
 
                             CheckBox chk = (CheckBox) view
                                     .findViewById(R.id.est_check_box);
-                            EstablishmentTypePojo bean = estTypeListArray.get(position);
+                            AllPojos bean = estTypeListArray.get(position);
                             if (bean.isSelected()) {
                                 bean.setSelected(false);
                                 chk.setChecked(false);
@@ -228,7 +227,7 @@ public class GetAllBusinessProfileFragment extends Fragment implements View.OnCl
             ArrayList<String> selectedTypes = new ArrayList<>();
 
 
-            for (EstablishmentTypePojo bean : estTypeListArray) {
+            for (AllPojos bean : estTypeListArray) {
                 if (bean.isSelected()) {
                     sb.append(bean.getBusiness_name());
                     sb.append(",");

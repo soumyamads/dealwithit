@@ -21,7 +21,7 @@ import com.snyxius.apps.dealwithit.api.WebServices;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
-import com.snyxius.apps.dealwithit.pojos.EstablishmentTypePojo;
+import com.snyxius.apps.dealwithit.pojos.AllPojos;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
@@ -39,7 +39,7 @@ public class AmbienceTypeFragment extends Fragment implements View.OnClickListen
     ListView typeList;
     String[] values;
     DataPassListener mCallback;
-    ArrayList<EstablishmentTypePojo> estTypeListArray;
+    ArrayList<AllPojos> estTypeListArray;
     static String strings;
     ProgressBar progressBar;
     TextView emptytext;
@@ -165,7 +165,7 @@ public class AmbienceTypeFragment extends Fragment implements View.OnClickListen
                     estTypeListArray = new ArrayList<>();
                     if (jArray != null) {
                         for (int i = 0; i < jArray.length(); i++) {
-                            EstablishmentTypePojo cp = new EstablishmentTypePojo();
+                            AllPojos cp = new AllPojos();
                             cp.setName(jArray.getString(i));
                             estTypeListArray.add(cp);
                         }
@@ -191,7 +191,7 @@ public class AmbienceTypeFragment extends Fragment implements View.OnClickListen
 
                             CheckBox chk = (CheckBox) view
                                     .findViewById(R.id.est_check_box);
-                            EstablishmentTypePojo bean = estTypeListArray.get(position);
+                            AllPojos bean = estTypeListArray.get(position);
                             if (bean.isSelected()) {
                                 bean.setSelected(false);
                                 chk.setChecked(false);
@@ -223,7 +223,7 @@ public class AmbienceTypeFragment extends Fragment implements View.OnClickListen
         try {
             StringBuffer sb = new StringBuffer();
             ArrayList<String> selectedTypes = new ArrayList<>();
-            for (EstablishmentTypePojo bean : estTypeListArray) {
+            for (AllPojos bean : estTypeListArray) {
                 if (bean.isSelected()) {
                     sb.append(bean.getName());
                     sb.append(",");

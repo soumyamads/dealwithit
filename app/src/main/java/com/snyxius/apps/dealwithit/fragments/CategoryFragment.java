@@ -4,25 +4,22 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.adapters.CategoryAdapter;
-import com.snyxius.apps.dealwithit.adapters.EstablishmentTypeAdapter;
 import com.snyxius.apps.dealwithit.api.WebRequest;
 import com.snyxius.apps.dealwithit.api.WebServices;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
-import com.snyxius.apps.dealwithit.pojos.EstablishmentTypePojo;
+import com.snyxius.apps.dealwithit.pojos.AllPojos;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,7 +36,7 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
     ListView typeList;
     String[] values;
     DataPassListener mCallback;
-    ArrayList<EstablishmentTypePojo> estTypeListArray;
+    ArrayList<AllPojos> estTypeListArray;
     ProgressBar progressBar;
     TextView emptytext;
 
@@ -136,7 +133,7 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
                     estTypeListArray = new ArrayList<>();
                     if (jArray != null) {
                         for (int i = 0; i < jArray.length(); i++) {
-                            EstablishmentTypePojo cp = new EstablishmentTypePojo();
+                            AllPojos cp = new AllPojos();
                             cp.setName(jArray.getString(i));
                             estTypeListArray.add(cp);
                         }

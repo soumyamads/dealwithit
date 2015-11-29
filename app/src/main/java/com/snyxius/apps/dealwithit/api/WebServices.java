@@ -45,7 +45,9 @@ Response
     }*/
 
     public static final String forgotPass = baseUrl  + "merchants/forgotPass";
-    /*{
+    /*
+    Request
+    {
         "email":"aa@aa.com"
     }*/
 
@@ -53,7 +55,9 @@ Response
 
     public static final String typeDetails = baseUrl  + "establishmenttype/typeDetails";
 
-    /*{
+    /*
+     Request
+    {
      "type":
                 [
                       "Restaurant",
@@ -67,9 +71,18 @@ Response
     public static final String ambiance = baseUrl  + "establishmenttype/ambiance";
 
     public static final String allBuisnessProf = baseUrl  + "merchants/allBuisnessProf";
+   /*
+   Request
+   {
+        "userId":"563bcf4c1d76b3ac42d36fd9",
+            "offset":"0",
+            "limit":"2"
+    }
+*/
 
-
- /*   {
+ /*
+  Response
+  {
         "notice":{
         "allProfiles":[{
             "Business_Name":"Sample",
@@ -85,8 +98,18 @@ Response
 
 
 
-        public static final String saveDeal = baseUrl  + "merchants/saveDeal";
+    public static final String saveDeal = baseUrl  + "merchants/saveDeal";
 
     public static final String saveBuisnessProf = baseUrl  + "merchants/saveBuisnessProf";
 
+    public static final String getDeals = baseUrl  + "merchants/getDeals";
+    /*
+    Request
+    {
+        "userId":"563bcf4c1d76b3ac42d36fd9",
+            "offset":"0",
+            "limit":"2"
+    }
+     */
 }
+

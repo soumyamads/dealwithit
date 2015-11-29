@@ -27,6 +27,13 @@ public interface Keys {
 
     public static final String profileId = "profileId";
 
+    public static final String offset = "offset";
+
+    public static final String limit = "limit";
+
+    public static final String allDeals = "allDeals";
+
+
     //AdddBusinessBasicKeys
     public static final String business_name = "Business_Name";
     public static final String category = "category";

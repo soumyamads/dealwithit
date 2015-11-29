@@ -10,7 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
-import com.snyxius.apps.dealwithit.pojos.EstablishmentTypePojo;
+import com.snyxius.apps.dealwithit.pojos.AllPojos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,15 +23,15 @@ public class BusinessProfileAdapter extends BaseAdapter {
     public String[] estTypeData;
     private Context mContext;
     private LayoutInflater mInflater;
-    private List<EstablishmentTypePojo> mainDataList = null;
-    private ArrayList<EstablishmentTypePojo> arraylist;
+    private List<AllPojos> mainDataList = null;
+    private ArrayList<AllPojos> arraylist;
 
     public BusinessProfileAdapter(Context context,
-                                  List<EstablishmentTypePojo> mainDataList) {
+                                  List<AllPojos> mainDataList) {
         this.mContext = context;
         this.mainDataList = mainDataList;
         mInflater = LayoutInflater.from(mContext);
-        this.arraylist = new ArrayList<EstablishmentTypePojo>();
+        this.arraylist = new ArrayList<AllPojos>();
         this.arraylist.addAll(mainDataList);
 //        mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -92,7 +92,7 @@ public class BusinessProfileAdapter extends BaseAdapter {
     }
 
     @Override
-    public EstablishmentTypePojo getItem(int position) {
+    public AllPojos getItem(int position) {
         return mainDataList.get(position);
     }
 

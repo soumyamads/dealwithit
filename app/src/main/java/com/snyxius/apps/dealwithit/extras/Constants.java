@@ -7,6 +7,8 @@ public class Constants {
 
     public static final String NA = "NA";
 
+    public static final int LIMIT = 8;
+
     public static final String PROGRESS_FRAGMENT = "ProgressFragment";
     public static final String SUCCESSDIALOG_FRAGMENT = "SuccessDialogFragment";
     public static final String BUSINESS_PROFILE_CREATED_DIALOG = "BusinessCreatedDialogFragment";
