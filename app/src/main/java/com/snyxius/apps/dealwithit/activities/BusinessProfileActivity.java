@@ -23,6 +23,7 @@ import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.fragments.DrawerFragment;
 import com.snyxius.apps.dealwithit.pojos.AllPojos;
 import com.snyxius.apps.dealwithit.utils.DividerItemDecoration;
+import com.snyxius.apps.dealwithit.utils.EndlessRecyclerOnScrollListener;
 import com.snyxius.apps.dealwithit.utils.RecyclerItemClickListener;
 import com.snyxius.apps.dealwithit.utils.VerticalSpaceItemDecoration;
 
@@ -43,7 +44,7 @@ public class BusinessProfileActivity extends AppCompatActivity {
     BusinessProfileListAdapter adapter;
     ProgressBar progressBar;
     ArrayList<AllPojos> estTypeListArray;
-
+    private LinearLayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,8 @@ public class BusinessProfileActivity extends AppCompatActivity {
                 String s = DealWithItApp.readFromPreferences(this, Keys.id, Constants.DEFAULT_STRING);
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.accumulate(Keys.id, s);
+                jsonObject.accumulate(Keys.offset, String.valueOf(Constants.DEFAULT_INT));
+                jsonObject.accumulate(Keys.limit, String.valueOf(Constants.LIMIT));
                 new getAllBusinessProfile().execute(jsonObject.toString());
 
             } else {
@@ -80,7 +83,10 @@ public class BusinessProfileActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
         mRecyclerView = (RecyclerView) findViewById(R.id.rvList);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
+
         //add ItemDecoration
         mRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(2));
         //or
@@ -102,8 +108,6 @@ public class BusinessProfileActivity extends AppCompatActivity {
                 })
         );
 
-//        adapter = new BusinessProfileListAdapter(this, getIngredients());
-//        mRecyclerView.setAdapter(adapter);
     }
 
     private class getAllBusinessProfile extends AsyncTask<String, Void, JSONObject> {
@@ -151,13 +155,35 @@ public class BusinessProfileActivity extends AppCompatActivity {
                         }
                     }
 
-                    final BusinessProfileListAdapter adapter = new BusinessProfileListAdapter(getApplicationContext(), estTypeListArray);
+                    adapter = new BusinessProfileListAdapter(getApplicationContext(), estTypeListArray);
                     mRecyclerView.setAdapter(adapter);
+                    mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
+                        @Override
+                        public void onLoadMore(int current_page) {
+                            try {
 
+                                if (DealWithItApp.isNetworkAvailable()) {
+                                    String s = DealWithItApp.readFromPreferences(getApplicationContext(), Keys.id, Constants.DEFAULT_STRING);
+                                    JSONObject jsonObject = new JSONObject();
+                                    jsonObject.accumulate(Keys.id, s);
+                                    jsonObject.accumulate(Keys.offset, String.valueOf(current_page));
+                                    jsonObject.accumulate(Keys.limit, String.valueOf(Constants.LIMIT));
+                                    new getScrollAllBusinessProfile().execute(jsonObject.toString());
+
+                                } else {
+
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+
+                        }
+                    });
 
                 } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
                     DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
-//                    emptytext.setVisibility(View.VISIBLE);
                 } else {
                     DealWithItApp.showAToast("Something Went Wrong.");
                 }
@@ -171,6 +197,69 @@ public class BusinessProfileActivity extends AppCompatActivity {
     }
 
 
+
+
+    private class getScrollAllBusinessProfile extends AsyncTask<String, Void, JSONObject> {
+
+        @Override
+        protected JSONObject doInBackground(String... params) {
+            JSONObject jsonObject = null;
+            try {
+                return WebRequest.postData(params[0], WebServices.allBuisnessProf);
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+            return jsonObject;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            super.onPostExecute(jsonObject);
+            progressBar.setVisibility(View.GONE);
+            onScrollDone(jsonObject);
+        }
+    }
+
+    private void onScrollDone(JSONObject jsonObject) {
+        try {
+
+            if (jsonObject != null) {
+                if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
+                    JSONObject obj = jsonObject.getJSONObject(Keys.notice);
+
+                    JSONArray jArray = obj.getJSONArray(Keys.allProfiles);
+
+
+                    if (jArray != null) {
+                        for (int i = 0; i < jArray.length(); i++) {
+                            JSONObject jsonObject1 = jArray.getJSONObject(i);
+                            AllPojos cp = new AllPojos();
+                            cp.setProfile_id(jsonObject1.getString(Keys.profileId));
+                            cp.setBusiness_name(jsonObject1.getString(Keys.business_name));
+                            cp.setCover_image(jsonObject1.getString(Keys.cover_image));
+                            cp.setLocation_name(jsonObject1.getString(Keys.location_name));
+                            cp.setCategory(jsonObject1.getString(Keys.category));
+                            estTypeListArray.add(cp);
+                        }
+                    }
+
+                    adapter.notifyDataSetChanged();
+
+
+                } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
+
+                } else {
+                    DealWithItApp.showAToast("Something Went Wrong.");
+                }
+            } else {
+                DealWithItApp.showAToast("Something Went Wrong.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
     private void initDrawer() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {

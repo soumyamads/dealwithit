@@ -1,5 +1,6 @@
 package com.snyxius.apps.dealwithit.fragments;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -11,7 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.activities.DealWithItActivity;
 import com.snyxius.apps.dealwithit.api.WebRequest;
 import com.snyxius.apps.dealwithit.api.WebServices;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
@@ -23,6 +28,8 @@ import com.snyxius.apps.dealwithit.utils.CustomPasswordEditText;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URISyntaxException;
+
 
 /**
  * Created by snyxius on 10/15/2015.
@@ -30,12 +37,20 @@ import org.json.JSONObject;
 public class LoginFragment extends Fragment implements View.OnClickListener {
     EditText email;
     EditText password;
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
+
+
+
+
+
+    public static LoginFragment newInstance(String  sockets) {
+
+        LoginFragment f = new LoginFragment();
+        return f;
     }
 
-    @Override
+
+       @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.login_fragment, container, false);
         return rootView;
@@ -169,6 +184,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private void submit(){
         try {
             JSONObject jsonObject = new JSONObject();
+            jsonObject.accumulate(Keys.socketId, DealWithItApp.readFromPreferences(getActivity(),Keys.socketId,Constants.DEFAULT_STRING));
             jsonObject.accumulate(Keys.Email, email.getText().toString());
             jsonObject.accumulate(Keys.Password, password.getText().toString());
             Log.d("json",jsonObject.toString());
@@ -218,10 +234,19 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         try {
              if(jsonObject.getString(Keys.status).equals(Constants.SUCCESS)){
                  DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
-                 DealWithItApp.saveToPreferences(getActivity(),Keys.id,jsonObject.getString(Keys.id));
-                 DialogFragment dialogFrag = SuccessDialogFragment.newInstance();
-                 dialogFrag.setCancelable(false);
-                 dialogFrag.show(getFragmentManager().beginTransaction(), Constants.SUCCESSDIALOG_FRAGMENT);
+                 DealWithItApp.saveToPreferences(getActivity(), Keys.id, jsonObject.getString(Keys.id));
+                 DealWithItApp.saveToPreferences(getActivity(),Keys.profileId,jsonObject.getString(Keys.profileId));
+                 if(!DealWithItApp.readFromPreferences(getActivity(), Keys.profileId,Constants.DEFAULT_STRING).equals(String.valueOf(Constants.DEFAULT_INT))
+                         && !DealWithItApp.readFromPreferences(getActivity(), Keys.profileId,Constants.DEFAULT_STRING).equals(Constants.DEFAULT_STRING)){
+                     Intent intent = new Intent(getActivity(), DealWithItActivity.class);
+                     startActivity(intent);
+                     getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+                     getActivity().finish();
+                 }else {
+                     DialogFragment dialogFrag = SuccessDialogFragment.newInstance();
+                     dialogFrag.setCancelable(false);
+                     dialogFrag.show(getFragmentManager().beginTransaction(), Constants.SUCCESSDIALOG_FRAGMENT);
+                 }
             }else if(jsonObject.getString(Keys.status).equals(Constants.FAILED)){
                  DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
              }else{

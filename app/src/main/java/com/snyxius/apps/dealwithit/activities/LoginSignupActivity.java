@@ -7,9 +7,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.Socket.SocketSingleton;
+import com.snyxius.apps.dealwithit.api.WebServices;
+import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileDetailFragment;
@@ -17,6 +24,7 @@ import com.snyxius.apps.dealwithit.fragments.LoginFragment;
 import com.snyxius.apps.dealwithit.fragments.LoginSignupFragment;
 import com.snyxius.apps.dealwithit.fragments.SignupFragment;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,12 +35,15 @@ public class LoginSignupActivity extends AppCompatActivity implements View.OnCli
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private ViewPagerAdapter adapter ;
 
-private ViewPagerAdapter adapter ;
+String socket = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_signup);
+        SocketSingleton.get(this).getSocket().connect();
+        SocketSingleton.get(this).getSocket().on(Keys.socketId, getSocketId);
         int position = getIntent().getIntExtra(Keys.position,Constants.DEFAULT_INT);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -42,6 +53,25 @@ private ViewPagerAdapter adapter ;
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setCurrentItem(position);
     }
+
+    private Emitter.Listener getSocketId = new Emitter.Listener() {
+
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    try{
+                        socket = args[0].toString();
+                        DealWithItApp.saveToPreferences(getApplicationContext(),Keys.socketId,socket);
+                        Log.d("socketId",socket);
+                    } catch (Exception e) {
+
+                    }
+                }
+            });
+        }
+    };
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -105,7 +135,6 @@ private ViewPagerAdapter adapter ;
             return mFragmentTitleList.get(position);
         }
     }
-
 
 
 

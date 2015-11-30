@@ -7,11 +7,15 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.LoginSignupActivity;
 import com.snyxius.apps.dealwithit.api.WebRequest;
@@ -25,6 +29,8 @@ import com.snyxius.apps.dealwithit.utils.CustomPasswordEditText;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URISyntaxException;
+
 
 /**
  * Created by snyxius on 10/14/2015.
@@ -34,12 +40,13 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
      EditText firstname,lastname,email,mobileno,establshname;
      EditText password,retypepassword;
-    boolean flags =  false;
 
-@Override
-public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        }
+
+    public static SignupFragment newInstance(String  sockets) {
+
+        SignupFragment f = new SignupFragment();
+        return f;
+    }
 
 @Override
 public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -138,6 +145,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                     jsonObject.accumulate(Keys.firstName, firstname.getText().toString());
                     jsonObject.accumulate(Keys.lastName, lastname.getText().toString());
                     jsonObject.accumulate(Keys.mobile, mobileno.getText().toString());
+                    jsonObject.accumulate(Keys.socketId, DealWithItApp.readFromPreferences(getActivity(),Keys.socketId,Constants.DEFAULT_STRING));
                     jsonObject.accumulate(Keys.establishmentName, establshname.getText().toString());
                     if (DealWithItApp.isNetworkAvailable()) {
                         new SignUp().execute(jsonObject.toString());

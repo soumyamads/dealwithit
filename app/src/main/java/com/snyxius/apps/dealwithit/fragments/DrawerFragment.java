@@ -8,16 +8,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.Socket.SocketSingleton;
 import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
 import com.snyxius.apps.dealwithit.activities.CreateBusinessProfileActivity;
 import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
 import com.snyxius.apps.dealwithit.activities.DealWithItActivity;
 import com.snyxius.apps.dealwithit.activities.DealsActivity;
 import com.snyxius.apps.dealwithit.activities.MerchantProfileActivity;
+import com.snyxius.apps.dealwithit.activities.SplashActivity;
 import com.snyxius.apps.dealwithit.adapters.DrawerAdapter;
 import com.snyxius.apps.dealwithit.adapters.SectionedRecyclerViewAdapter;
+import com.snyxius.apps.dealwithit.applications.DealWithItApp;
+import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.utils.RecyclerItemClickListener;
 
 import java.util.ArrayList;
@@ -33,7 +38,7 @@ public class DrawerFragment extends Fragment {
     String[] values = new String[] {"Home", "Create a Deal", "Chats", "Confirmations",
             "QR Code Scanner", "My Active Deals", "All Deals", "Search Booking ID", "Templates",
             "Business Profile", "Add a Business Profile", "Merchant Profile",
-            "Settings","Logout","Payment", "about us"};
+            "Settings","Logout","Payment"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +51,8 @@ public class DrawerFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ProgressBar progressBar = (ProgressBar)view.findViewById(R.id.pBar);
+        progressBar.setVisibility(View.GONE);
         initialise(view);
         //This is the code to provide a sectioned list
         List<SectionedRecyclerViewAdapter.Section> sections =
@@ -69,28 +76,82 @@ public class DrawerFragment extends Fragment {
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                Intent intent;
                 switch (position){
-                    case 0:Intent deal_with_it=new Intent(getActivity(), DealWithItActivity.class);
-                        startActivity(deal_with_it);
+                    case 0:intent=new Intent(getActivity(), DealWithItActivity.class);
+                        startActivity(intent);
                         getActivity().finish();
                         break;
 
-                    case 2:Intent create_deal=new Intent(getActivity(), CreateDealActivity.class);
-                        startActivity(create_deal);
+                    case 2:
+                       intent = new Intent(getActivity(), CreateDealActivity.class);
+                        startActivity(intent);
                         break;
-                    case 6:Intent deals=new Intent(getActivity(), DealsActivity.class);
-                        startActivity(deals);
+
+                    case 3:
+                        intent = new Intent(getActivity(), DealWithItActivity.class);
+                        startActivity(intent);
                         break;
+
+
+                    case 4:
+                        intent = new Intent(getActivity(), DealWithItActivity.class);
+                        startActivity(intent);
+                        break;
+
+                    case 5:
+                        DealWithItApp.showAToast("Under Construction");
+                        break;
+
+
+
+                    case 6:
+                        intent=new Intent(getActivity(), DealsActivity.class);
+                        startActivity(intent);
+                        break;
+
+
+                    case 7:
+                        intent = new Intent(getActivity(), DealsActivity.class);
+                        startActivity(intent);
+                        break;
+
+                    case 8:
+                        intent = new Intent(getActivity(), DealsActivity.class);
+                        startActivity(intent);
+                        break;
+
+                    case 9:
+                        DealWithItApp.showAToast("Under Construction");
+                        break;
+
+                    case 11:
+                        intent=new Intent(getActivity(), BusinessProfileActivity.class);
+                        startActivity(intent);
+                        break;
+
+                    case 12:
+                        intent=new Intent(getActivity(), CreateBusinessProfileActivity.class);
+                        startActivity(intent);
+                        break;
+
+
                     case 13:
-                        Intent merchant_pro=new Intent(getActivity(), MerchantProfileActivity.class);
-                        startActivity(merchant_pro);
+                        intent = new Intent(getActivity(), MerchantProfileActivity.class);
+                        startActivity(intent);
                         break;
-                    case 11:Intent create_business_pro=new Intent(getActivity(), BusinessProfileActivity.class);
-                        startActivity(create_business_pro);
+
+                    case 15:
+                        DealWithItApp.showAToast("Under Construction");
                         break;
-                    case 12:Intent business_pro=new Intent(getActivity(), CreateBusinessProfileActivity.class);
-                        startActivity(business_pro);
+
+                    case 16:
+                        logout();
                         break;
+                    case 17:
+                        DealWithItApp.showAToast("Under Construction");
+                        break;
+
                     default:
                         break;
                 }
@@ -98,6 +159,16 @@ public class DrawerFragment extends Fragment {
         }));
     }
 
+
+    private void logout(){
+            SocketSingleton.get(getActivity()).getSocket().disconnect();
+            DealWithItApp.clearSharedPrefData(getActivity());
+            DealWithItApp.saveToPreferences(getActivity(), Keys.intro, true);
+            Intent intent = new Intent(getActivity(), SplashActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            getActivity().startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+    }
     private void initialise(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rvList);
         mRecyclerView.setHasFixedSize(true);

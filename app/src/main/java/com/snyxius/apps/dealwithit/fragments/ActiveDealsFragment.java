@@ -66,6 +66,7 @@ public class ActiveDealsFragment extends Fragment {
     }
 
     private void initialize(View view){
+        progressBar = (ProgressBar) view.findViewById(R.id.pBar);
         initRecyclerView(view);
         try {
             if (DealWithItApp.isNetworkAvailable()) {
@@ -127,6 +128,7 @@ public class ActiveDealsFragment extends Fragment {
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
+            progressBar.setVisibility(View.GONE);
             onDone(jsonObject);
         }
     }
@@ -290,7 +292,6 @@ public class ActiveDealsFragment extends Fragment {
                     adapter.notifyDataSetChanged();
 
                 } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
-                   // DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
 
                 } else {
                     DealWithItApp.showAToast("Something Went Wrong.");

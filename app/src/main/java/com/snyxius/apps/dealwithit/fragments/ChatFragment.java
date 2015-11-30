@@ -3,12 +3,21 @@ package com.snyxius.apps.dealwithit.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URISyntaxException;
 
 
 /**
@@ -17,10 +26,6 @@ import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
 public class ChatFragment extends Fragment implements View.OnClickListener{
 
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

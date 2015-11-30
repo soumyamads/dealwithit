@@ -1,9 +1,11 @@
 package com.snyxius.apps.dealwithit.activities;
 
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.Formatter;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -26,12 +28,14 @@ public class SplashActivity extends AppCompatActivity {
         Window window = getWindow();
         window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
+
         new Handler().postDelayed(new Runnable() {
 
             @Override
             public void run() {
 
-                if(!DealWithItApp.readFromPreferences(getApplicationContext(), Keys.profileId,Constants.DEFAULT_STRING).equals(Constants.DEFAULT_STRING)){
+                if(!DealWithItApp.readFromPreferences(getApplicationContext(), Keys.profileId,Constants.DEFAULT_STRING).equals(String.valueOf(Constants.DEFAULT_INT))
+                        && !DealWithItApp.readFromPreferences(getApplicationContext(), Keys.profileId,Constants.DEFAULT_STRING).equals(Constants.DEFAULT_STRING)){
                     Intent intent = new Intent(SplashActivity.this, DealWithItActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
@@ -57,5 +61,12 @@ public class SplashActivity extends AppCompatActivity {
             }
         }, Constants.SPLASH_TIME_OUT);
     }
+
+        private String getIp(){
+            WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
+            return Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress()).toString();
+        }
+
+
 
 }
