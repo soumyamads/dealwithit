@@ -34,7 +34,7 @@ public interface Keys {
     public static final String allDeals = "allDeals";
 
     public static final String socketId = "socketId";
-
+    public static final String push = "push";
     //AdddBusinessBasicKeys
     public static final String business_name = "Business_Name";
     public static final String category = "category";

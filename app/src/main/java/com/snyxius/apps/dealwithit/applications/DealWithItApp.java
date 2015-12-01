@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 import android.util.Base64;
 import android.view.Gravity;
 import android.widget.Toast;
@@ -37,11 +39,17 @@ import java.util.Set;
         customReportContent = { ReportField.APP_VERSION_CODE, ReportField.APP_VERSION_NAME, ReportField.ANDROID_VERSION, ReportField.PHONE_MODEL, ReportField.CUSTOM_DATA, ReportField.STACK_TRACE, ReportField.LOGCAT },
         mode = ReportingInteractionMode.TOAST,
         resToastText = R.string.crash_toast_text)
-public class DealWithItApp extends Application {
+public class DealWithItApp extends MultiDexApplication {
     public static String sharedPreferencesName = "GymchaloApp";
     public static DealWithItApp mInstance;
     private static Context context;
     public static Toast toast;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     @Override
     public void onCreate() {
