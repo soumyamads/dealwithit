@@ -1,4 +1,4 @@
-package com.snyxius.apps.dealwithit.Notification;
+package com.snyxius.apps.dealwithit;
 
 import android.app.Activity;
 import android.content.ComponentName;

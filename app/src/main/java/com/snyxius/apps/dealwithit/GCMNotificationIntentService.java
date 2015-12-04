@@ -1,4 +1,4 @@
-package com.snyxius.apps.dealwithit.Notification;
+package com.snyxius.apps.dealwithit;
 
 import android.app.IntentService;
 import android.app.Notification;
@@ -13,7 +13,6 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.SplashActivity;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
@@ -72,22 +71,22 @@ public class GCMNotificationIntentService extends IntentService {
 					if(msg != null){	
 					String[] msgValues = msg.split("-");
 					if (msgValues.length > 1) {
-						if (!msgValues[0].trim().equalsIgnoreCase(DealWithItApp.readFromPreferences(getApplicationContext(), Keys.id, Constants.DEFAULT_STRING))) {
+						//if (!msgValues[0].trim().equalsIgnoreCase(DealWithItApp.readFromPreferences(getApplicationContext(), Keys.id, Constants.DEFAULT_STRING))) {
 							sendNotification(msgValues[1]);
-						}
+						//}
 					} else {
 						sendNotification(extras.getString("message"));
 					}
 
 				}else{
 					Log.e("Alert","Push notification error");
-					//QuickShopApplication.showAToast("Push notification error");
+					DealWithItApp.showAToast("Push notification error");
 				}
 			}		
 				Log.i("debug", "Received: " + extras.toString());
 			} else {
 				Log.d("Alert","Push notification error");
-				//QuickShopApplication.showAToast("Push notification error");
+				DealWithItApp.showAToast("Push notification error");
 			}
 		}
 		// Release the wake lock provided by the WakefulBroadcastReceiver.

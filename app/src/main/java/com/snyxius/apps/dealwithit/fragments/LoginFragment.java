@@ -460,4 +460,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         editor.commit();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        checkPlayServices();
+    }
 }
