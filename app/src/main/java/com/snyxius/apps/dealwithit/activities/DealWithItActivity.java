@@ -15,10 +15,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.View;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.extras.Constants;
+import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.fragments.BookingsFragment;
 import com.snyxius.apps.dealwithit.fragments.ChatFragment;
 import com.snyxius.apps.dealwithit.fragments.DrawerFragment;
@@ -42,10 +44,6 @@ public class DealWithItActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deal_with_it);
         initialize();
-
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.container_drawer,new DrawerFragment(), Constants.DRAWER_FRAGMENT)
-                .commit();
         initDrawer();
     }
 
@@ -54,6 +52,7 @@ public class DealWithItActivity extends AppCompatActivity implements View.OnClic
         setupViewPager(viewPager);
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
@@ -67,6 +66,9 @@ public class DealWithItActivity extends AppCompatActivity implements View.OnClic
         adapter.addFragment(new ChatFragment(), Constants.CHAT_FRAGMENT);
         adapter.addFragment(new BookingsFragment(), Constants.BOOKINGS_FRAGMENT);
         viewPager.setAdapter(adapter);
+        if(getIntent().getIntExtra(Keys.position,0) != 0){
+            viewPager.setCurrentItem(getIntent().getIntExtra(Keys.position,0));
+        }
     }
 
     @Override
@@ -78,19 +80,32 @@ public class DealWithItActivity extends AppCompatActivity implements View.OnClic
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.business_main, menu);
+        return true;
+    }
+
 
     private void initDrawer() {
         drawerLayout=(DrawerLayout)findViewById(R.id.drawerlayout);
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.container_drawer,new DrawerFragment().newInstance(drawerLayout), Constants.DRAWER_FRAGMENT)
+                .commit();
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
 
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
+                drawerToggle.syncState();
+                supportInvalidateOptionsMenu();
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+                drawerToggle.syncState();
+
             }
         };
         drawerLayout.setDrawerListener(drawerToggle);

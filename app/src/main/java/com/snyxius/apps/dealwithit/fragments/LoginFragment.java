@@ -244,38 +244,38 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private void onDone(JSONObject jsonObject){
         try {
-             if(jsonObject.getString(Keys.status).equals(Constants.SUCCESS)){
-                 DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
-                 DealWithItApp.saveToPreferences(getActivity(), Keys.id, jsonObject.getString(Keys.id));
-                 DealWithItApp.saveToPreferences(getActivity(),Keys.profileId,jsonObject.getString(Keys.profileId));
+            if(jsonObject != null) {
+                if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
+                    DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+                    DealWithItApp.saveToPreferences(getActivity(), Keys.id, jsonObject.getString(Keys.id));
+                    DealWithItApp.saveToPreferences(getActivity(), Keys.profileId, jsonObject.getString(Keys.profileId));
 
-                 if (checkPlayServices()) {
-                     gcm = GoogleCloudMessaging.getInstance(getActivity());
-                     regid = getRegistrationId(getActivity());
-                     Log.d("DeviceId", regid);
-                     if (regid.isEmpty()) {
-                         registerInBackground(false, "");
-
-
-                     } else if (!DealWithItApp.readFromPreferences(getActivity(),"isSent", false)) {
-                         registerInBackground(true,
-                                 DealWithItApp.readFromPreferences(getActivity(), "key", ""));
-                     }
-                 } else {
-
-                     Log.i("Debug", "No valid Google Play Services APK found.");
-                 }
+                    if (checkPlayServices()) {
+                        gcm = GoogleCloudMessaging.getInstance(getActivity());
+                        regid = getRegistrationId(getActivity());
+                        Log.d("DeviceId", regid);
+                        if (regid.isEmpty()) {
+                            registerInBackground(false, "");
 
 
+                        } else if (!DealWithItApp.readFromPreferences(getActivity(), "isSent", false)) {
+                            registerInBackground(true,
+                                    DealWithItApp.readFromPreferences(getActivity(), "key", ""));
+                        }
+                    } else {
+
+                        Log.i("Debug", "No valid Google Play Services APK found.");
+                    }
 
 
-
-
-            }else if(jsonObject.getString(Keys.status).equals(Constants.FAILED)){
-                 DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
-             }else{
-                 DealWithItApp.showAToast("Something Went Wrong.");
-             }
+                } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
+                    DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+                } else {
+                    DealWithItApp.showAToast("Something Went Wrong.");
+                }
+            }else{
+                DealWithItApp.showAToast("Something Went Wrong.Server is not responding");
+            }
         }catch (Exception e){
             e.printStackTrace();
         }

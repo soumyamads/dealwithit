@@ -192,16 +192,20 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 
             private void onDone(JSONObject jsonObject) {
                 try {
-                    if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
-                        DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
-                        DealWithItApp.saveToPreferences(getActivity(), Keys.id, jsonObject.getString(Keys.id));
-                        DialogFragment dialogFrag = SuccessDialogFragment.newInstance();
-                        dialogFrag.setCancelable(false);
-                        dialogFrag.show(getFragmentManager().beginTransaction(), Constants.SUCCESSDIALOG_FRAGMENT);
-                    } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
-                        DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
-                    } else {
-                        DealWithItApp.showAToast("Something Went Wrong.");
+                    if(jsonObject != null) {
+                        if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
+                            DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+                            DealWithItApp.saveToPreferences(getActivity(), Keys.id, jsonObject.getString(Keys.id));
+                            DialogFragment dialogFrag = SuccessDialogFragment.newInstance();
+                            dialogFrag.setCancelable(false);
+                            dialogFrag.show(getFragmentManager().beginTransaction(), Constants.SUCCESSDIALOG_FRAGMENT);
+                        } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
+                            DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+                        } else {
+                            DealWithItApp.showAToast("Something Went Wrong.");
+                        }
+                    }else{
+                        DealWithItApp.showAToast("Something Went Wrong, Server is not responding");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

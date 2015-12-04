@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -108,6 +109,13 @@ public class BusinessProfileActivity extends AppCompatActivity {
                 })
         );
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.business_main, menu);
+        return true;
     }
 
     private class getAllBusinessProfile extends AsyncTask<String, Void, JSONObject> {

@@ -3,6 +3,7 @@ package com.snyxius.apps.dealwithit.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,8 +23,11 @@ import com.snyxius.apps.dealwithit.activities.SplashActivity;
 import com.snyxius.apps.dealwithit.adapters.DrawerAdapter;
 import com.snyxius.apps.dealwithit.adapters.SectionedRecyclerViewAdapter;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
+import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.utils.RecyclerItemClickListener;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +37,7 @@ import java.util.List;
  */
 public class DrawerFragment extends Fragment {
 
+   static DrawerLayout drawerLayout;
     DrawerAdapter mAdapter;
     RecyclerView mRecyclerView;
     String[] values = new String[] {"Home", "Create a Deal", "Chats", "Confirmations",
@@ -45,6 +50,13 @@ public class DrawerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.recycler_view, container, false);
         return rootView;
+    }
+
+
+    public static  DrawerFragment newInstance(DrawerLayout drawer) {
+        drawerLayout = drawer;
+        DrawerFragment f = new DrawerFragment();
+        return f;
     }
 
 
@@ -62,103 +74,132 @@ public class DrawerFragment extends Fragment {
         sections.add(new SectionedRecyclerViewAdapter.Section(1,"DEALS"));
         sections.add(new SectionedRecyclerViewAdapter.Section(9,"PROFILE"));
         sections.add(new SectionedRecyclerViewAdapter.Section(12,"ACCOUNT"));
-//        sections.add(new SimpleSectionedRecyclerViewAdapter.Section(14,"Section 4"));
-//        sections.add(new SimpleSectionedRecyclerViewAdapter.Section(20,"Section 5"));
-
-        //Add your adapter to the sectionAdapter
+       //Add your adapter to the sectionAdapter
         SectionedRecyclerViewAdapter.Section[] dummy = new SectionedRecyclerViewAdapter.Section[sections.size()];
         SectionedRecyclerViewAdapter mSectionedAdapter = new
                 SectionedRecyclerViewAdapter(getActivity(),R.layout.drawer_header_item,R.id.menu_text,mAdapter);
         mSectionedAdapter.setSections(sections.toArray(dummy));
-
         //Apply this adapter to the RecyclerView
         mRecyclerView.setAdapter(mSectionedAdapter);
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent;
-                switch (position){
-                    case 0:intent=new Intent(getActivity(), DealWithItActivity.class);
-                        startActivity(intent);
-                        getActivity().finish();
-                        break;
-
-                    case 2:
-                       intent = new Intent(getActivity(), CreateDealActivity.class);
-                        startActivity(intent);
-                        break;
-
-                    case 3:
-                        intent = new Intent(getActivity(), DealWithItActivity.class);
-                        startActivity(intent);
-                        break;
-
-
-                    case 4:
-                        intent = new Intent(getActivity(), DealWithItActivity.class);
-                        startActivity(intent);
-                        break;
-
-                    case 5:
-                        DealWithItApp.showAToast("Under Construction");
-                        break;
-
-
-
-                    case 6:
-                        intent=new Intent(getActivity(), DealsActivity.class);
-                        startActivity(intent);
-                        break;
-
-
-                    case 7:
-                        intent = new Intent(getActivity(), DealsActivity.class);
-                        startActivity(intent);
-                        break;
-
-                    case 8:
-                        intent = new Intent(getActivity(), DealsActivity.class);
-                        startActivity(intent);
-                        break;
-
-                    case 9:
-                        DealWithItApp.showAToast("Under Construction");
-                        break;
-
-                    case 11:
-                        intent=new Intent(getActivity(), BusinessProfileActivity.class);
-                        startActivity(intent);
-                        break;
-
-                    case 12:
-                        intent=new Intent(getActivity(), CreateBusinessProfileActivity.class);
-                        startActivity(intent);
-                        break;
-
-
-                    case 13:
-                        intent = new Intent(getActivity(), MerchantProfileActivity.class);
-                        startActivity(intent);
-                        break;
-
-                    case 15:
-                        DealWithItApp.showAToast("Under Construction");
-                        break;
-
-                    case 16:
-                        logout();
-                        break;
-                    case 17:
-                        DealWithItApp.showAToast("Under Construction");
-                        break;
-
-                    default:
-                        break;
-                }
+              callBack(view,position);
             }
         }));
     }
 
+    private void callBack(View view,int position){
+        Intent intent;
+        drawerLayout.closeDrawers();
+        switch (position){
+            case 0:intent=new Intent(getActivity(), DealWithItActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+                break;
+
+            case 2:
+                intent = new Intent(getActivity(), CreateDealActivity.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+                break;
+
+            case 3:
+                intent = new Intent(getActivity(), DealWithItActivity.class);
+                intent.putExtra(Keys.position,0);
+                startActivity(intent);
+                getActivity().finish();
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+
+                break;
+
+
+            case 4:
+                intent = new Intent(getActivity(), DealWithItActivity.class);
+                intent.putExtra(Keys.position,1);
+                startActivity(intent);
+                getActivity().finish();
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+
+                break;
+
+            case 5:
+                DealWithItApp.showAToast("Under Construction");
+                break;
+
+
+
+            case 6:
+                intent=new Intent(getActivity(), DealsActivity.class);
+                intent.putExtra(Keys.position,0);
+                startActivity(intent);
+                getActivity().finish();
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+
+                break;
+
+
+            case 7:
+                intent = new Intent(getActivity(), DealsActivity.class);
+                intent.putExtra(Keys.position,1);
+                startActivity(intent);
+                getActivity().finish();
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+
+                break;
+
+            case 8:
+                intent = new Intent(getActivity(), DealsActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+
+                break;
+
+            case 9:
+                DealWithItApp.showAToast("Under Construction");
+                break;
+
+            case 11:
+                intent=new Intent(getActivity(), BusinessProfileActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+
+                break;
+
+            case 12:
+                intent=new Intent(getActivity(), CreateBusinessProfileActivity.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+
+                break;
+
+
+            case 13:
+                intent = new Intent(getActivity(), MerchantProfileActivity.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+
+                break;
+
+            case 15:
+                DealWithItApp.showAToast("Under Construction");
+                break;
+
+            case 16:
+                logout();
+                break;
+            case 17:
+                DealWithItApp.showAToast("Under Construction");
+                break;
+
+            default:
+                break;
+        }
+
+    }
 
     private void logout(){
             SocketSingleton.get(getActivity()).getSocket().disconnect();
