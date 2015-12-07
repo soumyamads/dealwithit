@@ -21,7 +21,7 @@
                 android:id="@+id/search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Search By Gym Name"
+                android:hint="Search By Deal Name"
                 android:textColor="#ffffff"
                 android:textColorHint="#DCDCDC"
                 android:singleLine="true"

@@ -64,7 +64,7 @@ public class DealWithItActivity extends AppCompatActivity implements View.OnClic
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new ChatFragment(), Constants.CHAT_FRAGMENT);
-        adapter.addFragment(new BookingsFragment(), Constants.BOOKINGS_FRAGMENT);
+        adapter.addFragment(new ChatFragment(), Constants.BOOKINGS_FRAGMENT);
         viewPager.setAdapter(adapter);
         if(getIntent().getIntExtra(Keys.position,0) != 0){
             viewPager.setCurrentItem(getIntent().getIntExtra(Keys.position,0));

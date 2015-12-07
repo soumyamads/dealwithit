@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.CreateBusinessProfileActivity;
@@ -43,16 +44,17 @@ import java.util.ArrayList;
 
 public class ActiveDealsFragment extends Fragment {
 
-    Toolbar toolbar;
-    RecyclerView mRecyclerView;
-    ProgressBar progressBar;
+
     ArrayList<AllPojos> dealsArray= new ArrayList<>();
     ArrayList<AllPojos> businessArray= new ArrayList<>();
     ArrayList<ArrayList<AllPojos>> mainArray= new ArrayList<>();
     ArrayList<String> days= new ArrayList<>();
     ArrayList<ArrayList<String>> daysArray = new ArrayList<>();
+    private RecyclerView mRecyclerView;
+    private ProgressBar progressBar;
     private LinearLayoutManager layoutManager;
     private DealsAdapter adapter;
+    private TextView empty;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -88,6 +90,7 @@ public class ActiveDealsFragment extends Fragment {
     }
 
     private void initRecyclerView(View view) {
+        empty = (TextView)view.findViewById(R.id.empty);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rvList);
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -136,13 +139,10 @@ public class ActiveDealsFragment extends Fragment {
 
     private void onDone(JSONObject jsonObject) {
         try {
-
             if (jsonObject != null) {
                 if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
                     JSONObject obj = jsonObject.getJSONObject(Keys.notice);
-
                     JSONArray jArray = obj.getJSONArray(Keys.allDeals);
-
                     dealsArray = new ArrayList<>();
                     mainArray = new ArrayList<>();
                     daysArray = new ArrayList<>();
@@ -183,33 +183,37 @@ public class ActiveDealsFragment extends Fragment {
                             mainArray.add(businessArray);
                         }
                     }
+                    if(!dealsArray.isEmpty()) {
+                        adapter = new DealsAdapter(getActivity(), dealsArray, mainArray, daysArray);
+                        mRecyclerView.setAdapter(adapter);
+                        mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
+                            @Override
+                            public void onLoadMore(int current_page) {
+                                try {
+                                    Log.d("post1", String.valueOf(current_page));
+                                    if (DealWithItApp.isNetworkAvailable()) {
+                                        String s = DealWithItApp.readFromPreferences(getActivity(), Keys.id, Constants.DEFAULT_STRING);
+                                        JSONObject jsonObject = new JSONObject();
+                                        jsonObject.accumulate(Keys.id, s);
+                                        jsonObject.accumulate(Keys.offset, String.valueOf(current_page));
+                                        jsonObject.accumulate(Keys.limit, String.valueOf(Constants.LIMIT));
+                                        Log.d("post1", jsonObject.toString());
+                                        new ScrollGetDeals().execute(jsonObject.toString());
+                                    } else {
 
-                    adapter = new DealsAdapter(getActivity(), dealsArray,mainArray,daysArray);
-                    mRecyclerView.setAdapter(adapter);
-                    mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
-                        @Override
-                        public void onLoadMore(int current_page) {
-                            try {
-                                Log.d("post1", String.valueOf(current_page));
-                                if (DealWithItApp.isNetworkAvailable()) {
-                                    String s = DealWithItApp.readFromPreferences(getActivity(), Keys.id, Constants.DEFAULT_STRING);
-                                    JSONObject jsonObject = new JSONObject();
-                                    jsonObject.accumulate(Keys.id, s);
-                                    jsonObject.accumulate(Keys.offset, String.valueOf(current_page));
-                                    jsonObject.accumulate(Keys.limit, String.valueOf(Constants.LIMIT));
-                                    Log.d("post1", jsonObject.toString());
-                                    new ScrollGetDeals().execute(jsonObject.toString());
-                                } else {
-
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
                                 }
-                            }catch (Exception e){
-                                e.printStackTrace();
                             }
-                        }
-                    });
+                        });
+
+                    }else{
+                        empty.setText(View.VISIBLE);
+                    }
 
                 } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
-
+                    empty.setText(View.VISIBLE);
                 } else {
                     DealWithItApp.showAToast("Something Went Wrong.");
                 }
