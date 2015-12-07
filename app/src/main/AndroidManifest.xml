@@ -52,6 +52,9 @@
         <activity android:name=".activities.BeforeBusinessProfileActivity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".activities.UserChatActivity"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".activities.CreateBusinessProfileActivity"
             android:screenOrientation="portrait"/>
 

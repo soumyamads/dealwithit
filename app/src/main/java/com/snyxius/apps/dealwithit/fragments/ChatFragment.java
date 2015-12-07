@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -17,6 +19,7 @@ import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
+import com.snyxius.apps.dealwithit.activities.UserChatActivity;
 import com.snyxius.apps.dealwithit.adapters.ChatAdapter;
 import com.snyxius.apps.dealwithit.adapters.DealsAdapter;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
@@ -32,11 +35,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 /**
  * Created by snyxius on 10/15/2015.
  */
 public class ChatFragment extends Fragment implements View.OnClickListener{
+
+
 
 
     private RecyclerView mRecyclerView;
@@ -66,6 +73,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
     private void initialise(View view){
         progressBar = (ProgressBar) view.findViewById(R.id.pBar);
         progressBar.setVisibility(View.GONE);
+//        view.findViewById(R.id.create_deal).setOnClickListener(this);
     }
 
     private void initRecyclerView(View view) {
@@ -93,6 +101,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
                     @Override
                     public void onItemClick(View view, int position) {
                         DealWithItApp.showAToast("Under Construction");
+                        Intent inten=new Intent(getActivity(), UserChatActivity.class);
+                        startActivity(inten);
                     }
                 })
         );
@@ -101,6 +111,12 @@ public class ChatFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-
+        if(v.getId() == R.id.create_deal){
+            Intent intent = new Intent(getActivity(), CreateDealActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        }
     }
+
+
 }
