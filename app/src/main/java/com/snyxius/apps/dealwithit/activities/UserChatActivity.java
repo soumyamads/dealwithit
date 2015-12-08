@@ -1,7 +1,12 @@
 package com.snyxius.apps.dealwithit.activities;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
@@ -10,6 +15,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.extras.Constants;
+import com.snyxius.apps.dealwithit.fragments.DrawerFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -22,15 +29,60 @@ public class UserChatActivity extends AppCompatActivity implements View.OnClickL
     TextView title,desc,userId,timing,cost;
     CircleImageView proPic;
     ImageView editProfile,rightArrow,openClose;
-
+    Toolbar toolbar;
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle drawerToggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_layout);
         initialise();
+        initDrawer();
+    }
+
+
+
+
+    private void initDrawer() {
+        drawerLayout=(DrawerLayout)findViewById(R.id.drawerlayout);
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.container_drawer,new DrawerFragment().newInstance(drawerLayout), Constants.DRAWER_FRAGMENT)
+                .commit();
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                drawerToggle.syncState();
+                supportInvalidateOptionsMenu();
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                drawerToggle.syncState();
+
+            }
+        };
+        drawerLayout.setDrawerListener(drawerToggle);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
     }
 
     private void initialise(){
+        toolbar=(Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         title=(TextView)findViewById(R.id.title);
         desc=(TextView)findViewById(R.id.desc);
         userId=(TextView)findViewById(R.id.user_id);
@@ -90,6 +142,11 @@ public class UserChatActivity extends AppCompatActivity implements View.OnClickL
         anim.setFillAfter(true);
         anim.setFillBefore(true);
         openClose.startAnimation(anim);
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.business_main, menu);
+        return true;
     }
 }

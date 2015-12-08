@@ -14,12 +14,14 @@ import android.util.Base64;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.snyxius.apps.dealwithit.R;
 
+import io.fabric.sdk.android.Fabric;
 import org.acra.ReportField;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
@@ -54,6 +56,7 @@ public class DealWithItApp extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         context = this;
         mInstance = this;
       //  ACRA.init(this);

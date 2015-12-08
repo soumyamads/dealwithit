@@ -91,6 +91,9 @@
             </intent-filter>
         </receiver>
         <service android:name=".GCMNotificationIntentService" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="01adfe677312a5817bf8f6dc3599e2299a6fb481" />
     </application>
 
 </manifest>
