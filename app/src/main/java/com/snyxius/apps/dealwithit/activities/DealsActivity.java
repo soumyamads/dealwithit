@@ -84,12 +84,9 @@ public class DealsActivity extends AppCompatActivity implements View.OnClickList
         if (id == R.id.action_settings) {
             return true;
         }else if(id==R.id.action_search){
-            DealWithItApp.showAToast("Coafas");
-            getSupportFragmentManager().beginTransaction()
-                    .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
-                    .add(R.id.container, new SearchDeals(), Constants.SEARCHDEAL_FRAGMENT)
-                    .addToBackStack(null)
-                    .commit();
+            Intent intent = new Intent(getApplicationContext(),SearchDealsActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.push_up_in, R.anim.push_down_out);
         }
 
         return super.onOptionsItemSelected(item);

@@ -136,7 +136,7 @@ public class GetAllBusinessProfileFragment extends Fragment implements View.OnCl
         protected JSONObject doInBackground(String... params) {
             JSONObject jsonObject = null;
             try {
-                return WebRequest.postData(params[0], WebServices.allBuisnessProf);
+                return WebRequest.postData(params[0], WebServices.tempBuisnessProf);
             }catch (Exception e){
 
                 e.printStackTrace();

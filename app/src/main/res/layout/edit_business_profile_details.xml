@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="DETAILS"
+                style="@style/TextAppearance.AppCompat.Medium"/>
+
+
+            <RelativeLayout
+                android:id="@+id/type_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/type_text"
+                    android:textColor="@android:color/black"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="3dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:hint="Select Type" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_below="@+id/type_text"
+                    android:background="@color/grey"/>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow_right"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cuisine_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/cuisine_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="3dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:hint="Select Cuisine" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_below="@+id/cuisine_text"
+                    android:background="@color/grey"/>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow_right"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ambience_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:id="@+id/ambience_text"
+                    android:textColor="@android:color/black"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="3dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:hint="Select Ambience" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_below="@+id/ambience_text"
+                    android:background="@color/grey"/>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow_right"/>
+            </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/cover_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginTop="15dp"
+                    android:text="TIMINGS AND SEATINGS" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="3dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="Hours Slot 1" />
+
+                <RelativeLayout
+                    android:id="@+id/slot1_start_time_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.8"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/slot1_start_time_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="8dp"
+                        android:hint="--:--"
+                        android:textColor="@android:color/black"
+                        android:paddingRight="25dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:padding="2dp"
+                        android:layout_alignRight="@+id/slot1_start_time_text"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/down_arrow"/>
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="to"/>
+
+
+                <RelativeLayout
+                    android:id="@+id/slot1_end_time_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.8"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/slot1_end_time_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="8dp"
+                        android:hint="--:--"
+                        android:textColor="@android:color/black"
+                        android:paddingRight="25dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:padding="2dp"
+                        android:layout_alignRight="@+id/slot1_end_time_text"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/down_arrow"/>
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="3dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="Hours Slot 2" />
+
+                <RelativeLayout
+                    android:id="@+id/slot2_start_time_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.8"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/slot2_start_time_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="8dp"
+                        android:hint="--:--"
+                        android:textColor="@android:color/black"
+                        android:paddingRight="25dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:padding="2dp"
+                        android:layout_alignRight="@+id/slot2_start_time_text"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/down_arrow"/>
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="to"/>
+
+
+                <RelativeLayout
+                    android:id="@+id/slot2_end_time_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.8"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/slot2_end_time_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="8dp"
+                        android:hint="--:--"
+                        android:textColor="@android:color/black"
+                        android:paddingRight="25dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:padding="2dp"
+                        android:layout_alignRight="@+id/slot2_end_time_text"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/down_arrow"/>
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Maximum Seatings"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <EditText
+                    android:id="@+id/max_seat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        </RelativeLayout>
+
+
+
+</LinearLayout>

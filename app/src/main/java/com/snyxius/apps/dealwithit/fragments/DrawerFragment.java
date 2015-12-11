@@ -19,6 +19,7 @@ import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
 import com.snyxius.apps.dealwithit.activities.DealWithItActivity;
 import com.snyxius.apps.dealwithit.activities.DealsActivity;
 import com.snyxius.apps.dealwithit.activities.MerchantProfileActivity;
+import com.snyxius.apps.dealwithit.activities.SearchDealsActivity;
 import com.snyxius.apps.dealwithit.activities.SplashActivity;
 import com.snyxius.apps.dealwithit.adapters.DrawerAdapter;
 import com.snyxius.apps.dealwithit.adapters.SectionedRecyclerViewAdapter;
@@ -150,7 +151,7 @@ public class DrawerFragment extends Fragment {
                 break;
 
             case 8:
-                intent = new Intent(getActivity(), DealsActivity.class);
+                intent = new Intent(getActivity(), SearchDealsActivity.class);
                 startActivity(intent);
                 getActivity().finish();
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);

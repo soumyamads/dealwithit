@@ -96,13 +96,19 @@ Response
     }*/
 
 
-
+    public static final String tempBuisnessProf = baseUrl  + "merchants/tempBuisnessProf";
 
     public static final String saveDeal = baseUrl  + "merchants/saveDeal";
 
     public static final String saveBuisnessProf = baseUrl  + "merchants/saveBuisnessProf";
 
     public static final String getDeals = baseUrl  + "merchants/getDeals";
+
+    public static final String deleteBuisnessProf = baseUrl  + "merchants/deleteBuisnessProf";
+
+    public static final String deleteDeal = baseUrl  + "merchants/deleteDeal";
+
+
     /*
     Request
     {

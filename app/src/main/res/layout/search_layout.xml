@@ -21,7 +21,7 @@
                 android:id="@+id/search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Search By Deal Name"
+                android:hint="Search By Deals"
                 android:textColor="#ffffff"
                 android:textColorHint="#DCDCDC"
                 android:singleLine="true"
@@ -30,6 +30,7 @@
                 android:paddingRight="8dp"
                 android:background="@null"
                 android:paddingBottom="12dp"
+                android:imeOptions="actionDone"
                 android:layout_toLeftOf="@+id/close"
                 android:layout_toStartOf="@+id/close" />
 
@@ -55,11 +56,10 @@
         </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-   <include
-       layout="@layout/recycler_view"/>
-
-
-
-
+    </FrameLayout>
 </LinearLayout>

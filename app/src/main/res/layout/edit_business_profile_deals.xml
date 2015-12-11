@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#ffffff">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:id="@+id/pBar" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+
+
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:text="INCOMING DEAL SETTINGS" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="8dp"
+                    android:text="Maximum Guests"/>
+
+                <EditText
+                    android:id="@+id/max_guest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="SET RANGE COST/PERSION" />
+
+                <RelativeLayout
+                    android:id="@+id/cost_start_layout"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="0.8"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/cost_start_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="8dp"
+                        android:text="500"
+                        android:paddingRight="25dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:padding="2dp"
+                        android:layout_alignRight="@+id/cost_start_text"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/down_arrow"/>
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="to"
+                    android:visibility="gone"/>
+
+
+                <RelativeLayout
+                    android:id="@+id/cost_end_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.8"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/cost_end_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="8dp"
+                        android:text="1000"
+                        android:paddingRight="25dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:padding="2dp"
+                        android:layout_alignRight="@+id/cost_end_text"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/down_arrow"/>
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <!--................Range SEEKBAR.........................-->
+
+
+            <com.appyvet.rangebar.RangeBar
+                xmlns:custom="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/rangebar1"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                custom:tickStart="0"
+                custom:tickInterval="50"
+                custom:tickEnd="5000"
+                custom:temporaryPins="false"
+                custom:pinMaxFont="10sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/leftIndex"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:text="Approx Cost/Person"/>
+
+                    <TextView
+                        android:id="@+id/leftIndexValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:inputType="number"
+                        android:hint="Rs 0 - Rs 5000"
+                        android:textColor="@android:color/black"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--.................Range SEEKBAR.........................-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="-6dp"
+                android:layout_marginTop="10dp">
+
+                <CheckBox
+                    android:id="@+id/checkBox_Alcohol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alcohol included"
+                    android:textStyle="bold"/>
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:text="WHAT'S COVERED IN DEAL" />
+
+            <EditText
+                android:id="@+id/deal_offering"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:inputType="textCapSentences"
+                android:hint="Deal Offering"/>
+
+
+
+            <Button
+                android:id="@+id/save"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/bottom_selector_secondary"
+                android:text="SAVE"
+                android:layout_marginTop="20dp"
+                android:textColor="#ffffff" />
+
+
+        </LinearLayout>
+
+        </RelativeLayout>
+
+
+
+</LinearLayout>

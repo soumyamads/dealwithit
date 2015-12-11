@@ -101,9 +101,14 @@ public class BusinessProfileActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(View view, int position) {
                         if (position == 0) {
-                            Intent intn = new Intent(BusinessProfileActivity.this, CreateBusinessProfileActivity.class);
-                            startActivity(intn);
-                            finish();
+                            Intent intent = new Intent(BusinessProfileActivity.this, CreateBusinessProfileActivity.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+                        }else{
+                            DealWithItApp.saveToPreferences(getApplicationContext(),Keys.deletebusinessprofilesIds,estTypeListArray.get(position).getProfile_id());
+                            Intent intent = new Intent(BusinessProfileActivity.this, EditBusinessProfile.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
                         }
                     }
                 })

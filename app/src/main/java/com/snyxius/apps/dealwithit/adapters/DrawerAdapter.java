@@ -45,8 +45,8 @@ String data;
         mContext = context;
 
         if (data != null)
-            mData = new ArrayList<String>(Arrays.asList(data));
-        else mData = new ArrayList<String>();
+            mData = new ArrayList<>(Arrays.asList(data));
+        else mData = new ArrayList<>();
     }
 
     public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -57,12 +57,6 @@ String data;
     @Override
     public void onBindViewHolder(SimpleViewHolder holder, final int position) {
         holder.title.setText(mData.get(position));
-        holder.title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(mContext, "Position =" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override

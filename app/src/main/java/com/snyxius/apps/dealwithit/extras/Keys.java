@@ -4,10 +4,12 @@ package com.snyxius.apps.dealwithit.extras;
  * Created by AMAN on 05-11-2015.
  */
 public interface Keys {
-
+    public static final String search = "search";
     public static final String allProfiles = "allProfiles";
     public static final String deal = "deal";
     public static final String businessprofilesIds = "BusinessProfilesIds";
+    public static final String deletebusinessprofilesIds = "buisnessProfileId";
+
     public static final String position = "position";
     public static final String intro = "intro";
     public static final String Email = "Email";

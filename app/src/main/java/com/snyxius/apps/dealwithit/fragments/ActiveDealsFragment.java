@@ -214,6 +214,7 @@ public class ActiveDealsFragment extends Fragment {
 
                 } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
                     empty.setText(View.VISIBLE);
+                    DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
                 } else {
                     DealWithItApp.showAToast("Something Went Wrong.");
                 }

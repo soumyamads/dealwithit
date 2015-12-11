@@ -1,0 +1,81 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:id="@+id/container">
+
+
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        >
+
+        <RelativeLayout
+            android:id="@+id/relative1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/wrong"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="7dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/bottom_selector_transparent"
+                android:src="@drawable/left_cross"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Business Profile"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+                android:textColor="#ffffff"
+                android:layout_centerInParent="true"
+
+                />
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="7dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/common_full_open_on_phone"
+                android:background="@drawable/bottom_selector_transparent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="50dp"
+                />
+            <ImageView
+                android:id="@+id/right"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="7dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/right_tick"
+                android:background="@drawable/bottom_selector_transparent"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+    <include layout="@layout/edit_business_basic"/>
+        <include layout="@layout/edit_business_profile_details"/>
+        <include layout="@layout/edit_business_profile_deals"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
