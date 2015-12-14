@@ -33,30 +33,22 @@ import org.json.JSONObject;
  */
 
 public class AddBusinessProfileIncomingDealFragment extends Fragment implements View.OnClickListener{
-    TextView leftIndexValue;
 
+    private TextView leftIndexValue;
     private RangeBar rangebar;
-
-    EditText max_guest,deal_offering;
-
-    CheckBox checkBox_Alcohol;
-
-    String alcohol = "No";
-
-    ProgressBar progressBar;
-
-    Button save;
-
-    Button add_incoming_deals;
+    private EditText max_guest,deal_offering;
+    private CheckBox checkBox_Alcohol;
+    private String alcohol = "No";
+    private ProgressBar progressBar;
+    private Button save;
+    private Button add_incoming_deals;
     static  JSONObject jsonObject = new JSONObject();
-
     IncomingDeals incomingDeal;
 
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        // Make sure that container activity implement the callback interface
         try {
               incomingDeal = (IncomingDeals) activity;
         } catch (ClassCastException e) {

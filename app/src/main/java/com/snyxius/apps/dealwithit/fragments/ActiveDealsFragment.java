@@ -19,6 +19,8 @@ import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.CreateBusinessProfileActivity;
+import com.snyxius.apps.dealwithit.activities.EditBusinessProfile;
+import com.snyxius.apps.dealwithit.activities.EditDealProfile;
 import com.snyxius.apps.dealwithit.adapters.BusinessProfileListAdapter;
 import com.snyxius.apps.dealwithit.adapters.DealsAdapter;
 import com.snyxius.apps.dealwithit.api.WebRequest;
@@ -108,7 +110,10 @@ public class ActiveDealsFragment extends Fragment {
                 new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        DealWithItApp.showAToast("Under Construction");
+                        DealWithItApp.saveToPreferences(getActivity(), Keys.dealId, dealsArray.get(position).getDealId());
+                        Intent intent = new Intent(getActivity(), EditDealProfile.class);
+                        startActivity(intent);
+                        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
                     }
                 })
         );
@@ -150,6 +155,7 @@ public class ActiveDealsFragment extends Fragment {
                         for (int i = 0; i < jArray.length(); i++) {
                             JSONObject jsonObject1 = jArray.getJSONObject(i);
                             AllPojos cp = new AllPojos();
+                            cp.setDealId(jsonObject1.getString(Keys.dealId));
                             cp.setDeal_name(jsonObject1.getString(Keys.deal_name));
                             cp.setDeal_image(jsonObject1.getString(Keys.deal_image));
                             cp.setRecurring(jsonObject1.getString(Keys.recurring));

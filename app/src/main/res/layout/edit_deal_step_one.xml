@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="30dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEAL NAME"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/deal_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Deal Name"
+                android:inputType="textCapSentences"
+                android:layout_marginTop="20dp"/>
+
+            <RelativeLayout
+                android:id="@+id/select_business_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/select_business_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="3dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:hint="Select Business Profile"
+                    android:textColor="@android:color/black"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_below="@+id/select_business_text"
+                    android:background="@color/grey"/>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/down_arrow"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="QUICK DESCRIPTION"
+                    android:textStyle="bold"
+
+                    android:layout_marginTop="20dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(Max 100 Letters)"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"/>
+
+            </LinearLayout>
+            <EditText
+                android:id="@+id/quick_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Quick Description"
+                android:maxLength="100"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="30dp"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FULL DESCRIPTION"
+                    android:textStyle="bold"
+
+                    android:layout_marginTop="20dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(Max 400 Letters)"
+
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"/>
+
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/additional"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Additional"
+                android:maxLength="400"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="40dp"/>
+
+        </LinearLayout>
+</LinearLayout>

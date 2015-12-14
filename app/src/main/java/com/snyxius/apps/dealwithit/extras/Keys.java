@@ -4,6 +4,9 @@ package com.snyxius.apps.dealwithit.extras;
  * Created by AMAN on 05-11-2015.
  */
 public interface Keys {
+
+    public static final String token = "token";
+
     public static final String search = "search";
     public static final String allProfiles = "allProfiles";
     public static final String deal = "deal";
@@ -28,10 +31,15 @@ public interface Keys {
     public static final String business = "business";
 
     public static final String profileId = "profileId";
-
+    public static final String dealNo = "dealNo";
     public static final String offset = "offset";
 
     public static final String limit = "limit";
+
+    public static final String deleteFlag = "deleteFlag";
+
+
+
 
     public static final String allDeals = "allDeals";
 
@@ -45,6 +53,7 @@ public interface Keys {
     public static final String description = "Description";
     public static final String menu_images = "Menu_Images";
     public static final String cover_image = "Cover_Image";
+    public static final String dealId = "dealId";
 
     //Add_BusinessDetailKeys
     public static final String type = "type";

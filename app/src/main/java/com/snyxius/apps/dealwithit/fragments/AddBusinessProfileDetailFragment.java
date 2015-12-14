@@ -147,8 +147,7 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.continue_detail:
-              // validate();
-                sendBasicData();
+                validate();
                 break;
             case R.id.type_layout:
                 passData.setTypeData(type_text.getText().toString());

@@ -108,6 +108,18 @@ Response
 
     public static final String deleteDeal = baseUrl  + "merchants/deleteDeal";
 
+    public static final String getOneBuisnessProf = baseUrl  + "merchants/getOneBuisnessProf";
+
+    public static final String getOneDeal = baseUrl  + "merchants/getOneDeal";
+
+    public static final String getUserProfile = baseUrl  + "merchants/getUserProfile";
+
+    public static final String updateUserProfile = baseUrl  + "merchants/updateUserProfile";
+
+    public static final String updateBuisnessProf = baseUrl  + "merchants/updateBuisnessProf";
+
+    public static final String updateDeal = baseUrl  + "merchants/updateDeal";
+
 
     /*
     Request

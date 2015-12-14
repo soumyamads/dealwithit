@@ -7,6 +7,16 @@ import java.util.ArrayList;
  */
 public class AllPojos {
     String name;
+    String dealId;
+
+    public String getDealId() {
+        return dealId;
+    }
+
+    public void setDealId(String dealId) {
+        this.dealId = dealId;
+    }
+
     private boolean selected; /* 0 -&gt; checkbox disable, 1 -&gt; checkbox enable */
 
     public String getName() {

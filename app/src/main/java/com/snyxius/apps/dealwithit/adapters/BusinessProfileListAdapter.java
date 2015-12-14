@@ -1,6 +1,7 @@
 package com.snyxius.apps.dealwithit.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,7 +82,8 @@ public class BusinessProfileListAdapter extends RecyclerView.Adapter<BusinessPro
             int currentItem = position - 1;
             holder.profileTitle.setText(mainDataList.get(currentItem).getBusiness_name() + " " + mainDataList.get(currentItem).getLocation_name());
             holder.profileSubTitle.setText(mainDataList.get(currentItem).getCategory());
-            holder.profilePic.setImageBitmap(DealWithItApp.base64ToBitmap(mainDataList.get(currentItem).getCover_image()));
+            BitmapDrawable ob = new BitmapDrawable(mContext.getResources(), DealWithItApp.base64ToBitmap(mainDataList.get(currentItem).getCover_image()));
+            holder.profilePic.setImageDrawable(ob);
         }
     }
 

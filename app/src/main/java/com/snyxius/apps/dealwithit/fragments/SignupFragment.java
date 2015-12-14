@@ -43,7 +43,6 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
 
     public static SignupFragment newInstance(String  sockets) {
-
         SignupFragment f = new SignupFragment();
         return f;
     }
@@ -145,8 +144,9 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                     jsonObject.accumulate(Keys.firstName, firstname.getText().toString());
                     jsonObject.accumulate(Keys.lastName, lastname.getText().toString());
                     jsonObject.accumulate(Keys.mobile, mobileno.getText().toString());
-                    jsonObject.accumulate(Keys.socketId, DealWithItApp.readFromPreferences(getActivity(),Keys.socketId,Constants.DEFAULT_STRING));
+                    jsonObject.accumulate(Keys.socketId, DealWithItApp.readFromPreferences(getActivity(), Keys.socketId, Constants.DEFAULT_STRING));
                     jsonObject.accumulate(Keys.establishmentName, establshname.getText().toString());
+                    jsonObject.accumulate(Keys.token, DealWithItApp.readFromPreferences(getActivity(), Keys.token, Constants.DEFAULT_STRING));
                     if (DealWithItApp.isNetworkAvailable()) {
                         new SignUp().execute(jsonObject.toString());
                     } else {
@@ -196,6 +196,8 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                         if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
                             DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
                             DealWithItApp.saveToPreferences(getActivity(), Keys.id, jsonObject.getString(Keys.id));
+                            DealWithItApp.saveToPreferences(getActivity(), Keys.profileId, jsonObject.getString(Keys.profileId));
+                            DealWithItApp.saveToPreferences(getActivity(), Keys.dealNo, jsonObject.getString(Keys.dealNo));
                             DialogFragment dialogFrag = SuccessDialogFragment.newInstance();
                             dialogFrag.setCancelable(false);
                             dialogFrag.show(getFragmentManager().beginTransaction(), Constants.SUCCESSDIALOG_FRAGMENT);

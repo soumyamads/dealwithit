@@ -145,8 +145,7 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.continues:
-             // validate();
-                sendBasicData();
+              validate();
                 break;
             case R.id.category_layout:
                 getActivity().getSupportFragmentManager().beginTransaction()
@@ -448,7 +447,7 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
             mCallback.setDetailStoke();
             mCallback.sendCategoryData(est_type_text.getText().toString(), jsonObject);
         }catch (Exception e){
-
+            e.printStackTrace();
         }
     }
 

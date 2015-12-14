@@ -33,14 +33,15 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                if(!DealWithItApp.readFromPreferences(getApplicationContext(), Keys.profileId,Constants.DEFAULT_STRING).equals(String.valueOf(Constants.DEFAULT_INT))
-                        && !DealWithItApp.readFromPreferences(getApplicationContext(), Keys.profileId,Constants.DEFAULT_STRING).equals(Constants.DEFAULT_STRING)){
+                if(!DealWithItApp.readFromPreferences(getApplicationContext(), Keys.profileId,Constants.DEFAULT_STRING).equals(String.valueOf(Constants.DEFAULT_INT)) &&
+                        !DealWithItApp.readFromPreferences(getApplicationContext(), Keys.profileId,Constants.DEFAULT_STRING).equals(Constants.DEFAULT_STRING)){
                     Intent intent = new Intent(SplashActivity.this, DealWithItActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
                     SplashActivity.this.finish();
-                } else if(!DealWithItApp.readFromPreferences(getApplicationContext(), Keys.id,Constants.DEFAULT_STRING).equals(Constants.DEFAULT_STRING)){
-                         Intent intent = new Intent(SplashActivity.this, DealWithItActivity.class);
+                } else if(!DealWithItApp.readFromPreferences(getApplicationContext(), Keys.id,Constants.DEFAULT_STRING).equals(Constants.DEFAULT_STRING) &&
+                        DealWithItApp.readFromPreferences(getApplicationContext(), Keys.profileId,Constants.DEFAULT_STRING).equals(String.valueOf(Constants.DEFAULT_INT))){
+                         Intent intent = new Intent(SplashActivity.this, BeforeBusinessProfileActivity.class);
                          startActivity(intent);
                          overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
                          SplashActivity.this.finish();

@@ -153,9 +153,7 @@ public class DrawerFragment extends Fragment {
             case 8:
                 intent = new Intent(getActivity(), SearchDealsActivity.class);
                 startActivity(intent);
-                getActivity().finish();
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
-
                 break;
 
             case 9:
