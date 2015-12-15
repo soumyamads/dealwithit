@@ -27,6 +27,8 @@ public class BeforeBusinessProfileActivity extends AppCompatActivity{
     ActionBarDrawerToggle drawerToggle;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
