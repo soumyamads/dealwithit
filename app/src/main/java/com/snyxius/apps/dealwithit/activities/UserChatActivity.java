@@ -12,6 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
@@ -32,6 +33,8 @@ public class UserChatActivity extends AppCompatActivity implements View.OnClickL
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle drawerToggle;
+
+    RelativeLayout rlTop;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +93,8 @@ public class UserChatActivity extends AppCompatActivity implements View.OnClickL
         cost=(TextView)findViewById(R.id.cost);
         proPic=(CircleImageView)findViewById(R.id.profile_pic);
         editProfile=(ImageView)findViewById(R.id.edit_profile);
+        rlTop=(RelativeLayout)findViewById(R.id.top);
+        rlTop.setOnClickListener(this);
         rightArrow=(ImageView)findViewById(R.id.right_arrow);
         openClose=(ImageView)findViewById(R.id.open_close);
         openClose.setOnClickListener(this);
@@ -104,7 +109,7 @@ public class UserChatActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.open_close){
+        if((v.getId()==R.id.open_close)||(v.getId()==R.id.top)){
             if(isShow){
                 isShow=false;
                 hideDatas();

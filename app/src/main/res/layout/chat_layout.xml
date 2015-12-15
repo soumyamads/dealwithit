@@ -79,8 +79,8 @@
 
             <ImageView
                 android:id="@+id/open_close"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:padding="8dp"
                 android:background="?selectableItemBackground"
                 android:layout_gravity="center_horizontal"
@@ -159,8 +159,8 @@
 
         <ImageView
             android:id="@+id/right_arrow"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:padding="3dp"
             android:src="@drawable/right_arrow_circle"
             android:background="?selectableItemBackground"
@@ -170,8 +170,8 @@
 
         <ImageView
             android:id="@+id/edit_profile"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:padding="2dp"
             android:src="@drawable/edit_icon_circle"
             android:background="?selectableItemBackground"
