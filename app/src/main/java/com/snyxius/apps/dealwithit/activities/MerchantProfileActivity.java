@@ -109,6 +109,8 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
                 mIsTheTitleVisible = false;
             }
         }
+
+
     }
 
     private void handleAlphaOnTitle(float percentage) {
