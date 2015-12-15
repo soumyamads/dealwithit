@@ -38,7 +38,7 @@ public class WarningDialogFragment extends DialogFragment implements View.OnClic
         view.findViewById(R.id.yes).setOnClickListener(this);
         view.findViewById(R.id.no).setOnClickListener(this);
         TextView textView = (TextView)view.findViewById(R.id.textView2);
-        textView.setText("Business Profile is present with current deal");
+        textView.setText("Deal is present with current profile");
         textView.setVisibility(View.VISIBLE);
         return view;
     }
