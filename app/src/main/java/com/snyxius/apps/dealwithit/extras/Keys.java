@@ -11,7 +11,7 @@ public interface Keys {
     public static final String allProfiles = "allProfiles";
     public static final String deal = "deal";
     public static final String businessprofilesIds = "BusinessProfilesIds";
-    public static final String deletebusinessprofilesIds = "buisnessProfileId";
+    public static final String businessprofilesIdss = "buisnessProfileId";
 
     public static final String position = "position";
     public static final String intro = "intro";
@@ -28,6 +28,7 @@ public interface Keys {
     public static final String establishmentDetail = "establishmentDetail";
     public static final String notice = "notice";
     public static final String profile = "profile";
+    public static final String Profile = "Profile";
     public static final String business = "business";
 
     public static final String profileId = "profileId";

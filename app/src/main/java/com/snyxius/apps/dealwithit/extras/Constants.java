@@ -9,7 +9,10 @@ public class Constants {
 
     public static final int LIMIT = 8;
 
-    public static final String SEARCHDEAL_FRAGMENT = "SearchDealFragment";
+    public static final String EditBusinessProfileBasicFragment = "EditBusinessProfileBasicFragment";
+    public static final String EditBusinessProfileDetailFragment = "EditBusinessProfileDetailFragment";
+    public static final String EditBusinessProfileIncomingDealFragment = "EditBusinessProfileIncomingDealFragment";
+    public static final String GRIDIMAGE_FRAGMENT = "GridImageFragment";
     public static final String PROGRESS_FRAGMENT = "ProgressFragment";
     public static final String SUCCESSDIALOG_FRAGMENT = "SuccessDialogFragment";
     public static final String WARNINGDIALOG_FRAGMENT = "WarningDialogFragment";

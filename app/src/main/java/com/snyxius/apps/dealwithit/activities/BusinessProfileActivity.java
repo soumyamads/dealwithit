@@ -105,7 +105,7 @@ public class BusinessProfileActivity extends AppCompatActivity {
                             startActivity(intent);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
                         }else{
-                            DealWithItApp.saveToPreferences(getApplicationContext(),Keys.deletebusinessprofilesIds,estTypeListArray.get(position-Constants.DEFAULT_ONE).getProfile_id());
+                            DealWithItApp.saveToPreferences(getApplicationContext(),Keys.businessprofilesIdss,estTypeListArray.get(position-Constants.DEFAULT_ONE).getProfile_id());
                             Intent intent = new Intent(BusinessProfileActivity.this, EditBusinessProfile.class);
                             startActivity(intent);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);

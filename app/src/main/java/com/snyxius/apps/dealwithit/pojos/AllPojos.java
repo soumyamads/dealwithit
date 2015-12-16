@@ -167,4 +167,35 @@ public class AllPojos {
     String closing_hour = "Closing_Hour";
     String startdealdate = "Start_Deal_Date";
     String enddealdate = "End_Deal_date";
+
+
+
+
+    public String address = "Address";
+    public String description = "Description";
+    public String menu_images = "Menu_Images";
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getMenu_images() {
+        return menu_images;
+    }
+
+    public void setMenu_images(String menu_images) {
+        this.menu_images = menu_images;
+    }
 }

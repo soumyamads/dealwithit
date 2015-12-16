@@ -221,15 +221,7 @@
 
 
 
-            <Button
-                android:id="@+id/save"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/bottom_selector_secondary"
-                android:text="SAVE"
-                android:layout_marginTop="20dp"
-                android:textColor="#ffffff" />
+
 
 
         </LinearLayout>

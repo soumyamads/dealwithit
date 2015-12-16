@@ -57,7 +57,7 @@ public class WarningDialogFragment extends DialogFragment implements View.OnClic
                 try{
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.accumulate(Keys.id,DealWithItApp.readFromPreferences(getActivity(),Keys.id,Constants.DEFAULT_STRING));
-                    jsonObject.accumulate(Keys.deletebusinessprofilesIds,DealWithItApp.readFromPreferences(getActivity(), Keys.deletebusinessprofilesIds, Constants.DEFAULT_STRING));
+                    jsonObject.accumulate(Keys.businessprofilesIdss,DealWithItApp.readFromPreferences(getActivity(), Keys.businessprofilesIdss, Constants.DEFAULT_STRING));
                     jsonObject.accumulate(Keys.deleteFlag,String.valueOf(Constants.DEFAULT_ONE));
                     new DeleteBusinessId().execute(jsonObject.toString());
 

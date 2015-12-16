@@ -38,7 +38,7 @@ public class EditDealProfile extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initialize(){
-        Log.d(Keys.deletebusinessprofilesIds, DealWithItApp.readFromPreferences(getApplicationContext(), Keys.deletebusinessprofilesIds, Constants.DEFAULT_STRING));
+        Log.d(Keys.businessprofilesIdss, DealWithItApp.readFromPreferences(getApplicationContext(), Keys.businessprofilesIdss, Constants.DEFAULT_STRING));
         findViewById(R.id.wrong).setOnClickListener(this);
         findViewById(R.id.right).setOnClickListener(this);
         findViewById(R.id.delete).setOnClickListener(this);
