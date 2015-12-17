@@ -69,7 +69,7 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
     TextView  est_type_text;//,ambience_text,cuisine_text;
     static String s;
     EditText est_name,address,description;
-    DetailStroke mCallback;
+    AddMenuImages mCallback;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     ArrayList<String> arrayImage = new ArrayList<>();
     String uploadPicture = "";
@@ -90,17 +90,20 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
         EditBusinessProfileBasicFragment f = new EditBusinessProfileBasicFragment();
         return f;
     }
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        // Make sure that container activity implement the callback interface
-//        try {
-//            mCallback = (DetailStroke)activity;
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException(activity.toString()
-//                    + " must implement DataPassListener");
-//        }
-//    }
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mCallback = (AddMenuImages) activity;
+        // Make sure that container activity implement the callback interface
+        try {
+
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement DataPassListener");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -161,7 +164,7 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
         uploadPicture = arrayBasics.get(Constants.DEFAULT_INT).getCover_image();
         BitmapDrawable ob = new BitmapDrawable(getActivity().getResources(), DealWithItApp.base64ToBitmap(arrayBasics.get(Constants.DEFAULT_INT).getCover_image()));
         cover_image.setImageDrawable(ob);
-        initializeGrid();
+       // initializeGrid();
     }
 
     private void initializeGrid()
@@ -173,7 +176,7 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.continues:
-              validate();
+                validateBusiness();
                 break;
             case R.id.category_layout:
                 getActivity().getSupportFragmentManager().beginTransaction()
@@ -185,7 +188,7 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
             case R.id.button_clear:
                 mAutocompleteView.setText("");
                 break;
-            case R.id.upload_menu_layout:
+            case R.id.add_menu:
                 new Picker.Builder(getContext(),this,R.style.MIP_theme)
                         .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
                         .setLimit(6)
@@ -325,6 +328,7 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
             arrayImage.add(encoded);
         }
 
+      mCallback.addItems(arrayImage);
 
 
     }
@@ -441,10 +445,12 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
 
     }
 
-    public void validate(){
+    public int validateBusiness(){
         if(est_name.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Establishment Name");
+            return Constants.DEFAULT_ONE;
+           // DealWithItApp.showAToast("Please select the Establishment Name");
         }else if(est_type_text.getText().toString().isEmpty()){
+
             DealWithItApp.showAToast("Please select the Category");
         }else if(address.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select the Location Name");
@@ -459,11 +465,13 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
             DealWithItApp.showAToast("Please cover picture first");
         }
         else{
-            sendBasicData();
+            return 2;
+            //sendBasicData();
         }
+        return Constants.DEFAULT_INT;
     }
 
-    private void sendBasicData(){
+    public  JSONObject sendBasicData(){
         try{
             JSONObject jsonObject = new JSONObject();
             jsonObject.accumulate(Keys.business_name,est_name.getText().toString());
@@ -473,14 +481,16 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
             jsonObject.accumulate(Keys.location_name, address.getText().toString());
             JSONArray array = new JSONArray(arrayImage);
             jsonObject.accumulate(Keys.menu_images,array);
-            jsonObject.accumulate(Keys.cover_image,uploadPicture);
-            mCallback.setDetailStoke();
-            mCallback.sendCategoryData(est_type_text.getText().toString(), jsonObject);
+            jsonObject.accumulate(Keys.cover_image, uploadPicture);
+            return jsonObject;
         }catch (Exception e){
             e.printStackTrace();
         }
+        return null;
     }
 
-
+    public interface AddMenuImages{
+        void addItems(ArrayList<String> arrayList);
+    }
 
 }

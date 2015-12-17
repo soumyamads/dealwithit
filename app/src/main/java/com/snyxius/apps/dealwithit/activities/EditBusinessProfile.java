@@ -36,6 +36,7 @@ import com.snyxius.apps.dealwithit.fragments.DrawerFragment;
 import com.snyxius.apps.dealwithit.fragments.EditBusinessProfileBasicFragment;
 import com.snyxius.apps.dealwithit.fragments.EditBusinessProfileDetailFragment;
 import com.snyxius.apps.dealwithit.fragments.EditBusinessProfileIncomingDealFragment;
+import com.snyxius.apps.dealwithit.fragments.ShowImageGrid;
 import com.snyxius.apps.dealwithit.fragments.SuccessDialogFragment;
 import com.snyxius.apps.dealwithit.fragments.WarningDialogFragment;
 import com.snyxius.apps.dealwithit.pojos.AllPojos;
@@ -48,7 +49,7 @@ import java.util.ArrayList;
 /**
  * Created by amanjham on 11/12/15 AD.
  */
-public class EditBusinessProfile extends AppCompatActivity implements View.OnClickListener, CategoryFragment.DataPassListener{
+public class EditBusinessProfile extends AppCompatActivity implements View.OnClickListener, CategoryFragment.DataPassListener,ShowImageGrid.DeletePosition,EditBusinessProfileBasicFragment.AddMenuImages{
 
 
     private Dialog dialogs;
@@ -85,6 +86,7 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
         findViewById(R.id.wrong).setOnClickListener(this);
         findViewById(R.id.right).setOnClickListener(this);
         findViewById(R.id.delete).setOnClickListener(this);
+        findViewById(R.id.save).setOnClickListener(this);
     }
 
 
@@ -119,6 +121,11 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
             case R.id.no:
                 dialogs.cancel();
                 break;
+            case R.id.save:
+                EditBusinessProfileBasicFragment f = (EditBusinessProfileBasicFragment) getSupportFragmentManager().findFragmentByTag(Constants.EditBusinessProfileBasicFragment);
+                int i = f.validateBusiness();
+                Log.d("POSITON",String.valueOf(i));
+                break;
         }
     }
 
@@ -143,6 +150,20 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void removeItem(int position) {
+        arrayMenuImages.remove(position);
+        ShowImageGrid f = (ShowImageGrid) getSupportFragmentManager().findFragmentByTag(Constants.GRIDIMAGE_FRAGMENT);
+        f.removeItems(position);
+    }
+
+    @Override
+    public void addItems(ArrayList<String> arrayList) {
+        arrayMenuImages.addAll(arrayList);
+        ShowImageGrid f = (ShowImageGrid) getSupportFragmentManager().findFragmentByTag(Constants.GRIDIMAGE_FRAGMENT);
+        f.addItems(arrayMenuImages);
     }
 
 
@@ -201,9 +222,12 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
                           arrayBasic.add(pojos);
 
                         getSupportFragmentManager().beginTransaction()
-                                .add(R.id.edit_business_basiccontainer, new EditBusinessProfileBasicFragment().newInstance(arrayBasic,arrayMenuImages), Constants.EditBusinessProfileBasicFragment)
+                                .add(R.id.edit_business_basiccontainer, new EditBusinessProfileBasicFragment().newInstance(arrayBasic, arrayMenuImages), Constants.EditBusinessProfileBasicFragment)
                                 .commit();
 
+                        getSupportFragmentManager().beginTransaction()
+                                .add(R.id.gridcontainer, new ShowImageGrid().newInstance(arrayMenuImages), Constants.GRIDIMAGE_FRAGMENT)
+                                .commit();
                         getSupportFragmentManager().beginTransaction()
                                 .add(R.id.edit_business_profile_detailscontainer, new EditBusinessProfileDetailFragment(), Constants.EditBusinessProfileDetailFragment)
                                 .commit();
