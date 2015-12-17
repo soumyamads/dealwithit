@@ -114,7 +114,29 @@ Response
 
     public static final String getUserProfile = baseUrl  + "merchants/getUserProfile";
 
+    /*{  "notice":
+        {    "profile":
+            {      "firstName": "aaa",
+                    "lastName": "aaa",
+                    "establishmentName": "aa",
+                    "email": "a@b.com",
+                    "mobile": "1234231232",
+                    "userImage": null
+            }
+        },
+        "status": "Success"
+    }*/
+
     public static final String updateUserProfile = baseUrl  + "merchants/updateUserProfile";
+
+    /*{
+            "userId":"563bcf4c1d76b3ac42d36fd9",
+            "firstName": "aaa",
+            "lastName": "aaa",
+            "establishmentName": "Airtel",
+            "email": "a@b.com",
+            "mobile": "1234231232"
+    }*/
 
     public static final String updateBuisnessProf = baseUrl  + "merchants/updateBuisnessProf";
 

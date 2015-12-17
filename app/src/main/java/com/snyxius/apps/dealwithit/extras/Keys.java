@@ -24,6 +24,8 @@ public interface Keys {
     public static final String firstName = "firstName";
     public static final String lastName = "lastName";
     public static final String mobile = "mobile";
+
+    public static final String userImage = "userImage";
     public static final String establishmentName = "establishmentName";
     public static final String establishmentDetail = "establishmentDetail";
     public static final String notice = "notice";

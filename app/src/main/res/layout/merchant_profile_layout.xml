@@ -22,7 +22,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:ignore="RtlHardcoded"
-    android:background="#CCCCCC">
+    android:background="#FFFFFF">
+
 
 <android.support.design.widget.CoordinatorLayout
     android:id="@+id/main_content"
@@ -79,6 +80,17 @@
     </android.support.design.widget.AppBarLayout>
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/pBar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -89,7 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="#CCCCCC"
+            android:background="#FFFFFF"
             android:paddingTop="54dp">
 
 
@@ -102,16 +114,44 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="NAME"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                        android:text="FIRST NAME"
+                        android:textStyle="bold"/>
 
                     <EditText
+                        android:id="@+id/user_firstname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Nihas Nizar" />
+                        android:text="Nihas Nizar"
+                        android:layout_marginTop="5dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:background="@null"/>
 
                 </LinearLayout>
 
+
+            <LinearLayout
+                style="@style/Widget.CardContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="LAST NAME"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/user_lastname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nihas Nizar"
+                    android:layout_marginTop="5dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:background="@null" />
+
+            </LinearLayout>
 
 
 
@@ -124,12 +164,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="NUMBER"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                        android:textStyle="bold" />
 
                     <EditText
+                        android:id="@+id/user_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="+919447778669" />
+                        android:text="+919447778669"
+                        android:layout_marginTop="5dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:background="@null"/>
 
                 </LinearLayout>
 
@@ -145,12 +190,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="DESIGNATION"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                        android:textStyle="bold" />
 
                     <EditText
+                        android:id="@+id/user_designation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Android Developer" />
+                        android:text="Android Developer"
+                        android:layout_marginTop="5dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:background="@null"/>
 
                 </LinearLayout>
 
@@ -165,17 +215,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="EMAIL ID"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                        android:textStyle="bold" />
 
                     <EditText
+                        android:id="@+id/user_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="nihas@snyxius.com" />
+                        android:text="nihas@snyxius.com"
+                        android:layout_marginTop="5dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:background="@null"/>
 
                 </LinearLayout>
 
             <Button
-                android:id="@+id/signup"
+                android:id="@+id/edit_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="EDIT"
@@ -239,7 +294,9 @@
         android:layout_marginTop="-70dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/proImage"
         android:layout_width="@dimen/image_width"
         android:layout_height="@dimen/image_width"
         android:src="@drawable/pro"
@@ -252,5 +309,7 @@
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
+
+
 
     </LinearLayout>
