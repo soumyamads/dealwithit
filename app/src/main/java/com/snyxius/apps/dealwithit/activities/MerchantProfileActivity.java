@@ -1,28 +1,62 @@
 package com.snyxius.apps.dealwithit.activities;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
 import android.view.animation.ScaleAnimation;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.api.WebRequest;
+import com.snyxius.apps.dealwithit.api.WebServices;
+import com.snyxius.apps.dealwithit.applications.DealWithItApp;
+import com.snyxius.apps.dealwithit.extras.Constants;
+import com.snyxius.apps.dealwithit.extras.Keys;
+import com.snyxius.apps.dealwithit.pojos.AllPojos;
+
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by snyxius on 11/12/2015.
  */
-public class MerchantProfileActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
+public class MerchantProfileActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener, View.OnClickListener {
 
     private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR  = 0.9f;
     private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS     = 0.3f;
@@ -37,7 +71,14 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
     private AppBarLayout mAppBarLayout;
     private ImageView mImageparallax;
     private FrameLayout mFrameParallax;
+    private CoordinatorLayout cordLayout;
     private Toolbar mToolbar;
+    ProgressDialog pDialog;
+    EditText userFirstName,userLastName,userNumber,userEmail,userEstName;
+    Button editButton;
+    CircleImageView proImage;
+    String uploadPicture = "";
+    int REQUEST_CAMERA = 0, SELECT_FILE = 1;
 //    ImageView proImage;
 
     @Override
@@ -59,6 +100,12 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
 
 
         mAppBarLayout.addOnOffsetChangedListener(this);
+
+        if (DealWithItApp.isNetworkAvailable()) {
+            new getProfile().execute(WebServices.getUserProfile);
+        }else{
+
+        }
     }
 
     private void bindActivity() {
@@ -69,6 +116,19 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
         mImageparallax  = (ImageView) findViewById(R.id.backdrop);
         mFrameParallax  = (FrameLayout) findViewById(R.id.main_framelayout_title);
         mImageLayout=(RelativeLayout)findViewById(R.id.imageLayout);
+        cordLayout=(CoordinatorLayout)findViewById(R.id.main_content);
+
+        userFirstName=(EditText)findViewById(R.id.user_firstname);
+        userLastName=(EditText)findViewById(R.id.user_lastname);
+        userEmail=(EditText)findViewById(R.id.user_email);
+        userNumber=(EditText)findViewById(R.id.user_number);
+        userEstName=(EditText)findViewById(R.id.user_designation);
+
+        editButton=(Button)findViewById(R.id.edit_profile);
+        editButton.setOnClickListener(this);
+
+        proImage=(CircleImageView)findViewById(R.id.proImage);
+        proImage.setOnClickListener(this);
     }
 
     private void initParallaxValues() {
@@ -83,6 +143,268 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
 
         mImageparallax.setLayoutParams(petDetailsLp);
         mFrameParallax.setLayoutParams(petBackgroundLp);
+
+        pDialog=new ProgressDialog(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.edit_profile:
+                if (DealWithItApp.isNetworkAvailable()) {
+                    new setProfile().execute(WebServices.updateUserProfile);
+                }else{
+
+                }
+                break;
+            case R.id.proImage:
+                selectImage();
+                break;
+        }
+    }
+
+    private void selectImage() {
+        final CharSequence[] items = {"Take Photo", "Choose from Library", "Cancel"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Add Photo!");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (items[item].equals("Take Photo")) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, REQUEST_CAMERA);
+                } else if (items[item].equals("Choose from Library")) {
+                    Intent intent = new Intent(
+                            Intent.ACTION_PICK,
+                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType("image/*");
+                    startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
+                } else if (items[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == SELECT_FILE)
+                onSelectFromGalleryResult(data);
+            else if (requestCode == REQUEST_CAMERA)
+                onCaptureImageResult(data);
+        }
+    }
+
+    private void onCaptureImageResult(Intent data) {
+        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        sendImages(thumbnail);
+        File destination = new File(Environment.getExternalStorageDirectory(),
+                System.currentTimeMillis() + ".jpg");
+
+        FileOutputStream fo;
+        try {
+            destination.createNewFile();
+            fo = new FileOutputStream(destination);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    @SuppressWarnings("deprecation")
+    private void onSelectFromGalleryResult(Intent data) {
+        Uri selectedImageUri = data.getData();
+        String[] projection = { MediaStore.MediaColumns.DATA };
+        Cursor cursor = managedQuery(selectedImageUri, projection, null, null,
+                null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+        cursor.moveToFirst();
+
+        String selectedImagePath = cursor.getString(column_index);
+
+        Log.d("selectPath", selectedImagePath);
+
+        Bitmap bm;
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(selectedImagePath, options);
+        final int REQUIRED_SIZE = 200;
+        int scale = 1;
+        while (options.outWidth / scale / 2 >= REQUIRED_SIZE
+                && options.outHeight / scale / 2 >= REQUIRED_SIZE)
+            scale *= 2;
+        options.inSampleSize = scale;
+        options.inJustDecodeBounds = false;
+        bm = BitmapFactory.decodeFile(selectedImagePath, options);
+        sendImages(bm);
+
+
+    }
+    private void sendImages(Bitmap bitmaps){
+        proImage.setImageBitmap(bitmaps);
+        int nh = (int) ( bitmaps.getHeight() * (256.0 / bitmaps.getWidth()) );
+        Bitmap scaled = Bitmap.createScaledBitmap(bitmaps, 256, nh, true);
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        scaled.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        uploadPicture = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+    }
+
+
+
+    private class getProfile extends AsyncTask<String, Void, JSONObject> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            cordLayout.setVisibility(View.GONE);
+            pDialog.setMessage("Loading..");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... params) {
+            JSONObject jsonObject = null;
+            try {
+                JSONObject jobj = new JSONObject();
+                jobj.accumulate(Keys.id,DealWithItApp.readFromPreferences(getApplicationContext(), Keys.id,""));
+                return WebRequest.postData(String.valueOf(jobj), params[0]);
+            }catch (Exception e){
+
+                e.printStackTrace();
+            }
+            return jsonObject;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            super.onPostExecute(jsonObject);
+            pDialog.dismiss();
+            cordLayout.setVisibility(View.VISIBLE);
+            onDone(jsonObject);
+        }
+    }
+
+
+    private void onDone(JSONObject jsonObject){
+        try {
+            if(jsonObject != null) {
+                if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
+                    JSONObject object = jsonObject.getJSONObject(Keys.notice);
+                    JSONObject object2 = object.getJSONObject(Keys.profile);
+                    if (object2 != null) {
+
+                            userFirstName.setText(object2.getString(Keys.firstName));
+                        userLastName.setText(object2.getString(Keys.lastName));
+                            userNumber.setText(object2.getString(Keys.mobile));
+                            userEmail.setText(object2.getString(Keys.email));
+                        userEstName.setText(object2.getString(Keys.establishmentName));
+                        if(object2.getString(Keys.userImage)!=null)
+                        proImage.setImageBitmap(DealWithItApp.base64ToBitmap(object2.getString(Keys.userImage)));
+                        else
+                            proImage.setImageResource(R.drawable.null_circle_image);
+                    }
+                } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
+                    DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+                } else {
+                    DealWithItApp.showAToast("Something Went Wrong.");
+                }
+            }else{
+                DealWithItApp.showAToast("Something Went Wrong.");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+
+    private class setProfile extends AsyncTask<String, Void, JSONObject> {
+
+        String newFname,newLname,newEstName,newEmail,newMobile;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog.setMessage("Updating..");
+            pDialog.setCancelable(false);
+            pDialog.show();
+            cordLayout.setVisibility(View.GONE);
+            newFname=userFirstName.getText().toString().trim();
+            newLname=userLastName.getText().toString().trim();
+            newEstName=userEstName.getText().toString().trim();
+            newEmail=userEmail.getText().toString().trim();
+            newMobile=userNumber.getText().toString().trim();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... params) {
+            JSONObject jsonObject = null;
+            try {
+                JSONObject jobj = new JSONObject();
+                jobj.accumulate(Keys.id,DealWithItApp.readFromPreferences(getApplicationContext(), Keys.id,""));
+                jobj.accumulate(Keys.firstName,newFname);
+                jobj.accumulate(Keys.lastName,newLname);
+                jobj.accumulate(Keys.establishmentName,newEstName);
+                jobj.accumulate(Keys.email,newEmail);
+                jobj.accumulate(Keys.mobile,newMobile);
+                jobj.accumulate(Keys.userImage,uploadPicture);
+                return WebRequest.postData(String.valueOf(jobj), params[0]);
+            }catch (Exception e){
+
+                e.printStackTrace();
+            }
+            return jsonObject;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            super.onPostExecute(jsonObject);
+            pDialog.dismiss();
+            cordLayout.setVisibility(View.VISIBLE);
+            onDone2(jsonObject);
+        }
+    }
+
+    private void onDone2(JSONObject jsonObject){
+        try {
+            if(jsonObject != null) {
+                if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
+//                    JSONObject object = jsonObject.getJSONObject(Keys.notice);
+                    DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+
+
+
+                } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
+                    DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+//                    emptytext.setVisibility(View.VISIBLE);
+                } else {
+                    DealWithItApp.showAToast("Something Went Wrong.");
+                }
+            }else{
+                DealWithItApp.showAToast("Something Went Wrong.");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public void validate(){
+
     }
 
     @Override
