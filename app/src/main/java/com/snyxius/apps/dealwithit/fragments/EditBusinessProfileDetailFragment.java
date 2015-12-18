@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,9 @@ import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
+import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
+import com.snyxius.apps.dealwithit.pojos.AllPojos;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
@@ -36,41 +39,45 @@ public class EditBusinessProfileDetailFragment extends Fragment implements View.
 
 
 
-    DealStroke mDealCallback;
+    //DealStroke mDealCallback;
     EditText max_seat;
     PassData passData;
     TextView slot1_start_time_text,slot1_end_time_text,ambience_text,cuisine_text,type_text;
     TextView slot2_start_time_text,slot2_end_time_text;
     private int position = 0;
-
-    ArrayList<String> arrayListAmbience = new ArrayList<>();
-    ArrayList<String> arrayListCuisine = new ArrayList<>();
-    ArrayList<String> arrayListType = new ArrayList<>();
+    static  ArrayList<AllPojos> arrayDetails = new ArrayList<>();
+    static  ArrayList<String> arrayListAmbience = new ArrayList<>();
+    static  ArrayList<String> arrayListCuisine = new ArrayList<>();
+    static  ArrayList<String> arrayListType = new ArrayList<>();
 
 
 
     static  JSONObject jsonObject = new JSONObject();
 
-    public static EditBusinessProfileDetailFragment newInstance(JSONObject Object) {
-        jsonObject = Object;
+    public static EditBusinessProfileDetailFragment newInstance(ArrayList<AllPojos> Object,ArrayList<String> arrayCuisine,
+    ArrayList<String> arrayAmbience,ArrayList<String> arrayType) {
+        arrayDetails = Object;
+        arrayListType = arrayType;
+        arrayListAmbience = arrayAmbience;
+        arrayListCuisine = arrayCuisine;
         EditBusinessProfileDetailFragment f = new EditBusinessProfileDetailFragment();
         return f;
     }
 
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        // Make sure that container activity implement the callback interface
-//        try {
-//
-//                  mDealCallback = (DealStroke) activity;
-//                  passData = (PassData) activity;
-//
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException(activity.toString()
-//                    + " must implement DataPassListener");
-//        }
-//    }
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        // Make sure that container activity implement the callback interface
+        try {
+
+
+                  passData = (PassData) activity;
+
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement DataPassListener");
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,9 +95,7 @@ public class EditBusinessProfileDetailFragment extends Fragment implements View.
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       // initialise(view);
-
-        Log.d("JSONCategory",jsonObject.toString());
+        initialise(view);
     }
 
     private void initialise(View view){
@@ -111,7 +116,15 @@ public class EditBusinessProfileDetailFragment extends Fragment implements View.
 
         max_seat = (EditText)view.findViewById(R.id.max_seat);
 
-        view.findViewById(R.id.continue_detail).setOnClickListener(this);
+        slot1_end_time_text.setText(arrayDetails.get(Constants.DEFAULT_INT).getTiming_slot_1_end());
+        slot1_start_time_text.setText(arrayDetails.get(Constants.DEFAULT_INT).getTiming_slot_1_start());
+        slot2_end_time_text.setText(arrayDetails.get(Constants.DEFAULT_INT).getTiming_slot_2_end());
+        slot2_start_time_text.setText(arrayDetails.get(Constants.DEFAULT_INT).getTiming_slot_2_start());
+
+        max_seat.setText(arrayDetails.get(Constants.DEFAULT_INT).getMax_seating());
+
+
+
         view.findViewById(R.id.cuisine_layout).setOnClickListener(this);
         view.findViewById(R.id.ambience_layout).setOnClickListener(this);
         view.findViewById(R.id.type_layout).setOnClickListener(this);
@@ -120,16 +133,56 @@ public class EditBusinessProfileDetailFragment extends Fragment implements View.
         view.findViewById(R.id.slot1_end_time_layout).setOnClickListener(this);
         view.findViewById(R.id.slot2_start_time_layout).setOnClickListener(this);
         view.findViewById(R.id.slot2_end_time_layout).setOnClickListener(this);
+        settingTypeData();
+        settingAmbienceData();
+        settingCuisineData();
+    }
 
+    private void settingTypeData() {
+        StringBuffer sb = new StringBuffer();
 
+        for(int i=0; i<arrayListType.size();i++){
+
+            sb.append(arrayListType.get(i));
+            if(i<arrayListType.size()-1) {
+                sb.append(",");
+            }
+
+        }
+        String s = sb.toString().trim();
+        type_text.setText(s);
+    }
+    private void settingCuisineData() {
+        StringBuffer sb = new StringBuffer();
+        for(int i=0; i<arrayListCuisine.size();i++){
+            sb.append(arrayListCuisine.get(i));
+            if(i<arrayListCuisine.size()-1) {
+                sb.append(",");
+            }
+
+        }
+        String s = sb.toString().trim();
+        cuisine_text.setText(s);
+    }
+
+    private void settingAmbienceData() {
+        StringBuffer sb = new StringBuffer();
+        for(int i=0; i<arrayListAmbience.size();i++){
+            sb.append(arrayListAmbience.get(i));
+
+            if(i<arrayListAmbience.size()-1) {
+                sb.append(",");
+            }
+
+        }
+        String s = sb.toString().trim();
+        ambience_text.setText(s);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.continue_detail:
-                validate();
-                break;
+
             case R.id.type_layout:
                 passData.setTypeData(type_text.getText().toString());
                 break;
@@ -237,32 +290,42 @@ public class EditBusinessProfileDetailFragment extends Fragment implements View.
     }
 
 
-    public void validate(){
+    public int validate(){
         if(type_text.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Type");
+            return Constants.INT_ONE;
+
         }else if(cuisine_text.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Cuisine");
+            return Constants.INT_TWO;
+
         }else if(ambience_text.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Ambience");
+            return Constants.INT_THREE;
+
         }else if(slot1_start_time_text.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select First start Hour Slot");
+
+            return Constants.INT_FOUR;
         }else if(slot1_end_time_text.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select First end Hour Slot");
+            return Constants.INT_FIVE;
+
         }else if(slot2_start_time_text.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select Second start Hour Slot");
+            return Constants.INT_SIX;
+
         }else if(slot2_end_time_text.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select Second end Hour Slot");
+            return Constants.INT_SEVEN;
+
         }else if(max_seat.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Maximum Seatings");
+            return Constants.INT_EIGHT;
+
        }
         else{
-            sendBasicData();
+            return Constants.INT_NINE;
+
         }
     }
 
 
-    private void sendBasicData(){
+    public JSONObject sendBasicData(){
         try{
+
             JSONArray arrayType = new JSONArray(arrayListType);
             JSONArray arrayCuisine = new JSONArray(arrayListCuisine);
             JSONArray arrayAmbience = new JSONArray(arrayListAmbience);
@@ -272,13 +335,13 @@ public class EditBusinessProfileDetailFragment extends Fragment implements View.
             jsonObject.accumulate(Keys.timing_slot_1_start, slot1_start_time_text.getText().toString());
             jsonObject.accumulate(Keys.timing_slot_1_end, slot1_end_time_text.getText().toString());
             jsonObject.accumulate(Keys.timing_slot_2_start,slot2_start_time_text.getText().toString());
-            jsonObject.accumulate(Keys.timing_slot_2_end,slot2_end_time_text.getText().toString());
+            jsonObject.accumulate(Keys.timing_slot_2_end, slot2_end_time_text.getText().toString());
             jsonObject.accumulate(Keys.max_seating, max_seat.getText().toString());
-            mDealCallback.setDealStoke();
-            mDealCallback.sendDetailsCategoryData(jsonObject);
+            return  jsonObject;
         }catch (Exception e){
             e.printStackTrace();
         }
+        return null;
     }
 
 }

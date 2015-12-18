@@ -156,10 +156,11 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
         est_name = (EditText)view.findViewById(R.id.est_name);
         est_name.setText(arrayBasics.get(Constants.DEFAULT_INT).getBusiness_name().toString());
         address = (EditText)view.findViewById(R.id.location_name);
-        address.setText(arrayBasics.get(Constants.DEFAULT_INT).getAddress().toString());
+
+        address.setText(arrayBasics.get(Constants.DEFAULT_INT).getLocation_name().toString());
         description = (EditText)view.findViewById(R.id.description);
         description.setText(arrayBasics.get(Constants.DEFAULT_INT).getDescription().toString());
-        mAutocompleteView.setText(arrayBasics.get(Constants.DEFAULT_INT).getLocation_name().toString());
+        mAutocompleteView.setText(arrayBasics.get(Constants.DEFAULT_INT).getAddress().toString());
         cover_image = (ImageView)view.findViewById(R.id.cover_image);
         uploadPicture = arrayBasics.get(Constants.DEFAULT_INT).getCover_image();
         BitmapDrawable ob = new BitmapDrawable(getActivity().getResources(), DealWithItApp.base64ToBitmap(arrayBasics.get(Constants.DEFAULT_INT).getCover_image()));
@@ -447,28 +448,32 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
 
     public int validateBusiness(){
         if(est_name.getText().toString().isEmpty()){
-            return Constants.DEFAULT_ONE;
+            return Constants.INT_ONE;
            // DealWithItApp.showAToast("Please select the Establishment Name");
         }else if(est_type_text.getText().toString().isEmpty()){
-
-            DealWithItApp.showAToast("Please select the Category");
+            return Constants.INT_TWO;
+            //DealWithItApp.showAToast("Please select the Category");
         }else if(address.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Location Name");
+            return Constants.INT_THREE;
+           // DealWithItApp.showAToast("Please select the Location Name");
         }
         else if(mAutocompleteView.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Address");
+            return Constants.INT_FOUR;
+           // DealWithItApp.showAToast("Please select the Address");
         }else if(description.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Description");
+            return Constants.INT_FIVE;
+           // DealWithItApp.showAToast("Please select the Description");
         }else if(arrayImage.isEmpty()){
-            DealWithItApp.showAToast("Please upload menu first");
+          return Constants.INT_SIX;
+           // DealWithItApp.showAToast("Please upload menu first");
         }else if(uploadPicture.equals("")){
-            DealWithItApp.showAToast("Please cover picture first");
+            return Constants.INT_SEVEN;
+           // DealWithItApp.showAToast("Please cover picture first");
         }
         else{
-            return 2;
+            return Constants.INT_EIGHT;
             //sendBasicData();
         }
-        return Constants.DEFAULT_INT;
     }
 
     public  JSONObject sendBasicData(){

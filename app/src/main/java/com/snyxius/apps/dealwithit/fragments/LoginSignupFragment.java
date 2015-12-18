@@ -59,7 +59,7 @@ public class LoginSignupFragment extends Fragment implements View.OnClickListene
             case R.id.login:
                 intent = new Intent(getActivity(),LoginSignupActivity.class);
                 DealWithItApp.saveToPreferences(getActivity(),Keys.intro,true);
-                intent.putExtra(Keys.position,Constants.DEFAULT_ONE);
+                intent.putExtra(Keys.position,Constants.INT_ONE);
                 startActivity(intent);
                 getActivity().finish();
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
