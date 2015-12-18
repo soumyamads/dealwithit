@@ -254,4 +254,51 @@ public class AllPojos {
     public void setUserImage(String userImage) {
         this.userImage = userImage;
     }
+
+
+    public String timing_slot_1_start = "Timing_Slot_1_Start";
+    public String timing_slot_2_start = "Timing_Slot_2_Start";
+    public String timing_slot_1_end = "Timing_Slot_1_End";
+    public String timing_slot_2_end = "Timing_Slot_2_End";
+    public String max_seating = "Maximum_Seating";
+
+    public String getTiming_slot_1_start() {
+        return timing_slot_1_start;
+    }
+
+    public void setTiming_slot_1_start(String timing_slot_1_start) {
+        this.timing_slot_1_start = timing_slot_1_start;
+    }
+
+    public String getTiming_slot_2_start() {
+        return timing_slot_2_start;
+    }
+
+    public void setTiming_slot_2_start(String timing_slot_2_start) {
+        this.timing_slot_2_start = timing_slot_2_start;
+    }
+
+    public String getTiming_slot_1_end() {
+        return timing_slot_1_end;
+    }
+
+    public void setTiming_slot_1_end(String timing_slot_1_end) {
+        this.timing_slot_1_end = timing_slot_1_end;
+    }
+
+    public String getTiming_slot_2_end() {
+        return timing_slot_2_end;
+    }
+
+    public void setTiming_slot_2_end(String timing_slot_2_end) {
+        this.timing_slot_2_end = timing_slot_2_end;
+    }
+
+    public String getMax_seating() {
+        return max_seating;
+    }
+
+    public void setMax_seating(String max_seating) {
+        this.max_seating = max_seating;
+    }
 }

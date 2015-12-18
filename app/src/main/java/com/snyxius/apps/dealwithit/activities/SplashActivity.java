@@ -48,7 +48,7 @@ public class SplashActivity extends AppCompatActivity {
                        } else if(DealWithItApp.readFromPreferences(getApplicationContext(), Keys.intro,false)) {
                         Intent intent = new Intent(SplashActivity.this, LoginSignupActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        intent.putExtra(Keys.position, Constants.DEFAULT_ONE);
+                        intent.putExtra(Keys.position, Constants.INT_ONE);
                         startActivity(intent);
                         SplashActivity.this.finish();
                         overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);

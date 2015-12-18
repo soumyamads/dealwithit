@@ -121,22 +121,15 @@ public class ShowImageGrid extends Fragment {
                 View view = convertView;
                 if (view == null) {
                     view = inflater.inflate(R.layout.showitemgridimage, parent, false);
+                    Animation shake = AnimationUtils.loadAnimation(mContext, R.anim.shake);
+                    view.setAnimation(shake);
                     holder = new ViewHolder();
                     assert view != null;
                     holder.imageView = (ImageView) view.findViewById(R.id.image);
                     holder.cross = (ImageView) view.findViewById(R.id.delete);
-                    holder.cross.setVisibility(View.GONE);
+                    holder.cross.setVisibility(View.VISIBLE);
                     holder.progressBar = (ProgressBar) view.findViewById(R.id.progress);
                     view.setTag(holder);
-                    view.setOnLongClickListener(new View.OnLongClickListener() {
-                        @Override
-                        public boolean onLongClick(View v) {
-                            Animation shake = AnimationUtils.loadAnimation(mContext, R.anim.shake);
-                            v.setAnimation(shake);
-                            holder.cross.setVisibility(View.VISIBLE);
-                            return false;
-                        }
-                    });
 
                 } else {
                     holder = (ViewHolder) view.getTag();
@@ -144,7 +137,6 @@ public class ShowImageGrid extends Fragment {
 
                 BitmapDrawable ob = new BitmapDrawable(mContext.getResources(), DealWithItApp.base64ToBitmap(arrayImages.get(position)));
                 holder.imageView.setImageDrawable(ob);
-
 
                 holder.cross.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -154,6 +146,8 @@ public class ShowImageGrid extends Fragment {
                 });
                 return view;
             }
+
+
         }
 
         static class ViewHolder {
@@ -178,5 +172,7 @@ public class ShowImageGrid extends Fragment {
 
         adapter.notifyDataSetChanged();
     }
+
+
 
 }

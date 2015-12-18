@@ -28,16 +28,20 @@ import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileBasicFragment;
+import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileDetailFragment;
+import com.snyxius.apps.dealwithit.fragments.AmbienceTypeFragment;
 import com.snyxius.apps.dealwithit.fragments.CategoryFragment;
 import com.snyxius.apps.dealwithit.fragments.CreateDealStepOneFragment;
 import com.snyxius.apps.dealwithit.fragments.CreateDealStepThreeFragment;
 import com.snyxius.apps.dealwithit.fragments.CreateDealStepTwoFragment;
+import com.snyxius.apps.dealwithit.fragments.CuisineTypeFragment;
 import com.snyxius.apps.dealwithit.fragments.DrawerFragment;
 import com.snyxius.apps.dealwithit.fragments.EditBusinessProfileBasicFragment;
 import com.snyxius.apps.dealwithit.fragments.EditBusinessProfileDetailFragment;
 import com.snyxius.apps.dealwithit.fragments.EditBusinessProfileIncomingDealFragment;
 import com.snyxius.apps.dealwithit.fragments.ShowImageGrid;
 import com.snyxius.apps.dealwithit.fragments.SuccessDialogFragment;
+import com.snyxius.apps.dealwithit.fragments.TypeFragment;
 import com.snyxius.apps.dealwithit.fragments.WarningDialogFragment;
 import com.snyxius.apps.dealwithit.pojos.AllPojos;
 
@@ -49,13 +53,18 @@ import java.util.ArrayList;
 /**
  * Created by amanjham on 11/12/15 AD.
  */
-public class EditBusinessProfile extends AppCompatActivity implements View.OnClickListener, CategoryFragment.DataPassListener,ShowImageGrid.DeletePosition,EditBusinessProfileBasicFragment.AddMenuImages{
+public class EditBusinessProfile extends AppCompatActivity implements View.OnClickListener, CategoryFragment.DataPassListener,ShowImageGrid.DeletePosition,EditBusinessProfileBasicFragment.AddMenuImages,
+        EditBusinessProfileDetailFragment.PassData,TypeFragment.DataPassListener,
+        AmbienceTypeFragment.DataPassListener,CuisineTypeFragment.DataPassListener{
 
 
     private Dialog dialogs;
     private ArrayList<AllPojos> arrayBasic;
     private ArrayList<AllPojos> arrayDetails;
     private ArrayList<String> arrayMenuImages;
+    private ArrayList<String> arraytype;
+    private ArrayList<String> arrayCuisine;
+    private ArrayList<String> arrayAmbiance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,12 +131,84 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
                 dialogs.cancel();
                 break;
             case R.id.save:
-                EditBusinessProfileBasicFragment f = (EditBusinessProfileBasicFragment) getSupportFragmentManager().findFragmentByTag(Constants.EditBusinessProfileBasicFragment);
-                int i = f.validateBusiness();
-                Log.d("POSITON",String.valueOf(i));
+                validateBasic();
                 break;
         }
     }
+
+    private void validateBasic() {
+        EditBusinessProfileBasicFragment f = (EditBusinessProfileBasicFragment) getSupportFragmentManager().findFragmentByTag(Constants.EditBusinessProfileBasicFragment);
+        int i = f.validateBusiness();
+        switch(i){
+            case Constants.INT_ONE:
+                DealWithItApp.showAToast("Please select the Establishment Name");
+                break;
+            case Constants.INT_TWO:
+                DealWithItApp.showAToast("Please select the Category");
+                break;
+            case Constants.INT_THREE:
+                DealWithItApp.showAToast("Please select the Location Name");
+                break;
+            case Constants.INT_FOUR:
+                DealWithItApp.showAToast("Please select the Address");
+                break;
+            case Constants.INT_FIVE:
+                DealWithItApp.showAToast("Please select the Description");
+                break;
+            case Constants.INT_SIX:
+                DealWithItApp.showAToast("Please upload menu first");
+                break;
+            case Constants.INT_SEVEN:
+                DealWithItApp.showAToast("Please cover picture first");
+                break;
+            case Constants.INT_EIGHT:
+                Log.d("Data", f.sendBasicData().toString());
+                validateDetails();
+                break;
+
+        }
+
+
+    }
+
+    private void validateDetails() {
+        EditBusinessProfileDetailFragment f = (EditBusinessProfileDetailFragment) getSupportFragmentManager().findFragmentByTag(Constants.EditBusinessProfileDetailFragment);
+        int i = f.validate();
+        switch(i){
+            case Constants.INT_ONE:
+                DealWithItApp.showAToast("Please select the Type");
+                break;
+            case Constants.INT_TWO:
+                DealWithItApp.showAToast("Please select the Cuisine");
+                break;
+            case Constants.INT_THREE:
+                DealWithItApp.showAToast("Please select the Ambience");
+                break;
+            case Constants.INT_FOUR:
+                DealWithItApp.showAToast("Please select First start Hour Slot");
+                break;
+            case Constants.INT_FIVE:
+                DealWithItApp.showAToast("Please select the Description");
+                break;
+            case Constants.INT_SIX:
+                DealWithItApp.showAToast("Please select Second start Hour Slot");
+                break;
+            case Constants.INT_SEVEN:
+                DealWithItApp.showAToast("Please select Second end Hour Slot");
+                break;
+            case Constants.INT_EIGHT:
+                DealWithItApp.showAToast("Please select the Maximum Seatings");
+                break;
+            case Constants.INT_NINE:
+                Log.d("Data",f.sendBasicData().toString());
+
+                break;
+
+        }
+
+
+    }
+
 
 
     private void warningDialog(){
@@ -164,6 +245,76 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
         arrayMenuImages.addAll(arrayList);
         ShowImageGrid f = (ShowImageGrid) getSupportFragmentManager().findFragmentByTag(Constants.GRIDIMAGE_FRAGMENT);
         f.addItems(arrayMenuImages);
+    }
+
+    @Override
+    public void setCuisineData(String string) {
+        try {
+            getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
+                    .add(R.id.container, new AmbienceTypeFragment().newInstance(string), Constants.AMBINENCE_FRAGMENT)
+                    .addToBackStack(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
+                    .commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setAmbienceData(String string) {
+
+        try {
+            getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
+                    .add(R.id.container, new CuisineTypeFragment().newInstance(string), Constants.CUISINE_FRAGMENT)
+                    .addToBackStack(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
+                    .commit();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setTypeData(String string) {
+        try {
+            getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
+                    .add(R.id.container, new TypeFragment().newInstance(string), Constants.TYPE_FRAGMENT)
+                    .addToBackStack(null)
+                    .commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void passAmbienceData(String data, ArrayList<String> array) {
+        try {
+            EditBusinessProfileDetailFragment f = (EditBusinessProfileDetailFragment) getSupportFragmentManager().findFragmentByTag(Constants.EditBusinessProfileDetailFragment);
+            f.changeAmbienceText(data, array);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void passCuisineData(String data, ArrayList<String> array) {
+        try {
+            EditBusinessProfileDetailFragment f = (EditBusinessProfileDetailFragment) getSupportFragmentManager().findFragmentByTag(Constants.EditBusinessProfileDetailFragment);
+            f.changeCuisineText(data, array);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void passTypeData(String data, ArrayList<String> array) {
+        try {
+            EditBusinessProfileDetailFragment f = (EditBusinessProfileDetailFragment) getSupportFragmentManager().findFragmentByTag(Constants.EditBusinessProfileDetailFragment);
+            f.changeTypeText(data, array);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 
@@ -207,12 +358,17 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
                     if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
                           arrayBasic = new ArrayList<>();
                           arrayMenuImages = new ArrayList<>();
+                          arraytype = new ArrayList<>();
+                          arrayCuisine = new ArrayList<>();
+                          arrayAmbiance = new ArrayList<>();
+                          arrayDetails = new ArrayList<>();
                           JSONObject jsonObject1 =  jsonObject.getJSONObject(Keys.notice);
                           JSONObject jsonObject2 =  jsonObject1.getJSONObject(Keys.Profile);
                           AllPojos pojos = new AllPojos();
                           pojos.setDescription(jsonObject2.getString(Keys.description));
                           pojos.setBusiness_name(jsonObject2.getString(Keys.business_name));
                           pojos.setCategory(jsonObject2.getString(Keys.category));
+                          pojos.setAddress(jsonObject2.getString(Keys.Address));
                           pojos.setLocation_name(jsonObject2.getString(Keys.location_name));
                           JSONArray jsonArray = jsonObject2.getJSONArray(Keys.menu_images);
                           for(int i=0; i<jsonArray.length();i++){
@@ -220,6 +376,29 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
                           }
                           pojos.setCover_image(jsonObject2.getString(Keys.cover_image));
                           arrayBasic.add(pojos);
+
+
+                               JSONArray jsonArray1 =  jsonObject2.getJSONArray(Keys.type);
+                                for (int i = 0; i< jsonArray1.length(); i++){
+                                     arraytype.add(jsonArray1.getString(i));
+                                }
+
+                        JSONArray jsonArray2 =  jsonObject2.getJSONArray(Keys.cusine);
+                        for (int i = 0; i< jsonArray2.length(); i++){
+                            arrayCuisine.add(jsonArray2.getString(i));
+                        }
+                        JSONArray jsonArray3 =  jsonObject2.getJSONArray(Keys.ambience);
+                        for (int i = 0; i< jsonArray3.length(); i++){
+                            arrayAmbiance.add(jsonArray3.getString(i));
+                        }
+
+                        AllPojos detailsPojos = new AllPojos();
+                        detailsPojos.setTiming_slot_1_start(jsonObject2.getString(Keys.timing_slot_1_start));
+                        detailsPojos.setTiming_slot_1_end(jsonObject2.getString(Keys.timing_slot_1_end));
+                        detailsPojos.setTiming_slot_2_start(jsonObject2.getString(Keys.timing_slot_2_start));
+                        detailsPojos.setTiming_slot_2_end(jsonObject2.getString(Keys.timing_slot_2_end));
+                        detailsPojos.setMax_seating(jsonObject2.getString(Keys.max_seating));
+                        arrayDetails.add(detailsPojos);
 
                         getSupportFragmentManager().beginTransaction()
                                 .add(R.id.edit_business_basiccontainer, new EditBusinessProfileBasicFragment().newInstance(arrayBasic, arrayMenuImages), Constants.EditBusinessProfileBasicFragment)
@@ -229,7 +408,7 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
                                 .add(R.id.gridcontainer, new ShowImageGrid().newInstance(arrayMenuImages), Constants.GRIDIMAGE_FRAGMENT)
                                 .commit();
                         getSupportFragmentManager().beginTransaction()
-                                .add(R.id.edit_business_profile_detailscontainer, new EditBusinessProfileDetailFragment(), Constants.EditBusinessProfileDetailFragment)
+                                .add(R.id.edit_business_profile_detailscontainer, new EditBusinessProfileDetailFragment().newInstance(arrayDetails,arrayAmbiance,arrayCuisine,arraytype), Constants.EditBusinessProfileDetailFragment)
                                 .commit();
 
                         getSupportFragmentManager().beginTransaction()
