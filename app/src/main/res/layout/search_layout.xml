@@ -37,7 +37,7 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@android:drawable/ic_menu_search"
+                android:src="@drawable/search_icon"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:tint="#CCCCCC"
@@ -45,11 +45,12 @@
 
             <ImageView
                 android:id="@+id/close"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:src="@drawable/ic_cross"
                 android:padding="12dp"
                 android:tint="#ffffff"
+                android:background="?selectableItemBackground"
                 android:layout_alignBottom="@+id/search"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />

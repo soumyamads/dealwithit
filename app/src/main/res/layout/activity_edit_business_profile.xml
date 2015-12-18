@@ -41,21 +41,20 @@
                 android:text="Edit Business Profile"
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
                 android:textColor="#ffffff"
-                android:layout_centerInParent="true"
+                android:layout_centerInParent="true" />
 
-                />
             <ImageView
                 android:id="@+id/delete"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:padding="7dp"
+                android:padding="4dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:src="@drawable/common_full_open_on_phone"
+                android:src="@drawable/delete_icon"
                 android:background="@drawable/bottom_selector_transparent"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="50dp"
-                />
+                android:layout_marginRight="50dp" />
+
             <ImageView
                 android:id="@+id/right"
                 android:layout_width="50dp"

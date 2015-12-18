@@ -199,7 +199,34 @@
         android:layout_alignParentBottom="true">
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:padding="15dp"
+            android:layout_marginRight="45dp"
+            android:layout_marginLeft="35dp"
+            android:hint="Type a message"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:tint="#000000"
+            android:padding="5dp"
+            android:background="?selectableItemBackground"
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/camera"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:tint="#000000"
+            android:padding="5dp"
+            android:background="?selectableItemBackground"
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/emoticon"/>
     </RelativeLayout>
 
 

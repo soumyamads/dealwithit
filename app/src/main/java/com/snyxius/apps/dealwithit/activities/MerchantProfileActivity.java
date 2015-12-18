@@ -43,6 +43,7 @@ import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.pojos.AllPojos;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
@@ -151,15 +152,59 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.edit_profile:
-                if (DealWithItApp.isNetworkAvailable()) {
-                    new setProfile().execute(WebServices.updateUserProfile);
-                }else{
-
-                }
+                validate();
                 break;
             case R.id.proImage:
                 selectImage();
                 break;
+        }
+    }
+
+
+    public void validate(){
+        userFirstName.clearFocus();
+        userLastName.clearFocus();
+        userEstName.clearFocus();
+        userEmail.clearFocus();
+        userNumber.clearFocus();
+
+        if (userFirstName.getText().toString().isEmpty()) {
+            userFirstName.setError("Field Required");
+            userFirstName.requestFocus();
+        }else if(userLastName.getText().toString().isEmpty()){
+            userLastName.setError("Field Required");
+            userLastName.requestFocus();
+        }else if(userEstName.getText().toString().isEmpty()){
+            userEstName.setError("Field Required");
+            userEstName.requestFocus();
+        }else if(userEmail.getText().toString().isEmpty()){
+            userEmail.setError("Field Required");
+            userEmail.requestFocus();
+        }else if(userNumber.getText().toString().isEmpty()){
+            userNumber.setError("Field Required");
+            userNumber.requestFocus();
+        }else{
+            submit();
+        }
+    }
+
+    public void submit(){
+        try {
+            JSONObject jobj = new JSONObject();
+            jobj.accumulate(Keys.id,DealWithItApp.readFromPreferences(getApplicationContext(), Keys.id,""));
+            jobj.accumulate(Keys.firstName,userFirstName.getText().toString());
+            jobj.accumulate(Keys.lastName,userLastName.getText().toString());
+            jobj.accumulate(Keys.establishmentName,userEstName.getText().toString());
+            jobj.accumulate(Keys.email,userEmail.getText().toString());
+            jobj.accumulate(Keys.mobile,userNumber.getText().toString());
+            jobj.accumulate(Keys.userImage,uploadPicture);
+            if (DealWithItApp.isNetworkAvailable()) {
+                new setProfile().execute(jobj.toString());
+            }else{
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -334,7 +379,7 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
 
     private class setProfile extends AsyncTask<String, Void, JSONObject> {
 
-        String newFname,newLname,newEstName,newEmail,newMobile;
+
 
         @Override
         protected void onPreExecute() {
@@ -343,26 +388,15 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
             pDialog.setCancelable(false);
             pDialog.show();
             cordLayout.setVisibility(View.GONE);
-            newFname=userFirstName.getText().toString().trim();
-            newLname=userLastName.getText().toString().trim();
-            newEstName=userEstName.getText().toString().trim();
-            newEmail=userEmail.getText().toString().trim();
-            newMobile=userNumber.getText().toString().trim();
+
         }
 
         @Override
         protected JSONObject doInBackground(String... params) {
             JSONObject jsonObject = null;
             try {
-                JSONObject jobj = new JSONObject();
-                jobj.accumulate(Keys.id,DealWithItApp.readFromPreferences(getApplicationContext(), Keys.id,""));
-                jobj.accumulate(Keys.firstName,newFname);
-                jobj.accumulate(Keys.lastName,newLname);
-                jobj.accumulate(Keys.establishmentName,newEstName);
-                jobj.accumulate(Keys.email,newEmail);
-                jobj.accumulate(Keys.mobile,newMobile);
-                jobj.accumulate(Keys.userImage,uploadPicture);
-                return WebRequest.postData(String.valueOf(jobj), params[0]);
+
+                return WebRequest.postData(params[0],WebServices.updateUserProfile);
             }catch (Exception e){
 
                 e.printStackTrace();
@@ -383,14 +417,10 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
         try {
             if(jsonObject != null) {
                 if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
-//                    JSONObject object = jsonObject.getJSONObject(Keys.notice);
                     DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
-
-
 
                 } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
                     DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
-//                    emptytext.setVisibility(View.VISIBLE);
                 } else {
                     DealWithItApp.showAToast("Something Went Wrong.");
                 }
@@ -403,9 +433,7 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
 
     }
 
-    public void validate(){
 
-    }
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {

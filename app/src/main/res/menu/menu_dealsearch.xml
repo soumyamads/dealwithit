@@ -6,7 +6,7 @@
 
 
     <item android:id="@+id/action_search"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/search_icon"
         android:title="action_search"
         app:showAsAction="always"/>
 
