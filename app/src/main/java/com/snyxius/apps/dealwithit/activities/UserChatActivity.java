@@ -1,5 +1,6 @@
 package com.snyxius.apps.dealwithit.activities;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -41,6 +42,8 @@ public class UserChatActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.chat_layout);
         initialise();
         initDrawer();
+
+        
     }
 
 
@@ -98,6 +101,7 @@ public class UserChatActivity extends AppCompatActivity implements View.OnClickL
         rightArrow=(ImageView)findViewById(R.id.right_arrow);
         openClose=(ImageView)findViewById(R.id.open_close);
         openClose.setOnClickListener(this);
+        findViewById(R.id.right_arrow).setOnClickListener(this);
 
         title.setVisibility(View.GONE);
         desc.setVisibility(View.GONE);
@@ -117,6 +121,10 @@ public class UserChatActivity extends AppCompatActivity implements View.OnClickL
                 isShow=true;
                 showDatas();
             }
+        }else if(v.getId()==R.id.right_arrow){
+            Intent detailIntent=new Intent(UserChatActivity.this,ChatDealDetailActivity.class);
+            startActivity(detailIntent);
+            finish();
         }
     }
 
