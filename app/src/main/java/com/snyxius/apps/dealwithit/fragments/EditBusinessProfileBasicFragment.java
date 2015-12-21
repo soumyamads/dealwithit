@@ -326,10 +326,11 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
             byte[] byteArray = byteArrayOutputStream.toByteArray();
             String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
-            arrayImage.add(encoded);
+            arrayMenu.add(encoded);
         }
 
-      mCallback.addItems(arrayImage);
+        Log.d("ImageSizeBasicAdding",String.valueOf(arrayMenu.size()));
+       mCallback.addItems(arrayMenu);
 
 
     }
@@ -463,7 +464,7 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
         }else if(description.getText().toString().isEmpty()){
             return Constants.INT_FIVE;
            // DealWithItApp.showAToast("Please select the Description");
-        }else if(arrayImage.isEmpty()){
+        }else if(arrayMenu.isEmpty()){
           return Constants.INT_SIX;
            // DealWithItApp.showAToast("Please upload menu first");
         }else if(uploadPicture.equals("")){
@@ -484,7 +485,8 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
             jsonObject.accumulate(Keys.address,mAutocompleteView.getText().toString());
             jsonObject.accumulate(Keys.description,description.getText().toString());
             jsonObject.accumulate(Keys.location_name, address.getText().toString());
-            JSONArray array = new JSONArray(arrayImage);
+            Log.d("ImageSizeBasic",String.valueOf(arrayMenu.size()));
+            JSONArray array = new JSONArray(arrayMenu);
             jsonObject.accumulate(Keys.menu_images,array);
             jsonObject.accumulate(Keys.cover_image, uploadPicture);
             return jsonObject;
@@ -498,4 +500,12 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
         void addItems(ArrayList<String> arrayList);
     }
 
+    public void removeItems(int position){
+        arrayMenu.remove(position);
+    }
+
+
+    public void addItems(int position){
+        arrayMenu.remove(position);
+    }
 }

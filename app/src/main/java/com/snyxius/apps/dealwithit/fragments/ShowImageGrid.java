@@ -121,8 +121,8 @@ public class ShowImageGrid extends Fragment {
                 View view = convertView;
                 if (view == null) {
                     view = inflater.inflate(R.layout.showitemgridimage, parent, false);
-                    Animation shake = AnimationUtils.loadAnimation(mContext, R.anim.shake);
-                    view.setAnimation(shake);
+                   // Animation shake = AnimationUtils.loadAnimation(mContext, R.anim.shake);
+                    //view.setAnimation(shake);
                     holder = new ViewHolder();
                     assert view != null;
                     holder.imageView = (ImageView) view.findViewById(R.id.image);
@@ -165,6 +165,7 @@ public class ShowImageGrid extends Fragment {
     public void removeItems(int position){
 
         adapter.notifyDataSetChanged();
+        adapter.notifyDataSetInvalidated();
     }
 
 

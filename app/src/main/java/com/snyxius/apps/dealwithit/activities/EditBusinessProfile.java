@@ -61,7 +61,7 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
     private Dialog dialogs;
     private ArrayList<AllPojos> arrayBasic;
     private ArrayList<AllPojos> arrayDetails;
-    private ArrayList<String> arrayMenuImages;
+    private ArrayList<String> arrayMenuImages = new ArrayList<>();
     private ArrayList<String> arraytype;
     private ArrayList<String> arrayCuisine;
     private ArrayList<String> arrayAmbiance;
@@ -235,14 +235,22 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
 
     @Override
     public void removeItem(int position) {
+        Log.d("ImageSizeBeforeRemoving",String.valueOf(arrayMenuImages.size()));
+
         arrayMenuImages.remove(position);
+        Log.d("ImageSizeAfterRemoving", String.valueOf(arrayMenuImages.size()));
         ShowImageGrid f = (ShowImageGrid) getSupportFragmentManager().findFragmentByTag(Constants.GRIDIMAGE_FRAGMENT);
         f.removeItems(position);
+
     }
 
     @Override
     public void addItems(ArrayList<String> arrayList) {
-        arrayMenuImages.addAll(arrayList);
+
+//        Log.d("ImageSizeGridAdding",String.valueOf(arrayList.size()));
+//        arrayMenuImages.clear();
+//        arrayMenuImages.addAll(arrayList);
+//        Log.d("ImageSizeGrid", String.valueOf(arrayMenuImages.size()));
         ShowImageGrid f = (ShowImageGrid) getSupportFragmentManager().findFragmentByTag(Constants.GRIDIMAGE_FRAGMENT);
         f.addItems(arrayMenuImages);
     }
@@ -252,24 +260,23 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
         try {
             getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
-                    .add(R.id.container, new AmbienceTypeFragment().newInstance(string), Constants.AMBINENCE_FRAGMENT)
-                    .addToBackStack(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
+                    .add(R.id.container, new CuisineTypeFragment().newInstance(string), Constants.CUISINE_FRAGMENT)
+                    .addToBackStack(Constants.EditBusinessProfileDetailFragment)
                     .commit();
-        }catch (Exception e){
+        }catch(Exception e){
             e.printStackTrace();
         }
     }
 
     @Override
     public void setAmbienceData(String string) {
-
         try {
             getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
-                    .add(R.id.container, new CuisineTypeFragment().newInstance(string), Constants.CUISINE_FRAGMENT)
-                    .addToBackStack(Constants.ADDBUSINESSPROFILEDETAIL_FRAGMENT)
+                    .add(R.id.container, new AmbienceTypeFragment().newInstance(string), Constants.AMBINENCE_FRAGMENT)
+                    .addToBackStack(Constants.EditBusinessProfileDetailFragment)
                     .commit();
-        }catch(Exception e){
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
@@ -280,7 +287,7 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
             getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
                     .add(R.id.container, new TypeFragment().newInstance(string), Constants.TYPE_FRAGMENT)
-                    .addToBackStack(null)
+                    .addToBackStack(Constants.EditBusinessProfileDetailFragment)
                     .commit();
         }catch (Exception e){
             e.printStackTrace();
