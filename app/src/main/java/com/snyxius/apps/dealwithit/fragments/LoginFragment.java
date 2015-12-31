@@ -237,7 +237,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void onDone(JSONObject jsonObject){
+    private void onDone(final JSONObject jsonObject){
         try {
             if(jsonObject != null) {
                 if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
@@ -259,7 +259,19 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
 
                 } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
-                    DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+                    Handler mHandler = new Handler(getActivity().getMainLooper());
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+
                 } else {
                     DealWithItApp.showAToast("Something Went Wrong.");
                 }

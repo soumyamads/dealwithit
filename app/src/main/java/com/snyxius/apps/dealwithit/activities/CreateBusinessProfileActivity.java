@@ -12,19 +12,18 @@ import android.widget.TextView;
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
-import com.snyxius.apps.dealwithit.extras.IncomingDeals;
 import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileBasicFragment;
 import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileBasicFragment.DetailStroke;
 import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileIncomingDealFragment;
 import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileDetailFragment;
-import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileNewIncomingDealFragment;
 import com.snyxius.apps.dealwithit.fragments.AmbienceTypeFragment;
+import com.snyxius.apps.dealwithit.fragments.BusinessProfileIncomingDealDialogFragment;
 import com.snyxius.apps.dealwithit.fragments.CategoryFragment;
 import com.snyxius.apps.dealwithit.fragments.CuisineTypeFragment;
 import com.snyxius.apps.dealwithit.fragments.TypeFragment;
+import com.snyxius.apps.dealwithit.pojos.AllPojos;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ import java.util.ArrayList;
  */
 public class CreateBusinessProfileActivity extends AppCompatActivity implements CategoryFragment.DataPassListener,TypeFragment.DataPassListener,
         AmbienceTypeFragment.DataPassListener,CuisineTypeFragment.DataPassListener,
-DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetailFragment.PassData,IncomingDeals, View.OnClickListener{
+DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetailFragment.PassData, View.OnClickListener,BusinessProfileIncomingDealDialogFragment.IncomingDeals{
 
     ImageView stepViewImage2,stepViewImage3;
     TextView stepViewText2,stepViewText3;
@@ -172,16 +171,6 @@ DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetai
                 .commit();
     }
 
-    @Override
-    public void sendDealsCategoryData(JSONObject jsonObject, JSONArray incomingDealArray) {
-                Log.d("incoming",incomingDealArray.toString());
-        getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_right, R.anim.fade_out, R.anim.slide_in_right, R.anim.fade_out)
-                .replace(R.id.frmaecontainer, new AddBusinessProfileNewIncomingDealFragment().newInstance(jsonObject, incomingDealArray), Constants.ADDBUSINESSPROFILENEWDEAL_FRAGMENT)
-                .addToBackStack(Constants.ADDBUSINESSPROFILENEWDEAL_FRAGMENT)
-                .commit();
-    }
-
 
     @Override
     public void onClick(View v) {
@@ -195,10 +184,7 @@ DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetai
                     ((AddBusinessProfileDetailFragment) fragment).validate();
                     Log.d("fragment", "2 instance");
                 }else if(fragment instanceof AddBusinessProfileIncomingDealFragment){
-                    ((AddBusinessProfileIncomingDealFragment) fragment).validate(1);
-                    Log.d("fragment", "3 instance");
-                }else if(fragment instanceof AddBusinessProfileNewIncomingDealFragment){
-                    ((AddBusinessProfileNewIncomingDealFragment) fragment).validate(1);
+                    ((AddBusinessProfileIncomingDealFragment) fragment).validate();
                     Log.d("fragment", "3 instance");
                 }else{
                     Log.d("fragment","no instance");
@@ -225,8 +211,6 @@ DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetai
             stepViewImage3.setImageResource(R.drawable.rounded_stroke_indicator);
         }else if(fragment instanceof AddBusinessProfileIncomingDealFragment){
             Log.d("fragment", "3 instance");
-        }else if(fragment instanceof AddBusinessProfileNewIncomingDealFragment){
-            Log.d("fragment", "3 instance");
         }else{
             Log.d("fragment","no instance");
         }
@@ -246,4 +230,13 @@ DetailStroke,AddBusinessProfileDetailFragment.DealStroke,AddBusinessProfileDetai
 
 
     }
+
+    @Override
+    public void sendDealsCategoryData(ArrayList<AllPojos> data) {
+        AddBusinessProfileIncomingDealFragment f = (AddBusinessProfileIncomingDealFragment) getSupportFragmentManager().findFragmentByTag(Constants.ADDBUSINESSPROFILEDEAL_FRAGMENT);
+       f.addItem(data);
+    }
+
+
+
 }

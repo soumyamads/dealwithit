@@ -1,6 +1,5 @@
 package com.snyxius.apps.dealwithit.activities;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
@@ -12,10 +11,6 @@ import android.widget.ImageView;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.extras.Constants;
-import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileBasicFragment;
-import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileDetailFragment;
-import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileIncomingDealFragment;
-import com.snyxius.apps.dealwithit.fragments.AddBusinessProfileNewIncomingDealFragment;
 import com.snyxius.apps.dealwithit.fragments.CreateDealStepOneFragment;
 import com.snyxius.apps.dealwithit.fragments.CreateDealStepThreeFragment;
 import com.snyxius.apps.dealwithit.fragments.CreateDealStepTwoFragment;
@@ -25,7 +20,6 @@ import com.snyxius.apps.dealwithit.fragments.GetAllBusinessProfileFragment;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by snyxius on 10/30/2015.

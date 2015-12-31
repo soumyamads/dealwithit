@@ -231,7 +231,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
                     sb.append(",");
                     String string = bean.getName();
                     String[] splited = string.split("\\s");
-                    selectedTypes.add(splited[0]);
+                    selectedTypes.add(bean.getName());
                 }
             }
             String s = sb.toString().trim();

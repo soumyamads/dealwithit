@@ -1,10 +1,14 @@
 package com.snyxius.apps.dealwithit.fragments;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,46 +21,35 @@ import android.widget.TextView;
 
 import com.appyvet.rangebar.RangeBar;
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.adapters.BusinessIncomingDealsAdapter;
 import com.snyxius.apps.dealwithit.api.WebRequest;
 import com.snyxius.apps.dealwithit.api.WebServices;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
-import com.snyxius.apps.dealwithit.extras.IncomingDeals;
 import com.snyxius.apps.dealwithit.extras.Keys;
+import com.snyxius.apps.dealwithit.pojos.AllPojos;
+import com.snyxius.apps.dealwithit.utils.RecyclerItemClickListener;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * Created by snyxius on 10/15/2015.
  */
 
-public class AddBusinessProfileIncomingDealFragment extends Fragment implements View.OnClickListener{
+public class AddBusinessProfileIncomingDealFragment extends Fragment {
 
-    private TextView leftIndexValue;
-    private RangeBar rangebar;
-    private EditText max_guest,deal_offering;
-    private CheckBox checkBox_Alcohol;
-    private String alcohol = "No";
-    private ProgressBar progressBar;
-    private Button save;
-    private Button add_incoming_deals;
+
     static  JSONObject jsonObject = new JSONObject();
-    IncomingDeals incomingDeal;
+    private RecyclerView mRecyclerView;
+    private Toolbar mToolbar;
+    private BusinessIncomingDealsAdapter mAdapter;
 
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-              incomingDeal = (IncomingDeals) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement DataPassListener");
-        }
-    }
-
+    ArrayList<AllPojos> bookingsData = new ArrayList<>();
 
     public static   AddBusinessProfileIncomingDealFragment newInstance(JSONObject Object) {
         jsonObject = Object;
@@ -64,107 +57,100 @@ public class AddBusinessProfileIncomingDealFragment extends Fragment implements 
         return f;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
+    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.add_business_profile_deals, container, false);
-        return rootView;
-}
-
+        return inflater.inflate(R.layout.business_incoming_recycler_view,container,false);
+    }
 
     @Override
-    public void onViewCreated(final View view, Bundle savedInstanceState) {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initialise(view);
-        rangebar.setPinColor(getResources().getColor(R.color.colorPrimaryDark));
-        rangebar.setTickColor(getResources().getColor(R.color.grey));
-        rangebar.setConnectingLineColor(getResources().getColor(R.color.colorPrimaryDark));
-        rangebar.setBarColor(getResources().getColor(R.color.colorPrimaryDark));
-        rangebar.setSelectorColor(getResources().getColor(R.color.colorPrimaryDark));
-        rangebar.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
+        initViews(view);
+    }
+
+    private void initViews(View view) {
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerAnimatedItems);
+        mAdapter = new BusinessIncomingDealsAdapter(getActivity(), bookingsData, new BusinessIncomingDealsAdapter.OnItemClickListener() {
             @Override
-            public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex, int rightPinIndex, String leftPinValue, String rightPinValue) {
-                leftIndexValue.setText("Rs "+leftPinValue+" - "+ "Rs "+rightPinValue);
+            public void onItemClick(View view, int position, List<AllPojos> mTaskList) {
+                if (view.getId() == R.id.button_delete) {
+                    Log.d("Position",String.valueOf(position));
+                    bookingsData.remove(position - 1);
+                    mAdapter.notifyItemRemoved(position - 1);
+
+                }
             }
         });
-
-
-    }
-
-    private void initialise(View view){
-        save = (Button)view.findViewById(R.id.save);
-        add_incoming_deals = (Button)view.findViewById(R.id.add_incoming_deals);
-        save.setOnClickListener(this);
-        add_incoming_deals.setOnClickListener(this);
-        view.findViewById(R.id.save).setOnClickListener(this);
-        progressBar=(ProgressBar)view.findViewById(R.id.pBar);
-        rangebar = (RangeBar) view.findViewById(R.id.rangebar1);
-        leftIndexValue = (TextView) view.findViewById(R.id.leftIndexValue);
-        deal_offering=(EditText)view.findViewById(R.id.deal_offering);
-        max_guest=(EditText)view.findViewById(R.id.max_guest);
-        checkBox_Alcohol =(CheckBox)view.findViewById(R.id.checkBox_Alcohol);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.save:
-                validate(1);
-                break;
-            case R.id.add_incoming_deals:
-                validate(2);
-                break;
-        }
-
-    }
-
-
-    public void validate(int position){
-        if(max_guest.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Maximum Guest");
-        }else if(leftIndexValue.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Range cost/person");
-        } else if(deal_offering.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select Deal Offering");
-        } else{
-
-
-            if(position == 1) {
-                sendBasicData(position);
-            }else if(position == 2){
-                sendBasicData(position);
-
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                callBack(view, position);
             }
+        }));
+    }
+
+
+    private void callBack(View view,int position) {
+        int value = 1+bookingsData.size();
+        Log.d("Position","  "+value+" position "+position);
+        if(position == 0) {
+            DialogFragment dialogFrag = BusinessProfileIncomingDealDialogFragment.newInstance(Constants.INT_ONE);
+            dialogFrag.setCancelable(false);
+            dialogFrag.show(getFragmentManager().beginTransaction(), Constants.EditBusinessProfileIncomingDealDialogFragment);
+
+        }
+
+
+        if(position == value) {
+
+            validate();
+        }
+
+
+    }
+
+    public void addItem(ArrayList<AllPojos> data) {
+        bookingsData.addAll(data);
+        mAdapter.notifyDataSetChanged();
+    }
+
+
+
+
+
+    public void validate(){
+        if(bookingsData.isEmpty()){
+            DealWithItApp.showAToast("Add atleast one incoming deals");
+        }else{
+            sendBasicData();
         }
     }
 
 
-    private void sendBasicData(int position){
+
+
+
+
+    public void sendBasicData(){
         try{
 
-            if(checkBox_Alcohol.isChecked()){
-                alcohol = "Yes";
-            } else if(!checkBox_Alcohol.isChecked()) {
-                alcohol = "No";
+            JSONArray jsonArray = new JSONArray();
+
+            for(int i=0;i<bookingsData.size();i++){
+
+                JSONObject jsonObjectDeal = new JSONObject();
+                jsonObjectDeal.put(Keys.max_guest, bookingsData.get(i).getMax_guest());
+                jsonObjectDeal.put(Keys.cost_per_person, bookingsData.get(i).getCost_per_person());
+                jsonObjectDeal.put(Keys.alcohol, bookingsData.get(i).getAlcohol());
+                jsonObjectDeal.put(Keys.deal_offering, bookingsData.get(i).getDeal_offering());
+                jsonArray.put(jsonObjectDeal);
             }
 
-            JSONObject jsonObjectDeal = new JSONObject();
-            jsonObjectDeal.put(Keys.max_guest, max_guest.getText().toString());
-            jsonObjectDeal.put(Keys.cost_per_person, leftIndexValue.getText().toString());
-            jsonObjectDeal.put(Keys.alcohol, alcohol);
-            jsonObjectDeal.put(Keys.deal_offering, deal_offering.getText().toString());
-            JSONArray jsonArray = new JSONArray();
-            jsonArray.put(jsonObjectDeal);
-
-            if(position == 2) {
-                incomingDeal.sendDealsCategoryData(jsonObject, jsonArray);
-
-
-            }else {
                 jsonObject.accumulate(Keys.incoming_deals, jsonArray);
                 String id = DealWithItApp.readFromPreferences(getActivity(), Keys.id, Constants.DEFAULT_STRING);
                 JSONObject object = new JSONObject();
@@ -178,7 +164,7 @@ public class AddBusinessProfileIncomingDealFragment extends Fragment implements 
                 } else {
 
                 }
-            }
+
         }catch (Exception e){
             e.printStackTrace();
         }

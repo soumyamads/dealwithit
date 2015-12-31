@@ -231,8 +231,8 @@ public class CuisineTypeFragment extends Fragment implements View.OnClickListene
                     sb.append(bean.getName());
                     sb.append(",");
                     String string = bean.getName();
-                    String[] splited = string.split("\\s");
-                    selectedTypes.add(splited[0]);
+
+                    selectedTypes.add(bean.getName());
                 }
             }
             String s = sb.toString().trim();

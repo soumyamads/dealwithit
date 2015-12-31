@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -145,6 +146,7 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.continues:
+               // sendBasicData();
               validate();
                 break;
             case R.id.category_layout:
@@ -412,25 +414,33 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
     }
 
     public void validate(){
-        if(est_name.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Establishment Name");
-        }else if(est_type_text.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Category");
-        }else if(address.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Location Name");
-        }
-        else if(mAutocompleteView.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Address");
-        }else if(description.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Description");
-        }else if(arrayImage.isEmpty()){
-            DealWithItApp.showAToast("Please upload menu first");
-        }else if(uploadPicture.equals("")){
-            DealWithItApp.showAToast("Please cover picture first");
-        }
-        else{
-            sendBasicData();
-        }
+        Handler mHandler = new Handler(getActivity().getMainLooper());
+
+
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if(est_name.getText().toString().isEmpty()){
+                    DealWithItApp.showAToast("Please select the Establishment Name");
+                 }else if(est_type_text.getText().toString().isEmpty()){
+                    DealWithItApp.showAToast("Please select the Category");
+                }else if(address.getText().toString().isEmpty()){
+                    DealWithItApp.showAToast("Please select the Location Name");
+                }
+                else if(mAutocompleteView.getText().toString().isEmpty()){
+                    DealWithItApp.showAToast("Please select the Address");
+                }else if(description.getText().toString().isEmpty()){
+                    DealWithItApp.showAToast("Please select the Description");
+                }else if(arrayImage.isEmpty()){
+                    DealWithItApp.showAToast("Please upload menu first");
+                }else if(uploadPicture.equals("")){
+                    DealWithItApp.showAToast("Please cover picture first");
+                }
+                else{
+                    sendBasicData();
+                }}});
+
+
     }
 
     private void sendBasicData(){

@@ -52,10 +52,10 @@ public class EditBusinessProfileDetailFragment extends Fragment implements View.
 
 
 
-    static  JSONObject jsonObject = new JSONObject();
 
-    public static EditBusinessProfileDetailFragment newInstance(ArrayList<AllPojos> Object,ArrayList<String> arrayCuisine,
-    ArrayList<String> arrayAmbience,ArrayList<String> arrayType) {
+
+    public static EditBusinessProfileDetailFragment newInstance(ArrayList<AllPojos> Object,ArrayList<String> arrayAmbience,
+    ArrayList<String> arrayCuisine ,ArrayList<String> arrayType) {
         arrayDetails = Object;
         arrayListType = arrayType;
         arrayListAmbience = arrayAmbience;
@@ -152,6 +152,7 @@ public class EditBusinessProfileDetailFragment extends Fragment implements View.
         String s = sb.toString().trim();
         type_text.setText(s);
     }
+
     private void settingCuisineData() {
         StringBuffer sb = new StringBuffer();
         for(int i=0; i<arrayListCuisine.size();i++){
@@ -323,9 +324,8 @@ public class EditBusinessProfileDetailFragment extends Fragment implements View.
     }
 
 
-    public JSONObject sendBasicData(){
+    public JSONObject sendBasicData(JSONObject jsonObject){
         try{
-
             JSONArray arrayType = new JSONArray(arrayListType);
             JSONArray arrayCuisine = new JSONArray(arrayListCuisine);
             JSONArray arrayAmbience = new JSONArray(arrayListAmbience);

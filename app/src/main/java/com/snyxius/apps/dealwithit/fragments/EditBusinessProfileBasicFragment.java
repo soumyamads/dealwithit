@@ -180,11 +180,11 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
                 validateBusiness();
                 break;
             case R.id.category_layout:
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
-                        .add(R.id.container, new CategoryFragment(), Constants.CATEGORY_FRAGMENT)
-                        .addToBackStack(null)
-                        .commit();
+//                getActivity().getSupportFragmentManager().beginTransaction()
+//                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
+//                        .add(R.id.container, new CategoryFragment(), Constants.CATEGORY_FRAGMENT)
+//                        .addToBackStack(null)
+//                        .commit();
                 break;
             case R.id.button_clear:
                 mAutocompleteView.setText("");

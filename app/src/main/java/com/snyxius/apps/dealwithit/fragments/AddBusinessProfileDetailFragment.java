@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
 import android.support.v4.app.Fragment;
@@ -147,6 +148,7 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.continue_detail:
+               // sendBasicData();
                 validate();
                 break;
             case R.id.type_layout:
@@ -257,31 +259,42 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
 
 
     public void validate(){
-        if(type_text.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Type");
-        }else if(cuisine_text.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Cuisine");
-        }else if(ambience_text.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Ambience");
-        }else if(slot1_start_time_text.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select First start Hour Slot");
-        }else if(slot1_end_time_text.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select First end Hour Slot");
-        }else if(slot2_start_time_text.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select Second start Hour Slot");
-        }else if(slot2_end_time_text.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select Second end Hour Slot");
-        }else if(max_seat.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Maximum Seatings");
-       }
-        else{
-            sendBasicData();
-        }
+        Handler mHandler = new Handler(getActivity().getMainLooper());
+
+
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                if(type_text.getText().toString().isEmpty()){
+                    DealWithItApp.showAToast("Please select the Type");
+                }else if(cuisine_text.getText().toString().isEmpty()){
+                    DealWithItApp.showAToast("Please select the Cuisine");
+                }else if(ambience_text.getText().toString().isEmpty()){
+                    DealWithItApp.showAToast("Please select the Ambience");
+                }else if(slot1_start_time_text.getText().toString().isEmpty()){
+                    DealWithItApp.showAToast("Please select First start Hour Slot");
+                }else if(slot1_end_time_text.getText().toString().isEmpty()){
+                    DealWithItApp.showAToast("Please select First end Hour Slot");
+                }else if(slot2_start_time_text.getText().toString().isEmpty()){
+                    DealWithItApp.showAToast("Please select Second start Hour Slot");
+                }else if(slot2_end_time_text.getText().toString().isEmpty()){
+                    DealWithItApp.showAToast("Please select Second end Hour Slot");
+                }else if(max_seat.getText().toString().isEmpty()){
+                    DealWithItApp.showAToast("Please select the Maximum Seatings");
+                }
+                else{
+                    sendBasicData();
+                }
+            }});
+
     }
 
 
     private void sendBasicData(){
         try{
+            Log.d("ArrayCuisine", arrayListCuisine.toString());
+            Log.d("ArrayType", arrayListType.toString());
+            Log.d("ArrayAmbience", arrayListAmbience.toString());
             JSONArray arrayType = new JSONArray(arrayListType);
             JSONArray arrayCuisine = new JSONArray(arrayListCuisine);
             JSONArray arrayAmbience = new JSONArray(arrayListAmbience);

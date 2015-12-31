@@ -301,4 +301,42 @@ public class AllPojos {
     public void setMax_seating(String max_seating) {
         this.max_seating = max_seating;
     }
+
+    public String getDeal_offering() {
+        return deal_offering;
+    }
+
+    public void setDeal_offering(String deal_offering) {
+        this.deal_offering = deal_offering;
+    }
+
+    public String getAlcohol() {
+        return alcohol;
+    }
+
+    public void setAlcohol(String alcohol) {
+        this.alcohol = alcohol;
+    }
+
+    public String getCost_per_person() {
+        return cost_per_person;
+    }
+
+    public void setCost_per_person(String cost_per_person) {
+        this.cost_per_person = cost_per_person;
+    }
+
+    public String getMax_guest() {
+        return max_guest;
+    }
+
+    public void setMax_guest(String max_guest) {
+        this.max_guest = max_guest;
+    }
+
+    public String deal_offering = "Deal_Offering";
+    public String alcohol = "Alcohol";
+    public String cost_per_person = "Cost_Per_Person";
+    public String max_guest = "Maximum_Guest";
+
 }

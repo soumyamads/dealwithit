@@ -5,18 +5,22 @@
     android:orientation="vertical"
     android:background="#ffffff">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
 
-            <ProgressBar
+            <ImageView
+                android:id="@+id/button_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_centerInParent="true"
-                android:visibility="gone"
-                android:id="@+id/pBar" />
+                android:layout_alignParentRight="true"
+                android:padding="10dp"
+                android:src="@android:drawable/ic_delete"/>
+
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -215,10 +219,19 @@
                 android:id="@+id/deal_offering"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:inputType="textCapSentences"
+                android:inputType="textMultiLine"
                 android:hint="Deal Offering"/>
 
+
+                <Button
+                    android:id="@+id/save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bottom_selector_secondary"
+                    android:text="SAVE"
+                    android:layout_marginTop="50dp"
+                    android:textColor="#ffffff" />
 
 
 
@@ -227,7 +240,7 @@
         </LinearLayout>
 
         </RelativeLayout>
-
+    </ScrollView>
 
 
 </LinearLayout>
