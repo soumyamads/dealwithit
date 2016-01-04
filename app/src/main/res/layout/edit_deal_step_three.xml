@@ -343,35 +343,6 @@
                     </RelativeLayout>
                 </RelativeLayout>
             </LinearLayout>
-
-
-
-
-            <TextView
-                android:id="@+id/login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/bottom_selector_transparent"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="PREVIEW"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/continue_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/bottom_selector_secondary"
-                android:text="SAVE"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#ffffff"
-                android:textStyle="bold" />
-
         </LinearLayout>
     </ScrollView>
 

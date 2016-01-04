@@ -1,37 +1,27 @@
 package com.snyxius.apps.dealwithit.fragments;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.snyxius.apps.dealwithit.R;
-import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
 import com.snyxius.apps.dealwithit.api.WebRequest;
 import com.snyxius.apps.dealwithit.api.WebServices;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
+import com.snyxius.apps.dealwithit.pojos.AllPojos;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
@@ -50,7 +40,7 @@ import java.util.Date;
 /**
  * Created by snyxius on 10/15/2015.
  */
-public class CreateDealStepThreeFragment extends Fragment implements View.OnClickListener ,TimePickerDialog.OnTimeSetListener,
+public class EditDealStepThreeFragment extends Fragment implements View.OnClickListener ,TimePickerDialog.OnTimeSetListener,
         DatePickerDialog.OnDateSetListener{
 
 
@@ -61,16 +51,15 @@ public class CreateDealStepThreeFragment extends Fragment implements View.OnClic
     String recurring = "yes";
     String fixed = "no";
     TextView opening_hour,closing_hour,startdealdate,enddealdate;
-    ArrayList<String> arrayListDays = new ArrayList<>();
+   private static ArrayList<String> arrayListDays = new ArrayList<>();
+   private static ArrayList<AllPojos> arrayStepThree = new ArrayList<>();
     CheckBox monday,tuesday,wednesday,thusday,friday,saturday,sunday,repeat;
-     static  AppCompatActivity mContext;
 
-    static JSONObject jsonObject = new JSONObject();
 
-    public static CreateDealStepThreeFragment newInstance(JSONObject Object,AppCompatActivity Context) {
-        jsonObject = Object;
-        CreateDealStepThreeFragment f = new CreateDealStepThreeFragment();
-        mContext=Context;
+    public static EditDealStepThreeFragment newInstance(ArrayList<AllPojos> Object,ArrayList<String> days) {
+        arrayStepThree = Object;
+        arrayListDays = days;
+        EditDealStepThreeFragment f = new EditDealStepThreeFragment();
         return f;
     }
 
@@ -83,7 +72,7 @@ public class CreateDealStepThreeFragment extends Fragment implements View.OnClic
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.create_deal_step_three, container, false);
+        View rootView = inflater.inflate(R.layout.edit_deal_step_three, container, false);
         return rootView;
 }
 
@@ -93,19 +82,7 @@ public class CreateDealStepThreeFragment extends Fragment implements View.OnClic
         super.onViewCreated(view, savedInstanceState);
         initialise(view);
 
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
 
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.radio_recurring) {
-                    recuringlayout.setVisibility(View.VISIBLE);
-                } else if (checkedId == R.id.radio_fixed) {
-                    recuringlayout.setVisibility(View.GONE);
-                }
-            }
-
-
-        });
 
     }
 
@@ -119,17 +96,21 @@ public class CreateDealStepThreeFragment extends Fragment implements View.OnClic
 
 
     private void initialise(View view){
-        view.findViewById(R.id.continue_button).setOnClickListener(this);
-        view.findViewById(R.id.radio_fixed).setOnClickListener(this);
-        view.findViewById(R.id.radio_recurring).setOnClickListener(this);
         view.findViewById(R.id.dealstrt).setOnClickListener(this);
         view.findViewById(R.id.dealexp).setOnClickListener(this);
         view.findViewById(R.id.opening_time_layout).setOnClickListener(this);
         view.findViewById(R.id.closing_time_layout).setOnClickListener(this);
         opening_hour = (TextView) view.findViewById(R.id.opening_time_text);
+
+        opening_hour.setText(arrayStepThree.get(Constants.DEFAULT_INT).getOpening_Hour());
         closing_hour = (TextView) view.findViewById(R.id.closing_time_text);
+        closing_hour.setText(arrayStepThree.get(Constants.DEFAULT_INT).getClosing_Hour());
         startdealdate = (TextView) view.findViewById(R.id.dlstart);
+        startdealdate.setText(arrayStepThree.get(Constants.DEFAULT_INT).getStart_Deal_Date());
         enddealdate = (TextView) view.findViewById(R.id.dlend);
+        enddealdate.setText(arrayStepThree.get(Constants.DEFAULT_INT).getEnd_Deal_date());
+
+
         sunday=(CheckBox)view.findViewById(R.id.sun);
         monday=(CheckBox)view.findViewById(R.id.m);
         tuesday=(CheckBox)view.findViewById(R.id.t);
@@ -139,16 +120,60 @@ public class CreateDealStepThreeFragment extends Fragment implements View.OnClic
         saturday=(CheckBox)view.findViewById(R.id.sa);
         repeat =(CheckBox)view.findViewById(R.id.repeat);
         radioGroup=(RadioGroup)view.findViewById(R.id.dateGroup);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.radio_recurring) {
+                    recuringlayout.setVisibility(View.VISIBLE);
+                } else if (checkedId == R.id.radio_fixed) {
+                    recuringlayout.setVisibility(View.GONE);
+                }
+            }
+
+
+        });
         recuringlayout=(LinearLayout)view.findViewById(R.id.recurring_layout);
+
+
+        if(arrayStepThree.get(Constants.DEFAULT_INT).getFix().equals("yes")){
+            radioGroup.check(R.id.radio_fixed);
+        }else{
+            radioGroup.check(R.id.radio_recurring);
+            if(arrayStepThree.get(Constants.DEFAULT_INT).getRepeat().equals("yes")){
+                repeat.setChecked(true);
+            }
+
+            if(arrayListDays.size() != 0){
+                for(int i=0; i <arrayListDays.size() ; i++){
+                    if(arrayListDays.get(i).equals("sunday")){
+                        sunday.setChecked(true);
+                    }else if(arrayListDays.get(i).equals("monday")){
+                        monday.setChecked(true);
+                    }else if(arrayListDays.get(i).equals("tuesday")){
+                        tuesday.setChecked(true);
+                    }else if(arrayListDays.get(i).equals("wednesday")){
+                        wednesday.setChecked(true);
+                    }else if(arrayListDays.get(i).equals("thusday")){
+                        thusday.setChecked(true);
+                    }else if(arrayListDays.get(i).equals("friday")){
+                        friday.setChecked(true);
+                    }else if(arrayListDays.get(i).equals("saturay")){
+                        saturday.setChecked(true);
+                    }
+                }
+            }
+
+
+
+        }
+
     }
 
     @Override
     public void onClick(View v) {
 
         switch (v.getId()){
-            case R.id.continue_button:
-                validate();
-                break;
             case R.id.opening_time_layout:
                 position = 1;
                 setTime();
@@ -237,15 +262,19 @@ public class CreateDealStepThreeFragment extends Fragment implements View.OnClic
     }
 
 
-    public void validate(){
+    public int validate(){
         if(startdealdate.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Start Deal Date");
+            return Constants.INT_ONE;
+
         }else if(enddealdate.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the End Deal Date");
+            return Constants.INT_TWO;
+
         } else if(opening_hour.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Opening Hour");
+            return Constants.INT_THREE;
+
         } else if(closing_hour.getText().toString().isEmpty()){
-            DealWithItApp.showAToast("Please select the Closing Hour");
+            return Constants.INT_FOUR;
+
         } else{
 
             int radioButtonID = radioGroup.getCheckedRadioButtonId();
@@ -278,25 +307,23 @@ public class CreateDealStepThreeFragment extends Fragment implements View.OnClic
                 if (saturday.isChecked()) {
                     arrayListDays.add("saturay");
                 }
-
                 if(arrayListDays.size() == 0){
-                    DealWithItApp.showAToast("Please atleast select one day");
+                    return Constants.INT_SIX;
+
                 }else {
 
-                    sendBasicData();
+                    return Constants.INT_FIVE;
                 }
-            }else if(radioButtonID == R.id.radio_fixed){
+            }else {
                 recurring = "no";
                 fixed = "yes";
-                sendBasicData();
+                return Constants.INT_FIVE;
             }
-
-
 
         }
     }
 
-    private void sendBasicData(){
+    public JSONObject sendBasicData(JSONObject jsonObject){
         try{
             jsonObject.accumulate(Keys.recurring, recurring);
             jsonObject.accumulate(Keys.fixed, fixed);
@@ -313,22 +340,16 @@ public class CreateDealStepThreeFragment extends Fragment implements View.OnClic
             String id = DealWithItApp.readFromPreferences(getActivity(), Keys.id, Constants.DEFAULT_STRING);
             JSONObject object = new JSONObject();
             object.accumulate(Keys.profile, jsonObject);
-            object.accumulate(Keys.id, id);
-            JSONObject object1 = new JSONObject();
-            object1.accumulate(Keys.deal, object);
-            if (DealWithItApp.isNetworkAvailable()) {
-                Log.d("Object",object1.toString());
-                new sendCreateDealData().execute(object1.toString());
-            } else {
+            JSONObject object2 = new JSONObject();
+            object2.accumulate(Keys.deal,object);
+            object2.accumulate(Keys.id,id);
+            object2.accumulate(Keys.dealId,DealWithItApp.readFromPreferences(getActivity(), Keys.dealId, Constants.DEFAULT_STRING));
 
-            }
-
-
-           Log.d("Deal",jsonObject.toString());
-
+            return object2;
         }catch (Exception e){
             e.printStackTrace();
         }
+        return null;
     }
 
 

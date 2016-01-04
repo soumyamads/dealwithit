@@ -9,6 +9,10 @@ public class Constants {
 
     public static final int LIMIT = 8;
 
+    public static final String EditDealStepThreeFragment = "EditDealStepThreeFragment";
+    public static final String EditDealStepOneFragment = "EditDealStepOneFragment";
+    public static final String EditDealStepTwoFragment = "EditDealStepTwoFragment";
+
     public static final String EditBusinessProfileIncomingDealDialogFragment = "BusinessProfileIncomingDealDialogFragment";
     public static final String EditBusinessProfileBasicFragment = "EditBusinessProfileBasicFragment";
     public static final String EditBusinessProfileDetailFragment = "EditBusinessProfileDetailFragment";

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,16 +19,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 
 import com.snyxius.apps.dealwithit.R;
-import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
+import com.snyxius.apps.dealwithit.pojos.AllPojos;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -43,7 +44,7 @@ import java.util.ArrayList;
 /**
  * Created by snyxius on 10/15/2015.
  */
-public class CreateDealStepTwoFragment extends Fragment  implements View.OnClickListener{
+public class EditDealStepTwoFragment extends Fragment  implements View.OnClickListener{
 
 
     LinearLayout linearguest,linearbilling;
@@ -51,24 +52,15 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     StepTwoStroke mCallback;
     String uploadPicture = "";
-    static JSONObject jsonObject = new JSONObject();
+
+    private static  ArrayList<AllPojos> arrayStepSecond;
     EditText minimum_guest,cost_person,max_boking,additional,terms_text,minimum_billig,discount_percent;
-    public static CreateDealStepTwoFragment newInstance(JSONObject Object) {
-        jsonObject = Object;
-        CreateDealStepTwoFragment f = new CreateDealStepTwoFragment();
+    ImageView cover_image;
+
+    public static EditDealStepTwoFragment newInstance(ArrayList<AllPojos> Object) {
+        arrayStepSecond = Object;
+        EditDealStepTwoFragment f = new EditDealStepTwoFragment();
         return f;
-    }
-
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mCallback = (StepTwoStroke)activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement DataPassListener");
-        }
     }
 
 
@@ -76,7 +68,7 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.create_deal_step_two, container, false);
+        View rootView = inflater.inflate(R.layout.edit_deal_step_two, container, false);
         return rootView;
     }
 
@@ -110,24 +102,34 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
         minimum_guest = (EditText)view.findViewById(R.id.mimimum_guest);
         cost_person = (EditText)view.findViewById(R.id.cost_person);
         max_boking = (EditText)view.findViewById(R.id.max_boking);
+        max_boking.setText(arrayStepSecond.get(Constants.DEFAULT_INT).getMaximum_Booking());
         additional = (EditText)view.findViewById(R.id.additional);
+        additional.setText(arrayStepSecond.get(Constants.DEFAULT_INT).getAdditional());
         terms_text = (EditText)view.findViewById(R.id.terms_text);
+        terms_text.setText(arrayStepSecond.get(Constants.DEFAULT_INT).getTerms_Conditions());
         minimum_billig = (EditText)view.findViewById(R.id.mimimum_billig);
         discount_percent = (EditText)view.findViewById(R.id.discount_percent);
+        cover_image = (ImageView)view.findViewById(R.id.cover_image);
         view.findViewById(R.id.deal_image_layout).setOnClickListener(this);
-        view.findViewById(R.id.continue_button).setOnClickListener(this);
-        view.findViewById(R.id.min_guests).setOnClickListener(this);
-        view.findViewById(R.id.min_billing).setOnClickListener(this);
+        uploadPicture = arrayStepSecond.get(Constants.DEFAULT_INT).getDeal_image();
+        BitmapDrawable ob = new BitmapDrawable(getActivity().getResources(), DealWithItApp.base64ToBitmap(arrayStepSecond.get(Constants.DEFAULT_INT).getDeal_image()));
+        cover_image.setImageDrawable(ob);
+        if(arrayStepSecond.get(Constants.DEFAULT_INT).getChecking().equals("Y")){
+            radioGroup.check(R.id.min_guests);
+            minimum_guest.setText(arrayStepSecond.get(Constants.DEFAULT_INT).getMinimum_Guest());
+            cost_person.setText(arrayStepSecond.get(Constants.DEFAULT_INT).getCost_person());
+        }else if(arrayStepSecond.get(Constants.DEFAULT_INT).getChecking().equals("N")){
+            radioGroup.check(R.id.min_billing);
+            minimum_billig.setText(arrayStepSecond.get(Constants.DEFAULT_INT).getMinimum_Billing());
+            discount_percent.setText(arrayStepSecond.get(Constants.DEFAULT_INT).getDiscount_Person());
+        }
+
     }
 
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.continue_button:
-                validate();
-               // sendBasicData();
-                break;
             case R.id.deal_image_layout:
                     selectImage();
                 break;
@@ -149,7 +151,7 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
                 } else if (items[item].equals("Choose from Library")) {
                     Intent intent = new Intent(
                             Intent.ACTION_PICK,
-                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     intent.setType("image/*");
                     startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
                 } else if (items[item].equals("Cancel")) {
@@ -220,11 +222,13 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
         options.inSampleSize = scale;
         options.inJustDecodeBounds = false;
         bm = BitmapFactory.decodeFile(selectedImagePath, options);
+
         sendImages(bm);
 
 
     }
     private void sendImages(Bitmap bitmaps){
+        cover_image.setImageBitmap(bitmaps);
         int nh = (int) ( bitmaps.getHeight() * (256.0 / bitmaps.getWidth()) );
         Bitmap scaled = Bitmap.createScaledBitmap(bitmaps, 256, nh, true);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -236,52 +240,50 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
 
 
 
-    public void validate(){
+    public int validate(){
 
         String radiovalue = ((RadioButton)getActivity().findViewById(radioGroup.getCheckedRadioButtonId())).getText().toString();
         Log.d("RadioValue",radiovalue);
 
         if(radiovalue.equals("Minimum Guests")){
             if(uploadPicture.equals("")){
-                DealWithItApp.showAToast("Please select the Deal Image");
+                return Constants.INT_ONE;
             }else if(minimum_guest.getText().toString().isEmpty()){
-                DealWithItApp.showAToast("Please select the Minimum Guest");
+                return Constants.INT_TWO;
             }else if(cost_person.getText().toString().isEmpty()){
-                DealWithItApp.showAToast("Please give the Cost Person");
+                return Constants.INT_THREE;
             } else if(additional.getText().toString().isEmpty()){
-                DealWithItApp.showAToast("Please select the Additional");
+                return Constants.INT_FOUR;
             }else if(terms_text.getText().toString().isEmpty()){
-                DealWithItApp.showAToast("Please give the Terms & Condition");
+                return Constants.INT_FIVE;
             }
             else{
-                sendBasicData(radiovalue);
+                return Constants.INT_EIGHT;
             }
 
-        }
-
-        if(radiovalue.equals("Minimum Billings")){
+        }else {
             if(uploadPicture.equals("")){
-                DealWithItApp.showAToast("Please select the Deal Image");
+                return Constants.INT_ONE;
+
             }else if(minimum_billig.getText().toString().isEmpty()){
-                DealWithItApp.showAToast("Please select the Minimum Billing");
+                return Constants.INT_SIX;
             }else if(discount_percent.getText().toString().isEmpty()){
-                DealWithItApp.showAToast("Please give the Discount Percent");
+                return Constants.INT_SEVEN;
             } else if(additional.getText().toString().isEmpty()){
-                DealWithItApp.showAToast("Please select the Additional");
+                return Constants.INT_FOUR;
             }else if(terms_text.getText().toString().isEmpty()){
-                DealWithItApp.showAToast("Please give the Terms & Condition");
+                return Constants.INT_FIVE;
             }
             else{
-                sendBasicData(radiovalue);
+                return Constants.INT_NINE;
             }
 
         }
-
 
     }
 
 
-    private void sendBasicData(String value){
+    public JSONObject sendBasicData(JSONObject jsonObject,String value){
         try{
             jsonObject.accumulate(Keys.deal_image, uploadPicture);
             if(value.equals("Minimum Guests")){
@@ -309,12 +311,12 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
             jsonObject.accumulate(Keys.additional, additional.getText().toString());
             jsonObject.accumulate(Keys.terms_text, terms_text.getText().toString());
 
-            mCallback.setStepThreeStoke();
-            mCallback.sendStepTwoData(jsonObject);
+           return jsonObject;
 
         }catch (Exception e){
             e.printStackTrace();
         }
+        return null;
     }
 
     public interface StepTwoStroke{

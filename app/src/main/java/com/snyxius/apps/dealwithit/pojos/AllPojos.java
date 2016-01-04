@@ -110,9 +110,7 @@ public class AllPojos {
         this.deal_image = deal_image;
     }
 
-    public String getRecurring() {
-        return recurring;
-    }
+
 
     public void setRecurring(String recurring) {
         this.recurring = recurring;
@@ -173,7 +171,7 @@ public class AllPojos {
 
     public String address = "Address";
     public String description = "Description";
-    public String menu_images = "Menu_Images";
+
 
     public String getAddress() {
         return address;
@@ -191,45 +189,10 @@ public class AllPojos {
         this.description = description;
     }
 
-    public String getMenu_images() {
-        return menu_images;
-    }
-
-    public void setMenu_images(String menu_images) {
-        this.menu_images = menu_images;
-    }
 
 
-    String firstName="firstName";
-    String lastName="lastName";
-    String establishmentName="establishmentName";
+
     String email="email";
-    String mobile="mobile";
-    String userImage="userImage";
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEstablishmentName() {
-        return establishmentName;
-    }
-
-    public void setEstablishmentName(String establishmentName) {
-        this.establishmentName = establishmentName;
-    }
 
     public String getEmail() {
         return email;
@@ -239,23 +202,8 @@ public class AllPojos {
         this.email = email;
     }
 
-    public String getMobile() {
-        return mobile;
-    }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getUserImage() {
-        return userImage;
-    }
-
-    public void setUserImage(String userImage) {
-        this.userImage = userImage;
-    }
-
-
+    //BusinessDetails
     public String timing_slot_1_start = "Timing_Slot_1_Start";
     public String timing_slot_2_start = "Timing_Slot_2_Start";
     public String timing_slot_1_end = "Timing_Slot_1_End";
@@ -302,6 +250,16 @@ public class AllPojos {
         this.max_seating = max_seating;
     }
 
+
+
+
+
+    //BuisnessIncomingDeal
+    public String deal_offering = "Deal_Offering";
+    public String alcohol = "Alcohol";
+    public String cost_per_person = "Cost_Per_Person";
+    public String max_guest = "Maximum_Guest";
+
     public String getDeal_offering() {
         return deal_offering;
     }
@@ -334,9 +292,185 @@ public class AllPojos {
         this.max_guest = max_guest;
     }
 
-    public String deal_offering = "Deal_Offering";
-    public String alcohol = "Alcohol";
-    public String cost_per_person = "Cost_Per_Person";
-    public String max_guest = "Maximum_Guest";
+
+
+
+
+    //DealStepOne
+    public String Deal_Name = "Deal_Name";
+    public String Full_Description = "Full_Description";
+    public String Quick_Description = "Quick_Description";
+
+    public String getDeal_Name() {
+        return Deal_Name;
+    }
+
+    public void setDeal_Name(String deal_Name) {
+        Deal_Name = deal_Name;
+    }
+
+    public String getFull_Description() {
+        return Full_Description;
+    }
+
+    public void setFull_Description(String full_Description) {
+        Full_Description = full_Description;
+    }
+
+    public String getQuick_Description() {
+        return Quick_Description;
+    }
+
+    public void setQuick_Description(String quick_Description) {
+        Quick_Description = quick_Description;
+    }
+
+
+
+    //DealStepSecond
+    public String Maximum_Booking = "Maximum_Booking";
+    public String Minimum_Guest = "Minimum_Guest";
+    public String Cost_person = "Cost_person";
+
+    public String Additional = "Additional";
+    public String Terms_Conditions = "Terms_Conditions";
+    public String Discount_Person = "Discount_Person";
+    public String Minimum_Billing = "Minimum_Billing";
+    public String Checking;
+
+    public String getChecking() {
+        return Checking;
+    }
+
+    public void setChecking(String checking) {
+        Checking = checking;
+    }
+
+    public String getMaximum_Booking() {
+        return Maximum_Booking;
+    }
+
+    public void setMaximum_Booking(String maximum_Booking) {
+        Maximum_Booking = maximum_Booking;
+    }
+
+    public String getMinimum_Guest() {
+        return Minimum_Guest;
+    }
+
+    public void setMinimum_Guest(String minimum_Guest) {
+        Minimum_Guest = minimum_Guest;
+    }
+
+    public String getCost_person() {
+        return Cost_person;
+    }
+
+    public void setCost_person(String cost_person) {
+        Cost_person = cost_person;
+    }
+
+
+
+    public String getAdditional() {
+        return Additional;
+    }
+
+    public void setAdditional(String additional) {
+        Additional = additional;
+    }
+
+    public String getTerms_Conditions() {
+        return Terms_Conditions;
+    }
+
+    public void setTerms_Conditions(String terms_Conditions) {
+        Terms_Conditions = terms_Conditions;
+    }
+
+    public String getDiscount_Person() {
+        return Discount_Person;
+    }
+
+    public void setDiscount_Person(String discount_Person) {
+        Discount_Person = discount_Person;
+    }
+
+    public String getMinimum_Billing() {
+        return Minimum_Billing;
+    }
+
+    public void setMinimum_Billing(String minimum_Billing) {
+        Minimum_Billing = minimum_Billing;
+    }
+
+    //DealStepSecond
+
+
+    public String getFix() {
+        return Fix;
+    }
+
+    public void setFix(String fix) {
+        Fix = fix;
+    }
+
+    public String Fix = "Fixed";
+
+
+    public String Recurring = "Recurring";
+
+    public String getStart_Deal_Date() {
+        return Start_Deal_Date;
+    }
+
+    public void setStart_Deal_Date(String start_Deal_Date) {
+        Start_Deal_Date = start_Deal_Date;
+    }
+
+    public String getClosing_Hour() {
+        return Closing_Hour;
+    }
+
+    public void setClosing_Hour(String closing_Hour) {
+        Closing_Hour = closing_Hour;
+    }
+
+    public String getOpening_Hour() {
+        return Opening_Hour;
+    }
+
+    public void setOpening_Hour(String opening_Hour) {
+        Opening_Hour = opening_Hour;
+    }
+
+    public String getEnd_Deal_date() {
+        return End_Deal_date;
+    }
+
+    public void setEnd_Deal_date(String end_Deal_date) {
+        End_Deal_date = end_Deal_date;
+    }
+
+    public String getRecurring() {
+        return Recurring;
+    }
+
+    public String getRepeat() {
+        return Repeat;
+    }
+
+    public void setRepeat(String repeat) {
+        Repeat = repeat;
+    }
+
+    public String Repeat = "Repeat";
+
+    public String End_Deal_date = "End_Deal_date";
+    public String Opening_Hour = "Opening_Hour";
+    public String Closing_Hour = "Closing_Hour";
+    public String Start_Deal_Date = "Start_Deal_Date";
+
+
 
 }

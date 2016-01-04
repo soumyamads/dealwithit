@@ -356,8 +356,8 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
                         userLastName.setText(object2.getString(Keys.lastName));
                             userNumber.setText(object2.getString(Keys.mobile));
                             userEmail.setText(object2.getString(Keys.email));
-                        userEstName.setText(object2.getString(Keys.establishmentName));
-                        if(object2.getString(Keys.userImage)!=null)
+                            userEstName.setText(object2.getString(Keys.establishmentName));
+                        if(!object2.getString(Keys.userImage).equals(""))
                         proImage.setImageBitmap(DealWithItApp.base64ToBitmap(object2.getString(Keys.userImage)));
                         else
                             proImage.setImageResource(R.drawable.null_circle_image);

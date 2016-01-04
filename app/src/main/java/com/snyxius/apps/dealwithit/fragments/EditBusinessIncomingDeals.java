@@ -19,6 +19,8 @@ import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.pojos.AllPojos;
+import com.snyxius.apps.dealwithit.utils.DividerItemDecoration;
+import com.snyxius.apps.dealwithit.utils.VerticalSpaceItemDecoration;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -73,6 +75,15 @@ public class EditBusinessIncomingDeals extends Fragment implements View.OnClickL
                 }
             }
         });
+
+        //add ItemDecoration
+        mRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(2));
+        //or
+        mRecyclerView.addItemDecoration(
+                new DividerItemDecoration(getActivity()));
+        //or
+        mRecyclerView.addItemDecoration(
+                new DividerItemDecoration(getActivity(), R.drawable.divider));
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }

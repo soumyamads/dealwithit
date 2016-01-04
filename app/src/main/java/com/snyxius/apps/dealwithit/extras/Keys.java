@@ -10,6 +10,8 @@ public interface Keys {
     public static final String search = "search";
     public static final String allProfiles = "allProfiles";
     public static final String deal = "deal";
+    public static final String Deal = "Deal";
+    public static final String businessprofilesNames = "businessprofilesNames";
     public static final String businessprofilesIds = "BusinessProfilesIds";
     public static final String businessprofilesIdss = "buisnessProfileId";
 

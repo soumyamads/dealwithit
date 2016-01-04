@@ -224,8 +224,8 @@ public class GetAllBusinessProfileFragment extends Fragment implements View.OnCl
     private void getSelectedTypes() {
         try {
             StringBuffer sb = new StringBuffer();
-            ArrayList<String> selectedTypes = new ArrayList<>();
-
+            ArrayList<String> selectedBusinessName = new ArrayList<>();
+            ArrayList<String> selectedBusinessIds = new ArrayList<>();
 
             for (AllPojos bean : estTypeListArray) {
                 if (bean.isSelected()) {
@@ -233,7 +233,8 @@ public class GetAllBusinessProfileFragment extends Fragment implements View.OnCl
                     sb.append(",");
                     String string = bean.getBusiness_name();
                     String[] splited = string.split("\\s");
-                    selectedTypes.add(bean.getProfile_id());
+                    selectedBusinessIds.add(bean.getProfile_id());
+                    selectedBusinessName.add(bean.getBusiness_name());
                 }
             }
             String s = sb.toString().trim();
@@ -241,7 +242,7 @@ public class GetAllBusinessProfileFragment extends Fragment implements View.OnCl
                 DealWithItApp.showAToast("Select atleast one Business Profile");
             } else {
                 s = s.substring(0, s.length() - 1);
-                mCallback.passBusinessProfileData(s, selectedTypes);
+                mCallback.passBusinessProfileData(s, selectedBusinessName, selectedBusinessIds);
                 getActivity().getSupportFragmentManager().popBackStack();
             }
 
@@ -252,7 +253,7 @@ public class GetAllBusinessProfileFragment extends Fragment implements View.OnCl
     }
 
     public interface DataPassListener{
-         void passBusinessProfileData(String data, ArrayList<String> array);
+         void passBusinessProfileData(String data, ArrayList<String> arrayBusinessName,ArrayList<String> arrayBusinessIds);
     }
 
 }

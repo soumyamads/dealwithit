@@ -84,16 +84,7 @@ GetAllBusinessProfileFragment.DataPassListener,CreateDealStepOneFragment.PassDat
     }
 
 
-    @Override
-    public void passBusinessProfileData(String data, ArrayList<String> array) {
-        try {
-            //Log.d("String",data+""+array.toString());
-            CreateDealStepOneFragment f = (CreateDealStepOneFragment) getSupportFragmentManager().findFragmentByTag(Constants.CREATE_STEP_ONE_FRAGMENT);
-            f.changeBusinessProfileText(data, array);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
+
 
     @Override
     public void onClick(View v) {
@@ -145,5 +136,16 @@ GetAllBusinessProfileFragment.DataPassListener,CreateDealStepOneFragment.PassDat
 //        }
 
 
+    }
+
+    @Override
+    public void passBusinessProfileData(String data, ArrayList<String> arrayBusinessName, ArrayList<String> arrayBusinessIds) {
+        try {
+            //Log.d("String",data+""+array.toString());
+            CreateDealStepOneFragment f = (CreateDealStepOneFragment) getSupportFragmentManager().findFragmentByTag(Constants.CREATE_STEP_ONE_FRAGMENT);
+            f.changeBusinessProfileText(data, arrayBusinessName,arrayBusinessIds );
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

@@ -95,7 +95,7 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.right:
-                DealWithItApp.showAToast("Under Construction");
+                validateBasic();
                 break;
             case R.id.wrong:
                 onBackPressed();
