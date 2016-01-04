@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,6 +16,8 @@ import android.provider.MediaStore;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -41,6 +44,7 @@ import com.snyxius.apps.dealwithit.api.WebServices;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
+import com.snyxius.apps.dealwithit.fragments.DrawerFragment;
 import com.snyxius.apps.dealwithit.pojos.AllPojos;
 
 import org.json.JSONException;
@@ -66,6 +70,11 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
     private boolean mIsTheTitleVisible          = false;
     private boolean mIsTheTitleContainerVisible = true;
 
+
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle drawerToggle;
+    Toolbar toolbar;
+
     private LinearLayout mTitleContainer;
     private RelativeLayout mImageLayout;
     private TextView mTitle;
@@ -89,15 +98,14 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
 
         bindActivity();
 
-        mToolbar.setTitle("");
-//        proImage=(ImageView)findViewById(R.id.pro_image);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
         startAlphaAnimation(mTitle, 0, View.INVISIBLE);
         initParallaxValues();
 
 
+        initParallaxValues();
+        initDrawer();
 
 
         mAppBarLayout.addOnOffsetChangedListener(this);
@@ -108,6 +116,42 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
 
         }
     }
+
+    private void initDrawer() {
+        drawerLayout=(DrawerLayout)findViewById(R.id.drawerlayout);
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.container_drawer,new DrawerFragment().newInstance(drawerLayout), Constants.DRAWER_FRAGMENT)
+                .commit();
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                drawerToggle.syncState();
+                supportInvalidateOptionsMenu();
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                drawerToggle.syncState();
+            }
+        };
+        drawerLayout.setDrawerListener(drawerToggle);
+    }
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+
 
     private void bindActivity() {
         mToolbar        = (Toolbar) findViewById(R.id.toolbar);
@@ -130,6 +174,12 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
 
         proImage=(CircleImageView)findViewById(R.id.proImage);
         proImage.setOnClickListener(this);
+
+        mToolbar.setTitle("");
+//        proImage=(ImageView)findViewById(R.id.pro_image);
+        setSupportActionBar(mToolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     private void initParallaxValues() {
@@ -353,17 +403,18 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
                     if (object2 != null) {
 
                             userFirstName.setText(object2.getString(Keys.firstName));
-                        userLastName.setText(object2.getString(Keys.lastName));
+                            userLastName.setText(object2.getString(Keys.lastName));
                             userNumber.setText(object2.getString(Keys.mobile));
                             userEmail.setText(object2.getString(Keys.email));
                             userEstName.setText(object2.getString(Keys.establishmentName));
+                            mTitle.setText(object2.getString(Keys.firstName));
                         if(!object2.getString(Keys.userImage).equals(""))
-                        proImage.setImageBitmap(DealWithItApp.base64ToBitmap(object2.getString(Keys.userImage)));
+                            proImage.setImageBitmap(DealWithItApp.base64ToBitmap(object2.getString(Keys.userImage)));
                         else
                             proImage.setImageResource(R.drawable.null_circle_image);
                     }
                 } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
-                    DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+                        DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
                 } else {
                     DealWithItApp.showAToast("Something Went Wrong.");
                 }
@@ -493,12 +544,12 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
     }
 
     public void scaleView(View v, int visibility) {
-        ScaleAnimation anim = (visibility == View.VISIBLE)
-        ? new ScaleAnimation(0,1,0,1) : new ScaleAnimation(1,0,1,0);
+        AlphaAnimation anim = (visibility == View.VISIBLE)
+        ? new AlphaAnimation(0,1) : new AlphaAnimation(1,0);
         anim.setFillBefore(true);
         anim.setFillAfter(true);
         anim.setFillEnabled(true);
-        anim.setDuration(300);
+        anim.setDuration(700);
         anim.setInterpolator(new OvershootInterpolator());
 //        fab.startAnimation(anim);
 //        anim.setFillAfter(true); // Needed to keep the result of the animation

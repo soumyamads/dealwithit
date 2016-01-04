@@ -101,7 +101,6 @@ private LinearLayout mTitleContainer;
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 drawerToggle.syncState();
-
             }
         };
         drawerLayout.setDrawerListener(drawerToggle);
