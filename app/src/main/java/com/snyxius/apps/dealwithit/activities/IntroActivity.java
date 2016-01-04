@@ -36,6 +36,7 @@ public class IntroActivity extends AppCompatActivity{
 
         @Override
         public Fragment getItem(int pos) {
+
             switch(pos) {
 
                 case 0:  return LoginSignupFragment.newInstance("IntroFragment, Instance 1");
