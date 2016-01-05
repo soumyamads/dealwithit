@@ -260,23 +260,19 @@
         android:background="@color/colorPrimary"
         app:title="">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
 
 
             <TextView
                 android:id="@+id/main.textview.title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="Nihas"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="Merchant Profile"
                 android:textColor="@android:color/white"
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
                 />
 
-        </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
 

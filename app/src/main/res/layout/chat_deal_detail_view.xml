@@ -41,13 +41,13 @@
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="150dp"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <ImageView
@@ -104,20 +104,19 @@
                 </android.support.v7.widget.Toolbar>
 
 
-                <FrameLayout
+                <RelativeLayout
                     android:id="@+id/frame_container"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    android:paddingTop="10dp"
+                    android:paddingTop="5dp"
                     android:layout_gravity="bottom|center_horizontal"
-                    android:orientation="vertical"
-                    app:layout_collapseMode="parallax">
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:id="@+id/linear_container"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                        android:layout_centerHorizontal="true"
                         android:orientation="vertical">
 
                         <TextView
@@ -144,7 +143,7 @@
 
                     </LinearLayout>
 
-                </FrameLayout>
+                </RelativeLayout>
 
             </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -182,27 +181,7 @@
         <!--android:layout_margin="@dimen/fab_margin"-->
         <!--android:clickable="true"/>-->
 
-        <RelativeLayout
-            android:id="@+id/imageLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-30dp"
-            android:visibility="gone"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/proImage"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/pro"
-                android:layout_centerHorizontal="true"
-                app:layout_anchorGravity="bottom|center"
-                app:border_color="@android:color/white"
-                app:border_width="2dp"
-                />
-
-        </RelativeLayout>
 
 
         <android.support.v4.widget.NestedScrollView
@@ -227,136 +206,153 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="FIRST NAME"
+                        android:text="NO OF GUESTS : 10"
+                        android:gravity="center"
+                        android:textColor="@color/colorPrimary"
                         android:textStyle="bold"/>
 
-                    <EditText
-                        android:id="@+id/user_firstname"
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Nihas Nizar"
+                        android:text="COST PER PERSON : INR 800"
                         android:layout_marginTop="5dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:background="@null"/>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    style="@style/Widget.CardContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                        android:textColor="@color/colorPrimary"
+                        android:gravity="center"
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="LAST NAME"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/user_lastname"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Nihas Nizar"
+                        android:text="ALCOHOL INCLUDED"
+                        android:gravity="center"
                         android:layout_marginTop="5dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:background="@null" />
+                        android:textStyle="bold"
+                        android:textSize="11dp"
+                        android:textColor="@color/colorPrimary"/>
 
-                </LinearLayout>
-
-
-
-                <LinearLayout
-                    style="@style/Widget.CardContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="NUMBER"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/user_number"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="+919447778669"
-                        android:layout_marginTop="5dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:background="@null"/>
-
-                </LinearLayout>
+                        android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:textStyle="bold"
+                        android:textSize="11dp"/>
 
 
-
-
-                <LinearLayout
-                    style="@style/Widget.CardContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="DESIGNATION"
-                        android:textStyle="bold" />
+                        android:text="ADDITIONAL REQUEST"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="11dp"
+                        android:layout_marginTop="15dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/colorPrimary"/>
 
-                    <EditText
-                        android:id="@+id/user_designation"
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Android Developer"
+                        android:background="#CDCDCD"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Need 2 starters + 1 maincourse + 2-3 drinks for each person"
+                            android:textStyle="bold"
+                            android:padding="8dp"
+                            android:textSize="11dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:background="@null"/>
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/share_mail"
+                            android:textStyle="bold"
+                            android:padding="8dp"
+                            android:textSize="11dp"
+                            android:background="?selectableItemBackground"/>
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/share_twitter"
+                            android:textStyle="bold"
+                            android:padding="8dp"
+                            android:textSize="11dp"
+                            android:background="?selectableItemBackground"/>
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/share_facebook"
+                            android:textStyle="bold"
+                            android:padding="8dp"
+                            android:textSize="11dp"
+                            android:background="?selectableItemBackground"/>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/edit_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="EDIT"
+                        android:layout_margin="16dp"
+                        android:textStyle="bold"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:background="@drawable/bottom_selector_secondary"
+                        android:textColor="#ffffff"
+                        />
+
 
                 </LinearLayout>
-
-
-
-                <LinearLayout
-                    style="@style/Widget.CardContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="EMAIL ID"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/user_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="nihas@snyxius.com"
-                        android:layout_marginTop="5dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:background="@null"/>
-
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/edit_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="EDIT"
-                    android:layout_margin="16dp"
-                    android:textStyle="bold"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:background="@drawable/bottom_selector_secondary"
-                    android:textColor="#ffffff"
-                    />
 
             </LinearLayout>
 
         </android.support.v4.widget.NestedScrollView>
+
+
+        <RelativeLayout
+            android:id="@+id/imageLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-35dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:background="#0783b4"></LinearLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/proImage"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/green_tick"
+                android:layout_centerHorizontal="true"
+                app:layout_anchorGravity="bottom|center"
+                app:border_color="@android:color/white"
+                app:border_width="5dp"
+                />
+
+
+
+        </RelativeLayout>
 
     </android.support.design.widget.CoordinatorLayout>
 

@@ -102,8 +102,6 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
 
         startAlphaAnimation(mTitle, 0, View.INVISIBLE);
         initParallaxValues();
-
-
         initParallaxValues();
         initDrawer();
 
@@ -122,7 +120,7 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container_drawer,new DrawerFragment().newInstance(drawerLayout), Constants.DRAWER_FRAGMENT)
                 .commit();
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close) {
 
             @Override
             public void onDrawerClosed(View drawerView) {
@@ -135,10 +133,12 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 drawerToggle.syncState();
+                supportInvalidateOptionsMenu();
             }
         };
         drawerLayout.setDrawerListener(drawerToggle);
     }
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -179,7 +179,14 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
 //        proImage=(ImageView)findViewById(R.id.pro_image);
         setSupportActionBar(mToolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setDisplayShowCustomEnabled(true);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayUseLogoEnabled(false);
+//        getSupportActionBar().setDisplayShowHomeEnabled(false);
+//        getSupportActionBar().setHomeButtonEnabled(true);
+//        getSupportActionBar().setIcon(null);
     }
 
     private void initParallaxValues() {
@@ -407,7 +414,7 @@ public class MerchantProfileActivity extends AppCompatActivity implements AppBar
                             userNumber.setText(object2.getString(Keys.mobile));
                             userEmail.setText(object2.getString(Keys.email));
                             userEstName.setText(object2.getString(Keys.establishmentName));
-                            mTitle.setText(object2.getString(Keys.firstName));
+//                            mTitle.setText(object2.getString(Keys.firstName));
                         if(!object2.getString(Keys.userImage).equals(""))
                             proImage.setImageBitmap(DealWithItApp.base64ToBitmap(object2.getString(Keys.userImage)));
                         else

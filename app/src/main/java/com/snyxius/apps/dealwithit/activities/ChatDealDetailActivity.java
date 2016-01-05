@@ -41,16 +41,16 @@ public class ChatDealDetailActivity extends AppCompatActivity implements View.On
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle drawerToggle;
     private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR  = 0.1f;
-    private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS     = 0.2f;
+    private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS     = 0.5f;
     private static final int ALPHA_ANIMATIONS_DURATION              = 200;
 
     private boolean mIsTheTitleVisible          = false;
     private boolean mIsTheTitleContainerVisible = true;
 //    private TextView mTitle;
 private LinearLayout mTitleContainer;
-    FrameLayout mFrameParallax;
+//    FrameLayout mFrameParallax;
     ImageView mImageparallax;
-    RelativeLayout rlTop;
+    RelativeLayout mImageLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ private LinearLayout mTitleContainer;
         initDrawer();
 
 //        startAlphaAnimation(mTitle, 0, View.INVISIBLE);
-        initParallaxValues();
+//        initParallaxValues();
     }
 
 
@@ -68,14 +68,14 @@ private LinearLayout mTitleContainer;
         CollapsingToolbarLayout.LayoutParams petDetailsLp =
                 (CollapsingToolbarLayout.LayoutParams) mImageparallax.getLayoutParams();
 
-        CollapsingToolbarLayout.LayoutParams petBackgroundLp =
-                (CollapsingToolbarLayout.LayoutParams) mFrameParallax.getLayoutParams();
+//        CollapsingToolbarLayout.LayoutParams petBackgroundLp =
+//                (CollapsingToolbarLayout.LayoutParams) mFrameParallax.getLayoutParams();
 
-        petDetailsLp.setParallaxMultiplier(0.1f);
-        petBackgroundLp.setParallaxMultiplier(0.3f);
-
-        mImageparallax.setLayoutParams(petDetailsLp);
-        mFrameParallax.setLayoutParams(petBackgroundLp);
+//        petDetailsLp.setParallaxMultiplier(0.1f);
+//        petBackgroundLp.setParallaxMultiplier(0.3f);
+//
+//        mImageparallax.setLayoutParams(petDetailsLp);
+//        mFrameParallax.setLayoutParams(petBackgroundLp);
 
 //        pDialog=new ProgressDialog(this);
     }
@@ -124,9 +124,9 @@ private LinearLayout mTitleContainer;
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 //        mTitle          = (TextView) findViewById(R.id.main_textview_title);
-        mFrameParallax=(FrameLayout)findViewById(R.id.frame_container);
+//        mFrameParallax=(FrameLayout)findViewById(R.id.frame_container);
         mTitleContainer = (LinearLayout) findViewById(R.id.linear_container);
-        mImageparallax  = (ImageView) findViewById(R.id.backdrop);
+        mImageLayout=(RelativeLayout)findViewById(R.id.imageLayout);
     }
 
     @Override
@@ -146,14 +146,14 @@ private LinearLayout mTitleContainer;
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
         int maxScroll = appBarLayout.getTotalScrollRange();
-        System.out.println("MAX SCROLL: "+maxScroll);
+        System.out.println("MAX SCROLL: " + maxScroll);
         float percentage = (float) Math.abs(verticalOffset) / (float) maxScroll;
 
         handleAlphaOnTitle(percentage);
-        handleToolbarTitleVisibility(percentage);
+//        handleToolbarTitleVisibility(percentage);
     }
 
-    private void handleToolbarTitleVisibility(float percentage) {
+    /*private void handleToolbarTitleVisibility(float percentage) {
         if (percentage >= PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR) {
 
             if(!mIsTheTitleVisible) {
@@ -170,22 +170,22 @@ private LinearLayout mTitleContainer;
         }
 
 
-    }
+    }*/
 
     private void handleAlphaOnTitle(float percentage) {
         if (percentage >= PERCENTAGE_TO_HIDE_TITLE_DETAILS) {
             if(mIsTheTitleContainerVisible) {
-//                scaleView(mImageLayout, View.INVISIBLE);
-                startAlphaAnimation(mTitleContainer, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
-                mIsTheTitleContainerVisible = false;
+                scaleView(mImageLayout, View.INVISIBLE);
+//                startAlphaAnimation(mTitleContainer, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
+//                mIsTheTitleContainerVisible = false;
             }
 
         } else {
 
             if (!mIsTheTitleContainerVisible) {
-                startAlphaAnimation(mTitleContainer, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
-//                scaleView(mImageLayout, View.VISIBLE);
-                mIsTheTitleContainerVisible = true;
+//                startAlphaAnimation(mTitleContainer, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
+                scaleView(mImageLayout, View.VISIBLE);
+//                mIsTheTitleContainerVisible = true;
             }
         }
     }
@@ -202,12 +202,12 @@ private LinearLayout mTitleContainer;
     }
 
     public void scaleView(View v, int visibility) {
-        ScaleAnimation anim = (visibility == View.VISIBLE)
-                ? new ScaleAnimation(0,1,0,1) : new ScaleAnimation(1,0,1,0);
+        AlphaAnimation anim = (visibility == View.VISIBLE)
+                ? new AlphaAnimation(0,1) : new AlphaAnimation(1,0);
         anim.setFillBefore(true);
         anim.setFillAfter(true);
         anim.setFillEnabled(true);
-        anim.setDuration(300);
+        anim.setDuration(700);
         anim.setInterpolator(new OvershootInterpolator());
 //        fab.startAnimation(anim);
 //        anim.setFillAfter(true); // Needed to keep the result of the animation
