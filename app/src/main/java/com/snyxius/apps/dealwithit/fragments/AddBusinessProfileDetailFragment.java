@@ -148,8 +148,8 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.continue_detail:
-               // sendBasicData();
-                validate();
+                sendBasicData();
+                //validate();
                 break;
             case R.id.type_layout:
                 passData.setTypeData(type_text.getText().toString());
@@ -281,6 +281,8 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
                     DealWithItApp.showAToast("Please select Second end Hour Slot");
                 }else if(max_seat.getText().toString().isEmpty()){
                     DealWithItApp.showAToast("Please select the Maximum Seatings");
+                }else if(max_seat.getText().toString().equals("0")){
+                    DealWithItApp.showAToast("Please enter atleast one");
                 }
                 else{
                     sendBasicData();

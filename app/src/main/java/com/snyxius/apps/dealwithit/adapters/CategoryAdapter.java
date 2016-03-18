@@ -51,8 +51,7 @@ public class CategoryAdapter extends BaseAdapter {
             convertView.setTag(R.id.est_type_name, holder.estName);
             convertView.setTag(R.id.est_check_box, holder.estChk);
 
-            holder.estChk
-                    .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            holder.estChk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
                         @Override
                         public void onCheckedChanged(CompoundButton vw,

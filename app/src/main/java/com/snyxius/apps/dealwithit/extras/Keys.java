@@ -4,6 +4,9 @@ package com.snyxius.apps.dealwithit.extras;
  * Created by AMAN on 05-11-2015.
  */
 public interface Keys {
+    public static final String flag = "flag";
+    public static final String venue_images = "venue_images";
+
     public static final String Address = "Address";
     public static final String token = "token";
 

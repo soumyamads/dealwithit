@@ -190,6 +190,8 @@ public class ActiveDealsFragment extends Fragment {
                         }
                     }
                     if(!dealsArray.isEmpty()) {
+                        empty.setVisibility(View.GONE);
+                        mRecyclerView.setVisibility(View.VISIBLE);
                         adapter = new DealsAdapter(getActivity(), dealsArray, mainArray, daysArray);
                         mRecyclerView.setAdapter(adapter);
                         mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
@@ -215,11 +217,13 @@ public class ActiveDealsFragment extends Fragment {
                         });
 
                     }else{
-                        empty.setText(View.VISIBLE);
+                        empty.setVisibility(View.VISIBLE);
+                        mRecyclerView.setVisibility(View.GONE);
                     }
 
                 } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
                     empty.setText(View.VISIBLE);
+                    mRecyclerView.setVisibility(View.GONE);
                     DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
                 } else {
                     DealWithItApp.showAToast("Something Went Wrong.");
@@ -227,6 +231,8 @@ public class ActiveDealsFragment extends Fragment {
             } else {
                 DealWithItApp.showAToast("Something Went Wrong.");
             }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

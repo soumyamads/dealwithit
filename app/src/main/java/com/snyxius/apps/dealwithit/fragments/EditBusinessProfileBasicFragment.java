@@ -72,6 +72,7 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
     AddMenuImages mCallback;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     ArrayList<String> arrayImage = new ArrayList<>();
+    ArrayList<String> arrayPhoto = new ArrayList<>();
     String uploadPicture = "";
     protected GoogleApiClient mGoogleApiClient;
     private PlaceAutocompleteAdapter mAdapter;
@@ -82,10 +83,12 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
     private ImageView cover_image;
 
     static  ArrayList<String> arrayMenu = new ArrayList<>();
+    static  ArrayList<String> arrayPhotos = new ArrayList<>();
     static ArrayList<AllPojos> arrayBasics = new ArrayList<>();
-    public static   EditBusinessProfileBasicFragment newInstance(ArrayList<AllPojos> arrayBasic,ArrayList<String > arrayImage) {
+    public static   EditBusinessProfileBasicFragment newInstance(ArrayList<AllPojos> arrayBasic,ArrayList<String > arrayImage,ArrayList<String > arrayPhoto) {
         arrayMenu = arrayImage;
         arrayBasics = arrayBasic;
+        arrayPhotos = arrayPhoto;
         Log.d("BasicArray",arrayBasics.get(Constants.DEFAULT_INT).toString());
         EditBusinessProfileBasicFragment f = new EditBusinessProfileBasicFragment();
         return f;
@@ -165,15 +168,10 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
         uploadPicture = arrayBasics.get(Constants.DEFAULT_INT).getCover_image();
         BitmapDrawable ob = new BitmapDrawable(getActivity().getResources(), DealWithItApp.base64ToBitmap(arrayBasics.get(Constants.DEFAULT_INT).getCover_image()));
         cover_image.setImageDrawable(ob);
-       // initializeGrid();
+
     }
 
-    private void initializeGrid()
-    {
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .add(R.id.gridcontainer, new ShowImageGrid().newInstance(arrayMenu), Constants.GRIDIMAGE_FRAGMENT)
-                .commit();
-    }    @Override
+      @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.continues:
@@ -190,6 +188,15 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
                 mAutocompleteView.setText("");
                 break;
             case R.id.add_menu:
+                DealWithItApp.saveToPreferences(getActivity(),Keys.flag,Constants.INT_ONE);
+                new Picker.Builder(getContext(),this,R.style.MIP_theme)
+                        .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
+                        .setLimit(6)
+                        .build()
+                        .startActivity();
+                break;
+            case R.id.add_photos:
+                DealWithItApp.saveToPreferences(getActivity(),Keys.flag,Constants.INT_TWO);
                 new Picker.Builder(getContext(),this,R.style.MIP_theme)
                         .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
                         .setLimit(6)
@@ -302,35 +309,67 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
 
         Log.d("IMAGES", "Picked images  " + images.toString());
 
-        arrayImage = new ArrayList<>();
+        if(DealWithItApp.readFromPreferences(getActivity(),Keys.flag,Constants.DEFAULT_INT) == Constants.INT_ONE) {
+            arrayImage = new ArrayList<>();
 
-        for(int i=0;i<images.size();i++){
+            for (int i = 0; i < images.size(); i++) {
 
-            Bitmap bitmaps;
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = true;
-            BitmapFactory.decodeFile(images.get(i).path, options);
-            final int REQUIRED_SIZE = 200;
-            int scale = 1;
-            while (options.outWidth / scale / 2 >= REQUIRED_SIZE
-                    && options.outHeight / scale / 2 >= REQUIRED_SIZE)
-                scale *= 2;
-            options.inSampleSize = scale;
-            options.inJustDecodeBounds = false;
-            bitmaps = BitmapFactory.decodeFile(images.get(i).path, options);
-            int nh = (int) ( bitmaps.getHeight() * (256.0 / bitmaps.getWidth()) );
-            Bitmap scaled = Bitmap.createScaledBitmap(bitmaps, 256, nh, true);
+                Bitmap bitmaps;
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                BitmapFactory.decodeFile(images.get(i).path, options);
+                final int REQUIRED_SIZE = 200;
+                int scale = 1;
+                while (options.outWidth / scale / 2 >= REQUIRED_SIZE
+                        && options.outHeight / scale / 2 >= REQUIRED_SIZE)
+                    scale *= 2;
+                options.inSampleSize = scale;
+                options.inJustDecodeBounds = false;
+                bitmaps = BitmapFactory.decodeFile(images.get(i).path, options);
+                int nh = (int) (bitmaps.getHeight() * (256.0 / bitmaps.getWidth()));
+                Bitmap scaled = Bitmap.createScaledBitmap(bitmaps, 256, nh, true);
 
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            scaled.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-            byte[] byteArray = byteArrayOutputStream.toByteArray();
-            String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                scaled.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+                byte[] byteArray = byteArrayOutputStream.toByteArray();
+                String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
-            arrayMenu.add(encoded);
+                arrayMenu.add(encoded);
+                mCallback.addItems(arrayMenu,Constants.INT_TWO);
+            }
+        }else if(DealWithItApp.readFromPreferences(getActivity(),Keys.flag,Constants.DEFAULT_INT) == Constants.INT_TWO){
+            arrayPhoto = new ArrayList<>();
+
+            for (int i = 0; i < images.size(); i++) {
+
+                Bitmap bitmaps;
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                BitmapFactory.decodeFile(images.get(i).path, options);
+                final int REQUIRED_SIZE = 200;
+                int scale = 1;
+                while (options.outWidth / scale / 2 >= REQUIRED_SIZE
+                        && options.outHeight / scale / 2 >= REQUIRED_SIZE)
+                    scale *= 2;
+                options.inSampleSize = scale;
+                options.inJustDecodeBounds = false;
+                bitmaps = BitmapFactory.decodeFile(images.get(i).path, options);
+                int nh = (int) (bitmaps.getHeight() * (256.0 / bitmaps.getWidth()));
+                Bitmap scaled = Bitmap.createScaledBitmap(bitmaps, 256, nh, true);
+
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                scaled.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+                byte[] byteArray = byteArrayOutputStream.toByteArray();
+                String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+                arrayPhotos.add(encoded);
+                mCallback.addItems(arrayMenu, Constants.INT_TWO);
+            }
+
         }
 
-        Log.d("ImageSizeBasicAdding",String.valueOf(arrayMenu.size()));
-       mCallback.addItems(arrayMenu);
+        Log.d("ImageSizeBasicAdding", String.valueOf(arrayMenu.size()));
+
 
 
     }
@@ -485,9 +524,11 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
             jsonObject.accumulate(Keys.address,mAutocompleteView.getText().toString());
             jsonObject.accumulate(Keys.description,description.getText().toString());
             jsonObject.accumulate(Keys.location_name, address.getText().toString());
-            Log.d("ImageSizeBasic",String.valueOf(arrayMenu.size()));
+            Log.d("ImageSizeBasic", String.valueOf(arrayMenu.size()));
             JSONArray array = new JSONArray(arrayMenu);
-            jsonObject.accumulate(Keys.menu_images,array);
+            jsonObject.accumulate(Keys.menu_images, array);
+            JSONArray array1 = new JSONArray(arrayPhotos);
+            jsonObject.accumulate(Keys.venue_images,array1);
             jsonObject.accumulate(Keys.cover_image, uploadPicture);
             return jsonObject;
         }catch (Exception e){
@@ -497,7 +538,7 @@ public class EditBusinessProfileBasicFragment extends Fragment implements View.O
     }
 
     public interface AddMenuImages{
-        void addItems(ArrayList<String> arrayList);
+        void addItems(ArrayList<String> arrayList,int position);
     }
 
     public void removeItems(int position){

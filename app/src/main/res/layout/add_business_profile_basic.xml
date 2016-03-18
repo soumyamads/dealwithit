@@ -119,7 +119,8 @@
                 android:background="@drawable/bottom_selector_transparent">
 
                 <TextView
-                    android:id="@+id/cuisine_text"
+                    android:textColor="@android:color/black"
+                    android:id="@+id/menu_text"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="4dp"
@@ -132,7 +133,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="3dp"
-                    android:layout_below="@+id/cuisine_text"
+                    android:layout_below="@+id/menu_text"
                     android:background="@color/grey"/>
 
                 <ImageView
@@ -143,7 +144,40 @@
                     android:src="@drawable/arrow_right"/>
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/photos_menu_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/bottom_selector_transparent">
 
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:id="@+id/photo_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="3dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:hint="Upload Photos" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_below="@+id/photo_text"
+                    android:background="@color/grey"/>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow_right"/>
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/cover_image_layout"
                 android:layout_width="match_parent"
@@ -154,7 +188,8 @@
                 android:background="@drawable/bottom_selector_transparent">
 
                 <TextView
-                    android:id="@+id/ambience_text"
+                    android:textColor="@android:color/black"
+                    android:id="@+id/cover_text"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="4dp"
@@ -167,7 +202,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="3dp"
-                    android:layout_below="@+id/ambience_text"
+                    android:layout_below="@+id/cover_text"
                     android:background="@color/grey"/>
 
                 <ImageView

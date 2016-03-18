@@ -168,7 +168,7 @@ public class SearchDeals extends Fragment {
             if (jsonObject != null) {
                 if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
                     if(empty.getVisibility() == View.VISIBLE){
-                        empty.setText(View.GONE);
+                        empty.setVisibility(View.GONE);
                         mRecyclerView.setVisibility(View.VISIBLE);
                     }
                     JSONObject obj = jsonObject.getJSONObject(Keys.notice);

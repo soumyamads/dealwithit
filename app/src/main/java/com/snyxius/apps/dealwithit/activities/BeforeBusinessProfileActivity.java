@@ -11,9 +11,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
+import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.fragments.DrawerFragment;
 
 /**
@@ -39,7 +42,10 @@ public class BeforeBusinessProfileActivity extends AppCompatActivity{
                 .add(R.id.container_drawer,new DrawerFragment(), Constants.DRAWER_FRAGMENT)
                 .commit();
         initDrawer();
-
+        TextView name = (TextView)findViewById(R.id.name);
+        String string = "Hi "+ DealWithItApp.readFromPreferences(getApplicationContext(), Keys.firstName,Constants.DEFAULT_STRING)+" "+
+                DealWithItApp.readFromPreferences(getApplicationContext(), Keys.lastName, Constants.DEFAULT_STRING);
+        name.setText(string);
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         drawerToggle.setDrawerIndicatorEnabled(false);
         drawerToggle.syncState();

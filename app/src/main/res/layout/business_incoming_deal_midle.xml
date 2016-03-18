@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="8dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:text="Maximum Guests"/>
+                android:text="Minimum Guests : "/>
 
             <TextView
                 android:id="@+id/max_guest"
@@ -103,7 +103,7 @@
                 android:id="@+id/alcohol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Yes"
+                android:text=""
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
         </LinearLayout>

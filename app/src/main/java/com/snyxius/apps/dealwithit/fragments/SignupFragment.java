@@ -1,7 +1,9 @@
 package com.snyxius.apps.dealwithit.fragments;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -25,6 +27,7 @@ import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.extras.Validater;
 import com.snyxius.apps.dealwithit.utils.CustomPasswordEditText;
+import com.snyxius.apps.dealwithit.utils.ShowHidePasswordEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,13 +50,13 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         return f;
     }
 
-@Override
-public View onCreateView(LayoutInflater inflater, ViewGroup container,
-        Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.signup_fragment, container, false);
-        return rootView;
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+                View rootView = inflater.inflate(R.layout.signup_fragment, container, false);
+                return rootView;
 
-}
+        }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -71,17 +74,15 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 establshname = (EditText) rootView.findViewById(R.id.establshname);
                 email = (EditText) rootView.findViewById(R.id.email);
                 mobileno = (EditText) rootView.findViewById(R.id.mobileno);
-                password = (EditText) rootView.findViewById(R.id.password);
+                password=(ShowHidePasswordEditText)rootView.findViewById(R.id.password);
+                password.setCompoundDrawables(null, null, getResources().getDrawable(R.color.colorPrimary), null);
                 retypepassword = (EditText) rootView.findViewById(R.id.retypepassword);
-                rootView.findViewById(R.id.show).setOnClickListener(this);
+
             }
 
             @Override
             public void onClick(View v) {
                 switch (v.getId()) {
-                    case R.id.show:
-                        password.setInputType(InputType.TYPE_CLASS_TEXT);
-                        break;
                     case R.id.signup_button:
                         validate();
                         break;
@@ -114,8 +115,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 }else if (mobileno.getText().toString().length() != 10) {
                     mobileno.setError("Mobile Number should be 10 digit without zero");
                     mobileno.requestFocus();
-                }
-                else if (email.getText().toString().isEmpty()) {
+                }else if (email.getText().toString().isEmpty()) {
                     email.setError("Field Required");
                     email.requestFocus();
                 } else if (!Validater.isValidEmail(email.getText().toString())) {
@@ -160,13 +160,15 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 
 
     private class SignUp extends AsyncTask<String, Void, JSONObject> {
-
+        private ProgressDialog dialog = new ProgressDialog(getActivity(),R.style.MyTheme);
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
-                    getActivity().getSupportFragmentManager().beginTransaction()
-                            .add(R.id.container_loading, new ProgressBarFrament(), Constants.PROGRESS_FRAGMENT)
-                            .commit();
+                    dialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
+                    dialog.setIndeterminate(true);
+                    dialog.setCancelable(false);
+                    dialog.setIndeterminateDrawable(getResources().getDrawable(R.drawable.progress));
+                    dialog.show();
                 }
 
                 @Override
@@ -183,18 +185,20 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 @Override
                 protected void onPostExecute(JSONObject jsonObject) {
                     super.onPostExecute(jsonObject);
-                    getActivity().getSupportFragmentManager().beginTransaction()
-                            .remove(getActivity().getSupportFragmentManager().findFragmentByTag(Constants.PROGRESS_FRAGMENT))
-                            .commit();
+                    if (dialog != null && dialog.isShowing()) {
+                        dialog.dismiss();
+                        dialog = null;
+                    }
                     onDone(jsonObject);
                 }
             }
 
-            private void onDone(JSONObject jsonObject) {
+            private void onDone(final JSONObject jsonObject) {
                 try {
                     if(jsonObject != null) {
                         if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
-                            DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+                            DealWithItApp.saveToPreferences(getActivity(), Keys.firstName, jsonObject.getString(Keys.firstName));
+                            DealWithItApp.saveToPreferences(getActivity(), Keys.lastName, jsonObject.getString(Keys.lastName));
                             DealWithItApp.saveToPreferences(getActivity(), Keys.id, jsonObject.getString(Keys.id));
                             DealWithItApp.saveToPreferences(getActivity(), Keys.profileId, jsonObject.getString(Keys.profileId));
                             DealWithItApp.saveToPreferences(getActivity(), Keys.dealNo, jsonObject.getString(Keys.dealNo));
@@ -202,12 +206,43 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                             dialogFrag.setCancelable(false);
                             dialogFrag.show(getFragmentManager().beginTransaction(), Constants.SUCCESSDIALOG_FRAGMENT);
                         } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
-                            DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+
+                            Handler mHandler = new Handler(getActivity().getMainLooper());
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
                         } else {
-                            DealWithItApp.showAToast("Something Went Wrong.");
+                            Handler mHandler = new Handler(getActivity().getMainLooper());
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        DealWithItApp.showAToast("Something Went Wrong.");
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
                         }
                     }else{
-                        DealWithItApp.showAToast("Something Went Wrong, Server is not responding");
+                        Handler mHandler = new Handler(getActivity().getMainLooper());
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    DealWithItApp.showAToast("Something Went Wrong. Server is not responding");
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

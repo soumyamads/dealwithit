@@ -40,15 +40,16 @@ public class BusinessCreatedDialogFragment extends DialogFragment implements Vie
 
     @Override
     public void onClick(View v) {
+
         if(v.getId() == R.id.continue_button){
             Intent intent=new Intent(getActivity(), DealWithItActivity.class);
             startActivity(intent);
             getActivity().finish();
         }
+
         if(v.getId() == R.id.create_another){
             Intent intent = new Intent(getActivity(),CreateBusinessProfileActivity.class);
             startActivity(intent);
-            getActivity().finish();
         }
 
 

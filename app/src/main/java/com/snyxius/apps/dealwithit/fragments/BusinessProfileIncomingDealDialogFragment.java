@@ -131,6 +131,8 @@ public class BusinessProfileIncomingDealDialogFragment extends DialogFragment im
     public void validate( int position){
         if(max_guest.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select the Maximum Guest");
+        }else if(max_guest.getText().toString().equals("0")){
+            DealWithItApp.showAToast("Please enter atleast one");
         }else if(leftIndexValue.getText().toString().isEmpty()){
             DealWithItApp.showAToast("Please select the Range cost/person");
         } else if(deal_offering.getText().toString().isEmpty()){

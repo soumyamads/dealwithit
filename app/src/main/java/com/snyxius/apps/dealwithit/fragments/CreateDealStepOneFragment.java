@@ -78,8 +78,8 @@ public class CreateDealStepOneFragment extends Fragment implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.continue_button:
-                validate();
-               // sendBasicData();
+               // validate();
+               sendBasicData();
                 break;
             case R.id.select_business_layout:
                 passData.setBusinessData(business_text.getText().toString());

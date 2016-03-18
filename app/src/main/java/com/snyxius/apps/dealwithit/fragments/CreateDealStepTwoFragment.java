@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
@@ -53,6 +54,7 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
     String uploadPicture = "";
     static JSONObject jsonObject = new JSONObject();
     EditText minimum_guest,cost_person,max_boking,additional,terms_text,minimum_billig,discount_percent;
+    TextView deal_image_text;
     public static CreateDealStepTwoFragment newInstance(JSONObject Object) {
         jsonObject = Object;
         CreateDealStepTwoFragment f = new CreateDealStepTwoFragment();
@@ -114,6 +116,7 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
         terms_text = (EditText)view.findViewById(R.id.terms_text);
         minimum_billig = (EditText)view.findViewById(R.id.mimimum_billig);
         discount_percent = (EditText)view.findViewById(R.id.discount_percent);
+        deal_image_text = (TextView)view.findViewById(R.id.deal_image_text);
         view.findViewById(R.id.deal_image_layout).setOnClickListener(this);
         view.findViewById(R.id.continue_button).setOnClickListener(this);
         view.findViewById(R.id.min_guests).setOnClickListener(this);
@@ -231,6 +234,9 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
         scaled.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
         uploadPicture = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        if(!uploadPicture.equals("")){
+            deal_image_text.setText("Image Uploaded");
+        }
     }
 
 
@@ -242,9 +248,10 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
         Log.d("RadioValue",radiovalue);
 
         if(radiovalue.equals("Minimum Guests")){
-            if(uploadPicture.equals("")){
-                DealWithItApp.showAToast("Please select the Deal Image");
-            }else if(minimum_guest.getText().toString().isEmpty()){
+//            if(uploadPicture.equals("")){
+//                DealWithItApp.showAToast("Please select the Deal Image");
+//            }else
+        if(minimum_guest.getText().toString().isEmpty()){
                 DealWithItApp.showAToast("Please select the Minimum Guest");
             }else if(cost_person.getText().toString().isEmpty()){
                 DealWithItApp.showAToast("Please give the Cost Person");
@@ -260,9 +267,10 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
         }
 
         if(radiovalue.equals("Minimum Billings")){
-            if(uploadPicture.equals("")){
-                DealWithItApp.showAToast("Please select the Deal Image");
-            }else if(minimum_billig.getText().toString().isEmpty()){
+//            if(uploadPicture.equals("")){
+//                DealWithItApp.showAToast("Please select the Deal Image");
+//            }else
+            if(minimum_billig.getText().toString().isEmpty()){
                 DealWithItApp.showAToast("Please select the Minimum Billing");
             }else if(discount_percent.getText().toString().isEmpty()){
                 DealWithItApp.showAToast("Please give the Discount Percent");

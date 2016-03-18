@@ -26,10 +26,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
+                <ImageView
+                    android:id="@+id/arrowType"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_height="20dp"
+                    android:src="@drawable/arrow_right"/>
                 <TextView
+                    android:maxEms="14"
                     android:id="@+id/type_text"
                     android:textColor="@android:color/black"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="4dp"
                     android:paddingTop="8dp"
@@ -44,12 +52,7 @@
                     android:layout_below="@+id/type_text"
                     android:background="@color/grey"/>
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/arrow_right"/>
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -58,9 +61,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow_right"/>
+
                 <TextView
+                    android:maxEms="14"
                     android:id="@+id/cuisine_text"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="4dp"
                     android:textColor="@android:color/black"
@@ -76,12 +88,6 @@
                     android:layout_below="@+id/cuisine_text"
                     android:background="@color/grey"/>
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/arrow_right"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -90,9 +96,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
                 <TextView
+                    android:maxEms="14"
                     android:id="@+id/ambience_text"
                     android:textColor="@android:color/black"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="4dp"
                     android:paddingTop="8dp"

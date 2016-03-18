@@ -152,6 +152,39 @@
                 android:layout_height="wrap_content"/>
 
             <LinearLayout
+                android:id="@+id/add_photos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:padding="10dp"
+                android:focusable="true"
+                android:background="@drawable/bottom_selector_transparent">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/plus_icon"/>
+
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:hint="Add Photos" />
+
+
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/gridphotoscontainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
                 android:id="@+id/edit_cover"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

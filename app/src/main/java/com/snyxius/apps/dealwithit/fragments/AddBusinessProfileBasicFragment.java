@@ -64,12 +64,13 @@ import java.util.ArrayList;
 
 public class AddBusinessProfileBasicFragment extends Fragment implements View.OnClickListener,Picker.PickListener, GoogleApiClient.OnConnectionFailedListener {
 
-    TextView  est_type_text;//,ambience_text,cuisine_text;
+    TextView  est_type_text,menu_text,cover_text,photo_text;//,ambience_text,cuisine_text;
     static String s;
     EditText est_name,address,description;
     DetailStroke mCallback;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     ArrayList<String> arrayImage = new ArrayList<>();
+    ArrayList<String> arrayPhotos = new ArrayList<>();
     String uploadPicture = "";
     protected GoogleApiClient mGoogleApiClient;
     private PlaceAutocompleteAdapter mAdapter;
@@ -134,9 +135,13 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
         view.findViewById(R.id.continues).setOnClickListener(this);
         view.findViewById(R.id.category_layout).setOnClickListener(this);
         view.findViewById(R.id.upload_menu_layout).setOnClickListener(this);
+        view.findViewById(R.id.photos_menu_layout).setOnClickListener(this);
         view.findViewById(R.id.cover_image_layout).setOnClickListener(this);
         view.findViewById(R.id.button_clear).setOnClickListener(this);
         est_type_text = (TextView)view.findViewById(R.id.category_text);
+        menu_text = (TextView)view.findViewById(R.id.menu_text);
+        photo_text = (TextView)view.findViewById(R.id.photo_text);
+        cover_text = (TextView)view.findViewById(R.id.cover_text);
         est_name = (EditText)view.findViewById(R.id.est_name);
         address = (EditText)view.findViewById(R.id.location_name);
         description = (EditText)view.findViewById(R.id.description);
@@ -146,8 +151,8 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.continues:
-               // sendBasicData();
-              validate();
+                sendBasicData();
+             // validate();
                 break;
             case R.id.category_layout:
                 getActivity().getSupportFragmentManager().beginTransaction()
@@ -160,6 +165,15 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
                 mAutocompleteView.setText("");
                 break;
             case R.id.upload_menu_layout:
+                DealWithItApp.saveToPreferences(getActivity(),Keys.flag,Constants.INT_ONE);
+                new Picker.Builder(getContext(),this,R.style.MIP_theme)
+                        .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
+                        .setLimit(6)
+                        .build()
+                        .startActivity();
+                break;
+            case R.id.photos_menu_layout:
+                DealWithItApp.saveToPreferences(getActivity(),Keys.flag,Constants.INT_TWO);
                 new Picker.Builder(getContext(),this,R.style.MIP_theme)
                         .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
                         .setLimit(6)
@@ -270,33 +284,75 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
 
         Log.d("IMAGES", "Picked images  " + images.toString());
 
-        arrayImage = new ArrayList<>();
+        if(DealWithItApp.readFromPreferences(getActivity(),Keys.flag,Constants.DEFAULT_INT) == Constants.INT_ONE) {
+            arrayImage = new ArrayList<>();
 
-        for(int i=0;i<images.size();i++){
 
-            Bitmap bitmaps;
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = true;
-            BitmapFactory.decodeFile(images.get(i).path, options);
-            final int REQUIRED_SIZE = 200;
-            int scale = 1;
-            while (options.outWidth / scale / 2 >= REQUIRED_SIZE
-                    && options.outHeight / scale / 2 >= REQUIRED_SIZE)
-                scale *= 2;
-            options.inSampleSize = scale;
-            options.inJustDecodeBounds = false;
-            bitmaps = BitmapFactory.decodeFile(images.get(i).path, options);
-            int nh = (int) ( bitmaps.getHeight() * (256.0 / bitmaps.getWidth()) );
-            Bitmap scaled = Bitmap.createScaledBitmap(bitmaps, 256, nh, true);
+            for(int i=0;i<images.size();i++){
 
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            scaled.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-            byte[] byteArray = byteArrayOutputStream.toByteArray();
-            String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                Bitmap bitmaps;
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                BitmapFactory.decodeFile(images.get(i).path, options);
+                final int REQUIRED_SIZE = 200;
+                int scale = 1;
+                while (options.outWidth / scale / 2 >= REQUIRED_SIZE
+                        && options.outHeight / scale / 2 >= REQUIRED_SIZE)
+                    scale *= 2;
+                options.inSampleSize = scale;
+                options.inJustDecodeBounds = false;
+                bitmaps = BitmapFactory.decodeFile(images.get(i).path, options);
+                int nh = (int) ( bitmaps.getHeight() * (256.0 / bitmaps.getWidth()) );
+                Bitmap scaled = Bitmap.createScaledBitmap(bitmaps, 256, nh, true);
 
-            arrayImage.add(encoded);
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                scaled.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+                byte[] byteArray = byteArrayOutputStream.toByteArray();
+                String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                arrayImage.add(encoded);
+
+            }
+            if(!arrayImage.isEmpty()){
+                menu_text.setText("Menu Uploaded");
+            }
+
+
+
+        }else if(DealWithItApp.readFromPreferences(getActivity(),Keys.flag,Constants.DEFAULT_INT) == Constants.INT_TWO){
+
+            arrayPhotos = new ArrayList<>();
+
+
+            for(int i=0;i<images.size();i++){
+
+                Bitmap bitmaps;
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                BitmapFactory.decodeFile(images.get(i).path, options);
+                final int REQUIRED_SIZE = 200;
+                int scale = 1;
+                while (options.outWidth / scale / 2 >= REQUIRED_SIZE
+                        && options.outHeight / scale / 2 >= REQUIRED_SIZE)
+                    scale *= 2;
+                options.inSampleSize = scale;
+                options.inJustDecodeBounds = false;
+                bitmaps = BitmapFactory.decodeFile(images.get(i).path, options);
+                int nh = (int) ( bitmaps.getHeight() * (256.0 / bitmaps.getWidth()) );
+                Bitmap scaled = Bitmap.createScaledBitmap(bitmaps, 256, nh, true);
+
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                scaled.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+                byte[] byteArray = byteArrayOutputStream.toByteArray();
+                String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                arrayPhotos.add(encoded);
+
+            }
+
+            if(!arrayPhotos.isEmpty()){
+                photo_text.setText("Photos Uploaded");
+            }
+
         }
-
 
 
     }
@@ -319,6 +375,9 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
         scaled.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
         uploadPicture = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        if(!uploadPicture.equals("")){
+            cover_text.setText("Cover Uploaded");
+        }
 
     }
 
@@ -433,8 +492,10 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
                     DealWithItApp.showAToast("Please select the Description");
                 }else if(arrayImage.isEmpty()){
                     DealWithItApp.showAToast("Please upload menu first");
-                }else if(uploadPicture.equals("")){
-                    DealWithItApp.showAToast("Please cover picture first");
+                }else if(arrayPhotos.isEmpty()){
+                        DealWithItApp.showAToast("Please upload photos first");
+                    }else if(uploadPicture.equals("")){
+                        DealWithItApp.showAToast("Please cover picture first");
                 }
                 else{
                     sendBasicData();
@@ -453,6 +514,8 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
             jsonObject.accumulate(Keys.location_name, address.getText().toString());
             JSONArray array = new JSONArray(arrayImage);
             jsonObject.accumulate(Keys.menu_images,array);
+            JSONArray array1 = new JSONArray(arrayPhotos);
+            jsonObject.accumulate(Keys.venue_images,array1);
             jsonObject.accumulate(Keys.cover_image,uploadPicture);
             mCallback.setDetailStoke();
             mCallback.sendCategoryData(est_type_text.getText().toString(), jsonObject);

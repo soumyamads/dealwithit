@@ -1,5 +1,6 @@
 package com.snyxius.apps.dealwithit.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,6 +34,7 @@ import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.extras.Validater;
 import com.snyxius.apps.dealwithit.utils.CustomPasswordEditText;
+import com.snyxius.apps.dealwithit.utils.ShowHidePasswordEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +48,7 @@ import java.net.URISyntaxException;
  */
 public class LoginFragment extends Fragment implements View.OnClickListener {
    private EditText email;
-   private EditText password;
+   private ShowHidePasswordEditText password;
 
 
 
@@ -70,19 +72,19 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initialise(View rootView){
-        rootView.findViewById(R.id.show).setOnClickListener(this);
         rootView.findViewById(R.id.login_button).setOnClickListener(this);
         email=(EditText)rootView.findViewById(R.id.email);
-        password=(EditText)rootView.findViewById(R.id.password);
+        password=(ShowHidePasswordEditText)rootView.findViewById(R.id.password);
+        password.setCompoundDrawables(null, null, getResources().getDrawable(R.color.colorPrimary), null);
         rootView.findViewById(R.id.fgtpaswd).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.show:
-                password.setInputType(InputType.TYPE_CLASS_TEXT);
-                break;
+//            case R.id.show:
+//                password.setInputType(InputType.TYPE_CLASS_TEXT);
+//                break;
             case R.id.login_button:
                     validate();
                 break;
@@ -121,15 +123,17 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private class Forgot extends AsyncTask<String,Void,JSONObject>{
-
+        private ProgressDialog dialog = new ProgressDialog(getActivity(),R.style.MyTheme);
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container_loading,new ProgressBarFrament(),Constants.PROGRESS_FRAGMENT)
-                    .commit();
-        }
+            dialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
+            dialog.setIndeterminate(true);
+            dialog.setCancelable(false);
+            dialog.setIndeterminateDrawable(getResources().getDrawable(R.drawable.progress));
+            dialog.show();
 
+        }
         @Override
         protected JSONObject doInBackground(String... params) {
             JSONObject jsonObject = null;
@@ -144,22 +148,47 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .remove(getActivity().getSupportFragmentManager().findFragmentByTag(Constants.PROGRESS_FRAGMENT))
-                    .commit();
+            if (dialog != null && dialog.isShowing()) {
+                dialog.dismiss();
+                dialog = null;
+            }
             onForgotDone(jsonObject);
         }
     }
 
-    private void onForgotDone(JSONObject jsonObject){
+    private void onForgotDone(final JSONObject jsonObject){
         try {
             if(jsonObject.getString(Keys.status).equals(Constants.SUCCESS)){
                 email.setText(Constants.DEFAULT_STRING);
                 DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
             }else if(jsonObject.getString(Keys.status).equals(Constants.FAILED)){
-                DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+                Handler mHandler = new Handler(getActivity().getMainLooper());
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+
             }else{
-                DealWithItApp.showAToast("Something Went Wrong.");
+                Handler mHandler = new Handler(getActivity().getMainLooper());
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            DealWithItApp.showAToast("Something Went Wrong.");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -206,16 +235,17 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private class Login extends AsyncTask<String, Void, JSONObject>{
-
+        private ProgressDialog dialog = new ProgressDialog(getActivity(),R.style.MyTheme);
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container_loading,new ProgressBarFrament(),Constants.PROGRESS_FRAGMENT)
-                    .commit();
+            dialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
+            dialog.setIndeterminate(true);
+            dialog.setCancelable(false);
+            dialog.setIndeterminateDrawable(getResources().getDrawable(R.drawable.progress));
+            dialog.show();
 
         }
-
         @Override
         protected JSONObject doInBackground(String... params) {
             JSONObject jsonObject = null;
@@ -230,18 +260,21 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .remove(getActivity().getSupportFragmentManager().findFragmentByTag(Constants.PROGRESS_FRAGMENT))
-                    .commit();
+            if (dialog != null && dialog.isShowing()) {
+                dialog.dismiss();
+                dialog = null;
+            }
             onDone(jsonObject);
         }
     }
 
     private void onDone(final JSONObject jsonObject){
         try {
+
             if(jsonObject != null) {
                 if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
-                    DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+                    DealWithItApp.saveToPreferences(getActivity(), Keys.firstName, jsonObject.getString(Keys.firstName));
+                    DealWithItApp.saveToPreferences(getActivity(), Keys.lastName, jsonObject.getString(Keys.lastName));
                     DealWithItApp.saveToPreferences(getActivity(), Keys.id, jsonObject.getString(Keys.id));
                     DealWithItApp.saveToPreferences(getActivity(), Keys.profileId, jsonObject.getString(Keys.profileId));
                     DealWithItApp.saveToPreferences(getActivity(), Keys.dealNo, jsonObject.getString(Keys.dealNo));
@@ -273,10 +306,32 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
 
                 } else {
-                    DealWithItApp.showAToast("Something Went Wrong.");
+                    Handler mHandler = new Handler(getActivity().getMainLooper());
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                DealWithItApp.showAToast("Something Went Wrong.");
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
                 }
             }else{
-                DealWithItApp.showAToast("Something Went Wrong.Server is not responding");
+                Handler mHandler = new Handler(getActivity().getMainLooper());
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            DealWithItApp.showAToast("Something Went Wrong.Server is not responding");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
             }
         }catch (Exception e){
             e.printStackTrace();

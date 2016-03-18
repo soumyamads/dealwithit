@@ -160,7 +160,7 @@ public class ShowImageGrid extends Fragment {
 
       public  interface DeletePosition{
         void removeItem(int position);
-    }
+      }
 
     public void removeItems(int position){
 

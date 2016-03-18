@@ -80,13 +80,13 @@ public class GCMNotificationIntentService extends IntentService {
 
 				}else{
 					Log.e("Alert","Push notification error");
-					DealWithItApp.showAToast("Push notification error");
+					//DealWithItApp.showAToast("Push notification error");
 				}
 			}		
 				Log.i("debug", "Received: " + extras.toString());
 			} else {
 				Log.d("Alert","Push notification error");
-				DealWithItApp.showAToast("Push notification error");
+				//DealWithItApp.showAToast("Push notification error");
 			}
 		}
 		// Release the wake lock provided by the WakefulBroadcastReceiver.

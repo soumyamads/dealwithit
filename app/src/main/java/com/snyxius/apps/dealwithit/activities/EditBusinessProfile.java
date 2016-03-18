@@ -29,6 +29,7 @@ import com.snyxius.apps.dealwithit.fragments.CuisineTypeFragment;
 import com.snyxius.apps.dealwithit.fragments.EditBusinessIncomingDeals;
 import com.snyxius.apps.dealwithit.fragments.EditBusinessProfileBasicFragment;
 import com.snyxius.apps.dealwithit.fragments.EditBusinessProfileDetailFragment;
+import com.snyxius.apps.dealwithit.fragments.GridImageFragment;
 import com.snyxius.apps.dealwithit.fragments.ProgressBarFrament;
 import com.snyxius.apps.dealwithit.fragments.ShowImageGrid;
 import com.snyxius.apps.dealwithit.fragments.TypeFragment;
@@ -43,7 +44,7 @@ import java.util.ArrayList;
 /**
  * Created by amanjham on 11/12/15 AD.
  */
-public class EditBusinessProfile extends AppCompatActivity implements View.OnClickListener, CategoryFragment.DataPassListener,ShowImageGrid.DeletePosition,EditBusinessProfileBasicFragment.AddMenuImages,
+public class EditBusinessProfile extends AppCompatActivity implements View.OnClickListener, CategoryFragment.DataPassListener,ShowImageGrid.DeletePosition,GridImageFragment.DeletePosition,EditBusinessProfileBasicFragment.AddMenuImages,
         EditBusinessProfileDetailFragment.PassData,TypeFragment.DataPassListener,
         AmbienceTypeFragment.DataPassListener,CuisineTypeFragment.DataPassListener,BusinessProfileIncomingDealDialogFragment.EditIncomingDeals{
 
@@ -53,6 +54,7 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
     private ArrayList<AllPojos> arrayDetails;
     private ArrayList<AllPojos> arrayDeals;
     private ArrayList<String> arrayMenuImages = new ArrayList<>();
+    private ArrayList<String> arrayPhotosImages = new ArrayList<>();
     private ArrayList<String> arraytype;
     private ArrayList<String> arrayCuisine;
     private ArrayList<String> arrayAmbiance;
@@ -271,22 +273,27 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
     public void removeItem(int position) {
         Log.d("ImageSizeBeforeRemoving",String.valueOf(arrayMenuImages.size()));
 
-        arrayMenuImages.remove(position);
+        arrayPhotosImages.remove(position);
         Log.d("ImageSizeAfterRemoving", String.valueOf(arrayMenuImages.size()));
-        ShowImageGrid f = (ShowImageGrid) getSupportFragmentManager().findFragmentByTag(Constants.GRIDIMAGE_FRAGMENT);
+        ShowImageGrid f = (ShowImageGrid) getSupportFragmentManager().findFragmentByTag(Constants.ShowImageGrid);
         f.removeItems(position);
 
     }
 
     @Override
-    public void addItems(ArrayList<String> arrayList) {
+    public void addItems(ArrayList<String> arrayList,int position) {
 
 //        Log.d("ImageSizeGridAdding",String.valueOf(arrayList.size()));
 //        arrayMenuImages.clear();
 //        arrayMenuImages.addAll(arrayList);
 //        Log.d("ImageSizeGrid", String.valueOf(arrayMenuImages.size()));
-        ShowImageGrid f = (ShowImageGrid) getSupportFragmentManager().findFragmentByTag(Constants.GRIDIMAGE_FRAGMENT);
-        f.addItems(arrayMenuImages);
+        if(position == Constants.INT_ONE) {
+            GridImageFragment f = (GridImageFragment) getSupportFragmentManager().findFragmentByTag(Constants.GRIDIMAGE_FRAGMENT);
+            f.addItems(arrayMenuImages);
+        }else if(position == Constants.INT_TWO){
+            ShowImageGrid f = (ShowImageGrid) getSupportFragmentManager().findFragmentByTag(Constants.ShowImageGrid);
+            f.addItems(arrayPhotosImages);
+        }
     }
 
     @Override
@@ -376,6 +383,16 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
         }
     }
 
+    @Override
+    public void removeGridItem(int position) {
+        Log.d("ImageSizeBeforeRemoving", String.valueOf(arrayMenuImages.size()));
+
+        arrayMenuImages.remove(position);
+        Log.d("ImageSizeAfterRemoving", String.valueOf(arrayMenuImages.size()));
+        GridImageFragment f = (GridImageFragment) getSupportFragmentManager().findFragmentByTag(Constants.GRIDIMAGE_FRAGMENT);
+        f.removeItems(position);
+    }
+
 
     private class GetBusinessProfile extends AsyncTask<String, Void, JSONObject> {
 
@@ -417,6 +434,7 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
                     if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
                           arrayBasic = new ArrayList<>();
                           arrayMenuImages = new ArrayList<>();
+                          arrayPhotosImages = new ArrayList<>();
                           arraytype = new ArrayList<>();
                           arrayCuisine = new ArrayList<>();
                           arrayAmbiance = new ArrayList<>();
@@ -434,6 +452,10 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
                           for(int i=0; i<jsonArray.length();i++){
                               arrayMenuImages.add(jsonArray.getString(i));
                           }
+                        JSONArray jsonArray5 = jsonObject2.getJSONArray(Keys.venue_images);
+                        for(int i=0; i<jsonArray5.length();i++){
+                            arrayPhotosImages.add(jsonArray5.getString(i));
+                        }
                           pojos.setCover_image(jsonObject2.getString(Keys.cover_image));
                           arrayBasic.add(pojos);
 
@@ -476,11 +498,14 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
 
 
                         getSupportFragmentManager().beginTransaction()
-                                .add(R.id.edit_business_basiccontainer, new EditBusinessProfileBasicFragment().newInstance(arrayBasic, arrayMenuImages), Constants.EditBusinessProfileBasicFragment)
+                                .add(R.id.edit_business_basiccontainer, new EditBusinessProfileBasicFragment().newInstance(arrayBasic, arrayMenuImages, arrayPhotosImages), Constants.EditBusinessProfileBasicFragment)
                                 .commit();
 
                         getSupportFragmentManager().beginTransaction()
-                                .add(R.id.gridcontainer, new ShowImageGrid().newInstance(arrayMenuImages), Constants.GRIDIMAGE_FRAGMENT)
+                                .add(R.id.gridcontainer, new GridImageFragment().newInstance(arrayMenuImages), Constants.GRIDIMAGE_FRAGMENT)
+                                .commit();
+                        getSupportFragmentManager().beginTransaction()
+                                .add(R.id.gridphotoscontainer, new ShowImageGrid().newInstance(arrayPhotosImages), Constants.ShowImageGrid)
                                 .commit();
 
                         getSupportFragmentManager().beginTransaction()

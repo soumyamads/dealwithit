@@ -1,0 +1,102 @@
+[
+    {
+        "outputFile": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/build/intermediates/res/merged/debug/values-land/values-land.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 51,
+                    "endOffset": 102
+                },
+                "from": {
+                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/res/values-land/dimens.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 800,
+                        "endColumn": 51,
+                        "endOffset": 847
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 107,
+                    "endColumn": 53,
+                    "endOffset": 156
+                },
+                "from": {
+                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/res/values-land/dimens.xml",
+                    "position": {
+                        "startLine": 23,
+                        "startColumn": 4,
+                        "startOffset": 852,
+                        "endColumn": 53,
+                        "endOffset": 901
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 161,
+                    "endColumn": 59,
+                    "endOffset": 216
+                },
+                "from": {
+                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/res/values-land/dimens.xml",
+                    "position": {
+                        "startLine": 26,
+                        "startColumn": 4,
+                        "startOffset": 967,
+                        "endColumn": 59,
+                        "endOffset": 1022
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 221,
+                    "endColumn": 60,
+                    "endOffset": 277
+                },
+                "from": {
+                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/res/values-land/dimens.xml",
+                    "position": {
+                        "startLine": 27,
+                        "startColumn": 4,
+                        "startOffset": 1027,
+                        "endColumn": 60,
+                        "endOffset": 1083
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 282,
+                    "endColumn": 59,
+                    "endOffset": 337
+                },
+                "from": {
+                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/res/values-land/dimens.xml",
+                    "position": {
+                        "startLine": 25,
+                        "startColumn": 4,
+                        "startOffset": 907,
+                        "endColumn": 59,
+                        "endOffset": 962
+                    }
+                }
+            }
+        ]
+    }
+]
