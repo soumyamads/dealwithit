@@ -78,7 +78,7 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
         emptytext=(TextView)rootView.findViewById(R.id.empty);
         emptytext.setVisibility(View.GONE);
         TextView title = (TextView)rootView.findViewById(R.id.title);
-        title.setText("Select Category");
+        title.setText("Establishment Type");
         rootView.findViewById(R.id.right_tick).setOnClickListener(this);
         rootView.findViewById(R.id.left_cross).setOnClickListener(this);
 

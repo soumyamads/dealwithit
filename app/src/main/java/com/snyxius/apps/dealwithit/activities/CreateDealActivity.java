@@ -11,10 +11,8 @@ import android.widget.ImageView;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.extras.Constants;
-import com.snyxius.apps.dealwithit.fragments.CreateDealStepOneFragment;
-import com.snyxius.apps.dealwithit.fragments.CreateDealStepThreeFragment;
-import com.snyxius.apps.dealwithit.fragments.CreateDealStepTwoFragment;
-import com.snyxius.apps.dealwithit.fragments.GetAllBusinessProfileFragment;
+import com.snyxius.apps.dealwithit.fragments.*;
+import com.snyxius.apps.dealwithit.fragments.TermsandConditions;
 
 
 import org.json.JSONObject;
@@ -25,7 +23,7 @@ import java.util.ArrayList;
  * Created by snyxius on 10/30/2015.
  */
 public class CreateDealActivity extends AppCompatActivity implements CreateDealStepOneFragment.StepOneStroke,CreateDealStepTwoFragment.StepTwoStroke,
-GetAllBusinessProfileFragment.DataPassListener,CreateDealStepOneFragment.PassData, View.OnClickListener{
+GetAllBusinessProfileFragment.DataPassListener,CreateDealStepOneFragment.PassData, View.OnClickListener,CreateDealStepTwoFragment.PassTandcData,TermsandConditions.TandcPassListener{
 
     ImageView stepViewImage2,stepViewImage3;
 
@@ -82,6 +80,8 @@ GetAllBusinessProfileFragment.DataPassListener,CreateDealStepOneFragment.PassDat
                 .addToBackStack(null)
                 .commit();
     }
+
+
 
 
 
@@ -143,7 +143,29 @@ GetAllBusinessProfileFragment.DataPassListener,CreateDealStepOneFragment.PassDat
         try {
             //Log.d("String",data+""+array.toString());
             CreateDealStepOneFragment f = (CreateDealStepOneFragment) getSupportFragmentManager().findFragmentByTag(Constants.CREATE_STEP_ONE_FRAGMENT);
-            f.changeBusinessProfileText(data, arrayBusinessName,arrayBusinessIds );
+            f.changeBusinessProfileText(data, arrayBusinessName, arrayBusinessIds);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+
+    @Override
+    public void setTandcData(String string) {
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.push_up_in, R.anim.push_down_out, R.anim.push_up_in, R.anim.push_down_out)
+                .add(R.id.container, new TermsandConditions().newInstance(string), Constants.TERMSANDCONDITION_FRAGMENT)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void passTandCData(String data) {
+        try {
+            //Log.d("String",data+""+array.toString());
+            CreateDealStepTwoFragment f = (CreateDealStepTwoFragment) getSupportFragmentManager().findFragmentByTag(Constants.CREATE_STEP_TWO_FRAGMENT);
+            f.changeTandCText(data);
         }catch(Exception e){
             e.printStackTrace();
         }

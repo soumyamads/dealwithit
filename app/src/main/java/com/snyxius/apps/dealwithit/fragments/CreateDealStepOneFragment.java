@@ -2,15 +2,19 @@ package com.snyxius.apps.dealwithit.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
+import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
 
 import org.json.JSONArray;
@@ -26,6 +30,7 @@ public class CreateDealStepOneFragment extends Fragment implements View.OnClickL
 
 
     TextView business_text;
+    ImageView quickimg;
     StepOneStroke mCallback;
     PassData passData;
     EditText quickDescription,fullDescription,deal_name;
@@ -68,10 +73,16 @@ public class CreateDealStepOneFragment extends Fragment implements View.OnClickL
     private void initialise(View view) {
         view.findViewById(R.id.continue_button).setOnClickListener(this);
         view.findViewById(R.id.select_business_layout).setOnClickListener(this);
+        view.findViewById(R.id.quickimage).setOnClickListener(this);
+        view.findViewById(R.id.template).setOnClickListener(this);
+        view.findViewById(R.id.templates).setOnClickListener(this);
+
+
         business_text = (TextView) view.findViewById(R.id.select_business_text);
         quickDescription = (EditText)view.findViewById(R.id.quick_desc);
         fullDescription =  (EditText)view.findViewById(R.id.additional);
         deal_name =  (EditText)view.findViewById(R.id.deal_name);
+        quickimg=(ImageView)view.findViewById(R.id.quickimage);
     }
 
     @Override
@@ -84,6 +95,24 @@ public class CreateDealStepOneFragment extends Fragment implements View.OnClickL
             case R.id.select_business_layout:
                 passData.setBusinessData(business_text.getText().toString());
                 break;
+
+            case R.id.quickimage:
+
+                DialogFragment dialogFrag = QuickDescriptionDialogFragment.newInstance();
+                dialogFrag.setCancelable(false);
+                dialogFrag.show(getFragmentManager().beginTransaction(), Constants.SUCCESSDIALOG_FRAGMENT);
+                break;
+            case R.id.template:
+            case R.id.templates:
+
+
+                FragmentManager manager = getFragmentManager();
+
+                TempFragment dialog = new TempFragment();
+                dialog.show(manager, "dialog");
+
+                break;
+
         }
     }
     public interface StepOneStroke {
@@ -94,6 +123,8 @@ public class CreateDealStepOneFragment extends Fragment implements View.OnClickL
     public interface PassData{
         void setBusinessData(String string);
     }
+
+
 
     public void validate(){
         if(deal_name.getText().toString().isEmpty()){

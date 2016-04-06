@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/main"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            style="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Venue Details"
+            />
+
+
+
+
+            <TextView
+                android:id="@+id/bussinessname"
+                android:layout_below="@+id/main"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+               android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PURPLE HAZE"
+                />
+
+                <LinearLayout
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_gravity="left"
+                        android:gravity="center"
+                        android:textAllCaps="true"
+                        android:textColor="@color/grey"
+                        android:textStyle="bold"
+                        style="@style/Base.TextAppearance.AppCompat.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="RATINGS"
+                        />
+
+                    <RatingBar
+                        android:id="@+id/myRatingBar"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+                        android:numStars="5" />
+
+
+
+                </LinearLayout>
+            </RelativeLayout>
+</LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/locationname"
+                android:textAllCaps="true"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KORAMANGLA"
+                />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/cuisine"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/grey"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fine Dine, Lounge, Bar, Family Restaurant, Quick Service Restaurant Club, Brewery, Dessert &amp; Bakery, Cafe, Casual Dine, Banquet."
+            />
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:textAllCaps="true"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CAPACITY: "
+                />
+            <TextView
+                android:id="@+id/capacityvalue"
+                android:textAllCaps="true"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="50"
+                />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/descriptions"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorPrimaryDark"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The content of the pages of this website is for your general information and use only. It is subject to change without notice.
+This website uses cookies to monitor browsing preferences."
+
+            />
+
+
+    </LinearLayout>
+</LinearLayout>

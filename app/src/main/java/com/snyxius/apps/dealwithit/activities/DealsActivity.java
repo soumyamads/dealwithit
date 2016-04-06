@@ -95,7 +95,7 @@ public class DealsActivity extends AppCompatActivity implements View.OnClickList
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new ActiveDealsFragment(), Constants.ACTIVE_DEALS);
         adapter.addFragment(new ActiveDealsFragment(), Constants.ALL_DEALS);
-      //  adapter.addFragment(new ActiveDealsFragment(), Constants.SEARCH_BOOKING);
+        adapter.addFragment(new ActiveDealsFragment(), Constants.SEARCH_BOOKING);
         viewPager.setAdapter(adapter);
     }
 

@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/jniLibs"/></dataSet><dataSet config="release"><source path="/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/release/jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/home/snyxius/dealwithit/dealwithit/dateandtimelib/src/main/jniLibs"/></dataSet><dataSet config="release"><source path="/home/snyxius/dealwithit/dealwithit/dateandtimelib/src/release/jniLibs"/></dataSet></merger>

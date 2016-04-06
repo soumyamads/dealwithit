@@ -71,6 +71,8 @@ public class ActiveDealsFragment extends Fragment {
 
     private void initialize(View view){
         progressBar = (ProgressBar) view.findViewById(R.id.pBar);
+        progressBar.setVisibility(View.VISIBLE);
+
         initRecyclerView(view);
         try {
             if (DealWithItApp.isNetworkAvailable()) {

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_corner_dialog_white"
+    android:layout_margin="10dp"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp">
+
+
+
+
+    <!--<ImageView-->
+        <!--android:layout_width="60dp"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:src="@drawable/success_tick"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:id="@+id/imageView" />-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OTP has been sent to mobile. Please wait while for verification"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:gravity="center"
+        android:layout_gravity="center"
+
+        android:layout_below="@+id/imageView"
+
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/textView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You might have to type manually if the registerd mobile no is different device"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/textView"
+        android:id="@+id/textView2" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="35dp"
+        android:inputType="number"
+        android:id="@+id/otptext" />
+
+
+    <Button
+        android:id="@+id/gotit_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="verify"
+        android:background="@drawable/bottom_selector_secondary"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textAllCaps="true"
+        android:layout_margin="15dp" />
+
+</LinearLayout>

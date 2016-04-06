@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        >
+
+        <RelativeLayout
+            android:id="@+id/relative1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/wrong"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="7dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/bottom_selector_transparent"
+                android:src="@drawable/left_cross"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terms &amp; Conditions"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+                android:textColor="#ffffff"
+                android:layout_centerInParent="true"
+
+                />
+            <ImageView
+                android:id="@+id/right"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="7dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/right_tick"
+                android:background="@drawable/bottom_selector_transparent"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        >
+    <TextView
+        android:id="@+id/template"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="template>"
+        android:textSize="10dp"
+        android:textColor="@color/colorPrimary"
+        android:padding="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"/>
+
+    <!--<TextView-->
+        <!--android:id="@+id/wrttxt"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Write here"-->
+        <!--android:textSize="10dp"-->
+        <!--android:visibility="gone"-->
+        <!--android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+        <!--android:layout_marginLeft="35dp"-->
+        <!--android:layout_marginTop="35dp"/>-->
+    <EditText
+        android:id="@+id/writehere"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Write here"
+        android:maxLength="100"
+        android:background="@null"
+        android:inputType="textMultiLine"
+         android:padding="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/template"
+       />
+
+    </RelativeLayout>
+</RelativeLayout>

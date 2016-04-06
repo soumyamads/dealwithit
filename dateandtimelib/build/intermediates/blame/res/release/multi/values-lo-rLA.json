@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/build/intermediates/res/merged/release/values-lo-rLA/values-lo-rLA.xml",
+        "outputFile": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/build/intermediates/res/merged/release/values-lo-rLA/values-lo-rLA.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 199
                 },
                 "from": {
-                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
+                    "file": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
                     "position": {
                         "startLine": 24,
                         "startColumn": 4,
@@ -30,7 +30,7 @@
                     "endOffset": 314
                 },
                 "from": {
-                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
+                    "file": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
                     "position": {
                         "startLine": 29,
                         "startColumn": 4,
@@ -49,7 +49,7 @@
                     "endOffset": 394
                 },
                 "from": {
-                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
+                    "file": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
@@ -68,7 +68,7 @@
                     "endOffset": 497
                 },
                 "from": {
-                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
+                    "file": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
@@ -87,7 +87,7 @@
                     "endOffset": 620
                 },
                 "from": {
-                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
+                    "file": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
                     "position": {
                         "startLine": 28,
                         "startColumn": 4,
@@ -106,7 +106,7 @@
                     "endOffset": 722
                 },
                 "from": {
-                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
+                    "file": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
                     "position": {
                         "startLine": 21,
                         "startColumn": 4,
@@ -125,7 +125,7 @@
                     "endOffset": 815
                 },
                 "from": {
-                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
+                    "file": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
                     "position": {
                         "startLine": 26,
                         "startColumn": 4,
@@ -144,7 +144,7 @@
                     "endOffset": 906
                 },
                 "from": {
-                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
+                    "file": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
                     "position": {
                         "startLine": 22,
                         "startColumn": 4,
@@ -163,7 +163,7 @@
                     "endOffset": 995
                 },
                 "from": {
-                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
+                    "file": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
                     "position": {
                         "startLine": 23,
                         "startColumn": 4,
@@ -182,7 +182,7 @@
                     "endOffset": 1079
                 },
                 "from": {
-                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
+                    "file": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
                     "position": {
                         "startLine": 27,
                         "startColumn": 4,
@@ -201,7 +201,7 @@
                     "endOffset": 1175
                 },
                 "from": {
-                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
+                    "file": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/src/main/res/values-lo-rLA/strings.xml",
                     "position": {
                         "startLine": 25,
                         "startColumn": 4,

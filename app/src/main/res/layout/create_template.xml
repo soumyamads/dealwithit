@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        >
+
+        <RelativeLayout
+            android:id="@+id/relative1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/wrong"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="7dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/bottom_selector_transparent"
+                android:src="@drawable/left_cross"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Template"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+                android:textColor="#ffffff"
+                android:layout_centerInParent="true"
+
+                />
+            <ImageView
+                android:id="@+id/right"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="7dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/right_tick"
+                android:background="@drawable/bottom_selector_transparent"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+    <ScrollView
+        android:layout_above="@+id/create_button"
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="30dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TEMPLATE NAME"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/deal_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Deal Name"
+                android:inputType="textCapSentences"
+                android:layout_marginTop="20dp"/>
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TEXT"
+                    android:textStyle="bold"
+
+                    android:layout_marginTop="20dp"/>
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="(Max 400 Letters)"-->
+
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:layout_marginTop="20dp"/>-->
+
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/additional"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Type text here"
+                android:maxLength="400"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="40dp"/>
+
+
+
+                  </LinearLayout>
+    </ScrollView>
+    <Button
+        android:id="@+id/create_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CREATE"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginTop="30dp"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="#ffffff"
+        android:layout_gravity="center"
+        />
+
+</RelativeLayout>

@@ -48,13 +48,15 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
 
 
     LinearLayout linearguest,linearbilling;
+    RelativeLayout termscondtn;
     RadioGroup radioGroup;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     StepTwoStroke mCallback;
+    PassTandcData passTandcData;
     String uploadPicture = "";
     static JSONObject jsonObject = new JSONObject();
     EditText minimum_guest,cost_person,max_boking,additional,terms_text,minimum_billig,discount_percent;
-    TextView deal_image_text;
+    TextView deal_image_text,terms_texts;
     public static CreateDealStepTwoFragment newInstance(JSONObject Object) {
         jsonObject = Object;
         CreateDealStepTwoFragment f = new CreateDealStepTwoFragment();
@@ -67,6 +69,8 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
         super.onAttach(activity);
         try {
             mCallback = (StepTwoStroke)activity;
+            passTandcData = (PassTandcData)activity;
+
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement DataPassListener");
@@ -103,6 +107,7 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
 
         });
 
+
     }
 
     private void initialise(View view){
@@ -113,7 +118,9 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
         cost_person = (EditText)view.findViewById(R.id.cost_person);
         max_boking = (EditText)view.findViewById(R.id.max_boking);
         additional = (EditText)view.findViewById(R.id.additional);
-        terms_text = (EditText)view.findViewById(R.id.terms_text);
+//        terms_text = (EditText)view.findViewById(R.id.terms_text);
+        terms_texts= (TextView)view.findViewById(R.id.terms_text);
+        termscondtn=(RelativeLayout)view.findViewById(R.id.terms_layout);
         minimum_billig = (EditText)view.findViewById(R.id.mimimum_billig);
         discount_percent = (EditText)view.findViewById(R.id.discount_percent);
         deal_image_text = (TextView)view.findViewById(R.id.deal_image_text);
@@ -121,6 +128,8 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
         view.findViewById(R.id.continue_button).setOnClickListener(this);
         view.findViewById(R.id.min_guests).setOnClickListener(this);
         view.findViewById(R.id.min_billing).setOnClickListener(this);
+        view.findViewById(R.id.terms_layout).setOnClickListener(this);
+
     }
 
 
@@ -133,6 +142,12 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
                 break;
             case R.id.deal_image_layout:
                     selectImage();
+                break;
+
+            case R.id.terms_layout:
+            case  R.id.terms_text:
+                passTandcData.setTandcData(terms_texts.getText().toString());
+
                 break;
         }
     }
@@ -257,7 +272,7 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
                 DealWithItApp.showAToast("Please give the Cost Person");
             } else if(additional.getText().toString().isEmpty()){
                 DealWithItApp.showAToast("Please select the Additional");
-            }else if(terms_text.getText().toString().isEmpty()){
+            }else if(terms_texts.getText().toString().isEmpty()){
                 DealWithItApp.showAToast("Please give the Terms & Condition");
             }
             else{
@@ -276,7 +291,7 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
                 DealWithItApp.showAToast("Please give the Discount Percent");
             } else if(additional.getText().toString().isEmpty()){
                 DealWithItApp.showAToast("Please select the Additional");
-            }else if(terms_text.getText().toString().isEmpty()){
+            }else if(terms_texts.getText().toString().isEmpty()){
                 DealWithItApp.showAToast("Please give the Terms & Condition");
             }
             else{
@@ -315,7 +330,7 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
 
             jsonObject.accumulate(Keys.max_boking, max_boking.getText().toString());
             jsonObject.accumulate(Keys.additional, additional.getText().toString());
-            jsonObject.accumulate(Keys.terms_text, terms_text.getText().toString());
+            jsonObject.accumulate(Keys.terms_text, terms_texts.getText().toString());
 
             mCallback.setStepThreeStoke();
             mCallback.sendStepTwoData(jsonObject);
@@ -328,5 +343,18 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
     public interface StepTwoStroke{
         void setStepThreeStoke();
         void sendStepTwoData(JSONObject jsonObject);
+    }
+    public interface PassTandcData{
+        void setTandcData(String string);
+    }
+    public void changeTandCText(String string){
+        try {
+//            arrayListBusinessProfile = arrayBusinessName;
+//            arrayListBusinessProfileIds = arrayBusinessIds;
+            terms_texts.setText(string);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }

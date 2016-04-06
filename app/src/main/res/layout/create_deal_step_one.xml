@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ScrollView
+        android:layout_above="@+id/continue_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="30dp">
+            android:padding="20dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,25 +59,45 @@
                     android:src="@drawable/down_arrow"/>
             </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/quicktxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="QUICK DESCRIPTION"
                     android:textStyle="bold"
-
                     android:layout_marginTop="20dp"/>
                 <TextView
+                    android:id="@+id/maxltr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="(Max 100 Letters)"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"/>
-
-            </LinearLayout>
+                    android:textSize="10dp"
+                    android:layout_toRightOf="@+id/quicktxt"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="25dp"/>
+                <ImageView
+                    android:id="@+id/quickimage"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/edit_icon_circle"
+                    android:layout_marginTop="28dp"
+                    android:layout_toRightOf="@+id/maxltr"
+                    android:layout_marginLeft="5dp"/>
+                <TextView
+                    android:id="@+id/template"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="template>"
+                    android:textSize="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="25dp"/>
+            </RelativeLayout>
             <EditText
                 android:id="@+id/quick_desc"
                 android:layout_width="match_parent"
@@ -87,26 +108,45 @@
                 android:layout_marginTop="30dp"/>
 
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/fulltxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="FULL DESCRIPTION"
                     android:textStyle="bold"
-
                     android:layout_marginTop="20dp"/>
                 <TextView
+                    android:id="@+id/maxltrs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="(Max 400 Letters)"
-
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"/>
-
-            </LinearLayout>
+                    android:textSize="10dp"
+                    android:layout_toRightOf="@+id/fulltxt"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="25dp"/>
+                <ImageView
+                    android:id="@+id/fullimgs"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/edit_icon_circle"
+                    android:layout_marginTop="28dp"
+                    android:layout_toRightOf="@+id/maxltrs"
+                    android:layout_marginLeft="5dp"/>
+                <TextView
+                    android:id="@+id/templates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="template>"
+                    android:textSize="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="25dp"/>
+            </RelativeLayout>
 
 
             <EditText
@@ -117,18 +157,20 @@
                 android:maxLength="400"
                 android:inputType="textMultiLine"
                 android:layout_marginTop="40dp"/>
-            <Button
-                android:id="@+id/continue_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="CONTINUE"
-                android:textStyle="bold"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/bottom_selector_secondary"
-                android:textColor="#ffffff"
-                android:layout_gravity="center"
-                />
+
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+    <Button
+        android:id="@+id/continue_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CONTINUE"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginTop="30dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_alignParentBottom="true"
+        android:textColor="#ffffff"
+        android:layout_gravity="center"
+        />
+</RelativeLayout>

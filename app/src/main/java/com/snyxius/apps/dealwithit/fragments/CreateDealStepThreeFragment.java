@@ -3,6 +3,7 @@ package com.snyxius.apps.dealwithit.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.activities.CategoryDetailsActivity;
 import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
 import com.snyxius.apps.dealwithit.api.WebRequest;
 import com.snyxius.apps.dealwithit.api.WebServices;
@@ -126,6 +128,8 @@ public class CreateDealStepThreeFragment extends Fragment implements View.OnClic
         view.findViewById(R.id.dealexp).setOnClickListener(this);
         view.findViewById(R.id.opening_time_layout).setOnClickListener(this);
         view.findViewById(R.id.closing_time_layout).setOnClickListener(this);
+        view.findViewById(R.id.preview).setOnClickListener(this);
+
         opening_hour = (TextView) view.findViewById(R.id.opening_time_text);
         closing_hour = (TextView) view.findViewById(R.id.closing_time_text);
         startdealdate = (TextView) view.findViewById(R.id.dlstart);
@@ -164,6 +168,11 @@ public class CreateDealStepThreeFragment extends Fragment implements View.OnClic
             case R.id.dealexp:
                 position = 4;
                 setDate();
+                break;
+            case R.id.preview:
+                Intent i=new Intent(getActivity(), CategoryDetailsActivity.class);
+                startActivity(i);
+
                 break;
         }
 

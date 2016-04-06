@@ -70,7 +70,7 @@ public class CategoryAdapter extends BaseAdapter {
         final int pos = position;
         holder.estChk.setTag(position);
         holder.estName.setText(mainDataList.get(position).getName());
-
+//
 //        holder.estChk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 ////                employeeData.get(pos).setSelected(isChecked);

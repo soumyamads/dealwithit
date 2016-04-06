@@ -8,6 +8,24 @@ import java.util.ArrayList;
 public class AllPojos {
     String name;
     String dealId;
+    String template_name;
+    String template_Id;
+
+    public String getTemplate_name() {
+        return template_name;
+    }
+
+    public void setTemplate_name(String template_name) {
+        this.template_name = template_name;
+    }
+
+    public String getTemplate_Id() {
+        return template_Id;
+    }
+
+    public void setTemplate_Id(String template_Id) {
+        this.template_Id = template_Id;
+    }
 
     public String getDealId() {
         return dealId;

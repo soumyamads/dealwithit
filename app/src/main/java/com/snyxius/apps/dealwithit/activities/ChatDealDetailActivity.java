@@ -1,6 +1,7 @@
 package com.snyxius.apps.dealwithit.activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -16,6 +17,7 @@ import android.view.animation.Animation;
 import android.view.animation.OvershootInterpolator;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,6 +45,7 @@ public class ChatDealDetailActivity extends AppCompatActivity implements View.On
     private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR  = 0.1f;
     private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS     = 0.5f;
     private static final int ALPHA_ANIMATIONS_DURATION              = 200;
+    Button editprofile_button;
 
     private boolean mIsTheTitleVisible          = false;
     private boolean mIsTheTitleContainerVisible = true;
@@ -127,11 +130,22 @@ private LinearLayout mTitleContainer;
 //        mFrameParallax=(FrameLayout)findViewById(R.id.frame_container);
         mTitleContainer = (LinearLayout) findViewById(R.id.linear_container);
         mImageLayout=(RelativeLayout)findViewById(R.id.imageLayout);
+        editprofile_button=(Button)findViewById(R.id.edit_profile_button);
+        findViewById(R.id.edit_profile_button).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
 
+        switch (v.getId()) {
+            case R.id.edit_profile_button:
+                Intent i=new Intent(this,EditDealOffer.class);
+                startActivity(i);
+                finish();
+
+                break;
+
+        }
     }
 
 

@@ -7,4 +7,10 @@
     <color name="darkred">#be3d2f</color>
     <color name="red">#f25224</color>
     <color name="grey">#808080</color>
+    <color name="colorPrimarys">#33062e</color>
+    <color name="colorPrimaryDarks">#5e1055</color>
+    <color name="colorYellow">#ffc929</color>
+    <color name="colorYellowDark">#c29511</color>
+    <color name="divider">#B6B6B6</color>
+
 </resources>

@@ -57,8 +57,9 @@ public class LoginSignupActivity extends AppCompatActivity implements View.OnCli
     String SENDER_ID = "117269319875";
     String regid;
     GoogleCloudMessaging gcm;
+    String socket = "";
 
-String socket = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -38,17 +38,18 @@ public class BeforeBusinessProfileActivity extends AppCompatActivity{
         setContentView(R.layout.before_start_deal_layout);
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+//        initDrawer();
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.container_drawer,new DrawerFragment(), Constants.DRAWER_FRAGMENT)
+                .add(R.id.container_drawer,new DrawerFragment().newInstance(drawerLayout), Constants.DRAWER_FRAGMENT)
                 .commit();
-        initDrawer();
         TextView name = (TextView)findViewById(R.id.name);
         String string = "Hi "+ DealWithItApp.readFromPreferences(getApplicationContext(), Keys.firstName,Constants.DEFAULT_STRING)+" "+
                 DealWithItApp.readFromPreferences(getApplicationContext(), Keys.lastName, Constants.DEFAULT_STRING);
         name.setText(string);
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        drawerToggle.setDrawerIndicatorEnabled(false);
-        drawerToggle.syncState();
+//        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+//        drawerToggle.setDrawerIndicatorEnabled(true);
+//        drawerToggle.syncState();
 
         addBusinessProfile=(Button)findViewById(R.id.add_business_profile);
         addBusinessProfile.setOnClickListener(new View.OnClickListener() {
@@ -76,9 +77,9 @@ public class BeforeBusinessProfileActivity extends AppCompatActivity{
         if (id == R.id.action_settings) {
             return true;
         }
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
+//        if (drawerToggle.onOptionsItemSelected(item)) {
+//            return true;
+//        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -100,15 +101,15 @@ public class BeforeBusinessProfileActivity extends AppCompatActivity{
         drawerLayout.setDrawerListener(drawerToggle);
     }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        drawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        drawerToggle.onConfigurationChanged(newConfig);
-    }
+//    @Override
+//    protected void onPostCreate(Bundle savedInstanceState) {
+//        super.onPostCreate(savedInstanceState);
+//        drawerToggle.syncState();
+//    }
+//
+//    @Override
+//    public void onConfigurationChanged(Configuration newConfig) {
+//        super.onConfigurationChanged(newConfig);
+//        drawerToggle.onConfigurationChanged(newConfig);
+//    }
 }

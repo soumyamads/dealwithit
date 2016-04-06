@@ -37,7 +37,9 @@ public class Constants {
     public static final String CREATE_STEP_ONE_FRAGMENT = "CreateDealStepOneFragment";
     public static final String CREATE_STEP_TWO_FRAGMENT = "CreateDealStepTwoFragment";
     public static final String CREATE_STEP_THREE_FRAGMENT = "CreateDealStepThreeFragment";
+    public static final String TERMSANDCONDITION_FRAGMENT = "TermsandCondition";
     public static final String GET_ALL_BUSINESS_PROFILE_FRAGMENT = "GetAllBusinessProfileFragment";
+
     public static final String DRAWER_FRAGMENT = "DrawerFragment";
     public static final String LOGIN_FRAGMENT = "Login";
     public static final String CHAT_FRAGMENT = "Chat";

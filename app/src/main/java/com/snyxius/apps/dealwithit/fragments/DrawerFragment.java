@@ -13,13 +13,16 @@ import android.widget.ProgressBar;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.Socket.SocketSingleton;
+import com.snyxius.apps.dealwithit.activities.Aboutus;
 import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
 import com.snyxius.apps.dealwithit.activities.CreateBusinessProfileActivity;
 import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
+import com.snyxius.apps.dealwithit.activities.CreateTemplateActivity;
 import com.snyxius.apps.dealwithit.activities.DealWithItActivity;
 import com.snyxius.apps.dealwithit.activities.DealsActivity;
 import com.snyxius.apps.dealwithit.activities.MerchantProfileActivity;
 import com.snyxius.apps.dealwithit.activities.SearchDealsActivity;
+import com.snyxius.apps.dealwithit.activities.SettingsActivity;
 import com.snyxius.apps.dealwithit.activities.SplashActivity;
 import com.snyxius.apps.dealwithit.adapters.DrawerAdapter;
 import com.snyxius.apps.dealwithit.adapters.SectionedRecyclerViewAdapter;
@@ -44,7 +47,7 @@ public class DrawerFragment extends Fragment {
     String[] values = new String[] {"Home", "Create a Deal", "Chats", "Confirmations",
             "QR Code Scanner", "My Active Deals", "All Deals", "Search Booking ID", "Templates",
             "Business Profile", "Add a Business Profile", "Merchant Profile",
-            "Settings","Logout","Payment"};
+            "Settings","Logout","Payment","About Us"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,7 +76,7 @@ public class DrawerFragment extends Fragment {
 
         //Sections
         sections.add(new SectionedRecyclerViewAdapter.Section(1,"DEALS"));
-        sections.add(new SectionedRecyclerViewAdapter.Section(9,"PROFILE"));
+        sections.add(new SectionedRecyclerViewAdapter.Section(9,"PROFILES"));
         sections.add(new SectionedRecyclerViewAdapter.Section(12,"ACCOUNT"));
        //Add your adapter to the sectionAdapter
         SectionedRecyclerViewAdapter.Section[] dummy = new SectionedRecyclerViewAdapter.Section[sections.size()];
@@ -157,7 +160,11 @@ public class DrawerFragment extends Fragment {
                 break;
 
             case 9:
-                DealWithItApp.showAToast("Under Construction");
+                intent=new Intent(getActivity(), CreateTemplateActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+
                 break;
 
             case 11:
@@ -184,7 +191,11 @@ public class DrawerFragment extends Fragment {
                 break;
 
             case 15:
-                DealWithItApp.showAToast("Under Construction");
+//                DealWithItApp.showAToast("Under Construction");
+                intent = new Intent(getActivity(), SettingsActivity.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+
                 break;
 
             case 16:
@@ -192,6 +203,14 @@ public class DrawerFragment extends Fragment {
                 break;
             case 17:
                 DealWithItApp.showAToast("Under Construction");
+                break;
+
+            case 18:
+//                DealWithItApp.showAToast("Under Construction");
+                intent = new Intent(getActivity(), Aboutus.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+
                 break;
 
             default:

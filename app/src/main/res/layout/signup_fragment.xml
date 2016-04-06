@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/signup_button"
+        android:layout_alignParentTop="true"
+       >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,7 +23,7 @@
                 android:id="@+id/establshname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Establishment Name"
+                android:hint="Company Name"
                 android:inputType="textCapSentences" />
 
             <EditText
@@ -117,21 +121,22 @@
                 android:hint="Retype Password"
                 android:inputType="textPassword" />
 
-            <Button
-                android:id="@+id/signup_button"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/bottom_selector_secondary"
-                android:text="SIGN UP"
-                android:textAllCaps="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#ffffff"
-                android:textStyle="bold" />
+
 
         </LinearLayout>
     </ScrollView>
 
-
-</LinearLayout>
+    <Button
+        android:id="@+id/signup_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="SIGN UP"
+        android:layout_alignParentBottom="true"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#ffffff"
+        android:textStyle="bold" />
+</RelativeLayout>

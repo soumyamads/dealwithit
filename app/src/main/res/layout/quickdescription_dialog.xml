@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_corner_dialog_white"
+    android:layout_margin="10dp"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp">
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <!--<ImageView-->
+    <!--android:layout_width="60dp"-->
+    <!--android:layout_height="60dp"-->
+    <!--android:src="@drawable/success_tick"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:id="@+id/imageView" />-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WHAT'S QUICK DESCRIPTION"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/textView" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:gravity="center"
+            android:background="@color/grey"
+            android:layout_gravity="center"
+            android:layout_marginTop="6dp"
+            android:id="@+id/View" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/textView"
+        android:id="@+id/textView2" />
+
+
+        <TextView
+            android:id="@+id/gotittext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OK.GOT IT!"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+             />
+
+
+
+
+    </LinearLayout>
+</ScrollView>
+</LinearLayout>

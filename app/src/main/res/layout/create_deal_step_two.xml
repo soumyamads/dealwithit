@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -7,8 +7,12 @@
     android:background="#ffffff">
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/continue_button"
+
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,7 +52,16 @@
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/null_image"/>
+                    android:src="@drawable/null_image"
+                    android:layout_marginRight="18dp"
+                  />
+                <ImageView
+                    android:id="@+id/right_arrow"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow"/>
             </RelativeLayout>
             <TextView
                 android:layout_width="wrap_content"
@@ -235,57 +248,81 @@
                 android:hint="Additional"
                 android:inputType="textMultiLine"
                 android:layout_marginTop="20dp"/>
+<!--<RelativeLayout-->
+    <!--android:id="@+id/terms_layout"-->
 
-            <EditText
-                android:id="@+id/terms_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Terms &amp; Conditions"
-                android:inputType="textMultiLine"
-                android:layout_marginTop="20dp"/>
-
-
-            <!--<RelativeLayout-->
-                <!--android:id="@+id/terms_layout"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!-->-->
+            <!--<EditText-->
+                <!--android:id="@+id/terms_text"-->
                 <!--android:layout_width="match_parent"-->
                 <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="10dp">-->
+                <!--android:hint="Terms &amp; Conditions"-->
+                <!--android:inputType="textMultiLine"-->
+                <!--android:enabled="false"-->
+                <!--android:layout_marginTop="20dp"/>-->
+            <!--<ImageView-->
+                <!--android:id="@+id/rightarrow"-->
+                <!--android:layout_width="20dp"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_marginTop="30dp"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:src="@drawable/right_arrow"/>-->
+<!--</RelativeLayout>-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/terms_text"-->
-                    <!--android:layout_width="fill_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:paddingLeft="4dp"-->
-                    <!--android:paddingTop="8dp"-->
-                    <!--android:paddingBottom="3dp"-->
-                    <!--android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-                    <!--android:text="Terms and Conditions" />-->
-
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:layout_marginLeft="3dp"-->
-                    <!--android:layout_below="@+id/terms_text"-->
-                    <!--android:background="@color/grey"/>-->
-
-                <!--<ImageView-->
-                    <!--android:layout_width="20dp"-->
-                    <!--android:layout_height="20dp"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:layout_centerVertical="true"-->
-                    <!--android:src="@drawable/arrow_right"/>-->
-            <!--</RelativeLayout>-->
-
-            <Button
-                android:id="@+id/continue_button"
+            <RelativeLayout
+                android:id="@+id/terms_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="continue"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/bottom_selector_secondary"
-                android:textColor="#ffffff"
-                android:layout_gravity="center"
-                />
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/terms_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="3dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="Terms and Conditions" />
+                <!--<EditText-->
+                <!--android:id="@+id/terms_text"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="Terms &amp; Conditions"-->
+                <!--android:inputType="textMultiLine"-->
+                <!--android:enabled="false"-->
+                <!--android:layout_marginTop="20dp"/>-->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_below="@+id/terms_text"
+                    android:background="@color/grey"/>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow_right"/>
+            </RelativeLayout>
+
+
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+    <Button
+        android:id="@+id/continue_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="continue"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="#ffffff"
+        android:layout_gravity="center"
+
+        />
+</RelativeLayout>

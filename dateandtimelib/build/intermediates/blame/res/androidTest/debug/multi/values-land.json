@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/build/intermediates/res/merged/androidTest/debug/values-land/values-land.xml",
+        "outputFile": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/build/intermediates/res/merged/androidTest/debug/values-land/values-land.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 102
                 },
                 "from": {
-                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/build/intermediates/bundles/debug/res/values-land/values-land.xml",
+                    "file": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/build/intermediates/bundles/debug/res/values-land/values-land.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -30,7 +30,7 @@
                     "endOffset": 156
                 },
                 "from": {
-                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/build/intermediates/bundles/debug/res/values-land/values-land.xml",
+                    "file": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/build/intermediates/bundles/debug/res/values-land/values-land.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -49,7 +49,7 @@
                     "endOffset": 216
                 },
                 "from": {
-                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/build/intermediates/bundles/debug/res/values-land/values-land.xml",
+                    "file": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/build/intermediates/bundles/debug/res/values-land/values-land.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -68,7 +68,7 @@
                     "endOffset": 277
                 },
                 "from": {
-                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/build/intermediates/bundles/debug/res/values-land/values-land.xml",
+                    "file": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/build/intermediates/bundles/debug/res/values-land/values-land.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -87,7 +87,7 @@
                     "endOffset": 337
                 },
                 "from": {
-                    "file": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/build/intermediates/bundles/debug/res/values-land/values-land.xml",
+                    "file": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/build/intermediates/bundles/debug/res/values-land/values-land.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,

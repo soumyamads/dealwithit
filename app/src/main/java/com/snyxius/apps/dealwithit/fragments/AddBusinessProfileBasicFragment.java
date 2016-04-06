@@ -38,6 +38,7 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.activities.UploadMenu;
 import com.snyxius.apps.dealwithit.adapters.PlaceAutocompleteAdapter;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
@@ -151,8 +152,8 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.continues:
-                sendBasicData();
-             // validate();
+//                sendBasicData();
+              validate();
                 break;
             case R.id.category_layout:
                 getActivity().getSupportFragmentManager().beginTransaction()
@@ -165,6 +166,8 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
                 mAutocompleteView.setText("");
                 break;
             case R.id.upload_menu_layout:
+//                Intent i=new Intent(getActivity(), UploadMenu.class);
+//                getActivity().startActivity(i);
                 DealWithItApp.saveToPreferences(getActivity(),Keys.flag,Constants.INT_ONE);
                 new Picker.Builder(getContext(),this,R.style.MIP_theme)
                         .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
@@ -492,9 +495,11 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
                     DealWithItApp.showAToast("Please select the Description");
                 }else if(arrayImage.isEmpty()){
                     DealWithItApp.showAToast("Please upload menu first");
-                }else if(arrayPhotos.isEmpty()){
-                        DealWithItApp.showAToast("Please upload photos first");
-                    }else if(uploadPicture.equals("")){
+                }
+//                    else if(arrayPhotos.isEmpty()){
+//                        DealWithItApp.showAToast("Please upload photos first");
+//                    }
+                    else if(uploadPicture.equals("")){
                         DealWithItApp.showAToast("Please cover picture first");
                 }
                 else{

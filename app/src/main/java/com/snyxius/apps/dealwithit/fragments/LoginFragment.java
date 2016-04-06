@@ -207,10 +207,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             }else if(password.getText().toString().isEmpty()){
                 password.setError("Field Required");
                 password.requestFocus();
-            }/* else if (!Validater.isValidPassword(password.getText().toString())){
+            }else if (!Validater.isValidPassword(password.getText().toString())){
                 password.setError("Invalid Format Password");
                 password.requestFocus();
-            }*/else{
+            }
+            else{
                     submit();
             }
 
@@ -227,6 +228,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             if(DealWithItApp.isNetworkAvailable()){
                 new Login().execute(jsonObject.toString());
             }else{
+                DealWithItApp.showAToast("No internet Connection");
+
 
             }
         }catch (JSONException e){
@@ -272,8 +275,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         try {
 
             if(jsonObject != null) {
-                if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
                     DealWithItApp.saveToPreferences(getActivity(), Keys.firstName, jsonObject.getString(Keys.firstName));
+                    if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
                     DealWithItApp.saveToPreferences(getActivity(), Keys.lastName, jsonObject.getString(Keys.lastName));
                     DealWithItApp.saveToPreferences(getActivity(), Keys.id, jsonObject.getString(Keys.id));
                     DealWithItApp.saveToPreferences(getActivity(), Keys.profileId, jsonObject.getString(Keys.profileId));
@@ -298,6 +301,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         public void run() {
                             try {
                                 DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

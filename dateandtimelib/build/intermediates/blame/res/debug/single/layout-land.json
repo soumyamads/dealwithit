@@ -1,10 +1,10 @@
 [
     {
-        "merged": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/build/intermediates/res/merged/debug/layout-land/mdtp_time_picker_dialog.xml",
-        "source": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/res/layout-land/mdtp_time_picker_dialog.xml"
+        "merged": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/build/intermediates/res/merged/debug/layout-land/mdtp_time_picker_dialog.xml",
+        "source": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/src/main/res/layout-land/mdtp_time_picker_dialog.xml"
     },
     {
-        "merged": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/build/intermediates/res/merged/debug/layout-land/mdtp_date_picker_dialog.xml",
-        "source": "/Users/amanjham/Documents/AndroidWorkspace/dealwithit/dateandtimelib/src/main/res/layout-land/mdtp_date_picker_dialog.xml"
+        "merged": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/build/intermediates/res/merged/debug/layout-land/mdtp_date_picker_dialog.xml",
+        "source": "/home/snyxius/dealwithit/dealwithit/dateandtimelib/src/main/res/layout-land/mdtp_date_picker_dialog.xml"
     }
 ]

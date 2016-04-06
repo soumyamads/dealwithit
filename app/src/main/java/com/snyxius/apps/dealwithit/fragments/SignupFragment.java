@@ -150,6 +150,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
                     if (DealWithItApp.isNetworkAvailable()) {
                         new SignUp().execute(jsonObject.toString());
                     } else {
+                        DealWithItApp.showAToast("No internet Connection");
 
                     }
                 } catch (JSONException e) {
@@ -202,7 +203,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
                             DealWithItApp.saveToPreferences(getActivity(), Keys.id, jsonObject.getString(Keys.id));
                             DealWithItApp.saveToPreferences(getActivity(), Keys.profileId, jsonObject.getString(Keys.profileId));
                             DealWithItApp.saveToPreferences(getActivity(), Keys.dealNo, jsonObject.getString(Keys.dealNo));
-                            DialogFragment dialogFrag = SuccessDialogFragment.newInstance();
+                            DialogFragment dialogFrag = OtpDialogFragment.newInstance();
                             dialogFrag.setCancelable(false);
                             dialogFrag.show(getFragmentManager().beginTransaction(), Constants.SUCCESSDIALOG_FRAGMENT);
                         } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {
