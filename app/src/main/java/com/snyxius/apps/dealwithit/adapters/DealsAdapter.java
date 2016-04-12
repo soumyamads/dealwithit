@@ -34,6 +34,7 @@ public class DealsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private static final int PROFILE_LIST_ITEM = 1;
     private ArrayList<ArrayList<AllPojos>> businessArray = null;
     ArrayList<ArrayList<String>> daysArray = null;
+    List<String> mListData;
 
     public DealsAdapter(Context context, ArrayList<AllPojos> dealsArray, ArrayList<ArrayList<AllPojos>> businessArray,ArrayList<ArrayList<String>> daysArray) {
 
@@ -44,6 +45,10 @@ public class DealsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.daysArray = daysArray;
     }
 
+
+    public DealsAdapter(List<String> mListData) {
+        this.mListData = mListData;
+    }
 
 
     static class ViewHolder extends RecyclerView.ViewHolder {

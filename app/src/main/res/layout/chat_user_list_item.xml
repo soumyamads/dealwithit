@@ -94,5 +94,4 @@
             android:background="@drawable/rounded_fill_indicator_primary"/>
 
     </LinearLayout>
-
-</RelativeLayout>
+    </RelativeLayout>

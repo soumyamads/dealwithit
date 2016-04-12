@@ -124,10 +124,16 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
                 } else if (password.getText().toString().isEmpty()) {
                     password.setError("Field Required");
                     password.requestFocus();
-                } else  if (!Validater.isValidPassword(password.getText().toString())) {
-                    password.setError("Invalid Format Password");
-                    password.requestFocus();
-                } else if (!password.getText().toString().equals(retypepassword.getText().toString())) {
+                }
+//                else  if (!Validater.isValidPassword(password.getText().toString())) {
+//                    password.setError("Invalid Format Password");
+//                    password.requestFocus();
+//                }
+                else if (retypepassword.getText().toString().isEmpty()) {
+                    retypepassword.setError("Field Required");
+                    retypepassword.requestFocus();
+                }
+                else if (!password.getText().toString().equals(retypepassword.getText().toString())) {
                     retypepassword.setError("Password Mismatching");
                     retypepassword.requestFocus();
                 } else {

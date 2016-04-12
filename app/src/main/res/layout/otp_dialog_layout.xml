@@ -38,7 +38,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You might have to type manually if the registerd mobile no is different device"
+        android:text="You might have to type manually if the registerd mobile no is a different device"
         android:gravity="center"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"

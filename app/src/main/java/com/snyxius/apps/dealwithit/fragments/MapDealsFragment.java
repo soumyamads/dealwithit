@@ -70,7 +70,7 @@ public class MapDealsFragment extends SupportMapFragment implements OnMapReadyCa
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap = googleMap;
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney").icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons(R.drawable.map_marker,40,50))));
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney").icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons(R.drawable.map_marker,40,50))));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 

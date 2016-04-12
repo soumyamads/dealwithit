@@ -147,6 +147,19 @@
             android:layout_marginTop="3dp"
             android:textColor="@color/grey"/>
 
+        <TextView
+            android:id="@+id/guest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NO OF GUESTS : 10"
+            android:singleLine="true"
+            android:layout_marginLeft="8dp"
+            android:textSize="12dp"
+            android:ellipsize="end"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/grey"/>
+
+
     </LinearLayout>
     </LinearLayout>
 

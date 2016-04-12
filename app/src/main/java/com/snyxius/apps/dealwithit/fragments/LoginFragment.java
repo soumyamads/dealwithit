@@ -207,10 +207,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             }else if(password.getText().toString().isEmpty()){
                 password.setError("Field Required");
                 password.requestFocus();
-            }else if (!Validater.isValidPassword(password.getText().toString())){
-                password.setError("Invalid Format Password");
-                password.requestFocus();
             }
+//            else if (!Validater.isValidPassword(password.getText().toString())){
+//                password.setError("Invalid Format Password");
+//                password.requestFocus();
+//            }
             else{
                     submit();
             }

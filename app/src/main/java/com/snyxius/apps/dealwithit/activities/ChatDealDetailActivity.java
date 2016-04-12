@@ -132,6 +132,7 @@ private LinearLayout mTitleContainer;
         mImageLayout=(RelativeLayout)findViewById(R.id.imageLayout);
         editprofile_button=(Button)findViewById(R.id.edit_profile_button);
         findViewById(R.id.edit_profile_button).setOnClickListener(this);
+
     }
 
     @Override
@@ -145,6 +146,8 @@ private LinearLayout mTitleContainer;
 
                 break;
 
+
+
         }
     }
 
@@ -152,7 +155,7 @@ private LinearLayout mTitleContainer;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.business_main, menu);
+        getMenuInflater().inflate(R.menu.chatmain, menu);
         return true;
     }
 

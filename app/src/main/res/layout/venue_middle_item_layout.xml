@@ -41,7 +41,7 @@
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:background="@drawable/bottom_selector_secondary"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimarys"
             />
 
     </RelativeLayout>

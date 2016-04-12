@@ -26,6 +26,7 @@ import com.snyxius.apps.dealwithit.fragments.BookingsFragment;
 import com.snyxius.apps.dealwithit.fragments.CategoryFragment;
 import com.snyxius.apps.dealwithit.fragments.ChatFragment;
 import com.snyxius.apps.dealwithit.fragments.DrawerFragment;
+import com.snyxius.apps.dealwithit.fragments.SearchBookingFragment;
 import com.snyxius.apps.dealwithit.fragments.SearchDeals;
 
 import java.util.ArrayList;
@@ -95,7 +96,7 @@ public class DealsActivity extends AppCompatActivity implements View.OnClickList
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new ActiveDealsFragment(), Constants.ACTIVE_DEALS);
         adapter.addFragment(new ActiveDealsFragment(), Constants.ALL_DEALS);
-        adapter.addFragment(new ActiveDealsFragment(), Constants.SEARCH_BOOKING);
+//        adapter.addFragment(new SearchBookingFragment(), Constants.SEARCH_BOOKING);
         viewPager.setAdapter(adapter);
     }
 

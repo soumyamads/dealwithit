@@ -69,16 +69,16 @@ public class EditDealOffer extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.opening_time_layout:
+            case R.id.opening_time_text:
                 position = 1;
                 setTime();
                 break;
 
-            case R.id.closing_time_layout:
+            case R.id.closing_time_text:
                 position = 2;
                 setTime();
                 break;
-            case R.id.dealstrt:
+            case R.id.dlstart:
                 position = 3;
                 setDate();
                 break;

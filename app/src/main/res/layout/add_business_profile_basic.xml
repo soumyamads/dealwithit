@@ -101,8 +101,18 @@
                     android:layout_centerVertical="true"
                     android:tint="#808080"
                     android:padding="5dp"
-                    android:layout_marginRight="6dp"/>
+                    android:layout_marginRight="6dp"
+                    android:visibility="gone"/>
             </RelativeLayout>
+
+            <EditText
+                android:id="@+id/mobileno"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:maxLength="10"
+                android:hint="Mobile no"
+                android:inputType="number" />
 
             <EditText
                 android:id="@+id/description"

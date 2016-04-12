@@ -163,6 +163,18 @@
     android:layout_height="wrap_content">
 
 
+    <TextView
+        android:id="@+id/titles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Deal Preview"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/white"
+        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+    />
+
                         <TextView
                             android:id="@+id/title"
                             android:layout_width="match_parent"
@@ -170,6 +182,7 @@
                            android:gravity="center"
                             android:text="Summer Fiesta"
                             android:textStyle="bold"
+                            android:layout_below="@+id/titles"
                             android:textColor="@android:color/white"
                             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
                             />
@@ -179,7 +192,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text=""
+        android:text="Purple Haze, Kormangala"
         android:textStyle="bold"
         android:textColor="@android:color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -191,6 +204,14 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/back"/>
+
+    <ImageView
+        android:id="@+id/edit"
+        android:layout_centerVertical="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/edit_icon_circle"
+        android:layout_alignParentRight="true"/>
 </RelativeLayout>
 
 

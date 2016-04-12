@@ -109,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Please enter a password usingbetween 8 to 20 characters, including atleast one alpha numeric letter, one special letter and an uppercase letter"
-
+                android:visibility="gone"
                 />
 
             <EditText

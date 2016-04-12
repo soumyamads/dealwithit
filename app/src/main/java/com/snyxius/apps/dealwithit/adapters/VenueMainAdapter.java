@@ -69,8 +69,8 @@ public class VenueMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             HeaderHolder headerHolder= (HeaderHolder) holder;
             headerHolder.stars.getDrawable(2).setColorFilter(mContext.getResources().getColor(R.color.colorYellow), PorterDuff.Mode.SRC_ATOP);
             headerHolder.rat.setRating(4.0f);
-            headerHolder.bussinessname.setText(mListData.get(position).getBusiness_name());
-            headerHolder.locationname.setText(mListData.get(position).getLocation_name());
+//            headerHolder.bussinessname.setText(mListData.get(position).getBusiness_name());
+//            headerHolder.locationname.setText(mListData.get(position).getLocation_name());
 //            headerHolder.capacity.setText(mListData.get(position).getCapacity());
 //            headerHolder.cuisines.setText(mListData.get(position).getCuisine());
 

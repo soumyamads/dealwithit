@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.adapters.VenueMainAdapter;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
@@ -70,13 +71,14 @@ public class VenueDetailsFragment extends Fragment {
     }
 
     private void initialize(View view) {
-        recyclerView = (RecyclerView)view.findViewById(R.id.recycler_views);
+        RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recycler_views);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-
-        if(count == Constants.INT_ONE) {
+        VenueMainAdapter adapter = new VenueMainAdapter(getActivity(), createDummyData());
+        recyclerView.setAdapter(adapter);
+//        if(count == Constants.INT_ONE) {
 //            view.findViewById(R.id.down_arrow1).setVisibility(View.GONE);
-        }
+//        }
     }
 
     public ArrayList<SectionDataModel> createDummyData() {

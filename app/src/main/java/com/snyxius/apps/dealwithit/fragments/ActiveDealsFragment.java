@@ -21,7 +21,9 @@ import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.activities.CreateBusinessProfileActivity;
 import com.snyxius.apps.dealwithit.activities.EditBusinessProfile;
 import com.snyxius.apps.dealwithit.activities.EditDealProfile;
+import com.snyxius.apps.dealwithit.activities.UserChatActivity;
 import com.snyxius.apps.dealwithit.adapters.BusinessProfileListAdapter;
+import com.snyxius.apps.dealwithit.adapters.ChatAdapter;
 import com.snyxius.apps.dealwithit.adapters.DealsAdapter;
 import com.snyxius.apps.dealwithit.api.WebRequest;
 import com.snyxius.apps.dealwithit.api.WebServices;
@@ -38,6 +40,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by amanjham on 27/11/15 AD.
@@ -115,6 +119,7 @@ public class ActiveDealsFragment extends Fragment {
                         DealWithItApp.saveToPreferences(getActivity(), Keys.dealId, dealsArray.get(position).getDealId());
                         Intent intent = new Intent(getActivity(), EditDealProfile.class);
                         startActivity(intent);
+                        getActivity().finish();
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
                     }
                 })
@@ -170,7 +175,7 @@ public class ActiveDealsFragment extends Fragment {
                             if(jsonObject1.has(Keys.enddealdate)){
                                 cp.setEnddealdate(jsonObject1.getString(Keys.enddealdate));
                             }
-                            JSONArray jsonArray = jsonObject1.getJSONArray(Keys.businessprofilesIds);
+                           /* JSONArray jsonArray = jsonObject1.getJSONArray(Keys.businessprofilesIds);
                             businessArray = new ArrayList<>();
                             for(int j= 0 ; j<jsonArray.length();j++){
                                 JSONObject json = jsonArray.getJSONObject(j);
@@ -178,8 +183,8 @@ public class ActiveDealsFragment extends Fragment {
                                 pojos.setBusiness_name(json.getString(Keys.business_name));
                                 pojos.setLocation_name(json.getString(Keys.location_name));
                                 businessArray.add(pojos);
-                            }
-                                days = new ArrayList<>();
+                            }*/
+                            days = new ArrayList<>();
                             if(jsonObject1.has(Keys.days)){
                                 JSONArray array = jsonObject1.getJSONArray(Keys.days);
                                 for(int k=0 ; k< array.length();k++ ){

@@ -42,8 +42,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="7dp"
-        android:clickable="true"
-        android:focusable="true"
         android:layout_marginTop="10dp"
         android:background="@drawable/bottom_selector_transparent"
         android:src="@drawable/left_cross"

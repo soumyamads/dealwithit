@@ -28,7 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UserChatActivity extends AppCompatActivity implements View.OnClickListener{
 
     boolean isShow=false;
-    TextView title,desc,userId,timing,cost;
+    TextView title,desc,userId,timing,cost,guest;
     CircleImageView proPic;
     ImageView editProfile,rightArrow,openClose;
     Toolbar toolbar;
@@ -94,6 +94,8 @@ public class UserChatActivity extends AppCompatActivity implements View.OnClickL
         userId=(TextView)findViewById(R.id.user_id);
         timing=(TextView)findViewById(R.id.timing);
         cost=(TextView)findViewById(R.id.cost);
+        guest=(TextView)findViewById(R.id.guest);
+
         proPic=(CircleImageView)findViewById(R.id.profile_pic);
         editProfile=(ImageView)findViewById(R.id.edit_profile);
         rlTop=(RelativeLayout)findViewById(R.id.top);
@@ -102,6 +104,8 @@ public class UserChatActivity extends AppCompatActivity implements View.OnClickL
         openClose=(ImageView)findViewById(R.id.open_close);
         openClose.setOnClickListener(this);
         findViewById(R.id.right_arrow).setOnClickListener(this);
+        findViewById(R.id.edit_profile).setOnClickListener(this);
+
 
         title.setVisibility(View.GONE);
         desc.setVisibility(View.GONE);
@@ -109,6 +113,8 @@ public class UserChatActivity extends AppCompatActivity implements View.OnClickL
         cost.setVisibility(View.GONE);
         proPic.setVisibility(View.GONE);
         editProfile.setVisibility(View.GONE);
+        guest.setVisibility(View.GONE);
+
     }
 
     @Override
@@ -126,6 +132,11 @@ public class UserChatActivity extends AppCompatActivity implements View.OnClickL
             startActivity(detailIntent);
             finish();
         }
+        else if(v.getId()==R.id.edit_profile){
+//            Intent detailIntent=new Intent(UserChatActivity.this,EditDealProfile.class);
+//            startActivity(detailIntent);
+//            finish();
+        }
     }
 
 
@@ -136,6 +147,8 @@ public class UserChatActivity extends AppCompatActivity implements View.OnClickL
         cost.setVisibility(View.GONE);
         proPic.setVisibility(View.GONE);
         editProfile.setVisibility(View.GONE);
+        guest.setVisibility(View.GONE);
+
         RotateAnimation anim= new RotateAnimation(0f,-180f, Animation.RELATIVE_TO_SELF, 0.5f,Animation.RELATIVE_TO_SELF,0.5f);
         anim.setDuration(500);
         anim.setFillBefore(true);
@@ -150,6 +163,8 @@ public class UserChatActivity extends AppCompatActivity implements View.OnClickL
         cost.setVisibility(View.VISIBLE);
         proPic.setVisibility(View.VISIBLE);
         editProfile.setVisibility(View.VISIBLE);
+        guest.setVisibility(View.VISIBLE);
+
         RotateAnimation anim= new RotateAnimation(0f,180f, Animation.RELATIVE_TO_SELF, 0.5f,Animation.RELATIVE_TO_SELF,0.5f);
         anim.setDuration(500);
         anim.setFillAfter(true);

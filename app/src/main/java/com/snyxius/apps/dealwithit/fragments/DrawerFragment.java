@@ -106,6 +106,8 @@ public class DrawerFragment extends Fragment {
             case 2:
                 intent = new Intent(getActivity(), CreateDealActivity.class);
                 startActivity(intent);
+                getActivity().finish();
+
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
                 break;
 
@@ -156,6 +158,8 @@ public class DrawerFragment extends Fragment {
             case 8:
                 intent = new Intent(getActivity(), SearchDealsActivity.class);
                 startActivity(intent);
+                getActivity().finish();
+
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
                 break;
 
@@ -178,6 +182,8 @@ public class DrawerFragment extends Fragment {
             case 12:
                 intent=new Intent(getActivity(), CreateBusinessProfileActivity.class);
                 startActivity(intent);
+                getActivity().finish();
+
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
 
                 break;
@@ -186,6 +192,8 @@ public class DrawerFragment extends Fragment {
             case 13:
                 intent = new Intent(getActivity(), MerchantProfileActivity.class);
                 startActivity(intent);
+                getActivity().finish();
+
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
 
                 break;
@@ -194,6 +202,8 @@ public class DrawerFragment extends Fragment {
 //                DealWithItApp.showAToast("Under Construction");
                 intent = new Intent(getActivity(), SettingsActivity.class);
                 startActivity(intent);
+                getActivity().finish();
+
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
 
                 break;
@@ -209,6 +219,8 @@ public class DrawerFragment extends Fragment {
 //                DealWithItApp.showAToast("Under Construction");
                 intent = new Intent(getActivity(), Aboutus.class);
                 startActivity(intent);
+                getActivity().finish();
+
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
 
                 break;

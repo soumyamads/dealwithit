@@ -35,6 +35,7 @@ public class CreateTemplateActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(CreateTemplateActivity.this,DealTemplatesActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

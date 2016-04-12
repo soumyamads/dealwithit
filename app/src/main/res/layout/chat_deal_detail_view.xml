@@ -100,6 +100,19 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             />
 
+                        <!--<ImageView-->
+                            <!--android:layout_width="20dp"-->
+                            <!--android:layout_height="20dp"-->
+                            <!--android:src="@drawable/back"-->
+                            <!--android:layout_marginRight="10dp"-->
+                            <!--android:layout_gravity="right"/>-->
+
+                        <!--<ImageView-->
+                            <!--android:layout_width="20dp"-->
+                            <!--android:layout_height="20dp"-->
+                            <!--android:src="@drawable/my_deal_edit"-->
+                            <!--android:layout_marginRight="10dp"-->
+                            <!--android:layout_gravity="right"/>-->
                     </LinearLayout>
                 </android.support.v7.widget.Toolbar>
 
@@ -275,6 +288,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:layout_gravity="center"
+                        android:visibility="gone"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -326,9 +340,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
                 android:layout_centerVertical="true"
+                android:visibility="gone"
                 android:background="#0783b4"></LinearLayout>
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:visibility="gone"
                 android:id="@+id/proImage"
                 android:layout_width="60dp"
                 android:layout_height="60dp"

@@ -38,4 +38,40 @@
 
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@+id/chatrecylce"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="#ffffff"
+            android:choiceMode="singleChoice"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:id="@+id/pBar" />
+
+        <TextView
+            android:id="@+id/empty"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No result found"
+            android:layout_centerInParent="true"
+            style="@style/Base.TextAppearance.AppCompat.Large"/>
+
+
+    </RelativeLayout>
+
 </RelativeLayout>

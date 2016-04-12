@@ -10,14 +10,14 @@
         android:background="@drawable/pro"
         >
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/edit_icon_circle"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            />
+        <!--<ImageView-->
+            <!--android:id="@+id/back"-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:src="@drawable/edit_icon_circle"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--/>-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,15 +42,15 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 />
         </LinearLayout>
-        <ImageView
-            android:id="@+id/action_settings"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/search_icon"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:layout_alignParentRight="true"
-            />
+        <!--<ImageView-->
+            <!--android:id="@+id/action_settings"-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:src="@drawable/search_icon"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--/>-->
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -76,7 +76,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/dlstart"
+                    android:id="@+id/dldate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
