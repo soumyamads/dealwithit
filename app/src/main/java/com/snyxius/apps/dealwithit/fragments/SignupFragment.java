@@ -220,6 +220,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
                                 public void run() {
                                     try {
                                         DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
+
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }

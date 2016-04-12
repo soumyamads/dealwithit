@@ -45,6 +45,13 @@ public interface Keys {
     public static final String limit = "limit";
 
     public static final String deleteFlag = "deleteFlag";
+    public static final String templatename = "templatename";
+    public static final String temptext = "temptext";
+    public static final String getTemplateList = "getTemplateList";
+    public static final String Id = "id";
+    public static final String merchantId = "merchantId";
+
+
 
 
 
@@ -119,4 +126,5 @@ public interface Keys {
 
 
 
+    public static final String description_template="description_template";
 }
