@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,6 +67,10 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
     ArrayList<String> arrayListAmbience = new ArrayList<>();
     ArrayList<String> arrayListCuisine = new ArrayList<>();
     ArrayList<String> arrayListType = new ArrayList<>();
+
+    RelativeLayout typeLayout,cuisineLayout,ambienceLayout;
+
+
 
 
 
@@ -124,12 +129,31 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
 
 
         ambience_text = (TextView) view.findViewById(R.id.ambience_text);
-
+        ambienceLayout= (RelativeLayout) view.findViewById(R.id.ambience_layout);
         cuisine_text = (TextView) view.findViewById(R.id.cuisine_text);
-
+        cuisineLayout= (RelativeLayout) view.findViewById(R.id.cuisine_layout);
         type_text = (TextView) view.findViewById(R.id.type_text);
-
+        typeLayout= (RelativeLayout) view.findViewById(R.id.type_layout);
         max_seat = (EditText)view.findViewById(R.id.max_seat);
+
+//          "Restaurant",      "Entertainment / Activities",      "Halls",      "Weekend getaway",      "Spa"
+        if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Restaurant)){
+
+        }else if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Activities)){
+            cuisineLayout.setVisibility(View.GONE);
+            ambienceLayout.setVisibility(View.GONE);
+            type_text.setText("Activity Type");
+        }else if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Halls)){
+            ambienceLayout.setVisibility(View.GONE);
+            cuisine_text.setText("Features");
+            type_text.setText("Hall Type");
+        }else if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Spa)){
+            type_text.setText("Caters To");
+            cuisine_text.setText("Services");
+            ambienceLayout.setVisibility(View.GONE);
+
+        }
+
 
         view.findViewById(R.id.continue_detail).setOnClickListener(this);
         view.findViewById(R.id.cuisine_layout).setOnClickListener(this);
@@ -265,13 +289,34 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                if(type_text.getText().toString().isEmpty()){
-                    DealWithItApp.showAToast("Please select the Type");
-                }else if(cuisine_text.getText().toString().isEmpty()){
-                    DealWithItApp.showAToast("Please select the Cuisine");
-                }else if(ambience_text.getText().toString().isEmpty()){
-                    DealWithItApp.showAToast("Please select the Ambience");
-                }else if(slot1_start_time_text.getText().toString().isEmpty()){
+
+                if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Restaurant)) {
+                    if (type_text.getText().toString().isEmpty()) {
+                        DealWithItApp.showAToast("Please select the Type");
+                    } else if (cuisine_text.getText().toString().isEmpty()) {
+                        DealWithItApp.showAToast("Please select the Cuisine");
+                    } else if (ambience_text.getText().toString().isEmpty()) {
+                        DealWithItApp.showAToast("Please select the Ambience");
+                    }
+                }else if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Activities)) {
+                    if (type_text.getText().toString().isEmpty()) {
+                        DealWithItApp.showAToast("Please select the Type");
+                    }
+                }else if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Halls)) {
+                    if (type_text.getText().toString().isEmpty()) {
+                        DealWithItApp.showAToast("Please select Hall Type");
+                    } else if (cuisine_text.getText().toString().isEmpty()) {
+                        DealWithItApp.showAToast("Please select the Features");
+                    }
+                }else if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Spa)) {
+                    if (type_text.getText().toString().isEmpty()) {
+                        DealWithItApp.showAToast("Please select Caters to");
+                    } else if (cuisine_text.getText().toString().isEmpty()) {
+                        DealWithItApp.showAToast("Please select the Service");
+                    }
+                }
+
+                if(slot1_start_time_text.getText().toString().isEmpty()){
                     DealWithItApp.showAToast("Please select First start Hour Slot");
                 }else if(slot1_end_time_text.getText().toString().isEmpty()){
                     DealWithItApp.showAToast("Please select First end Hour Slot");
@@ -294,15 +339,36 @@ public class AddBusinessProfileDetailFragment extends Fragment implements View.O
 
     private void sendBasicData(){
         try{
-            Log.d("ArrayCuisine", arrayListCuisine.toString());
-            Log.d("ArrayType", arrayListType.toString());
-            Log.d("ArrayAmbience", arrayListAmbience.toString());
-            JSONArray arrayType = new JSONArray(arrayListType);
-            JSONArray arrayCuisine = new JSONArray(arrayListCuisine);
-            JSONArray arrayAmbience = new JSONArray(arrayListAmbience);
-            jsonObject.accumulate(Keys.type,arrayType);
-            jsonObject.accumulate(Keys.cusine,arrayCuisine);
-            jsonObject.accumulate(Keys.ambience,arrayAmbience);
+            if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Restaurant)) {
+                Log.d("ArrayCuisine", arrayListCuisine.toString());
+                Log.d("ArrayType", arrayListType.toString());
+                Log.d("ArrayAmbience", arrayListAmbience.toString());
+                JSONArray arrayType = new JSONArray(arrayListType);
+                JSONArray arrayCuisine = new JSONArray(arrayListCuisine);
+                JSONArray arrayAmbience = new JSONArray(arrayListAmbience);
+                jsonObject.accumulate(Keys.type,arrayType);
+                jsonObject.accumulate(Keys.cusine,arrayCuisine);
+                jsonObject.accumulate(Keys.ambience,arrayAmbience);
+            }else if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Activities)) {
+                Log.d("ArrayType", arrayListType.toString());
+                JSONArray arrayType = new JSONArray(arrayListType);
+                jsonObject.accumulate(Keys.Activ,arrayType);
+            }else if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Spa)) {
+                Log.d("ArraySpa", arrayListType.toString());
+                Log.d("ArrayServices", arrayListCuisine.toString());
+                JSONArray arrayType = new JSONArray(arrayListType);
+                JSONArray arrayCuisine = new JSONArray(arrayListCuisine);
+                jsonObject.accumulate(Keys.Spa,arrayType);
+                jsonObject.accumulate(Keys.Services,arrayCuisine);
+            }else if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Halls)) {
+                Log.d("ArrayHallType", arrayListType.toString());
+                Log.d("ArrayHallFeatures", arrayListCuisine.toString());
+                JSONArray arrayType = new JSONArray(arrayListType);
+                JSONArray arrayCuisine = new JSONArray(arrayListCuisine);
+                jsonObject.accumulate(Keys.HallType,arrayType);
+                jsonObject.accumulate(Keys.Feautures,arrayCuisine);
+            }
+
             jsonObject.accumulate(Keys.timing_slot_1_start, slot1_start_time_text.getText().toString());
             jsonObject.accumulate(Keys.timing_slot_1_end, slot1_end_time_text.getText().toString());
             jsonObject.accumulate(Keys.timing_slot_2_start,slot2_start_time_text.getText().toString());

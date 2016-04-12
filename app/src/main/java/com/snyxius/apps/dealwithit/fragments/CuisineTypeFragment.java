@@ -89,7 +89,14 @@ public class CuisineTypeFragment extends Fragment implements View.OnClickListene
 
 
            if (DealWithItApp.isNetworkAvailable()) {
-               new getCuisineDetails().execute(WebServices.cuisine);
+
+               if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Restaurant)) {
+                   new getCuisineDetails().execute(WebServices.cuisine);
+               }else  if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Spa)) {
+                   new getCuisineDetails().execute(WebServices.spaServices);
+               }else  if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Halls)) {
+                   new getCuisineDetails().execute(WebServices.HallFeautures);
+               }
            } else {
 
            }
@@ -164,7 +171,18 @@ public class CuisineTypeFragment extends Fragment implements View.OnClickListene
             if(jsonObject != null) {
                 if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
                     JSONObject json = jsonObject.getJSONObject(Keys.notice);
-                    JSONArray jArray = json.getJSONArray(Keys.cusine);
+//                    JSONArray jArray = json.getJSONArray(Keys.cusine);
+                    JSONArray jArray=null;
+
+                    if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Restaurant)) {
+                        jArray = json.getJSONArray(Keys.cusine);
+                    }else  if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Spa)) {
+                        jArray = json.getJSONArray(Keys.Services);
+                    }else  if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Halls)) {
+                        jArray = json.getJSONArray(Keys.Feautures);
+                    }
+
+
                     estTypeListArray = new ArrayList<>();
                     if (jArray != null) {
                         for (int i = 0; i < jArray.length(); i++) {

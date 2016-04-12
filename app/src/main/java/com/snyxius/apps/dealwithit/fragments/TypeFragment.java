@@ -139,7 +139,15 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
         protected JSONObject doInBackground(String... params) {
             JSONObject jsonObject = null;
             try {
-                return WebRequest.postData(params[0], WebServices.typeDetails);
+                if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Restaurant)) {
+                    return WebRequest.postData(params[0], WebServices.typeDetails);
+                }else  if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Activities)) {
+                    return WebRequest.getData(WebServices.ActivityType);
+                }else  if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Spa)) {
+                    return WebRequest.getData(WebServices.spa);
+                }else  if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Halls)) {
+                    return WebRequest.getData(WebServices.HallType);
+                }
             }catch (Exception e){
 
                 e.printStackTrace();
@@ -161,7 +169,17 @@ public class TypeFragment extends Fragment implements View.OnClickListener {
             if(jsonObject != null) {
                 if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
                     JSONObject obj = jsonObject.getJSONObject(Keys.notice);
-                    JSONArray jArray = obj.getJSONArray(Keys.type);
+                    JSONArray jArray=null;
+
+                    if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Restaurant)) {
+                        jArray = obj.getJSONArray(Keys.type);
+                    }else  if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Activities)) {
+                        jArray = obj.getJSONArray(Keys.Activ);
+                    }else  if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Spa)) {
+                        jArray = obj.getJSONArray(Keys.Spa);
+                    }else  if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Halls)) {
+                        jArray = obj.getJSONArray(Keys.HallType);
+                    }
 
                     estTypeListArray = new ArrayList<>();
                     if (jArray != null) {

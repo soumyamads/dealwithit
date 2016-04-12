@@ -71,6 +71,13 @@ Response
     public static final String ambiance = baseUrl  + "establishmenttype/ambiance";
 
     public static final String allBuisnessProf = baseUrl  + "merchants/allBuisnessProf";
+
+    public static final String spa = baseUrl  + "establishmenttype/spa";
+    public static final String spaServices = baseUrl  + "establishmenttype/spaServices";
+    public static final String HallType = baseUrl  + "establishmenttype/HallType";
+    public static final String HallFeautures = baseUrl  + "establishmenttype/HallFeautures";
+    public static final String ActivityType = baseUrl  + "establishmenttype/ActivityType";
+
    /*
    Request
    {

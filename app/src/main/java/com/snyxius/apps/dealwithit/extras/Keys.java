@@ -107,4 +107,16 @@ public interface Keys {
     public static final String opening_hour = "Opening_Hour";
     public static final String closing_hour = "Closing_Hour";
 
+
+    public static final String Restaurant = "Restaurant";
+    public static final String Activities = "Entertainment / Activities";
+    public static final String Activ = "Activities";
+    public static final String HallType = "HallType";
+    public static final String Halls = "Halls";
+    public static final String Spa = "Spa";
+    public static final String Services = "Services";
+    public static final String Feautures = "Feautures";
+
+
+
 }
