@@ -9,6 +9,16 @@ public class AllPojos {
     String name;
     String dealId;
     String template_name;
+    String Template_Description;
+
+    public String getTemplate_Description() {
+        return Template_Description;
+    }
+
+    public void setTemplate_Description(String template_Description) {
+        Template_Description = template_Description;
+    }
+
     String template_Id;
 
     public String getTemplate_name() {

@@ -276,7 +276,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         try {
 
             if(jsonObject != null) {
-                    DealWithItApp.saveToPreferences(getActivity(), Keys.firstName, jsonObject.getString(Keys.firstName));
+//                    DealWithItApp.saveToPreferences(getActivity(), Keys.firstName, jsonObject.getString(Keys.firstName));
                     if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
                     DealWithItApp.saveToPreferences(getActivity(), Keys.lastName, jsonObject.getString(Keys.lastName));
                     DealWithItApp.saveToPreferences(getActivity(), Keys.id, jsonObject.getString(Keys.id));
@@ -302,10 +302,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         public void run() {
                             try {
                                 DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+//                            DealWithItApp.showAToast("Failed");
+
+
                         }
                     });
 

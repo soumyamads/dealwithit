@@ -66,7 +66,7 @@
                 android:text="TEMPLATE NAME"
                 android:textStyle="bold"/>
             <EditText
-                android:id="@+id/deal_name"
+                android:id="@+id/temp_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Deal Name"
@@ -100,7 +100,7 @@
 
 
             <EditText
-                android:id="@+id/additional"
+                android:id="@+id/temptext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Type text here"
