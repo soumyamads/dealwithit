@@ -50,6 +50,7 @@ public interface Keys {
     public static final String getTemplateList = "getTemplateList";
     public static final String Id = "id";
     public static final String merchantId = "merchantId";
+    public static final String tempId = "tempId";
 
 
 
@@ -127,4 +128,7 @@ public interface Keys {
 
 
     public static final String description_template="description_template";
+    public static final String  Templatedeleted=" Template deleted";
+
+
 }

@@ -51,7 +51,7 @@ public class DealTemplatesActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
 
 //    ListView mylist;
-    TextView empty;
+    TextView empty,createnewtext;
     private LinearLayoutManager layoutManager;
 
     Button done;
@@ -126,6 +126,15 @@ public class DealTemplatesActivity extends AppCompatActivity {
 //        list.add(cp1);
 //        AllPojos cp2 = new AllPojos();
         empty = (TextView)findViewById(R.id.empty);
+        createnewtext = (TextView)findViewById(R.id.create_new_text);
+        createnewtext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getApplicationContext(),CreateTemplateActivity.class);
+                startActivity(i);
+            }
+        });
+
         mRecyclerView = (RecyclerView) findViewById(R.id.rvList);
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);

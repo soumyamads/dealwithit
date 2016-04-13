@@ -18,6 +18,7 @@ import com.snyxius.apps.dealwithit.activities.BusinessProfileActivity;
 import com.snyxius.apps.dealwithit.activities.CreateBusinessProfileActivity;
 import com.snyxius.apps.dealwithit.activities.CreateDealActivity;
 import com.snyxius.apps.dealwithit.activities.CreateTemplateActivity;
+import com.snyxius.apps.dealwithit.activities.DealTemplatesActivity;
 import com.snyxius.apps.dealwithit.activities.DealWithItActivity;
 import com.snyxius.apps.dealwithit.activities.DealsActivity;
 import com.snyxius.apps.dealwithit.activities.MerchantProfileActivity;
@@ -150,7 +151,7 @@ public class DrawerFragment extends Fragment {
                 intent = new Intent(getActivity(), DealsActivity.class);
                 intent.putExtra(Keys.position,1);
                 startActivity(intent);
-//                getActivity().finish();
+                getActivity().finish();
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
 
                 break;
@@ -158,15 +159,15 @@ public class DrawerFragment extends Fragment {
             case 8:
                 intent = new Intent(getActivity(), SearchDealsActivity.class);
                 startActivity(intent);
-//                getActivity().finish();
+                getActivity().finish();
 
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
                 break;
 
             case 9:
-                intent=new Intent(getActivity(), CreateTemplateActivity.class);
+                intent=new Intent(getActivity(), DealTemplatesActivity.class);
                 startActivity(intent);
-//                getActivity().finish();
+                getActivity().finish();
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
 
                 break;
@@ -174,7 +175,7 @@ public class DrawerFragment extends Fragment {
             case 11:
                 intent=new Intent(getActivity(), BusinessProfileActivity.class);
                 startActivity(intent);
-//                getActivity().finish();
+                getActivity().finish();
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
 
                 break;
@@ -182,7 +183,7 @@ public class DrawerFragment extends Fragment {
             case 12:
                 intent=new Intent(getActivity(), CreateBusinessProfileActivity.class);
                 startActivity(intent);
-//                getActivity().finish();
+                getActivity().finish();
 
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
 
@@ -192,7 +193,7 @@ public class DrawerFragment extends Fragment {
             case 13:
                 intent = new Intent(getActivity(), MerchantProfileActivity.class);
                 startActivity(intent);
-//                getActivity().finish();
+                getActivity().finish();
 
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
 
@@ -202,7 +203,7 @@ public class DrawerFragment extends Fragment {
 //                DealWithItApp.showAToast("Under Construction");
                 intent = new Intent(getActivity(), SettingsActivity.class);
                 startActivity(intent);
-//                getActivity().finish();
+                getActivity().finish();
 
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
 
@@ -219,7 +220,7 @@ public class DrawerFragment extends Fragment {
 //                DealWithItApp.showAToast("Under Construction");
                 intent = new Intent(getActivity(), Aboutus.class);
                 startActivity(intent);
-//                getActivity().finish();
+                getActivity().finish();
 
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
 

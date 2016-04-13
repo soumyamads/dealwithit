@@ -195,6 +195,17 @@ Response – Success
 }
      */
 
+
+    public static final String deleteTemplate = baseUrl  +"merchants/deleteTemplate";
+
+  /*  {
+        "tempId":"570cd5e54d1705f331814b52"
+    }
+
+    {
+        "notice": "Template deleted",
+            "status": "Success"
+    }*/
 }
 
 

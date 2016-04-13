@@ -14,14 +14,18 @@
         android:id="@+id/title"
         android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
         android:textColor="@color/colorPrimary"/>
-    <ListView
-        android:id="@+id/list"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvList"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
+        android:layout_gravity="start"
+        android:background="#ffffff"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="2dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/title"
-
-       >
-    </ListView>
+        />
 
     <Button
         android:id="@+id/button1"
@@ -30,9 +34,10 @@
         android:background="@drawable/bottom_selector_secondary"
         android:layout_centerInParent="true"
         android:text="Done"
-        android:layout_below="@+id/list"
         android:onClick="showDialog"
         android:padding="20dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/rvList"
+        />
 
 </RelativeLayout>

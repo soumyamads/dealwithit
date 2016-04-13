@@ -64,10 +64,10 @@ public class CreateTemplateActivity extends AppCompatActivity implements  View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.create_button:
-//                validate();
-                Intent intent=new Intent(CreateTemplateActivity.this,DealTemplatesActivity.class);
-                startActivity(intent);
-                finish();
+                validate();
+//                Intent intent=new Intent(CreateTemplateActivity.this,DealTemplatesActivity.class);
+//                startActivity(intent);
+//                finish();
                 break;
         }
     }
@@ -149,7 +149,7 @@ public class CreateTemplateActivity extends AppCompatActivity implements  View.O
         try {
             if(jsonObject != null) {
                 if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
-                    DealWithItApp.showAToast(jsonObject.getString(Keys.status));
+                    DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
 
 //                    DialogFragment dialogFrag = OtpDialogFragment.newInstance();
 //                    dialogFrag.setCancelable(false);
