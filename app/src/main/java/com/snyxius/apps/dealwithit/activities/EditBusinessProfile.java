@@ -59,6 +59,8 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
     private ArrayList<String> arrayCuisine;
     private ArrayList<String> arrayAmbiance;
     JSONObject jsonObject1 = new JSONObject();
+//    String category_name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -445,6 +447,9 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
                           AllPojos pojos = new AllPojos();
                           pojos.setDescription(jsonObject2.getString(Keys.description));
                           pojos.setBusiness_name(jsonObject2.getString(Keys.business_name));
+//                        category_name=jsonObject2.getString(Keys.category);
+                        DealWithItApp.saveToPreferences(getApplicationContext(), Keys.category,jsonObject2.getString(Keys.category));
+
                           pojos.setCategory(jsonObject2.getString(Keys.category));
                           pojos.setAddress(jsonObject2.getString(Keys.Address));
                           pojos.setLocation_name(jsonObject2.getString(Keys.location_name));
@@ -459,19 +464,46 @@ public class EditBusinessProfile extends AppCompatActivity implements View.OnCli
                           pojos.setCover_image(jsonObject2.getString(Keys.cover_image));
                           arrayBasic.add(pojos);
 
+                        if(DealWithItApp.readFromPreferences(getApplicationContext(), Keys.category, "").equals(Keys.Restaurant)) {
+                            JSONArray jsonArray1 = jsonObject2.getJSONArray(Keys.type);
+                            for (int i = 0; i < jsonArray1.length(); i++) {
+                                arraytype.add(jsonArray1.getString(i));
+                            }
 
-                               JSONArray jsonArray1 =  jsonObject2.getJSONArray(Keys.type);
-                                for (int i = 0; i< jsonArray1.length(); i++){
-                                     arraytype.add(jsonArray1.getString(i));
-                                }
+                            JSONArray jsonArray2 = jsonObject2.getJSONArray(Keys.cusine);
+                            for (int i = 0; i < jsonArray2.length(); i++) {
+                                arrayCuisine.add(jsonArray2.getString(i));
+                            }
+                            JSONArray jsonArray3 = jsonObject2.getJSONArray(Keys.ambience);
+                            for (int i = 0; i < jsonArray3.length(); i++) {
+                                arrayAmbiance.add(jsonArray3.getString(i));
+                            }
+                        }else  if(DealWithItApp.readFromPreferences(getApplicationContext(), Keys.category,"").equals(Keys.Activities)) {
+                            JSONArray jsonArray1 = jsonObject2.getJSONArray(Keys.Activ);
+                            for (int i = 0; i < jsonArray1.length(); i++) {
+                                arraytype.add(jsonArray1.getString(i));
+                            }
 
-                        JSONArray jsonArray2 =  jsonObject2.getJSONArray(Keys.cusine);
-                        for (int i = 0; i< jsonArray2.length(); i++){
-                            arrayCuisine.add(jsonArray2.getString(i));
-                        }
-                        JSONArray jsonArray3 =  jsonObject2.getJSONArray(Keys.ambience);
-                        for (int i = 0; i< jsonArray3.length(); i++){
-                            arrayAmbiance.add(jsonArray3.getString(i));
+                        }else  if(DealWithItApp.readFromPreferences(getApplicationContext(), Keys.category,"").equals(Keys.Spa)) {
+                            JSONArray jsonArray1 = jsonObject2.getJSONArray(Keys.Spa);
+                            for (int i = 0; i < jsonArray1.length(); i++) {
+                                arraytype.add(jsonArray1.getString(i));
+                            }
+
+                            JSONArray jsonArray2 = jsonObject2.getJSONArray(Keys.Services);
+                            for (int i = 0; i < jsonArray2.length(); i++) {
+                                arrayCuisine.add(jsonArray2.getString(i));
+                            }
+                        }else  if(DealWithItApp.readFromPreferences(getApplicationContext(), Keys.category,"").equals(Keys.Halls)) {
+                            JSONArray jsonArray1 = jsonObject2.getJSONArray(Keys.HallType);
+                            for (int i = 0; i < jsonArray1.length(); i++) {
+                                arraytype.add(jsonArray1.getString(i));
+                            }
+
+                            JSONArray jsonArray2 = jsonObject2.getJSONArray(Keys.Feautures);
+                            for (int i = 0; i < jsonArray2.length(); i++) {
+                                arrayCuisine.add(jsonArray2.getString(i));
+                            }
                         }
 
                         AllPojos detailsPojos = new AllPojos();
