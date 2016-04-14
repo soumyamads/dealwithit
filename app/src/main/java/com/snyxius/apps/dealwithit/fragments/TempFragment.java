@@ -1,5 +1,6 @@
 package com.snyxius.apps.dealwithit.fragments;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -49,8 +50,23 @@ RecyclerView mRecyclerView;
     LinearLayoutManager layoutManager;
     ListView mylist;
     Button done;
+    sendTemplate template;
+
     ArrayList<AllPojos> estTypeListArray;
     TempTitleAdapter adapter;
+    int getPositionCheckbox;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            template = (sendTemplate) activity;
+
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement DataPassListener");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +78,13 @@ RecyclerView mRecyclerView;
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int pos=-1;
+                if (TempTitleAdapter.clickedPOs!=-1) {
+                    pos=TempTitleAdapter.clickedPOs;
+                    DealWithItApp.showAToast(TempTitleAdapter.clickedPOs + "");
+                }
+                if(template!=null)
+                template.getTemplateSelected(estTypeListArray.get(pos).getTemplate_Description());
 
                 dismiss();
             }
@@ -94,6 +117,12 @@ RecyclerView mRecyclerView;
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         return view;
     }
+
+
+    public interface sendTemplate{
+        public void getTemplateSelected(String content);
+    }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -159,6 +188,8 @@ getlist();
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
     }
+
+
 
     private class gettemplatetitle extends AsyncTask<String, Void, JSONObject> {
         private ProgressDialog dialog = new ProgressDialog(getActivity());

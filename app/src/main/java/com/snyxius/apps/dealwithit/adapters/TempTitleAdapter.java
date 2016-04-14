@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.pojos.AllPojos;
 
 import java.util.ArrayList;
@@ -24,11 +25,15 @@ import java.util.List;
  */
 public class TempTitleAdapter extends RecyclerView.Adapter<TempTitleAdapter.MyViewHolder>{
 
+
+
     List<AllPojos> mListData;
     private  static  CheckBox lastChecked=null;
     private static int lastCheckedPos=0;
     //    Context context;
     AppCompatActivity activity;
+    passChecked pass = null;
+    public static int clickedPOs;
     final CharSequence[] items = {
             "View", "Delete", "Email Template"
     };
@@ -50,6 +55,15 @@ public class TempTitleAdapter extends RecyclerView.Adapter<TempTitleAdapter.MyVi
         return new MyViewHolder(view);
     }
 
+    public interface passChecked{
+        void getChecked(int pos);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
     @Override
     public void onBindViewHolder(TempTitleAdapter.MyViewHolder holder, int i) {
 
@@ -63,11 +77,14 @@ public class TempTitleAdapter extends RecyclerView.Adapter<TempTitleAdapter.MyVi
             }
 //            MyViewHolder.description.setText(mListData.get(i).getTemplate_Description());
             MyViewHolder.checkBox.setTag(i);
+
             MyViewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                         CheckBox cb=(CheckBox)v;
-int clickedPOs=((Integer)cb.getTag()).intValue();
+                    clickedPOs=((Integer)cb.getTag()).intValue();
+//                    DealWithItApp.showAToast("click"+clickedPOs);
+
 
                     if(cb.isChecked())
                     {
@@ -84,7 +101,8 @@ int clickedPOs=((Integer)cb.getTag()).intValue();
                         lastChecked = null;
 
 //                    fonts.get(clickedPos).setSelected(cb.isChecked);
-
+//                    pass.getChecked(clickedPOs);
+//                    DealWithItApp.saveToPreferences(activity,"checkbox_pos",clickedPOs);
                     }
                 });
 

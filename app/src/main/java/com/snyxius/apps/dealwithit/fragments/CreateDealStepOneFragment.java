@@ -26,7 +26,7 @@ import java.util.ArrayList;
 /**
  * Created by snyxius on 10/15/2015.
  */
-public class CreateDealStepOneFragment extends Fragment implements View.OnClickListener {
+public class CreateDealStepOneFragment extends Fragment implements View.OnClickListener{
 
 
     TextView business_text;
@@ -89,8 +89,8 @@ public class CreateDealStepOneFragment extends Fragment implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.continue_button:
-               // validate();
-               sendBasicData();
+                validate();
+//               sendBasicData();
                 break;
             case R.id.select_business_layout:
                 passData.setBusinessData(business_text.getText().toString());
@@ -115,6 +115,13 @@ public class CreateDealStepOneFragment extends Fragment implements View.OnClickL
 
         }
     }
+
+
+    public void getTemplateSelected(String content) {
+        fullDescription.setText(content);
+
+    }
+
     public interface StepOneStroke {
         void setStepTwoStoke();
         void sendStepOneData(JSONObject jsonObject);

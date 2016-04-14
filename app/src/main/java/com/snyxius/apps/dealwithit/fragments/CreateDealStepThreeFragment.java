@@ -52,7 +52,7 @@ import java.util.Date;
 /**
  * Created by snyxius on 10/15/2015.
  */
-public class CreateDealStepThreeFragment extends Fragment implements View.OnClickListener ,TimePickerDialog.OnTimeSetListener,
+public class  CreateDealStepThreeFragment extends Fragment implements View.OnClickListener ,TimePickerDialog.OnTimeSetListener,
         DatePickerDialog.OnDateSetListener{
 
 

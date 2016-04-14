@@ -22,7 +22,7 @@ import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 public class TermsandConditions extends Fragment implements View.OnClickListener {
     EditText typetext;
     TextView template;
-
+//    sendTemplate template;
     ListView typeList;
     String[] values;
     TandcPassListener mCallback;
@@ -31,6 +31,7 @@ public class TermsandConditions extends Fragment implements View.OnClickListener
     static String strings;
     ProgressBar progressBar;
     TextView emptytext;
+    sendTemplateTerms temp;
 //    ArrayList<String> arrayList;
 
     public static TermsandConditions newInstance(String string) {
@@ -44,26 +45,16 @@ public class TermsandConditions extends Fragment implements View.OnClickListener
         super.onAttach(activity);
         // Make sure that container activity implement the callback interface
         try {
-            mCallback = (TandcPassListener)activity;
+            temp=(sendTemplateTerms)activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement DataPassListener");
         }
     }
 
-    private void splitingData(){
-//        arrayList = new ArrayList<>();
-//        if(strings.equals("Select Business Profile")){
-//
-//        }else{
-//            int count = StringUtils.countMatches(strings, ",");
-//            for (int i=0 ;i<=count;i++) {
-//                String[] splited = strings.split(",");
-//                arrayList.add(splited[i]);
-//            }
-//
-//            Log.d("List", arrayList.toString());
-//        }
+    public void getTermsTemplateSelected(String content) {
+        typetext.setText(content);
+
     }
 
         @Override
@@ -72,6 +63,11 @@ public class TermsandConditions extends Fragment implements View.OnClickListener
         View rootView = inflater.inflate(R.layout.termsandcondition, container, false);
         return rootView;
 
+    }
+
+
+    public interface sendTemplateTerms{
+        void getTermsTemplateSelected(String content);
     }
 
     @Override

@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@android:color/white"
-    android:focusableInTouchMode="true"
-        android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusable="true">
-
+    android:clickable="false"
+    android:focusable="true"
+>
     <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"

@@ -23,7 +23,7 @@ import java.util.ArrayList;
  * Created by snyxius on 10/30/2015.
  */
 public class CreateDealActivity extends AppCompatActivity implements CreateDealStepOneFragment.StepOneStroke,CreateDealStepTwoFragment.StepTwoStroke,
-GetAllBusinessProfileFragment.DataPassListener,CreateDealStepOneFragment.PassData, View.OnClickListener,CreateDealStepTwoFragment.PassTandcData,TermsandConditions.TandcPassListener{
+GetAllBusinessProfileFragment.DataPassListener,CreateDealStepOneFragment.PassData, View.OnClickListener,CreateDealStepTwoFragment.PassTandcData,TermsandConditions.TandcPassListener,TempFragment.sendTemplate,TermsandConditions.sendTemplateTerms{
 
     ImageView stepViewImage2,stepViewImage3;
 
@@ -170,4 +170,39 @@ GetAllBusinessProfileFragment.DataPassListener,CreateDealStepOneFragment.PassDat
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void getTemplateSelected(String content) {
+        try {
+            //Log.d("String",data+""+array.toString());
+//            TermsandConditions f1 = (TermsandConditions) getSupportFragmentManager().findFragmentByTag(Constants.TERMSANDCONDITION_FRAGMENT);
+//            f1.getTemplateSelected(content);
+
+            CreateDealStepOneFragment f = (CreateDealStepOneFragment) getSupportFragmentManager().findFragmentByTag(Constants.CREATE_STEP_ONE_FRAGMENT);
+            f.getTemplateSelected(content);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void getTermsTemplateSelected(String content) {
+
+    }
+
+//    @Override
+//    public void getTermsTemplateSelected(String content) {
+//        try {
+//            //Log.d("String",data+""+array.toString());
+////            TermsandConditions f1 = (TermsandConditions) getSupportFragmentManager().findFragmentByTag(Constants.TERMSANDCONDITION_FRAGMENT);
+////            f1.getTemplateSelected(content);
+//
+//            TermsandConditions f = (TermsandConditions) getSupportFragmentManager().findFragmentByTag(Constants.TERMSANDCONDITION_FRAGMENT);
+//            f.getTermsTemplateSelected(content);
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//
+//    }
 }
