@@ -383,7 +383,7 @@ public class  CreateDealStepThreeFragment extends Fragment implements View.OnCli
             if(jsonObject != null){
                 if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
                     DealWithItApp.showAToast(jsonObject.getString(Keys.notice));
-                    DialogFragment dialogFrag = BusinessCreatedDialogFragment.newInstance();
+                    DialogFragment dialogFrag = CreatedDealDialogFragment.newInstance();
                     dialogFrag.setCancelable(false);
                     dialogFrag.show(getFragmentManager().beginTransaction(), Constants.BUSINESS_PROFILE_CREATED_DIALOG);
                 } else if (jsonObject.getString(Keys.status).equals(Constants.FAILED)) {

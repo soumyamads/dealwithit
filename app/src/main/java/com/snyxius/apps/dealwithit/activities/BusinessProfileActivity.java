@@ -155,6 +155,7 @@ public class BusinessProfileActivity extends AppCompatActivity {
                     JSONArray jArray = obj.getJSONArray(Keys.allProfiles);
 
                     estTypeListArray = new ArrayList<>();
+
                     if (jArray != null) {
                         for (int i = 0; i < jArray.length(); i++) {
                             JSONObject jsonObject1 = jArray.getJSONObject(i);

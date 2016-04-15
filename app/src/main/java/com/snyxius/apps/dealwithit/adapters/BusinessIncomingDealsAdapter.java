@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * Created by AMAN on 11-09-2015.
  */
-public class BusinessIncomingDealsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class  BusinessIncomingDealsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public OnItemClickListener mItemClickListener;
     List<AllPojos> bookingsData = new ArrayList<>();

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="false"
-    android:focusable="true"
+    android:focusable="false"
 >
     <RelativeLayout
         android:id="@+id/toolbar"
@@ -53,12 +53,16 @@
                 />
         </RelativeLayout>
     </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:background="@android:color/white"
-        >
+
+
+        <RelativeLayout
+            android:id="@+id/relatvblwtoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:focusable="false"
+            android:layout_below="@+id/toolbar"
+            android:background="#ffffff">
     <TextView
         android:id="@+id/template"
         android:layout_width="wrap_content"
@@ -95,4 +99,32 @@
        />
 
     </RelativeLayout>
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_below="@+id/toolbar"-->
+        <!--android:id="@+id/relativeLayout">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/empty"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:visibility="gone"-->
+            <!--style="@style/Base.TextAppearance.AppCompat.Medium"-->
+            <!--android:text="No result found"/>-->
+
+    <!--</RelativeLayout>-->
+
+<Button
+    android:id="@+id/save"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimaryDark"
+    android:text="save"
+    android:textStyle="bold"
+    android:textColor="@android:color/white"
+    android:layout_alignParentBottom="true"/>
 </RelativeLayout>

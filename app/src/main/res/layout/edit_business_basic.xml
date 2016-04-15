@@ -96,17 +96,17 @@
                     android:paddingRight="20dp"
                     android:inputType="textMultiLine" />
 
-                <ImageView
-                    android:id="@+id/button_clear"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/ic_cross"
-                    android:background="@drawable/bottom_selector_transparent"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:tint="#808080"
-                    android:padding="5dp"
-                    android:layout_marginRight="6dp"/>
+                <!--<ImageView-->
+                    <!--android:id="@+id/button_clear"-->
+                    <!--android:layout_width="25dp"-->
+                    <!--android:layout_height="25dp"-->
+                    <!--android:src="@drawable/ic_cross"-->
+                    <!--android:background="@drawable/bottom_selector_transparent"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:tint="#808080"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:layout_marginRight="6dp"/>-->
             </RelativeLayout>
 
             <EditText

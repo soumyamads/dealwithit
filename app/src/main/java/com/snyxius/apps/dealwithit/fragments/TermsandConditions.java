@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -31,6 +32,7 @@ public class TermsandConditions extends Fragment implements View.OnClickListener
     static String strings;
     ProgressBar progressBar;
     TextView emptytext;
+    Button save;
 //    ArrayList<String> arrayList;
 
     public static TermsandConditions newInstance(String string) {
@@ -97,6 +99,7 @@ public class TermsandConditions extends Fragment implements View.OnClickListener
         rootView.findViewById(R.id.template).setOnClickListener(this);
 
         rootView.findViewById(R.id.wrong).setOnClickListener(this);
+        rootView.findViewById(R.id.save).setOnClickListener(this);
         typetext=(EditText)rootView.findViewById(R.id.writehere);
 
     }
@@ -105,8 +108,11 @@ public class TermsandConditions extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.right:
+            case R.id.save:
+
                 getSelectedTypes();
                 break;
+
             case R.id.wrong:
                 getActivity().getSupportFragmentManager().popBackStack();
                 break;

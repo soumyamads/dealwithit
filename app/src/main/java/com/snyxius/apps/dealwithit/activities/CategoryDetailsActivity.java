@@ -2,27 +2,18 @@ package com.snyxius.apps.dealwithit.activities;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.res.Configuration;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
@@ -33,23 +24,13 @@ import android.widget.TextView;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.adapters.ViewPagerAdapter;
-import com.snyxius.apps.dealwithit.api.WebRequest;
-import com.snyxius.apps.dealwithit.api.WebServices;
-import com.snyxius.apps.dealwithit.applications.DealWithItApp;
-import com.snyxius.apps.dealwithit.extras.Constants;
-import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.fragments.DealsDetailsFragment;
 import com.snyxius.apps.dealwithit.fragments.MapDealsFragment;
 import com.snyxius.apps.dealwithit.fragments.ShareDealsFragment;
-import com.snyxius.apps.dealwithit.fragments.TermsAndConditions;
+import com.snyxius.apps.dealwithit.fragments.TermsAndConditionsUser;
 import com.snyxius.apps.dealwithit.fragments.VenueDetailsFragment;
-import com.snyxius.apps.dealwithit.pojos.AllPojos;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -153,7 +134,7 @@ public class CategoryDetailsActivity extends AppCompatActivity implements AppBar
 
         viewPagerAdapter.addFragment(new ShareDealsFragment(), R.drawable.ic_tabbar_deals_share);
 
-        viewPagerAdapter.addFragment(new TermsAndConditions(), R.drawable.ic_tabbar_deals_terms);
+        viewPagerAdapter.addFragment(new TermsAndConditionsUser(), R.drawable.ic_tabbar_deals_terms);
 
 
         viewPager.setAdapter(viewPagerAdapter);

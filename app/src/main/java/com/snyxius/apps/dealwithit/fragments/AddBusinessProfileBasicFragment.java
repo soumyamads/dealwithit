@@ -168,20 +168,26 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
             case R.id.upload_menu_layout:
 //                Intent i=new Intent(getActivity(), UploadMenu.class);
 //                getActivity().startActivity(i);
-                DealWithItApp.saveToPreferences(getActivity(),Keys.flag,Constants.INT_ONE);
-                new Picker.Builder(getContext(),this,R.style.MIP_theme)
-                        .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
-                        .setLimit(6)
-                        .build()
-                        .startActivity();
+
+
+//                DealWithItApp.saveToPreferences(getActivity(),Keys.flag,Constants.INT_ONE);
+//                new Picker.Builder(getContext(),this,R.style.MIP_theme)
+//                        .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
+//                        .setLimit(6)
+//                        .build()
+//                        .startActivity();
+                selectImage();
+
                 break;
             case R.id.photos_menu_layout:
-                DealWithItApp.saveToPreferences(getActivity(),Keys.flag,Constants.INT_TWO);
-                new Picker.Builder(getContext(),this,R.style.MIP_theme)
-                        .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
-                        .setLimit(6)
-                        .build()
-                        .startActivity();
+//                DealWithItApp.saveToPreferences(getActivity(),Keys.flag,Constants.INT_TWO);
+//                new Picker.Builder(getContext(),this,R.style.MIP_theme)
+//                        .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
+//                        .setLimit(6)
+//                        .build()
+//                        .startActivity();
+                selectImage();
+
                 break;
             case R.id.cover_image_layout:
                 selectImage();

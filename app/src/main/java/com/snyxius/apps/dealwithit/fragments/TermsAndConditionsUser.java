@@ -13,13 +13,13 @@ import com.snyxius.apps.dealwithit.extras.Constants;
 /**
  * Created by amanjham on 27/01/16.
  */
-public class TermsAndConditions extends Fragment {
+public class TermsAndConditionsUser extends Fragment {
 
     static int count = Constants.DEFAULT_INT;
-    public static TermsAndConditions newInstance(int position) {
+    public static TermsAndConditionsUser newInstance(int position) {
         count = position;
         Bundle args = new Bundle();
-        TermsAndConditions fragment = new TermsAndConditions();
+        TermsAndConditionsUser fragment = new TermsAndConditionsUser();
         fragment.setArguments(args);
         return fragment;
     }
