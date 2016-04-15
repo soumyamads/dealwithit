@@ -46,9 +46,9 @@ public class DrawerFragment extends Fragment {
     DrawerAdapter mAdapter;
     RecyclerView mRecyclerView;
     String[] values = new String[] {"Home", "Create a Deal", "Chats", "Confirmations",
-            "QR Code Scanner", "My Active Deals", "All Deals", "Search Booking ID", "Templates",
-            "Business Profile", "Add a Business Profile", "Merchant Profile",
-            "Settings","Logout","Payment","About Us"};
+            "QR Code Scanner", "My Active Deals", "All Deals",  "Templates",
+            "Business Profile", "Merchant Profile",
+            "Settings","Logout","Payment","About Us","contact us","Help"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,8 +77,8 @@ public class DrawerFragment extends Fragment {
 
         //Sections
         sections.add(new SectionedRecyclerViewAdapter.Section(1,"DEALS"));
-        sections.add(new SectionedRecyclerViewAdapter.Section(9,"PROFILES"));
-        sections.add(new SectionedRecyclerViewAdapter.Section(12,"ACCOUNT"));
+        sections.add(new SectionedRecyclerViewAdapter.Section(8,"PROFILES"));
+        sections.add(new SectionedRecyclerViewAdapter.Section(10,"ACCOUNT"));
        //Add your adapter to the sectionAdapter
         SectionedRecyclerViewAdapter.Section[] dummy = new SectionedRecyclerViewAdapter.Section[sections.size()];
         SectionedRecyclerViewAdapter mSectionedAdapter = new
@@ -155,16 +155,16 @@ public class DrawerFragment extends Fragment {
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
 
                 break;
+//
+//            case 8:
+//                intent = new Intent(getActivity(), SearchDealsActivity.class);
+//                startActivity(intent);
+//                getActivity().finish();
+//
+//                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+//                break;
 
             case 8:
-                intent = new Intent(getActivity(), SearchDealsActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-
-                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
-                break;
-
-            case 9:
                 intent=new Intent(getActivity(), DealTemplatesActivity.class);
                 startActivity(intent);
                 getActivity().finish();
@@ -172,7 +172,7 @@ public class DrawerFragment extends Fragment {
 
                 break;
 
-            case 11:
+            case 10:
                 intent=new Intent(getActivity(), BusinessProfileActivity.class);
                 startActivity(intent);
                 getActivity().finish();
@@ -180,17 +180,17 @@ public class DrawerFragment extends Fragment {
 
                 break;
 
-            case 12:
-                intent=new Intent(getActivity(), CreateBusinessProfileActivity.class);
-                startActivity(intent);
-                getActivity().finish();
+//            case 13:
+//                intent=new Intent(getActivity(), CreateBusinessProfileActivity.class);
+//                startActivity(intent);
+//                getActivity().finish();
+//
+//                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+//
+//                break;
 
-                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
 
-                break;
-
-
-            case 13:
+            case 11:
                 intent = new Intent(getActivity(), MerchantProfileActivity.class);
                 startActivity(intent);
                 getActivity().finish();
@@ -199,7 +199,7 @@ public class DrawerFragment extends Fragment {
 
                 break;
 
-            case 15:
+            case 13:
 //                DealWithItApp.showAToast("Under Construction");
                 intent = new Intent(getActivity(), SettingsActivity.class);
                 startActivity(intent);
@@ -209,14 +209,14 @@ public class DrawerFragment extends Fragment {
 
                 break;
 
-            case 16:
+            case 14:
                 logout();
                 break;
-            case 17:
+            case 15:
                 DealWithItApp.showAToast("Under Construction");
                 break;
 
-            case 18:
+            case 16:
 //                DealWithItApp.showAToast("Under Construction");
                 intent = new Intent(getActivity(), Aboutus.class);
                 startActivity(intent);
@@ -224,6 +224,12 @@ public class DrawerFragment extends Fragment {
 
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
 
+                break;
+            case 17:
+                DealWithItApp.showAToast("Under Construction");
+                break;
+            case 18:
+                DealWithItApp.showAToast("Under Construction");
                 break;
 
             default:

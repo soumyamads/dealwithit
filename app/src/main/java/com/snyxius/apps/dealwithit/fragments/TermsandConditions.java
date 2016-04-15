@@ -39,6 +39,17 @@ public class TermsandConditions extends Fragment implements View.OnClickListener
         return f;
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        // Make sure that container activity implement the callback interface
+        try {
+            mCallback = (TandcPassListener)activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement DataPassListener");
+        }
+    }
 
 
     public void getTermsTemplateSelected(String content) {

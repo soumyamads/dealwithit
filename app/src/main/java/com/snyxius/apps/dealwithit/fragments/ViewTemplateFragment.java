@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,8 +19,8 @@ import com.snyxius.apps.dealwithit.extras.Constants;
  */
 public class ViewTemplateFragment extends DialogFragment implements View.OnClickListener {
     TextView titles,contents;
-    ImageView close;
-
+//    ImageView close;
+    Button cancel;
     public static ViewTemplateFragment newInstance(String title,String content) {
         ViewTemplateFragment f = new ViewTemplateFragment();
         Bundle bundle=new Bundle();
@@ -53,8 +54,15 @@ public class ViewTemplateFragment extends DialogFragment implements View.OnClick
         contents=(TextView)view.findViewById(R.id.descriptions);
         titles.setText(getArguments().getString("title"));
         contents.setText(getArguments().getString("content"));
-        close=(ImageView)view.findViewById(R.id.close);
-        close.setOnClickListener(new View.OnClickListener() {
+//        close=(ImageView)view.findViewById(R.id.close);
+//        close.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dismiss();
+//            }
+//        });
+        cancel=(Button)view.findViewById(R.id.cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();

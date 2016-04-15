@@ -67,7 +67,7 @@ public class BeforeBusinessProfileActivity extends AppCompatActivity{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.business_main, menu);
+//        getMenuInflater().inflate(R.menu.business_main, menu);
         return true;
     }
 

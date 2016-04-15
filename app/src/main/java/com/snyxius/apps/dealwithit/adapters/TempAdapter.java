@@ -72,29 +72,30 @@ AppCompatActivity activity;
 
     @Override
     public void onBindViewHolder(MyViewHolder myViewHolder, final int i) {
-        if(myViewHolder instanceof MyViewHolder ) {
+//        if(myViewHolder instanceof MyViewHolder ) {
             MyViewHolder MyViewHolder = (MyViewHolder) myViewHolder;
             MyViewHolder.title.setText(mListData.get(i).getTemplate_name());
             MyViewHolder.description.setText(mListData.get(i).getTemplate_Description());
             MyViewHolder.threedots.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                    builder.setTitle("Make your selection");
-//                    builder.setItems(items, new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int item) {
-//                            // Do something with the selection
-////                            mDoneButton.setText(items[item]);
-//                        }
-//                    });
-//                    AlertDialog alert = builder.create();
-//                    alert.show();
+//
+////                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+////                    builder.setTitle("Make your selection");
+////                    builder.setItems(items, new DialogInterface.OnClickListener() {
+////                        public void onClick(DialogInterface dialog, int item) {
+////                            // Do something with the selection
+//////                            mDoneButton.setText(items[item]);
+////                        }
+////                    });
+////                    AlertDialog alert = builder.create();
+////                    alert.show();
+                    DealWithItApp.showAToast("clicked");
                     ShowAlertDialogWithListview(i);
                 }
             });
 
-        }
+//        }
     }
     public void ShowAlertDialogWithListview(final int pos)
     {
@@ -110,7 +111,7 @@ AppCompatActivity activity;
                 if (item == 0) {
 //                    FragmentManager fragmentManager = activity.getFragmentManager();
                     DialogFragment dialogFrag = ViewTemplateFragment.newInstance(mListData.get(pos).getTemplate_name(),mListData.get(pos).getTemplate_Description());
-                    dialogFrag.setCancelable(false);
+                    dialogFrag.setCancelable(true);
                     dialogFrag.show(activity.getSupportFragmentManager().beginTransaction(), Constants.SUCCESSDIALOG_FRAGMENT);
                 } else if (item == 1) {
 
