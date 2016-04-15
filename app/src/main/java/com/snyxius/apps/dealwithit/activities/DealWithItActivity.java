@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.View;
 
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
 import com.snyxius.apps.dealwithit.fragments.BookingsFragment;
@@ -27,6 +28,8 @@ import com.snyxius.apps.dealwithit.fragments.DrawerFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Nihas on 02-11-2015.
@@ -37,6 +40,9 @@ public class DealWithItActivity extends AppCompatActivity implements View.OnClic
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle drawerToggle;
+    int back_int=0;
+    private Timer timer=new Timer();
+    private final long DELAY = 5000; // milliseconds
 
 
     @Override
@@ -45,6 +51,30 @@ public class DealWithItActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_deal_with_it);
         initialize();
         initDrawer();
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        if(back_int==0){
+            DealWithItApp.showAToast("Press Again to exit");
+            back_int=1;
+            timer.cancel();
+            timer = new Timer();
+            timer.schedule(
+                    new TimerTask() {
+                        @Override
+                        public void run() {
+                            // TODO: do what you need here (refresh list)
+                            // you will probably need to use runOnUiThread(Runnable action) for some specific actions
+                            back_int=0;
+                        }
+                    },
+                    DELAY
+            );
+        }else if(back_int==1){
+            finishAffinity();
+        }
     }
 
     private void initialize() {

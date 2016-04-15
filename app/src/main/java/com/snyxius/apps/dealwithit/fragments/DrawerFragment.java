@@ -98,7 +98,8 @@ public class DrawerFragment extends Fragment {
         Intent intent;
         drawerLayout.closeDrawers();
         switch (position){
-            case 0:intent=new Intent(getActivity(), DealWithItActivity.class);
+            case 0:
+                intent=new Intent(getActivity(), DealWithItActivity.class);
                 startActivity(intent);
 //                getActivity().finish();
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
@@ -165,9 +166,17 @@ public class DrawerFragment extends Fragment {
 //                break;
 
             case 8:
+                intent = new Intent(getActivity(), DealTemplatesActivity.class);
+                startActivity(intent);
+//                getActivity().finish();
+
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
+                break;
+
+            case 9:
                 intent=new Intent(getActivity(), DealTemplatesActivity.class);
                 startActivity(intent);
-                getActivity().finish();
+//                getActivity().finish();
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
 
                 break;
@@ -175,7 +184,7 @@ public class DrawerFragment extends Fragment {
             case 10:
                 intent=new Intent(getActivity(), BusinessProfileActivity.class);
                 startActivity(intent);
-                getActivity().finish();
+//                getActivity().finish();
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
 
                 break;
@@ -188,12 +197,16 @@ public class DrawerFragment extends Fragment {
 //                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
 //
 //                break;
+            case 12:
+                intent=new Intent(getActivity(), CreateBusinessProfileActivity.class);
+                startActivity(intent);
+//                getActivity().finish();
 
 
             case 11:
                 intent = new Intent(getActivity(), MerchantProfileActivity.class);
                 startActivity(intent);
-                getActivity().finish();
+//                getActivity().finish();
 
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out);
 
