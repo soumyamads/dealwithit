@@ -23,7 +23,7 @@ import java.util.ArrayList;
  * Created by snyxius on 10/30/2015.
  */
 public class CreateDealActivity extends AppCompatActivity implements CreateDealStepOneFragment.StepOneStroke,CreateDealStepTwoFragment.StepTwoStroke,
-GetAllBusinessProfileFragment.DataPassListener,CreateDealStepOneFragment.PassData, View.OnClickListener,CreateDealStepTwoFragment.PassTandcData,TermsandConditions.TandcPassListener,TempFragment.sendTemplate,TermsandConditions.sendTemplateTerms{
+GetAllBusinessProfileFragment.DataPassListener,CreateDealStepOneFragment.PassData, View.OnClickListener,CreateDealStepTwoFragment.PassTandcData,TermsandConditions.TandcPassListener,TempFragment.sendTemplate,TempFragment.sendTemplateTandC{
 
     ImageView stepViewImage2,stepViewImage3;
 
@@ -187,9 +187,11 @@ GetAllBusinessProfileFragment.DataPassListener,CreateDealStepOneFragment.PassDat
     }
 
     @Override
-    public void getTermsTemplateSelected(String content) {
-
+    public void getTemplateTandCSelected(String content) {
+        TermsandConditions f = (TermsandConditions) getSupportFragmentManager().findFragmentByTag(Constants.TERMSANDCONDITION_FRAGMENT);
+        f.getTermsTemplateSelected(content);
     }
+
 
 //    @Override
 //    public void getTermsTemplateSelected(String content) {
