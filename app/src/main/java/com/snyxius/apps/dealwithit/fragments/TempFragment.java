@@ -51,6 +51,7 @@ RecyclerView mRecyclerView;
     ListView mylist;
     Button done;
     sendTemplate template;
+    sendTemplateTandC tandcTemplate;
 
     ArrayList<AllPojos> estTypeListArray;
     TempTitleAdapter adapter;
@@ -61,7 +62,7 @@ RecyclerView mRecyclerView;
         super.onAttach(activity);
         try {
             template = (sendTemplate) activity;
-
+            tandcTemplate=(sendTemplateTandC)activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement DataPassListener");
@@ -83,8 +84,14 @@ RecyclerView mRecyclerView;
                     pos=TempTitleAdapter.clickedPOs;
                     DealWithItApp.showAToast(TempTitleAdapter.clickedPOs + "");
                 }
-                if(template!=null)
-                template.getTemplateSelected(estTypeListArray.get(pos).getTemplate_Description());
+
+                if(getTag().equals("tandc")){
+                    if (tandcTemplate != null)
+                        tandcTemplate.getTemplateTandCSelected(estTypeListArray.get(pos).getTemplate_Description());
+                }else {
+                    if (template != null)
+                        template.getTemplateSelected(estTypeListArray.get(pos).getTemplate_Description());
+                }
 
                 dismiss();
             }
@@ -123,6 +130,10 @@ RecyclerView mRecyclerView;
         public void getTemplateSelected(String content);
     }
 
+
+    public interface sendTemplateTandC{
+        public void getTemplateTandCSelected(String content);
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

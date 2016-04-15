@@ -109,7 +109,7 @@ public class CreateDealStepOneFragment extends Fragment implements View.OnClickL
                 FragmentManager manager = getFragmentManager();
 
                 TempFragment dialog = new TempFragment();
-                dialog.show(manager, "dialog");
+                dialog.show(manager, "stepOne");
 
                 break;
 

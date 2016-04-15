@@ -31,7 +31,6 @@ public class TermsandConditions extends Fragment implements View.OnClickListener
     static String strings;
     ProgressBar progressBar;
     TextView emptytext;
-    sendTemplateTerms temp;
 //    ArrayList<String> arrayList;
 
     public static TermsandConditions newInstance(String string) {
@@ -40,21 +39,10 @@ public class TermsandConditions extends Fragment implements View.OnClickListener
         return f;
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        // Make sure that container activity implement the callback interface
-        try {
-            temp=(sendTemplateTerms)activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement DataPassListener");
-        }
-    }
+
 
     public void getTermsTemplateSelected(String content) {
         typetext.setText(content);
-
     }
 
         @Override
@@ -66,9 +54,7 @@ public class TermsandConditions extends Fragment implements View.OnClickListener
     }
 
 
-    public interface sendTemplateTerms{
-        void getTermsTemplateSelected(String content);
-    }
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -117,7 +103,7 @@ public class TermsandConditions extends Fragment implements View.OnClickListener
                 FragmentManager manager = getFragmentManager();
 
                 TempFragment dialog = new TempFragment();
-                dialog.show(manager, "dialog");
+                dialog.show(manager, "tandc");
 
                 break;
         }
