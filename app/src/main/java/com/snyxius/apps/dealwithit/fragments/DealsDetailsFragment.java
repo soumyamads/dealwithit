@@ -25,9 +25,14 @@ import android.widget.Toast;
 
 
 import com.snyxius.apps.dealwithit.R;
+import com.snyxius.apps.dealwithit.extras.Keys;
+import com.snyxius.apps.dealwithit.pojos.AllPojos;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by amanjham on 27/01/16.
@@ -35,20 +40,37 @@ import org.json.JSONException;
 public class DealsDetailsFragment extends Fragment {
 
 
+    TextView minimumguest;
+    LinearLayout details;
+    TextView costOrDiscountText;
+    TextView timings;
+    TextView expDate;
+    TextView startDate;
+
+    LinearLayout beforeReserveLayout;
+    RelativeLayout afterReserveLayout;
+    TextView bookedDate;
+    TextView bookedTime;
+
     static String startingDate;
     static String endingdate;
     static String startingTime;
     static String endingTime;
     static String totalAmountText;
-
+TextView minimumBillGuesttext, minimumBillGuestNum,costperson;
 
     Button reserve;
     FragmentManager fm ;
 //    = getSupportFragmentManager();
 //    ArrayList<AllPojos> getDealsdetails;
     AppCompatActivity AppAct;
+    static JSONObject jobj2 = new JSONObject();
 
-
+    public static DealsDetailsFragment newInstance(JSONObject Object) {
+        jobj2 = Object;
+        DealsDetailsFragment f = new DealsDetailsFragment();
+        return f;
+    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -83,13 +105,17 @@ public class DealsDetailsFragment extends Fragment {
         dates.putString("end_time", endingTime);
         dates.putString("total_amount",totalAmountText);
         return dates;
-
     }
 
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        minimumBillGuestNum=(TextView)view.findViewById(R.id.minimum_bill_guest_num);
+        costperson=(TextView)view.findViewById(R.id.cost_person);
+        beforeReserveLayout=(LinearLayout)view.findViewById(R.id.before_reserve_layout);
+        afterReserveLayout=(RelativeLayout)view.findViewById(R.id.after_reserve_layout);
+
 //        initialize(view);
 
 //        if (savedInstanceState != null) {
@@ -101,127 +127,146 @@ public class DealsDetailsFragment extends Fragment {
 //            setupWeekdaysButtons1();
 
 //        weekdaysDataSource1.setVisible(false);
-        reserve=(Button)view.findViewById(R.id.reserve);
-        reserve.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+//        reserve=(Button)view.findViewById(R.id.reserve);
+//        reserve.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
 //
-//                Book_button_fragment dialogFragment = new Book_button_fragment();
-//                dialogFragment.setArguments(startBookFragmnt());
-//                dialogFragment.show(getFragmentManager(), "Sample Fragment");
-            }
-        });
+////
+////                Book_button_fragment dialogFragment = new Book_button_fragment();
+////                dialogFragment.setArguments(startBookFragmnt());
+////                dialogFragment.show(getFragmentManager(), "Sample Fragment");
+//            }
+//        });
+
 //        getDealsdetails=new ArrayList<>();
-//        JSONObject jobj2= null;
-//        try {
+//        JSONObject jobj2=
+
+try{
+//Toast.makeText(getActivity(),"jsn"+jobj2,Toast.LENGTH_LONG).show();
+//    if (jobj2.has(Keys.minimum_guest)) {
+//        JSONArray jarr1 = jobj2.getJSONArray(Keys.minimum_guest);
+//        JSONObject jobj3 = jarr1.getJSONObject(0);
+////        pojos.setMinimum_Guest(jobj3.getString(Keys.minimum_guest));
+////        pojos.setCost_person(jobj3.getString(Keys.cost_person));
+//
+//        minimumBillGuestNum.setText(jobj3.getString(Keys.minimum_guest));
+////        minimumBillGuesttext.setText("MINIMUM NO OF GUESTS : ");
+//        Toast.makeText(getActivity(),"eeee"+minimumBillGuestNum,Toast.LENGTH_LONG).show();
+////        costOrDiscountText.setText("COST PER PERSON");
+//        totalAmountText = jobj3.getString(Keys.cost_person);
+//        costperson.setText("INR " + jobj3.getString(Keys.cost_person) + "/Guest");
+//    } else {
+////        pojos.setMinimum_Guest("");
+////        pojos.setCost_person("");
+//    }
 //            jobj2 = new JSONObject(DealWithItApp.readFromPreferences(getActivity(), "DEAL_DETAIL", ""));
-//            if(jobj2.has(Keys.fixed)) {
-//                beforeReserveLayout.setVisibility(View.VISIBLE);
-//                afterReserveLayout.setVisibility(View.GONE);
-//                AllPojos pojos = new AllPojos();
-//                pojos.setDeal_name(jobj2.getString(Keys.deal_name));
+            if(jobj2.has(Keys.fixed)) {
+                beforeReserveLayout.setVisibility(View.VISIBLE);
+                afterReserveLayout.setVisibility(View.GONE);
+                AllPojos pojos = new AllPojos();
+                pojos.setDeal_name(jobj2.getString(Keys.deal_name));
 //                pojos.setAddress(jobj2.getString(Keys.address));
 //                pojos.setDescription(jobj2.getString(Keys.description));
-//                pojos.setRecurring(jobj2.getString(Keys.recurring));
-//                pojos.setFixed(jobj2.getString(Keys.fixed));
-//
-//                if (jobj2.has(Keys.minimum_guest)) {
-//                    JSONArray jarr1 = jobj2.getJSONArray(Keys.minimum_guest);
-//                    JSONObject jobj3 = jarr1.getJSONObject(0);
-//                    pojos.setMinimum_Guest(jobj3.getString(Keys.minimum_guest));
-//                    pojos.setCost_person(jobj3.getString(Keys.cost_person));
-//
-//                    minimumBillGuestNum.setText(jobj3.getString(Keys.minimum_guest));
+                pojos.setRecurring(jobj2.getString(Keys.recurring));
+                pojos.setFixed(jobj2.getString(Keys.fixed));
+
+                if (jobj2.has(Keys.minimum_guest)) {
+                    JSONArray jarr1 = jobj2.getJSONArray(Keys.minimum_guest);
+                    JSONObject jobj3 = jarr1.getJSONObject(0);
+                    pojos.setMinimum_Guest(jobj3.getString(Keys.minimum_guest));
+                    pojos.setCost_person(jobj3.getString(Keys.cost_person));
+
+                    minimumBillGuestNum.setText(jobj3.getString(Keys.minimum_guest));
 //                    minimumBillGuesttext.setText("MINIMUM NO OF GUESTS : ");
+                    Toast.makeText(getActivity(),"eeee"+minimumBillGuestNum,Toast.LENGTH_LONG).show();
 //                    costOrDiscountText.setText("COST PER PERSON");
-//                    totalAmountText = jobj3.getString(Keys.cost_person);
-//                    costperson.setText("INR " + jobj3.getString(Keys.cost_person) + "/Guest");
-//                } else {
-//                    pojos.setMinimum_Guest("");
-//                    pojos.setCost_person("");
-//                }
-//
-//                if (jobj2.has(Keys.minimum_billig)) {
-//                    JSONArray jarr2 = jobj2.getJSONArray(Keys.minimum_billig);
-//                    JSONObject jobj3 = jarr2.getJSONObject(0);
-//                    pojos.setMinimum_Billing(jobj3.getString(Keys.minimum_billig));
-//                    pojos.setDiscount_Person(jobj3.getString(Keys.discount_percent));
-//                    totalAmountText = jobj3.getString(Keys.minimum_billig);
-//                    minimumBillGuestNum.setText("Rs " + jobj3.getString(Keys.minimum_billig));
-//                    minimumBillGuesttext.setText("MINIMUM BILL AMOUNT : ");
-//                    costOrDiscountText.setText("PERCENTAGE DISCOUNT");
-//                    costperson.setText(jobj3.getString(Keys.discount_percent) + "% OFF");
-//
-//                } else {
-//                    pojos.setMinimum_Billing("");
-//                    pojos.setDiscount_Person("");
-//                }
-//                startingDate = jobj2.getString(Keys.startdealdate);
-//                endingdate = jobj2.getString(Keys.enddealdate);
-//                startingTime = jobj2.getString(Keys.opening_hour);
-//                endingTime = jobj2.getString(Keys.closing_hour);
-//
-//                timings.setText(startingTime + " - " + endingTime);
-//                expDate.setText(endingdate);
-//                startDate.setText(startingDate);
-//
-//                if (jobj2.getString(Keys.recurring).equals("yes")) {
-//
+                    totalAmountText = jobj3.getString(Keys.cost_person);
+                    costperson.setText("INR " + jobj3.getString(Keys.cost_person) + "/Guest");
+                } else {
+                    pojos.setMinimum_Guest("");
+                    pojos.setCost_person("");
+                }
+
+                if (jobj2.has(Keys.minimum_billig)) {
+                    JSONArray jarr2 = jobj2.getJSONArray(Keys.minimum_billig);
+                    JSONObject jobj3 = jarr2.getJSONObject(0);
+                    pojos.setMinimum_Billing(jobj3.getString(Keys.minimum_billig));
+                    pojos.setDiscount_Person(jobj3.getString(Keys.discount_percent));
+                    totalAmountText = jobj3.getString(Keys.minimum_billig);
+                    minimumBillGuestNum.setText("Rs " + jobj3.getString(Keys.minimum_billig));
+                    minimumBillGuesttext.setText("MINIMUM BILL AMOUNT : ");
+                    costOrDiscountText.setText("PERCENTAGE DISCOUNT");
+                    costperson.setText(jobj3.getString(Keys.discount_percent) + "% OFF");
+
+                } else {
+                    pojos.setMinimum_Billing("");
+                    pojos.setDiscount_Person("");
+                }
+                startingDate = jobj2.getString(Keys.startdealdate);
+                endingdate = jobj2.getString(Keys.enddealdate);
+                startingTime = jobj2.getString(Keys.opening_hour);
+                endingTime = jobj2.getString(Keys.closing_hour);
+
+                timings.setText(startingTime + " - " + endingTime);
+                expDate.setText(endingdate);
+                startDate.setText(startingDate);
+
+                if (jobj2.getString(Keys.recurring).equals("yes")) {
+
 //                    weekdaysDataSource1.setVisible(true);
-//
-//                    if (jobj2.has(Keys.days)) {
-//
-//                        JSONArray dateArr = jobj2.getJSONArray(Keys.days);
-//                        ArrayList<String> dateArrays = new ArrayList<>();
-//                        for (int j = 0; j < dateArr.length(); j++) {
-//                            dateArrays.add(dateArr.getString(j));
-//                        }
-//                        pojos.setDays(dateArrays);
-//                    }
-//                }
-//
-//            }else{
-//                afterReserveLayout.setVisibility(View.VISIBLE);
-//                beforeReserveLayout.setVisibility(View.GONE);
-//
-//                if (jobj2.has(Keys.minimum_guest)) {
-//                    JSONArray jarr1 = jobj2.getJSONArray(Keys.minimum_guest);
-//                    if(jarr1.length()>0) {
-//                        JSONObject jobj3 = jarr1.getJSONObject(0);
-//
-//                        minimumBillGuestNum.setText(jobj3.getString(Keys.minimum_guest));
-//                        minimumBillGuesttext.setText("MINIMUM NO OF GUESTS : ");
-//                        costOrDiscountText.setText("COST PER PERSON");
-//                        totalAmountText = jobj3.getString(Keys.cost_person);
-//                        costperson.setText("INR " + jobj3.getString(Keys.cost_person) + "/Guest");
-//                    }
-//                }
-//
-//                if (jobj2.has(Keys.minimum_billig)) {
-//                    JSONArray jarr2 = jobj2.getJSONArray(Keys.minimum_billig);
-//                    if(jarr2.length()>0) {
-//                        JSONObject jobj3 = jarr2.getJSONObject(0);
-//                        totalAmountText = jobj3.getString(Keys.minimum_billig);
-//                        minimumBillGuestNum.setText("Rs " + jobj3.getString(Keys.minimum_billig));
-//                        minimumBillGuesttext.setText("MINIMUM BILL AMOUNT : ");
-//                        costOrDiscountText.setText("PERCENTAGE DISCOUNT");
-//                        costperson.setText(jobj3.getString(Keys.discount_percent) + "% OFF");
-//                    }
-//
-//                }
-//
+
+                    if (jobj2.has(Keys.days)) {
+
+                        JSONArray dateArr = jobj2.getJSONArray(Keys.days);
+                        ArrayList<String> dateArrays = new ArrayList<>();
+                        for (int j = 0; j < dateArr.length(); j++) {
+                            dateArrays.add(dateArr.getString(j));
+                        }
+                        pojos.setDays(dateArrays);
+                    }
+                }
+
+            }else {
+                afterReserveLayout.setVisibility(View.VISIBLE);
+                beforeReserveLayout.setVisibility(View.GONE);
+
+                if (jobj2.has(Keys.minimum_guest)) {
+                    JSONArray jarr1 = jobj2.getJSONArray(Keys.minimum_guest);
+                    if (jarr1.length() > 0) {
+                        JSONObject jobj3 = jarr1.getJSONObject(0);
+
+                        minimumBillGuestNum.setText(jobj3.getString(Keys.minimum_guest));
+                        minimumBillGuesttext.setText("MINIMUM NO OF GUESTS : ");
+                        costOrDiscountText.setText("COST PER PERSON");
+                        totalAmountText = jobj3.getString(Keys.cost_person);
+                        costperson.setText("INR " + jobj3.getString(Keys.cost_person) + "/Guest");
+                    }
+                }
+
+                if (jobj2.has(Keys.minimum_billig)) {
+                    JSONArray jarr2 = jobj2.getJSONArray(Keys.minimum_billig);
+                    if (jarr2.length() > 0) {
+                        JSONObject jobj3 = jarr2.getJSONObject(0);
+                        totalAmountText = jobj3.getString(Keys.minimum_billig);
+                        minimumBillGuestNum.setText("Rs " + jobj3.getString(Keys.minimum_billig));
+                        minimumBillGuesttext.setText("MINIMUM BILL AMOUNT : ");
+                        costOrDiscountText.setText("PERCENTAGE DISCOUNT");
+                        costperson.setText(jobj3.getString(Keys.discount_percent) + "% OFF");
+                    }
+
+                }
+
 //                bookedDate.setText(jobj2.getString(Keys.select_Date));
 //                bookedTime.setText(jobj2.getString(Keys.select_Time));
-//                bookedId.setText("BOOKING ID: "+jobj2.getString(Keys.BookingID));
-//                reserve.setText("CALL MERCHANT");
+////                bookedId.setText("BOOKING ID: "+jobj2.getString(Keys.BookingID));
+                reserve.setText("CALL MERCHANT");
 //                reserve.setTag(jobj2.getString(Keys.Contact_no));
-//
-//            }
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }}
 //
 //
 //
@@ -289,4 +334,3 @@ public class DealsDetailsFragment extends Fragment {
 
 
 
-}

@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -51,6 +52,7 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
     RelativeLayout termscondtn;
     RadioGroup radioGroup;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
+    ImageView tick,galry,arrow;
     StepTwoStroke mCallback;
     PassTandcData passTandcData;
     String uploadPicture = "";
@@ -124,6 +126,11 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
         minimum_billig = (EditText)view.findViewById(R.id.mimimum_billig);
         discount_percent = (EditText)view.findViewById(R.id.discount_percent);
         deal_image_text = (TextView)view.findViewById(R.id.deal_image_text);
+
+        arrow = (ImageView)view.findViewById(R.id.right_arrow);
+        galry = (ImageView)view.findViewById(R.id.galry);
+        tick = (ImageView)view.findViewById(R.id.greentk);
+
         view.findViewById(R.id.deal_image_layout).setOnClickListener(this);
         view.findViewById(R.id.continue_button).setOnClickListener(this);
         view.findViewById(R.id.min_guests).setOnClickListener(this);
@@ -251,6 +258,9 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
         uploadPicture = Base64.encodeToString(byteArray, Base64.DEFAULT);
         if(!uploadPicture.equals("")){
             deal_image_text.setText("Image Uploaded");
+            arrow.setVisibility(View.GONE);
+            galry.setVisibility(View.GONE);
+            tick.setVisibility(View.VISIBLE);
         }
     }
 

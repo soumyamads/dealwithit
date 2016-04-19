@@ -9,7 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/continue_button">
+        android:layout_above="@+id/launchdeal">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -366,7 +366,7 @@
         </LinearLayout>
     </ScrollView>
     <Button
-        android:id="@+id/continue_button"
+        android:id="@+id/launchdeal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

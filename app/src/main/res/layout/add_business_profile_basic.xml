@@ -151,11 +151,20 @@
                     android:background="@color/grey"/>
 
                 <ImageView
+                    android:id="@+id/rightarw"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/arrow_right"/>
+                <ImageView
+                    android:id="@+id/greentk2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"
+                    android:src="@drawable/green_tick"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -187,11 +196,21 @@
                     android:background="@color/grey"/>
 
                 <ImageView
+                    android:id="@+id/rightarw2"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/arrow_right"/>
+                <ImageView
+                    android:id="@+id/greentk1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"
+
+                    android:src="@drawable/green_tick"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/cover_image_layout"
@@ -221,11 +240,20 @@
                     android:background="@color/grey"/>
 
                 <ImageView
+                    android:id="@+id/galryimg"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/null_image"/>
+                <ImageView
+                    android:id="@+id/greentk"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:visibility="gone"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/green_tick"/>
             </RelativeLayout>
 
 

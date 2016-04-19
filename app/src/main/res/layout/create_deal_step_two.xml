@@ -48,6 +48,7 @@
                     android:background="@color/grey"/>
 
                 <ImageView
+                    android:id="@+id/galry"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
@@ -55,6 +56,17 @@
                     android:src="@drawable/null_image"
                     android:layout_marginRight="18dp"
                   />
+
+                <ImageView
+                    android:id="@+id/greentk"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/green_tick"
+                    android:visibility="gone"
+                    android:layout_marginRight="18dp"
+                    />
                 <ImageView
                     android:id="@+id/right_arrow"
                     android:layout_width="20dp"

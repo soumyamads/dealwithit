@@ -5,49 +5,50 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
     <LinearLayout
+        android:id="@+id/details_layout"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="20dp">
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="20dp"
-            android:visibility="visible"
-            android:src="@drawable/down_arrows"/>
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="10dp"
-            android:visibility="invisible"
-            android:src="@drawable/down_arrows"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="20dp"
+                android:visibility="visible"
+                android:src="@drawable/down_arrow"/>
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="10dp"
-            android:visibility="invisible"
-            android:src="@drawable/down_arrows"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="10dp"
+                android:visibility="invisible"
+                android:src="@drawable/down_arrow"/>
 
-        <ImageView
-            android:visibility="invisible"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="10dp"
-            android:src="@drawable/down_arrows"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="10dp"
+                android:visibility="invisible"
+                android:src="@drawable/down_arrow"/>
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="10dp"
-            android:visibility="invisible"
-            android:src="@drawable/down_arrows"/>
-    </LinearLayout>
+            <ImageView
+                android:visibility="invisible"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="10dp"
+                android:src="@drawable/down_arrow"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="10dp"
+                android:visibility="invisible"
+                android:src="@drawable/down_arrow"/>
+        </LinearLayout>
 
 
 
@@ -73,6 +74,7 @@
 
 
             <TextView
+                android:id="@+id/cost_discount_text"
                 android:textStyle="bold"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/colorPrimaryDarks"
@@ -90,28 +92,28 @@
                 android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/cost_person"
-                android:textColor="@color/colorPrimaryDarks"
-                android:textStyle="bold"
-                style="@style/TextAppearance.AppCompat.Large"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="INR 800"
-                />
+                <TextView
+                    android:id="@+id/cost_person"
+                    android:textColor="@color/colorPrimaryDarks"
+                    android:textStyle="bold"
+                    style="@style/TextAppearance.AppCompat.Large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    />
 
                 <!--<TextView-->
-                    <!--android:layout_centerVertical="true"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:textStyle="bold"-->
-                    <!--android:textColor="@color/colorPrimaryDarks"-->
-                    <!--style="@style/Base.TextAppearance.AppCompat.Small"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Alcohol Included"-->
-                    <!--android:textAllCaps="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textColor="@color/colorPrimaryDarks"-->
+                <!--style="@style/Base.TextAppearance.AppCompat.Small"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Alcohol Included"-->
+                <!--android:textAllCaps="true"-->
 
-                    <!--/>-->
+                <!--/>-->
 
             </RelativeLayout>
 
@@ -124,6 +126,7 @@
 
 
                 <TextView
+                    android:id="@+id/minimum_bill_guest"
                     android:textAllCaps="true"
                     android:textColor="@color/colorPrimaryDarks"
                     android:textStyle="bold"
@@ -134,127 +137,236 @@
                     />
 
                 <TextView
-                    android:id="@+id/minimumguest"
-                    android:textAllCaps="true"
+                    android:id="@+id/minimum_bill_guest_num"
                     android:textColor="@color/colorPrimaryDarks"
                     android:textStyle="bold"
                     style="@style/Base.TextAppearance.AppCompat.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10"
+                    android:text=""
                     />
+
+
             </LinearLayout>
 
             <!--<LinearLayout-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content">-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
 
 
-                <!--<TextView-->
-                    <!--android:textAllCaps="true"-->
-                    <!--android:textStyle="bold"-->
-                    <!--android:textColor="@color/grey"-->
-                    <!--style="@style/Base.TextAppearance.AppCompat.Medium"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="WED, 03/11/2015"-->
-                    <!--/>-->
+            <!--<TextView-->
+            <!--android:textAllCaps="true"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textColor="@color/grey"-->
+            <!--style="@style/Base.TextAppearance.AppCompat.Medium"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="WED, 03/11/2015"-->
+            <!--/>-->
 
 
-                <!--<TextView-->
-                    <!--android:textColor="@color/grey"-->
-                    <!--android:textAllCaps="true"-->
-                    <!--android:textStyle="bold"-->
-                    <!--style="@style/Base.TextAppearance.AppCompat.Medium"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text=" , "-->
-                    <!--/>-->
+            <!--<TextView-->
+            <!--android:textColor="@color/grey"-->
+            <!--android:textAllCaps="true"-->
+            <!--android:textStyle="bold"-->
+            <!--style="@style/Base.TextAppearance.AppCompat.Medium"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text=" , "-->
+            <!--/>-->
 
-                <!--<TextView-->
-                    <!--android:textColor="@color/grey"-->
-                    <!--android:textAllCaps="true"-->
-                    <!--android:textStyle="bold"-->
-                    <!--style="@style/Base.TextAppearance.AppCompat.Medium"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="18:00 - 23:00"-->
-                    <!--/>-->
+            <!--<TextView-->
+            <!--android:textColor="@color/grey"-->
+            <!--android:textAllCaps="true"-->
+            <!--android:textStyle="bold"-->
+            <!--style="@style/Base.TextAppearance.AppCompat.Medium"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="18:00 - 23:00"-->
+            <!--/>-->
             <!--</LinearLayout>-->
 
             <!--<LinearLayout-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content">-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
 
 
-                <!--<TextView-->
-                    <!--android:textColor="@color/grey"-->
-                    <!--android:textStyle="bold"-->
-                    <!--style="@style/Base.TextAppearance.AppCompat.Medium"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="28 days left"-->
-                    <!--/>-->
+            <!--<TextView-->
+            <!--android:textColor="@color/grey"-->
+            <!--android:textStyle="bold"-->
+            <!--style="@style/Base.TextAppearance.AppCompat.Medium"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="28 days left"-->
+            <!--/>-->
 
-                <!--<TextView-->
-                    <!--android:textColor="@color/grey"-->
-                    <!--android:textAllCaps="true"-->
-                    <!--android:textStyle="bold"-->
-                    <!--style="@style/Base.TextAppearance.AppCompat.Medium"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text=" / "-->
-                    <!--/>-->
+            <!--<TextView-->
+            <!--android:textColor="@color/grey"-->
+            <!--android:textAllCaps="true"-->
+            <!--android:textStyle="bold"-->
+            <!--style="@style/Base.TextAppearance.AppCompat.Medium"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text=" / "-->
+            <!--/>-->
 
 
-                <!--<TextView-->
-                    <!--android:textColor="@color/grey"-->
-                    <!--android:textStyle="bold"-->
-                    <!--style="@style/Base.TextAppearance.AppCompat.Medium"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="3 slots left"-->
-                    <!--/>-->
+            <!--<TextView-->
+            <!--android:textColor="@color/grey"-->
+            <!--android:textStyle="bold"-->
+            <!--style="@style/Base.TextAppearance.AppCompat.Medium"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="3 slots left"-->
+            <!--/>-->
             <!--</LinearLayout>-->
 
+            <ViewStub
+                android:id="@+id/weekdays_stub"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize" />
+
             <TextView
+                android:id="@+id/timing"
                 android:textColor="@color/grey"
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 style="@style/Base.TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="18:00 - 23:00"
-                />
-            <TextView
-                android:layout_marginTop="15dp"
-                android:textColor="@color/colorPrimaryDarks"
-                style="@style/Base.TextAppearance.AppCompat.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Surya, Neeraj, Aman , Pawan and Raj like this."
-               android:textStyle="bold"
+                android:text=""/>
 
-                />
+            <LinearLayout
+                android:id="@+id/before_reserve_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/colorPrimaryDarks"
+                    style="@style/Base.TextAppearance.AppCompat.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DEAL STARTS ON"
+                    android:textAllCaps="true"
+                    android:textSize="11dp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/start_date"
+                    android:textColor="@color/grey"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    style="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/colorPrimaryDarks"
+                    style="@style/Base.TextAppearance.AppCompat.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DEAL EXPIRES ON"
+                    android:textAllCaps="true"
+                    android:textSize="11dp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/expiry_date"
+                    android:textColor="@color/grey"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    style="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/after_reserve_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <!--<ImageView-->
+                    <!--android:layout_width="80dp"-->
+                    <!--android:layout_height="80dp"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:src="@drawable/com_facebook_profile_picture_blank_portrait"/>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/booked_date"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        style="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""/>
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/booked_time"-->
+                        <!--android:textColor="@color/weekdaysstub_purple"-->
+                        <!--android:textAllCaps="true"-->
+                        <!--android:textStyle="bold"-->
+                        <!--android:layout_marginTop="5dp"-->
+                        <!--style="@style/Base.TextAppearance.AppCompat.Medium"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text=""/>-->
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <!--<TextView-->
+                <!--android:id="@+id/booking_id"-->
+                <!--android:layout_marginTop="15dp"-->
+                <!--android:textColor="@color/colorPrimaryDarks"-->
+                <!--style="@style/Base.TextAppearance.AppCompat.Small"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Surya, Neeraj, Aman , Pawan and Raj like this."-->
+                <!--android:textStyle="bold"-->
+
+                <!--/>-->
 
 
         </LinearLayout>
-    <Button
-        android:layout_marginTop="30dp"
-        android:padding="10dp"
-        android:id="@+id/reserve"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="RESERVE"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:background="@color/colorYellow"
-        android:textColor="@color/colorPrimarys"
-        />
-</LinearLayout>
+        <!--<Button-->
+            <!--android:layout_marginTop="30dp"-->
+            <!--android:padding="10dp"-->
+            <!--android:id="@+id/reserve"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="RESERVE"-->
+            <!--android:textAllCaps="true"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+            <!--android:background="@color/colorYellow"-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--/>-->
+    </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

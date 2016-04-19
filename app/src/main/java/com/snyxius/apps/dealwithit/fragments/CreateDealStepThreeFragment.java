@@ -55,7 +55,7 @@ import java.util.Date;
 public class  CreateDealStepThreeFragment extends Fragment implements View.OnClickListener ,TimePickerDialog.OnTimeSetListener,
         DatePickerDialog.OnDateSetListener{
 
-
+boolean preview=false;
     int position = 0;
     LinearLayout recuringlayout;
     RadioGroup radioGroup;
@@ -121,7 +121,7 @@ public class  CreateDealStepThreeFragment extends Fragment implements View.OnCli
 
 
     private void initialise(View view){
-        view.findViewById(R.id.continue_button).setOnClickListener(this);
+        view.findViewById(R.id.launchdeal).setOnClickListener(this);
         view.findViewById(R.id.radio_fixed).setOnClickListener(this);
         view.findViewById(R.id.radio_recurring).setOnClickListener(this);
         view.findViewById(R.id.dealstrt).setOnClickListener(this);
@@ -150,7 +150,7 @@ public class  CreateDealStepThreeFragment extends Fragment implements View.OnCli
     public void onClick(View v) {
 
         switch (v.getId()){
-            case R.id.continue_button:
+            case R.id.launchdeal:
                 validate();
                 break;
             case R.id.opening_time_layout:
@@ -170,9 +170,8 @@ public class  CreateDealStepThreeFragment extends Fragment implements View.OnCli
                 setDate();
                 break;
             case R.id.preview:
-                Intent i=new Intent(getActivity(), CategoryDetailsActivity.class);
-                startActivity(i);
-
+                preview=true;
+                validate();
                 break;
         }
 
@@ -292,12 +291,25 @@ public class  CreateDealStepThreeFragment extends Fragment implements View.OnCli
                     DealWithItApp.showAToast("Please atleast select one day");
                 }else {
 
-                    sendBasicData();
+                    if(preview==true){
+                        sendData();
+
+
+                    }else {
+                        sendBasicData();
+                    }
                 }
             }else if(radioButtonID == R.id.radio_fixed){
                 recurring = "no";
                 fixed = "yes";
-                sendBasicData();
+                if(preview==true){
+                    sendData();
+
+                }
+                else{
+                    sendBasicData();
+
+                }
             }
 
 
@@ -339,7 +351,43 @@ public class  CreateDealStepThreeFragment extends Fragment implements View.OnCli
             e.printStackTrace();
         }
     }
+private void sendData(){
+    try{
+        jsonObject.accumulate(Keys.recurring, recurring);
+        jsonObject.accumulate(Keys.fixed, fixed);
+        jsonObject.accumulate(Keys.repeat, repeats);
+        jsonObject.accumulate(Keys.startdealdate, startdealdate.getText().toString());
+        jsonObject.accumulate(Keys.enddealdate, enddealdate.getText().toString());
+        jsonObject.accumulate(Keys.opening_hour, opening_hour.getText().toString());
+        jsonObject.accumulate(Keys.closing_hour, closing_hour.getText().toString());
+        JSONArray jsonArray = new JSONArray(arrayListDays);
+        jsonObject.accumulate(Keys.days, jsonArray);
 
+
+
+//        String id = DealWithItApp.readFromPreferences(getActivity(), Keys.id, Constants.DEFAULT_STRING);
+//        JSONObject object = new JSONObject();
+//        object.accumulate(Keys.profile, jsonObject);
+//        object.accumulate(Keys.id, id);
+//        JSONObject object1 = new JSONObject();
+//        object1.accumulate(Keys.deal, object);
+//        if (DealWithItApp.isNetworkAvailable()) {
+//            Log.d("Object",object1.toString());
+//            new sendCreateDealData().execute(object1.toString());
+//        } else {
+//
+//        }
+
+
+        Intent i=new Intent(getActivity(), CategoryDetailsActivity.class);
+        i.putExtra("Deal",jsonObject.toString());
+        startActivity(i);        Log.d("Deal",jsonObject.toString());
+
+
+    }catch (Exception e){
+        e.printStackTrace();
+    }
+}
 
 
     private class sendCreateDealData extends AsyncTask<String, Void, JSONObject> {

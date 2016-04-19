@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -38,12 +41,14 @@ import java.util.ArrayList;
 public class BusinessProfileIncomingDealDialogFragment extends DialogFragment implements View.OnClickListener{
 
     private TextView leftIndexValue;
-    private RangeBar rangebar;
+//    private RangeBar rangebar;
+    EditText rangebar;
     private EditText max_guest,deal_offering;
     private CheckBox checkBox_Alcohol;
     private String alcohol = "No";
     IncomingDeals incomingDeal;
     EditIncomingDeals editIncomingDeals;
+    LinearLayout alchol;
     static  int positions ;
 
     @Override
@@ -87,21 +92,50 @@ public class BusinessProfileIncomingDealDialogFragment extends DialogFragment im
         super.onViewCreated(view, savedInstanceState);
         initialise(view);
         view.findViewById(R.id.button_delete).setOnClickListener(this);
-        rangebar = (RangeBar) view.findViewById(R.id.rangebar1);
+        rangebar = (EditText) view.findViewById(R.id.rangebar1);
         leftIndexValue = (TextView) view.findViewById(R.id.leftIndexValue);
-        rangebar.setPinColor(getResources().getColor(R.color.colorPrimaryDark));
-        rangebar.setTickColor(getResources().getColor(R.color.grey));
-        rangebar.setConnectingLineColor(getResources().getColor(R.color.colorPrimaryDark));
-        rangebar.setBarColor(getResources().getColor(R.color.colorPrimaryDark));
-        rangebar.setSelectorColor(getResources().getColor(R.color.colorPrimaryDark));
-        rangebar.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
+        alchol=(LinearLayout)view.findViewById(R.id.alchollinear);
+        rangebar.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex, int rightPinIndex, String leftPinValue, String rightPinValue) {
-                leftIndexValue.setText("Rs "+leftPinValue+" - "+ "Rs "+rightPinValue);
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // TODO Auto-generated method stub
             }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!rangebar.getText().toString().equalsIgnoreCase("")){
+                    leftIndexValue.setText("Rs "+rangebar.getText().toString());
+
+
+                }
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+
+            }
+
         });
 
 
+//        rangebar.setPinColor(getResources().getColor(R.color.colorPrimaryDark));
+//        rangebar.setTickColor(getResources().getColor(R.color.grey));
+//        rangebar.setConnectingLineColor(getResources().getColor(R.color.colorPrimaryDark));
+//        rangebar.setBarColor(getResources().getColor(R.color.colorPrimaryDark));
+//        rangebar.setSelectorColor(getResources().getColor(R.color.colorPrimaryDark));
+//        rangebar.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
+//            @Override
+//            public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex, int rightPinIndex, String leftPinValue, String rightPinValue) {
+//            }
+//        });
+
+        if(DealWithItApp.readFromPreferences(getActivity().getApplicationContext(), Keys.category, "").equals(Keys.Restaurant)) {
+            alchol.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initialise(View view){

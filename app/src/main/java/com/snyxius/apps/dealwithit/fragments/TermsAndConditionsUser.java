@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.extras.Constants;
 
+import org.json.JSONObject;
+
 /**
  * Created by amanjham on 27/01/16.
  */
@@ -22,6 +24,13 @@ public class TermsAndConditionsUser extends Fragment {
         TermsAndConditionsUser fragment = new TermsAndConditionsUser();
         fragment.setArguments(args);
         return fragment;
+    }
+    static JSONObject jsonObject = new JSONObject();
+
+    public static TermsAndConditionsUser newInstance(JSONObject Object) {
+        jsonObject = Object;
+        TermsAndConditionsUser f = new TermsAndConditionsUser();
+        return f;
     }
     @Nullable
     @Override

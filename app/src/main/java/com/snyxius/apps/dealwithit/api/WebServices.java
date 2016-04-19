@@ -206,6 +206,15 @@ Response – Success
         "notice": "Template deleted",
             "status": "Success"
     }*/
+  public static final String dealdetailsModified=baseUrl+"user/getDealDetails";
+
+    /* Type – POST
+
+            Request
+
+    {
+        "dealId":"1456742818393"
+    }*/
 }
 
 

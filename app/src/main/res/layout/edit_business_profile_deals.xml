@@ -141,16 +141,23 @@
             <!--................Range SEEKBAR.........................-->
 
 
-            <com.appyvet.rangebar.RangeBar
-                xmlns:custom="http://schemas.android.com/apk/res-auto"
+            <!--<com.appyvet.rangebar.RangeBar-->
+                <!--xmlns:custom="http://schemas.android.com/apk/res-auto"-->
+                <!--android:id="@+id/rangebar1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="72dp"-->
+                <!--custom:tickStart="0"-->
+                <!--custom:tickInterval="50"-->
+                <!--custom:tickEnd="2500"-->
+                <!--custom:temporaryPins="false"-->
+                <!--custom:pinMaxFont="10sp"/>-->
+
+            <EditText
                 android:id="@+id/rangebar1"
                 android:layout_width="match_parent"
-                android:layout_height="72dp"
-                custom:tickStart="0"
-                custom:tickInterval="50"
-                custom:tickEnd="2500"
-                custom:temporaryPins="false"
-                custom:pinMaxFont="10sp"/>
+                android:layout_height="wrap_content"
+                android:hint=""
+                android:inputType="number"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -169,7 +176,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        android:text="Approx Cost/Person"/>
+                        android:text="Cost/Person"/>
 
                     <TextView
                         android:id="@+id/leftIndexValue"
@@ -187,9 +194,11 @@
             <!--.................Range SEEKBAR.........................-->
 
             <LinearLayout
+                android:id="@+id/alchollinear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:layout_marginLeft="-6dp"
                 android:layout_marginTop="10dp">
 

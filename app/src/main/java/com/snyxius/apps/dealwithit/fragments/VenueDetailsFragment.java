@@ -36,7 +36,13 @@ public class VenueDetailsFragment extends Fragment {
     static int count= Constants.DEFAULT_INT;
     RecyclerView recyclerView;
 
+    static JSONObject jsonObject = new JSONObject();
 
+    public static VenueDetailsFragment newInstance(JSONObject Object) {
+        jsonObject = Object;
+        VenueDetailsFragment f = new VenueDetailsFragment();
+        return f;
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

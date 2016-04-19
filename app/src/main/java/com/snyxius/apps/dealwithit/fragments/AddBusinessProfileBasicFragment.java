@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,6 +69,7 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
     TextView  est_type_text,menu_text,cover_text,photo_text;//,ambience_text,cuisine_text;
     static String s;
     EditText est_name,address,description;
+    ImageView greentick,gallryimg,getGreentick2,getGreentick3,arrow1,arrow2;
     DetailStroke mCallback;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     ArrayList<String> arrayImage = new ArrayList<>();
@@ -146,6 +148,15 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
         est_name = (EditText)view.findViewById(R.id.est_name);
         address = (EditText)view.findViewById(R.id.location_name);
         description = (EditText)view.findViewById(R.id.description);
+        gallryimg = (ImageView)view.findViewById(R.id.galryimg);
+        greentick = (ImageView)view.findViewById(R.id.greentk);
+        getGreentick2 = (ImageView)view.findViewById(R.id.greentk2);
+        getGreentick3 = (ImageView)view.findViewById(R.id.greentk1);
+        arrow1 = (ImageView)view.findViewById(R.id.rightarw);
+        arrow2 = (ImageView)view.findViewById(R.id.rightarw2);
+
+
+
     }
 
     @Override
@@ -170,23 +181,23 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
 //                getActivity().startActivity(i);
 
 
-//                DealWithItApp.saveToPreferences(getActivity(),Keys.flag,Constants.INT_ONE);
-//                new Picker.Builder(getContext(),this,R.style.MIP_theme)
-//                        .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
-//                        .setLimit(6)
-//                        .build()
-//                        .startActivity();
-                selectImage();
+                DealWithItApp.saveToPreferences(getActivity(),Keys.flag,Constants.INT_ONE);
+                new Picker.Builder(getContext(),this,R.style.MIP_theme)
+                        .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
+                        .setLimit(6)
+                        .build()
+                        .startActivity();
+//                selectImage();
 
                 break;
             case R.id.photos_menu_layout:
-//                DealWithItApp.saveToPreferences(getActivity(),Keys.flag,Constants.INT_TWO);
-//                new Picker.Builder(getContext(),this,R.style.MIP_theme)
-//                        .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
-//                        .setLimit(6)
-//                        .build()
-//                        .startActivity();
-                selectImage();
+                DealWithItApp.saveToPreferences(getActivity(),Keys.flag,Constants.INT_TWO);
+                new Picker.Builder(getContext(),this,R.style.MIP_theme)
+                        .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
+                        .setLimit(6)
+                        .build()
+                        .startActivity();
+//                selectImage();
 
                 break;
             case R.id.cover_image_layout:
@@ -323,6 +334,8 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
             }
             if(!arrayImage.isEmpty()){
                 menu_text.setText("Menu Uploaded");
+                arrow1.setVisibility(View.GONE);
+                getGreentick2.setVisibility(View.VISIBLE);
             }
 
 
@@ -359,6 +372,8 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
 
             if(!arrayPhotos.isEmpty()){
                 photo_text.setText("Photos Uploaded");
+                arrow2.setVisibility(View.INVISIBLE);
+                getGreentick3.setVisibility(View.VISIBLE);
             }
 
         }
@@ -386,6 +401,8 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
         uploadPicture = Base64.encodeToString(byteArray, Base64.DEFAULT);
         if(!uploadPicture.equals("")){
             cover_text.setText("Cover Uploaded");
+            gallryimg.setVisibility(View.GONE);
+            greentick.setVisibility(View.VISIBLE);
         }
 
     }
@@ -502,9 +519,9 @@ public class AddBusinessProfileBasicFragment extends Fragment implements View.On
                 }else if(arrayImage.isEmpty()){
                     DealWithItApp.showAToast("Please upload menu first");
                 }
-//                    else if(arrayPhotos.isEmpty()){
-//                        DealWithItApp.showAToast("Please upload photos first");
-//                    }
+                    else if(arrayPhotos.isEmpty()){
+                        DealWithItApp.showAToast("Please upload photos first");
+                    }
                     else if(uploadPicture.equals("")){
                         DealWithItApp.showAToast("Please cover picture first");
                 }
