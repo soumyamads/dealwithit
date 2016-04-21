@@ -158,7 +158,7 @@ public class VenueDetailsFragment extends Fragment {
 //    }
 //
 //    private void onDone(final JSONObject jsonObject) {
-//        try {
+
 //            if(jsonObject != null) {
 //                if (jsonObject.getString(Keys.status).equals(Constants.SUCCESS)) {
 ////                    Log.e("DATAAAAAAAAa", String.valueOf(jsonObject.getJSONObject(Keys.notice)));

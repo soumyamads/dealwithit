@@ -82,15 +82,16 @@ RecyclerView mRecyclerView;
                 int pos=-1;
                 if (TempTitleAdapter.clickedPOs!=-1) {
                     pos=TempTitleAdapter.clickedPOs;
-                    DealWithItApp.showAToast(TempTitleAdapter.clickedPOs + "");
+//                    DealWithItApp.showAToast(TempTitleAdapter.clickedPOs + "");
                 }
 
                 if(getTag().equals("tandc")){
-                    if (tandcTemplate != null)
+                    if (estTypeListArray.size()>0)
                         tandcTemplate.getTemplateTandCSelected(estTypeListArray.get(pos).getTemplate_Description());
                 }else {
-                    if (template != null)
+                    if (estTypeListArray.size()>0)
                         template.getTemplateSelected(estTypeListArray.get(pos).getTemplate_Description());
+
                 }
 
                 dismiss();
@@ -186,7 +187,7 @@ getlist();
             if (DealWithItApp.isNetworkAvailable()) {
                 new gettemplatetitle().execute(jsonObject.toString());
             } else {
-                DealWithItApp.showAToast("No internet Connection");
+                DealWithItApp.showAToast("No Internet Connection");
 
             }
         } catch (JSONException e) {
@@ -296,7 +297,7 @@ getlist();
                     @Override
                     public void run() {
                         try {
-                            DealWithItApp.showAToast("Something Went Wrong. Server is not responding");
+                            DealWithItApp.showAToast("Something Went Wrong. Server is Not Responding");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

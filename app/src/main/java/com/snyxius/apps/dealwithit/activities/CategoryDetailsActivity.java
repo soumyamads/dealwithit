@@ -11,6 +11,7 @@ import android.os.SystemClock;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -27,6 +28,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.OvershootInterpolator;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -42,6 +44,7 @@ import com.snyxius.apps.dealwithit.api.WebServices;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
+import com.snyxius.apps.dealwithit.fragments.CreatedDealDialogFragment;
 import com.snyxius.apps.dealwithit.fragments.DealsDetailsFragment;
 import com.snyxius.apps.dealwithit.fragments.MapDealsFragment;
 import com.snyxius.apps.dealwithit.fragments.ShareDealsFragment;
@@ -92,6 +95,7 @@ public class CategoryDetailsActivity  extends AppCompatActivity implements AppBa
 //    @InjectView(R.id.pBar)
     JSONObject jsonObject;
     ProgressBar pBar;
+    Button savelaunch;
 
 
     @Override
@@ -121,7 +125,15 @@ public class CategoryDetailsActivity  extends AppCompatActivity implements AppBa
         title = (TextView) findViewById(R.id.title);
         address = (TextView) findViewById(R.id.address);
         description = (TextView) findViewById(R.id.description);
-
+        savelaunch=(Button)findViewById(R.id.savelaunch_button);
+        savelaunch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment dialogFrag = CreatedDealDialogFragment.newInstance();
+                dialogFrag.setCancelable(false);
+                dialogFrag.show(getSupportFragmentManager().beginTransaction(), Constants.BUSINESS_PROFILE_CREATED_DIALOG);
+            }
+        });
         book_button = (ImageView) findViewById(R.id.book_button);
         book_button.setOnClickListener(new View.OnClickListener() {
             @Override

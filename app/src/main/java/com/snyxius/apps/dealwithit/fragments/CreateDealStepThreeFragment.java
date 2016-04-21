@@ -151,6 +151,7 @@ boolean preview=false;
 
         switch (v.getId()){
             case R.id.launchdeal:
+                preview=false;
                 validate();
                 break;
             case R.id.opening_time_layout:

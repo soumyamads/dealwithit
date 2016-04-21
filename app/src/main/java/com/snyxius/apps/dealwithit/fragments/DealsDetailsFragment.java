@@ -42,7 +42,6 @@ public class DealsDetailsFragment extends Fragment {
 
     TextView minimumguest;
     LinearLayout details;
-    TextView costOrDiscountText;
     TextView timings;
     TextView expDate;
     TextView startDate;
@@ -51,7 +50,7 @@ public class DealsDetailsFragment extends Fragment {
     RelativeLayout afterReserveLayout;
     TextView bookedDate;
     TextView bookedTime;
-
+    TextView costOrDiscountText;
     static String startingDate;
     static String endingdate;
     static String startingTime;
@@ -112,9 +111,16 @@ TextView minimumBillGuesttext, minimumBillGuestNum,costperson;
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         minimumBillGuestNum=(TextView)view.findViewById(R.id.minimum_bill_guest_num);
+        minimumBillGuesttext=(TextView)view.findViewById(R.id.minimum_bill_guest);
         costperson=(TextView)view.findViewById(R.id.cost_person);
         beforeReserveLayout=(LinearLayout)view.findViewById(R.id.before_reserve_layout);
         afterReserveLayout=(RelativeLayout)view.findViewById(R.id.after_reserve_layout);
+        startDate=(TextView)view.findViewById(R.id.start_date);
+        expDate=(TextView)view.findViewById(R.id.expiry_date);
+        timings=(TextView)view.findViewById(R.id.timing);
+        costOrDiscountText=(TextView)view.findViewById(R.id.cost_discount_text);
+
+
 
 //        initialize(view);
 
@@ -171,16 +177,18 @@ try{
                 pojos.setRecurring(jobj2.getString(Keys.recurring));
                 pojos.setFixed(jobj2.getString(Keys.fixed));
 
-                if (jobj2.has(Keys.minimum_guest)) {
+                if (jobj2.getJSONArray(Keys.minimum_guest).length()>0) {
                     JSONArray jarr1 = jobj2.getJSONArray(Keys.minimum_guest);
+                    System.out.println("guestl" + jarr1);
+
                     JSONObject jobj3 = jarr1.getJSONObject(0);
                     pojos.setMinimum_Guest(jobj3.getString(Keys.minimum_guest));
                     pojos.setCost_person(jobj3.getString(Keys.cost_person));
 
                     minimumBillGuestNum.setText(jobj3.getString(Keys.minimum_guest));
-//                    minimumBillGuesttext.setText("MINIMUM NO OF GUESTS : ");
+                    minimumBillGuesttext.setText("MINIMUM NO OF GUESTS : ");
                     Toast.makeText(getActivity(),"eeee"+minimumBillGuestNum,Toast.LENGTH_LONG).show();
-//                    costOrDiscountText.setText("COST PER PERSON");
+                    costOrDiscountText.setText("COST PER PERSON");
                     totalAmountText = jobj3.getString(Keys.cost_person);
                     costperson.setText("INR " + jobj3.getString(Keys.cost_person) + "/Guest");
                 } else {
@@ -188,8 +196,9 @@ try{
                     pojos.setCost_person("");
                 }
 
-                if (jobj2.has(Keys.minimum_billig)) {
+                if (jobj2.getJSONArray(Keys.minimum_billig).length()>0) {
                     JSONArray jarr2 = jobj2.getJSONArray(Keys.minimum_billig);
+                    System.out.println("guest" + jarr2);
                     JSONObject jobj3 = jarr2.getJSONObject(0);
                     pojos.setMinimum_Billing(jobj3.getString(Keys.minimum_billig));
                     pojos.setDiscount_Person(jobj3.getString(Keys.discount_percent));
