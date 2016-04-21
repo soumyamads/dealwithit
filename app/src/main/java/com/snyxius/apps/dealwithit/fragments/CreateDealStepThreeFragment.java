@@ -47,6 +47,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 /**
@@ -66,6 +67,7 @@ boolean preview=false;
     ArrayList<String> arrayListDays = new ArrayList<>();
     CheckBox monday,tuesday,wednesday,thusday,friday,saturday,sunday,repeat;
      static  AppCompatActivity mContext;
+    String openingtime=" ";
 
     static JSONObject jsonObject = new JSONObject();
 
@@ -240,10 +242,50 @@ boolean preview=false;
         Log.d("Time",time);
         if(position == 1){
             opening_hour.setText(time);
+            openingtime=time;
+
         }else if(position == 2){
-            closing_hour.setText(time);
-        }
+                                closing_hour.setText(time);
+
+//            if(!openingtime.equals(" ")){
+//                Toast.makeText(getActivity(),"Please select Opening Hours",Toast.LENGTH_LONG).show();
+                            }
+//            else {
+//
+//                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//                Date strDate = null;
+//                try {
+//                    strDate = sdf.parse(openingtime);
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                if (System.currentTimeMillis() > strDate.getTime()) {
+////                    catalog_outdated = 1;
+//                    closing_hour.setText(time);
+//
+//                }
+//                else{
+//                    Toast.makeText(getActivity(),"Cannot Select a Future Time",Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        }
+
+//            Calendar temp=Calendar.getInstance();
+//            temp.set(Calendar.HOUR_OF_DAY,hourOfDay);
+//            temp.set(Calendar.MINUTE,minute);
+//
+//            if(temp.after(GregorianCalendar.getInstance())){
+//                Toast.makeText(getActivity(), "Cannot select a future time", Toast.LENGTH_SHORT).show();
+//            } else {
+//                Calendar datetime=Calendar.getInstance();
+//                datetime.set(Calendar.HOUR_OF_DAY,hourOfDay);
+//                datetime.set(Calendar.MINUTE,minute);
+//                SimpleDateFormat mSDF=new SimpleDateFormat("MM-dd-yyyy hh: mm a");
+//                opening_hour.setText(mSDF.format(datetime.getTime()));  // make sure this is accessible
+//            }
     }
+
+
 
 
     public void validate(){

@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 
 import com.snyxius.apps.dealwithit.R;
 import com.snyxius.apps.dealwithit.adapters.VenueMainAdapter;
+import com.snyxius.apps.dealwithit.api.WebRequest;
+import com.snyxius.apps.dealwithit.api.WebServices;
 import com.snyxius.apps.dealwithit.applications.DealWithItApp;
 import com.snyxius.apps.dealwithit.extras.Constants;
 import com.snyxius.apps.dealwithit.extras.Keys;
@@ -69,7 +71,7 @@ public class VenueDetailsFragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-//            new BussinesDetails().execute(json.toString());
+            new BussinesDetails().execute(json.toString());
 
         }else{
             DealWithItApp.showAToast("Internet Unavailable");
@@ -113,49 +115,49 @@ public class VenueDetailsFragment extends Fragment {
         return allsampleData;
     }
 
-//    private class BussinesDetails extends AsyncTask<String, Void, JSONObject>
-//
-//    {
-//        private ProgressDialog dialog = new ProgressDialog(getActivity());
-//
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-////            this.getSupportFragmentManager().beginTransaction()
-////                    .add(R.id.container_loading,new ProgressBarFrament(),Constants.PROGRESS_FRAGMENT)
-////                    .commit();
-//            dialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
-//            dialog.setIndeterminate(true);
-//            dialog.setCancelable(false);
-////            dialog.setIndeterminateDrawable(getResources().getDrawable(R.drawable.progress));
-//            dialog.show();
-//
-//        }
-//
-//        @Override
-//        protected JSONObject doInBackground(String... params) {
-//            JSONObject jsonObject = null;
-//            try {
-//                jsonObject = WebRequest.postData(params[0], WebServices.bussinessdetails);
-//            }catch (Exception e){
-//                e.printStackTrace();
-//            }
-//            return jsonObject;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(JSONObject jsonObject) {
-//            super.onPostExecute(jsonObject);
-////            this.getSupportFragmentManager().beginTransaction()
-////                    .remove(this.getSupportFragmentManager().findFragmentByTag(Constants.PROGRESS_FRAGMENT))
-////                    .commit();
-//            if (dialog != null && dialog.isShowing()) {
-//                dialog.dismiss();
-//                dialog = null;
-//            }
+    private class BussinesDetails extends AsyncTask<String, Void, JSONObject>
+
+    {
+        private ProgressDialog dialog = new ProgressDialog(getActivity());
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+//            this.getSupportFragmentManager().beginTransaction()
+//                    .add(R.id.container_loading,new ProgressBarFrament(),Constants.PROGRESS_FRAGMENT)
+//                    .commit();
+            dialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
+            dialog.setIndeterminate(true);
+            dialog.setCancelable(false);
+//            dialog.setIndeterminateDrawable(getResources().getDrawable(R.drawable.progress));
+            dialog.show();
+
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... params) {
+            JSONObject jsonObject = null;
+            try {
+                jsonObject = WebRequest.postData(params[0], WebServices.bussinessdetails);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return jsonObject;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            super.onPostExecute(jsonObject);
+//            this.getSupportFragmentManager().beginTransaction()
+//                    .remove(this.getSupportFragmentManager().findFragmentByTag(Constants.PROGRESS_FRAGMENT))
+//                    .commit();
+            if (dialog != null && dialog.isShowing()) {
+                dialog.dismiss();
+                dialog = null;
+            }
 //            onDone(jsonObject);
-//        }
-//    }
+        }
+    }
 //
 //    private void onDone(final JSONObject jsonObject) {
 

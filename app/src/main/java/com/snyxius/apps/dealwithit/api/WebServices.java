@@ -215,6 +215,47 @@ Response – Success
     {
         "dealId":"1456742818393"
     }*/
+
+
+    public static final String bussinessdetails=baseUrl+"user/getBuisnessDetail";
+
+    /*{
+        "dealId":"1457676520443"
+    }
+
+    Response – Success
+
+    {
+        "notice": {
+        "deals": [
+        {
+            "Description": "Hsigixyd",
+                "category": "Restaurant",
+                "Cuisine": [
+            "Continental",
+                    "Chinese",
+                    "Vietnamese"
+            ],
+            "type": [
+            "Quick Bites",
+                    "Dessert Parlor",
+                    "Sports Bar",
+                    "Cafe"
+            ],
+            "Address": "Banashankari 2nd Stage, Bengaluru, Karnataka, India",
+                "Cover_Image": ""
+        }
+        ]
+    },
+        "status": "Success"
+    }
+
+    Response – Failed
+    {
+        "notice": "Error",
+            "status": "Failed"
+    }
+*/
 }
 
 

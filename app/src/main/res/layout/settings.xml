@@ -66,6 +66,7 @@
             android:layout_below="@+id/select_business_text"
             android:background="@color/grey"/>
         <TextView
+            android:id="@+id/abtus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -79,6 +80,7 @@
             android:layout_below="@+id/select_business_text"
             android:background="@color/grey"/>
         <TextView
+            android:id="@+id/logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

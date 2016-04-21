@@ -5,8 +5,7 @@
     android:background="@android:color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="false"
-    android:focusable="false"
+    android:clickable="true"
 >
     <RelativeLayout
         android:id="@+id/toolbar"
@@ -59,8 +58,7 @@
             android:id="@+id/relatvblwtoolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clickable="false"
-            android:focusable="false"
+            android:clickable="true"
             android:layout_below="@+id/toolbar"
             android:background="#ffffff">
     <TextView
