@@ -253,18 +253,18 @@ try{
                     }
                 }
 
-                if (jobj2.has(Keys.minimum_billig)) {
-                    JSONArray jarr2 = jobj2.getJSONArray(Keys.minimum_billig);
-                    if (jarr2.length() > 0) {
-                        JSONObject jobj3 = jarr2.getJSONObject(0);
-                        totalAmountText = jobj3.getString(Keys.minimum_billig);
-                        minimumBillGuestNum.setText("Rs " + jobj3.getString(Keys.minimum_billig));
-                        minimumBillGuesttext.setText("MINIMUM BILL AMOUNT : ");
-                        costOrDiscountText.setText("PERCENTAGE DISCOUNT");
-                        costperson.setText(jobj3.getString(Keys.discount_percent) + "% OFF");
-                    }
-
-                }
+//                if (jobj2.has(Keys.minimum_billig)) {
+//                    JSONArray jarr2 = jobj2.getJSONArray(Keys.minimum_billig);
+//                    if (jarr2.length() > 0) {
+//                        JSONObject jobj3 = jarr2.getJSONObject(0);
+//                        totalAmountText = jobj3.getString(Keys.minimum_billig);
+//                        minimumBillGuestNum.setText("Rs " + jobj3.getString(Keys.minimum_billig));
+//                        minimumBillGuesttext.setText("MINIMUM BILL AMOUNT : ");
+//                        costOrDiscountText.setText("PERCENTAGE DISCOUNT");
+//                        costperson.setText(jobj3.getString(Keys.discount_percent) + "% OFF");
+//                    }
+//
+//                }
 
 //                bookedDate.setText(jobj2.getString(Keys.select_Date));
 //                bookedTime.setText(jobj2.getString(Keys.select_Time));

@@ -256,6 +256,8 @@ Response – Success
             "status": "Failed"
     }
 */
+    public static final String dealpreview=baseUrl+"merchants/Deal_preview";
+
 }
 
 

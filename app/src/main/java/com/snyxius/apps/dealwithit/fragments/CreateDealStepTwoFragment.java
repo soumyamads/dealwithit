@@ -62,7 +62,9 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
     public static CreateDealStepTwoFragment newInstance(JSONObject Object) {
         jsonObject = Object;
         CreateDealStepTwoFragment f = new CreateDealStepTwoFragment();
+
         return f;
+
     }
 
 
@@ -92,6 +94,7 @@ public class CreateDealStepTwoFragment extends Fragment  implements View.OnClick
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+System.out.println("OOO"+jsonObject);
         initialise(view);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

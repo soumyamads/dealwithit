@@ -122,7 +122,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.abtus:
-Intent i=new Intent(this,Aboutus.class);
+                Intent i=new Intent(this,Aboutus.class);
                 startActivity(i);break;
         }
 

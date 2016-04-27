@@ -53,6 +53,8 @@ public interface Keys {
     public static final String merchantId = "merchantId";
     public static final String tempId = "tempId";
     public static final String userId="userId";
+    public static final String capacity="capacity";
+
 
 
 

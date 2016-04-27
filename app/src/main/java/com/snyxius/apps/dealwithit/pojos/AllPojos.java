@@ -18,6 +18,33 @@ public class AllPojos {
     public void setTemplate_Description(String template_Description) {
         Template_Description = template_Description;
     }
+    public String capacity = "Capacity";
+
+    public String getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(String capacity) {
+        this.capacity = capacity;
+    }
+    private ArrayList<String> cuisine;
+    private ArrayList<String> type;
+
+    public ArrayList<String> getCuisine() {
+        return cuisine;
+    }
+
+    public void setCuisine(ArrayList<String> cuisine) {
+        this.cuisine = cuisine;
+    }
+
+    public ArrayList<String> getType() {
+        return type;
+    }
+
+    public void setType(ArrayList<String> type) {
+        this.type = type;
+    }
 
     String template_Id;
 
